@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "driversCabSim", "driversCabSim\driversCabSim.vbproj", "{7EA65CE0-A1B4-429F-9695-33E7C2DFAF18}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KontaktSimulator", "KontaktSimulator\KontaktSimulator.vbproj", "{CE2CFB56-4A46-4914-8120-A470192BAFE2}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Stellwerk", "Stellwerk\Stellwerk.vbproj", "{CCDDD96D-E8E0-4AC7-BFE9-AC76811FCAC2}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Steuerpulte", "Steuerpulte\Steuerpulte.vbproj", "{2E0BF411-B727-4672-A927-52A554E87765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webcams", "Webcams\Webcams.csproj", "{66CDB3E4-65C0-41B1-880D-1D2D0C843488}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Weichensteuerung", "Weichensteuerung\Weichensteuerung.vbproj", "{E504911F-4D2C-401A-8E4D-A256FD7CE0AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7EA65CE0-A1B4-429F-9695-33E7C2DFAF18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA65CE0-A1B4-429F-9695-33E7C2DFAF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA65CE0-A1B4-429F-9695-33E7C2DFAF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA65CE0-A1B4-429F-9695-33E7C2DFAF18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2CFB56-4A46-4914-8120-A470192BAFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2CFB56-4A46-4914-8120-A470192BAFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2CFB56-4A46-4914-8120-A470192BAFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2CFB56-4A46-4914-8120-A470192BAFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCDDD96D-E8E0-4AC7-BFE9-AC76811FCAC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCDDD96D-E8E0-4AC7-BFE9-AC76811FCAC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCDDD96D-E8E0-4AC7-BFE9-AC76811FCAC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCDDD96D-E8E0-4AC7-BFE9-AC76811FCAC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E0BF411-B727-4672-A927-52A554E87765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E0BF411-B727-4672-A927-52A554E87765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E0BF411-B727-4672-A927-52A554E87765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E0BF411-B727-4672-A927-52A554E87765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CDB3E4-65C0-41B1-880D-1D2D0C843488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CDB3E4-65C0-41B1-880D-1D2D0C843488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CDB3E4-65C0-41B1-880D-1D2D0C843488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CDB3E4-65C0-41B1-880D-1D2D0C843488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E504911F-4D2C-401A-8E4D-A256FD7CE0AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E504911F-4D2C-401A-8E4D-A256FD7CE0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E504911F-4D2C-401A-8E4D-A256FD7CE0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E504911F-4D2C-401A-8E4D-A256FD7CE0AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAC74772-CAA3-4C1C-8DE4-27FB0D4CE19E}
+	EndGlobalSection
+EndGlobal
