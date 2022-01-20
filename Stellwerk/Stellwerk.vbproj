@@ -58,9 +58,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Release\Plugins\Controls\MediaProvider.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Externals\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PluginManagerLibrary">
       <HintPath>..\..\Release\PluginManagerLibrary.dll</HintPath>
@@ -143,6 +142,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -156,7 +156,73 @@
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="resources\Kontakte\1i.gif" />
+    <Content Include="resources\Kontakte\1o.gif" />
+    <Content Include="resources\Kontakte\313i.gif" />
+    <Content Include="resources\Kontakte\313o.gif" />
+    <Content Include="resources\Kontakte\500i.gif" />
+    <Content Include="resources\Kontakte\500o.gif" />
+    <Content Include="resources\Kontakte\501i.gif" />
+    <Content Include="resources\Kontakte\501o.gif" />
+    <Content Include="resources\Kontakte\502i.gif" />
+    <Content Include="resources\Kontakte\502o.gif" />
+    <Content Include="resources\Kontakte\600i.gif" />
+    <Content Include="resources\Kontakte\600o.gif" />
+    <Content Include="resources\Kontakte\601i.gif" />
+    <Content Include="resources\Kontakte\601o.gif" />
+    <Content Include="resources\Strecken\15.gif" />
+    <Content Include="resources\Strecken\17.gif" />
+    <Content Include="resources\Strecken\18.gif" />
+    <Content Include="resources\Strecken\24.gif" />
+    <Content Include="resources\Strecken\25.gif" />
+    <Content Include="resources\Strecken\26.gif" />
+    <Content Include="resources\Strecken\27.gif" />
+    <Content Include="resources\Strecken\28.gif" />
+    <Content Include="resources\Strecken\34.gif" />
+    <Content Include="resources\Strecken\36.gif" />
+    <Content Include="resources\Strecken\37.gif" />
+    <Content Include="resources\Strecken\45.gif" />
+    <Content Include="resources\Strecken\47.gif" />
+    <Content Include="resources\Strecken\48.gif" />
+    <Content Include="resources\Strecken\56.gif" />
+    <Content Include="resources\Strecken\562.gif" />
+    <Content Include="resources\Strecken\57.gif" />
+    <Content Include="resources\Weichen\12g.gif" />
+    <Content Include="resources\Weichen\12r.gif" />
+    <Content Include="resources\Weichen\13g.gif" />
+    <Content Include="resources\Weichen\13r.gif" />
+    <Content Include="resources\Weichen\1508l.gif" />
+    <Content Include="resources\Weichen\1508r.gif" />
+    <Content Include="resources\Weichen\2607l.gif" />
+    <Content Include="resources\Weichen\2607r.gif" />
+    <Content Include="resources\Weichen\2708l.gif" />
+    <Content Include="resources\Weichen\2708r.gif" />
+    <Content Include="resources\Weichen\3406l.gif" />
+    <Content Include="resources\Weichen\3406r.gif" />
+    <Content Include="resources\Weichen\4305l.gif" />
+    <Content Include="resources\Weichen\4305r.gif" />
+    <Content Include="resources\Weichen\4508l.gif" />
+    <Content Include="resources\Weichen\4508r.gif" />
+    <Content Include="resources\Weichen\45g.gif" />
+    <Content Include="resources\Weichen\45r.gif" />
+    <Content Include="resources\Weichen\5104l.gif" />
+    <Content Include="resources\Weichen\5104r.gif" />
+    <Content Include="resources\Weichen\5406l.gif" />
+    <Content Include="resources\Weichen\5406r.gif" />
+    <Content Include="resources\Weichen\6305L.gif" />
+    <Content Include="resources\Weichen\6305R.gif" />
+    <Content Include="resources\Weichen\7102l.gif" />
+    <Content Include="resources\Weichen\7102r.gif" />
+    <Content Include="resources\Weichen\7203l.gif" />
+    <Content Include="resources\Weichen\7203r.gif" />
+    <Content Include="resources\Weichen\8104L.gif" />
+    <Content Include="resources\Weichen\8104R.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /S /Y /Q $(ProjectDir)resources\ $(TargetDir)..\..\Pics\</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
