@@ -16,7 +16,6 @@ namespace Webcams
             private string _name;
             private int _captureDeviceIndex;
             private WebcamDisplay _webcamDisplayControl;
-            private Uri _uri;
 
             public WebcamProperties()
             {
@@ -40,15 +39,6 @@ namespace Webcams
                     _webcamDisplayControl.Initialize(value);
                 }
             }
-
-            public Uri Url { 
-                get { return _uri; }
-                set { 
-                    _uri = value;
-                    _webcamDisplayControl.Initialize(value);
-                }
-            }
-
 
             public ListBox.ObjectCollection AvailableWebcams
             {
@@ -80,7 +70,7 @@ namespace Webcams
         {
             InitializeComponent();
             _pluginHost = pluginHost;
-            _webcamProperies = new List<WebcamProperties>();
+            _webcamProperies = new System.Collections.Generic.List<WebcamProperties>();
             _capture = new driversCabSim.Capture();
             _dataStorage = dataStorage;
             FillDevicesList();
@@ -89,14 +79,13 @@ namespace Webcams
         public void SaveConfiguration()
         {
             _dataStorage.write_to_table("Webcams", 0, _webcamProperies.Count);
-            for (int i = 0; i < _webcamProperies.Count; i++)
+            if (_inputDevices.Length > 0)
             {
-                _dataStorage.write_to_table("Webcams", i * 3 + 1, _webcamProperies[i].Name);
-                if (_inputDevices.Length > 0)
+                for (int i = 0; i < _webcamProperies.Count; i++)
                 {
-                    _dataStorage.write_to_table("Webcams", i * 3 + 2, _inputDevices[_webcamProperies[i].CaptureDeviceIndex].DevicePath);
+                    _dataStorage.write_to_table("Webcams", i * 2 + 1, _webcamProperies[i].Name);
+                    _dataStorage.write_to_table("Webcams", i * 2 + 2, _inputDevices[_webcamProperies[i].CaptureDeviceIndex].DevicePath);
                 }
-                _dataStorage.write_to_table("Webcams", i * 3 + 3, _webcamProperies[i].Url.ToString());
             }
         }
 
@@ -106,7 +95,7 @@ namespace Webcams
             for (int i = 0; i < numberOfWebcams; i++)
             {
                 WebcamProperties webcamProps = new WebcamProperties();
-                AddWebcam(_dataStorage.read_from_table("Webcams", i * 3 + 1), ResolveDevicePath(_dataStorage.read_from_table("Webcams", i * 3 + 2)), _dataStorage.read_from_table("Webcams", i * 3 + 3));
+                AddWebcam(_dataStorage.read_from_table("Webcams", i * 2 + 1), ResolveDevicePath(_dataStorage.read_from_table("Webcams", i * 2 + 2)));
             }
         }
 
@@ -126,21 +115,17 @@ namespace Webcams
 
         private void AddWebcam_Click(object sender, EventArgs e)
         {
-            AddWebcam("New Webcam", -1, string.Empty);
+            AddWebcam("New Webcam", -1);
         }
 
-        private void AddWebcam(string name, int deviceIndex, string uri)
+        private void AddWebcam(string name, int deviceIndex)
         {
             WebcamProperties webcam = new WebcamProperties();
             webcam.Name = name;
             _webcamProperies.Add(webcam);
             RebuildWebcamList();
             _pluginHost.registerGUIControl(webcam.WebcamDisplayControl);
-            if(string.IsNullOrEmpty(uri) == false)
-            {
-                webcam.Url = new Uri(uri);
-            }
-            else if (deviceIndex >= 0)
+            if (deviceIndex >= 0)
             {
                 webcam.CaptureDeviceIndex = deviceIndex;
             }
@@ -167,7 +152,6 @@ namespace Webcams
             else
             {
                 textBox1.Text = (listBox1.SelectedItem as WebcamProperties).Name;
-                textBox2.Text = (listBox1.SelectedItem as WebcamProperties).Url.ToString();
                 PropertiesGroup.Enabled = true;
             }
         }
@@ -221,43 +205,6 @@ namespace Webcams
             }
             catch (Exception)
             {}
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            Uri result;
-            var parsed = Uri.TryCreate(textBox2.Text, UriKind.Absolute, out result);
-            if (parsed)
-            {
-                textBox2.BackColor = Color.White;
-            }
-            else 
-            { 
-                textBox2.BackColor = Color.Red;
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (listBox2.SelectedIndex > 0)
-            {
-                Uri result;
-                var parsed = Uri.TryCreate(listBox2.SelectedItem.ToString(), UriKind.Absolute, out result);
-                if (parsed)
-                {
-                    listBox2.Items.RemoveAt(listBox2.SelectedIndex);
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Uri result;
-            var parsed = Uri.TryCreate(textBox2.Text, UriKind.Absolute, out result);
-            if (parsed)
-            {
-                listBox2.Items.Add(textBox2.Text);
-            }
         }
     }
 }
