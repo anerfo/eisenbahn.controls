@@ -32,6 +32,7 @@ Partial Class DasKalteHerz
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.KapitelLabel = New System.Windows.Forms.Label()
         CType(Me.StoryPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -135,10 +136,24 @@ Partial Class DasKalteHerz
         Me.Button6.Text = "<"
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'KapitelLabel
+        '
+        Me.KapitelLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.KapitelLabel.AutoSize = True
+        Me.KapitelLabel.BackColor = System.Drawing.Color.LightGray
+        Me.KapitelLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KapitelLabel.Location = New System.Drawing.Point(44, 415)
+        Me.KapitelLabel.Name = "KapitelLabel"
+        Me.KapitelLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.KapitelLabel.Size = New System.Drawing.Size(57, 20)
+        Me.KapitelLabel.TabIndex = 10
+        Me.KapitelLabel.Text = "Kapitel"
+        '
         'DasKalteHerz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.KapitelLabel)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button3)
@@ -153,6 +168,7 @@ Partial Class DasKalteHerz
         CType(Me.StoryPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents StoryPictureBox As System.Windows.Forms.PictureBox
@@ -164,5 +180,6 @@ Partial Class DasKalteHerz
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents KapitelLabel As System.Windows.Forms.Label
 
 End Class

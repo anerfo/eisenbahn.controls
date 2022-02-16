@@ -5,22 +5,22 @@
     Dim _LokStufen(,) As Integer
     Dim _LokTimer(,) As Integer
     Dim _Lichter() As Integer = {10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 28, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 65, 73}
-    Dim _Dampf As Dictionary(Of Integer, Klassen.LokEigenschaften) = New Dictionary(Of Integer, Klassen.LokEigenschaften) From {
+    Dim _Dampf As System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) = New System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) From {
         {77, Klassen.LokEigenschaften.Funktion1},
         {76, Klassen.LokEigenschaften.Funktion1}}
-    Dim _Motor As Dictionary(Of Integer, Klassen.LokEigenschaften) = New System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) From {
+    Dim _Motor As System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) = New System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) From {
         {40, Klassen.LokEigenschaften.Funktion2},
         {42, Klassen.LokEigenschaften.Funktion3},
         {77, Klassen.LokEigenschaften.Funktion1},
         {76, Klassen.LokEigenschaften.Funktion1}}
-    Dim _Ansage As Dictionary(Of Integer, Klassen.LokEigenschaften) = New Dictionary(Of Integer, Klassen.LokEigenschaften) From {
+    Dim _Ansage As System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) = New System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) From {
         {29, Klassen.LokEigenschaften.Funktion2},
         {76, Klassen.LokEigenschaften.Funktion1}}
-    Dim _Pfeifen As Dictionary(Of Integer, Klassen.LokEigenschaften) = New Dictionary(Of Integer, Klassen.LokEigenschaften) From {
+    Dim _Pfeifen As System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) = New System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) From {
         {40, Klassen.LokEigenschaften.Funktion2},
         {29, Klassen.LokEigenschaften.Funktion3},
         {76, Klassen.LokEigenschaften.Funktion1}}
-    Dim _Innenbeleuchtung As Dictionary(Of Integer, Klassen.LokEigenschaften) = New Dictionary(Of Integer, Klassen.LokEigenschaften) From {
+    Dim _Innenbeleuchtung As System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) = New System.Collections.Generic.Dictionary(Of Integer, Klassen.LokEigenschaften) From {
         {29, Klassen.LokEigenschaften.Funktion1},
         {40, Klassen.LokEigenschaften.Funktion1},
         {76, Klassen.LokEigenschaften.Funktion1}}
@@ -67,6 +67,7 @@
         _aktiveLoks(4) = lok4
         Speichern()
     End Sub
+
 
     Public Function AktiveHolen(ByVal nummer As Integer) As Integer
         Return _aktiveLoks(nummer)

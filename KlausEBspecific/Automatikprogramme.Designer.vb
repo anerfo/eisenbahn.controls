@@ -25,6 +25,9 @@ Partial Class Automatikprogramme
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.AutoParaLabel = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button30 = New System.Windows.Forms.Button()
+        Me.Button29 = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Button28 = New System.Windows.Forms.Button()
@@ -51,14 +54,8 @@ Partial Class Automatikprogramme
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Button81 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.CheckboxKurzzug4 = New System.Windows.Forms.CheckBox()
         Me.NumericUpDown8 = New System.Windows.Forms.NumericUpDown()
-        Me.CheckboxKurzzug3 = New System.Windows.Forms.CheckBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.CheckboxKurzzug2 = New System.Windows.Forms.CheckBox()
-        Me.CheckboxKurzzug1 = New System.Windows.Forms.CheckBox()
         Me.NumericUpDown9 = New System.Windows.Forms.NumericUpDown()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.NumericUpDown11 = New System.Windows.Forms.NumericUpDown()
@@ -112,13 +109,13 @@ Partial Class Automatikprogramme
         Me.Button23 = New System.Windows.Forms.Button()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.NumericUpDown6 = New System.Windows.Forms.NumericUpDown()
+        Me.NumericUpDown5 = New System.Windows.Forms.NumericUpDown()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TrackBar4 = New System.Windows.Forms.TrackBar()
         Me.TrackBar3 = New System.Windows.Forms.TrackBar()
-        Me.TrackBar2 = New System.Windows.Forms.TrackBar()
-        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.NumericUpDown4 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown3 = New System.Windows.Forms.NumericUpDown()
@@ -138,6 +135,7 @@ Partial Class Automatikprogramme
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -146,10 +144,10 @@ Partial Class Automatikprogramme
         CType(Me.NumericUpDown10, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox9.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
+        CType(Me.NumericUpDown6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TrackBar4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TrackBar3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,6 +176,9 @@ Partial Class Automatikprogramme
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button30)
+        Me.GroupBox1.Controls.Add(Me.Button29)
+        Me.GroupBox1.Controls.Add(Me.Button20)
         Me.GroupBox1.Controls.Add(Me.Label13)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.Button28)
@@ -204,14 +205,8 @@ Partial Class Automatikprogramme
         Me.GroupBox1.Controls.Add(Me.Label27)
         Me.GroupBox1.Controls.Add(Me.Button81)
         Me.GroupBox1.Controls.Add(Me.Label25)
-        Me.GroupBox1.Controls.Add(Me.Label23)
-        Me.GroupBox1.Controls.Add(Me.Label21)
-        Me.GroupBox1.Controls.Add(Me.CheckboxKurzzug4)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown8)
-        Me.GroupBox1.Controls.Add(Me.CheckboxKurzzug3)
         Me.GroupBox1.Controls.Add(Me.Label16)
-        Me.GroupBox1.Controls.Add(Me.CheckboxKurzzug2)
-        Me.GroupBox1.Controls.Add(Me.CheckboxKurzzug1)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown9)
         Me.GroupBox1.Controls.Add(Me.Label22)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown11)
@@ -276,10 +271,37 @@ Partial Class Automatikprogramme
         Me.GroupBox1.TabIndex = 19
         Me.GroupBox1.TabStop = False
         '
+        'Button30
+        '
+        Me.Button30.Location = New System.Drawing.Point(242, 354)
+        Me.Button30.Name = "Button30"
+        Me.Button30.Size = New System.Drawing.Size(29, 23)
+        Me.Button30.TabIndex = 117
+        Me.Button30.Text = "V1"
+        Me.Button30.UseVisualStyleBackColor = True
+        '
+        'Button29
+        '
+        Me.Button29.Location = New System.Drawing.Point(925, 60)
+        Me.Button29.Name = "Button29"
+        Me.Button29.Size = New System.Drawing.Size(35, 20)
+        Me.Button29.TabIndex = 116
+        Me.Button29.Text = "Hell"
+        Me.Button29.UseVisualStyleBackColor = True
+        '
+        'Button20
+        '
+        Me.Button20.Location = New System.Drawing.Point(840, 60)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(35, 20)
+        Me.Button20.TabIndex = 115
+        Me.Button20.Text = "Aus"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(51, 339)
+        Me.Label13.Location = New System.Drawing.Point(73, 339)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(25, 13)
         Me.Label13.TabIndex = 114
@@ -289,7 +311,7 @@ Partial Class Automatikprogramme
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(51, 262)
+        Me.Label11.Location = New System.Drawing.Point(73, 262)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(25, 13)
         Me.Label11.TabIndex = 113
@@ -300,7 +322,7 @@ Partial Class Automatikprogramme
         '
         Me.Button28.Location = New System.Drawing.Point(58, 379)
         Me.Button28.Name = "Button28"
-        Me.Button28.Size = New System.Drawing.Size(15, 20)
+        Me.Button28.Size = New System.Drawing.Size(57, 20)
         Me.Button28.TabIndex = 112
         Me.Button28.Text = "P"
         Me.Button28.UseVisualStyleBackColor = True
@@ -309,7 +331,7 @@ Partial Class Automatikprogramme
         '
         Me.Button27.Location = New System.Drawing.Point(58, 354)
         Me.Button27.Name = "Button27"
-        Me.Button27.Size = New System.Drawing.Size(15, 20)
+        Me.Button27.Size = New System.Drawing.Size(57, 20)
         Me.Button27.TabIndex = 111
         Me.Button27.Text = "P"
         Me.Button27.UseVisualStyleBackColor = True
@@ -318,7 +340,7 @@ Partial Class Automatikprogramme
         '
         Me.Button26.Location = New System.Drawing.Point(58, 302)
         Me.Button26.Name = "Button26"
-        Me.Button26.Size = New System.Drawing.Size(15, 20)
+        Me.Button26.Size = New System.Drawing.Size(57, 20)
         Me.Button26.TabIndex = 110
         Me.Button26.Text = "P"
         Me.Button26.UseVisualStyleBackColor = True
@@ -327,7 +349,7 @@ Partial Class Automatikprogramme
         '
         Me.Button25.Location = New System.Drawing.Point(58, 279)
         Me.Button25.Name = "Button25"
-        Me.Button25.Size = New System.Drawing.Size(15, 20)
+        Me.Button25.Size = New System.Drawing.Size(57, 20)
         Me.Button25.TabIndex = 109
         Me.Button25.Text = "P"
         Me.Button25.UseVisualStyleBackColor = True
@@ -454,7 +476,7 @@ Partial Class Automatikprogramme
         '
         'Button92
         '
-        Me.Button92.Location = New System.Drawing.Point(882, 303)
+        Me.Button92.Location = New System.Drawing.Point(882, 304)
         Me.Button92.Name = "Button92"
         Me.Button92.Size = New System.Drawing.Size(75, 23)
         Me.Button92.TabIndex = 93
@@ -515,36 +537,6 @@ Partial Class Automatikprogramme
         Me.Label25.TabIndex = 86
         Me.Label25.Text = "Diagonale"
         '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(82, 339)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(28, 13)
-        Me.Label23.TabIndex = 85
-        Me.Label23.Tag = "1"
-        Me.Label23.Text = "Kurz"
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(82, 262)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(28, 13)
-        Me.Label21.TabIndex = 84
-        Me.Label21.Tag = "1"
-        Me.Label21.Text = "Kurz"
-        '
-        'CheckboxKurzzug4
-        '
-        Me.CheckboxKurzzug4.AutoSize = True
-        Me.CheckboxKurzzug4.Location = New System.Drawing.Point(88, 379)
-        Me.CheckboxKurzzug4.Name = "CheckboxKurzzug4"
-        Me.CheckboxKurzzug4.Size = New System.Drawing.Size(15, 14)
-        Me.CheckboxKurzzug4.TabIndex = 12
-        Me.CheckboxKurzzug4.Tag = "4"
-        Me.CheckboxKurzzug4.UseVisualStyleBackColor = True
-        '
         'NumericUpDown8
         '
         Me.NumericUpDown8.Location = New System.Drawing.Point(9, 279)
@@ -556,16 +548,6 @@ Partial Class Automatikprogramme
         Me.NumericUpDown8.Tag = "1"
         Me.NumericUpDown8.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'CheckboxKurzzug3
-        '
-        Me.CheckboxKurzzug3.AutoSize = True
-        Me.CheckboxKurzzug3.Location = New System.Drawing.Point(88, 354)
-        Me.CheckboxKurzzug3.Name = "CheckboxKurzzug3"
-        Me.CheckboxKurzzug3.Size = New System.Drawing.Size(15, 14)
-        Me.CheckboxKurzzug3.TabIndex = 11
-        Me.CheckboxKurzzug3.Tag = "3"
-        Me.CheckboxKurzzug3.UseVisualStyleBackColor = True
-        '
         'Label16
         '
         Me.Label16.AutoSize = True
@@ -575,28 +557,6 @@ Partial Class Automatikprogramme
         Me.Label16.TabIndex = 0
         Me.Label16.Tag = "1"
         Me.Label16.Text = "Zug"
-        '
-        'CheckboxKurzzug2
-        '
-        Me.CheckboxKurzzug2.AutoSize = True
-        Me.CheckboxKurzzug2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.CheckboxKurzzug2.Location = New System.Drawing.Point(88, 304)
-        Me.CheckboxKurzzug2.Name = "CheckboxKurzzug2"
-        Me.CheckboxKurzzug2.Size = New System.Drawing.Size(15, 14)
-        Me.CheckboxKurzzug2.TabIndex = 10
-        Me.CheckboxKurzzug2.Tag = "2"
-        Me.CheckboxKurzzug2.UseVisualStyleBackColor = True
-        '
-        'CheckboxKurzzug1
-        '
-        Me.CheckboxKurzzug1.AutoSize = True
-        Me.CheckboxKurzzug1.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckboxKurzzug1.Location = New System.Drawing.Point(88, 281)
-        Me.CheckboxKurzzug1.Name = "CheckboxKurzzug1"
-        Me.CheckboxKurzzug1.Size = New System.Drawing.Size(15, 14)
-        Me.CheckboxKurzzug1.TabIndex = 9
-        Me.CheckboxKurzzug1.Tag = "1"
-        Me.CheckboxKurzzug1.UseVisualStyleBackColor = False
         '
         'NumericUpDown9
         '
@@ -915,11 +875,12 @@ Partial Class Automatikprogramme
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(840, 60)
+        Me.Button2.Location = New System.Drawing.Point(870, 60)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(120, 20)
+        Me.Button2.Size = New System.Drawing.Size(69, 20)
         Me.Button2.TabIndex = 32
         Me.Button2.Text = "Hue"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button2.UseVisualStyleBackColor = True
         '
         'TextBox1
@@ -1079,13 +1040,13 @@ Partial Class Automatikprogramme
         '
         'GroupBox10
         '
+        Me.GroupBox10.Controls.Add(Me.NumericUpDown6)
+        Me.GroupBox10.Controls.Add(Me.NumericUpDown5)
         Me.GroupBox10.Controls.Add(Me.Label20)
         Me.GroupBox10.Controls.Add(Me.Label19)
         Me.GroupBox10.Controls.Add(Me.Label18)
         Me.GroupBox10.Controls.Add(Me.TrackBar4)
         Me.GroupBox10.Controls.Add(Me.TrackBar3)
-        Me.GroupBox10.Controls.Add(Me.TrackBar2)
-        Me.GroupBox10.Controls.Add(Me.TrackBar1)
         Me.GroupBox10.Controls.Add(Me.Label17)
         Me.GroupBox10.Location = New System.Drawing.Point(0, 4)
         Me.GroupBox10.Name = "GroupBox10"
@@ -1093,6 +1054,26 @@ Partial Class Automatikprogramme
         Me.GroupBox10.TabIndex = 2
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Lok 1 Geschwindigkeit"
+        '
+        'NumericUpDown6
+        '
+        Me.NumericUpDown6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NumericUpDown6.Location = New System.Drawing.Point(226, 40)
+        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {14, 0, 0, 0})
+        Me.NumericUpDown6.Name = "NumericUpDown6"
+        Me.NumericUpDown6.Size = New System.Drawing.Size(39, 26)
+        Me.NumericUpDown6.TabIndex = 9
+        Me.NumericUpDown6.Tag = "2"
+        '
+        'NumericUpDown5
+        '
+        Me.NumericUpDown5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NumericUpDown5.Location = New System.Drawing.Point(23, 42)
+        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {14, 0, 0, 0})
+        Me.NumericUpDown5.Name = "NumericUpDown5"
+        Me.NumericUpDown5.Size = New System.Drawing.Size(39, 26)
+        Me.NumericUpDown5.TabIndex = 8
+        Me.NumericUpDown5.Tag = "1"
         '
         'Label20
         '
@@ -1115,11 +1096,11 @@ Partial Class Automatikprogramme
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(18, 58)
+        Me.Label18.Location = New System.Drawing.Point(223, 21)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(41, 13)
+        Me.Label18.Size = New System.Drawing.Size(48, 13)
         Me.Label18.TabIndex = 5
-        Me.Label18.Text = "Stufe 2"
+        Me.Label18.Text = "Bremsen"
         '
         'TrackBar4
         '
@@ -1139,33 +1120,14 @@ Partial Class Automatikprogramme
         Me.TrackBar3.TabIndex = 3
         Me.TrackBar3.Tag = "3"
         '
-        'TrackBar2
-        '
-        Me.TrackBar2.Location = New System.Drawing.Point(65, 53)
-        Me.TrackBar2.Maximum = 14
-        Me.TrackBar2.Name = "TrackBar2"
-        Me.TrackBar2.Size = New System.Drawing.Size(203, 45)
-        Me.TrackBar2.TabIndex = 2
-        Me.TrackBar2.Tag = "2"
-        '
-        'TrackBar1
-        '
-        Me.TrackBar1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.TrackBar1.Location = New System.Drawing.Point(65, 19)
-        Me.TrackBar1.Maximum = 14
-        Me.TrackBar1.Name = "TrackBar1"
-        Me.TrackBar1.Size = New System.Drawing.Size(203, 45)
-        Me.TrackBar1.TabIndex = 1
-        Me.TrackBar1.Tag = "1"
-        '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(18, 23)
+        Me.Label17.Location = New System.Drawing.Point(20, 21)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(41, 13)
+        Me.Label17.Size = New System.Drawing.Size(50, 13)
         Me.Label17.TabIndex = 0
-        Me.Label17.Text = "Stufe 1"
+        Me.Label17.Text = "Anfahren"
         '
         'NumericUpDown4
         '
@@ -1322,25 +1284,36 @@ Partial Class Automatikprogramme
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(928, 40)
+        Me.Label10.Location = New System.Drawing.Point(928, 30)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(92, 13)
         Me.Label10.TabIndex = 87
-        Me.Label10.Text = "Stand 29.02.2020"
+        Me.Label10.Text = "Stand 13.01.2022"
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Aus", "Eisenbahn", "Das kalte Herz", "Time", "Let there be light"})
+        Me.ComboBox1.Items.AddRange(New Object() {"Aus", "Eisenbahn", "Das kalte Herz", "Time", "Let there be light", "Tag und Nacht"})
         Me.ComboBox1.Location = New System.Drawing.Point(55, 27)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(134, 21)
         Me.ComboBox1.TabIndex = 109
         '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(765, 30)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(75, 13)
+        Me.LinkLabel1.TabIndex = 110
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "Kamerawagen"
+        '
         'Automatikprogramme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label31)
@@ -1364,10 +1337,10 @@ Partial Class Automatikprogramme
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
+        CType(Me.NumericUpDown6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TrackBar4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TrackBar3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1395,10 +1368,6 @@ Partial Class Automatikprogramme
     Friend WithEvents Button22 As System.Windows.Forms.Button
     Friend WithEvents Button21 As System.Windows.Forms.Button
     Friend WithEvents Button23 As System.Windows.Forms.Button
-    Friend WithEvents CheckboxKurzzug4 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckboxKurzzug3 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckboxKurzzug2 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckboxKurzzug1 As System.Windows.Forms.CheckBox
     Friend WithEvents Button41 As System.Windows.Forms.Button
     Friend WithEvents Button42 As System.Windows.Forms.Button
     Friend WithEvents Button43 As System.Windows.Forms.Button
@@ -1456,10 +1425,7 @@ Partial Class Automatikprogramme
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents TrackBar4 As System.Windows.Forms.TrackBar
     Friend WithEvents TrackBar3 As System.Windows.Forms.TrackBar
-    Friend WithEvents TrackBar2 As System.Windows.Forms.TrackBar
-    Friend WithEvents TrackBar1 As System.Windows.Forms.TrackBar
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents Button83 As System.Windows.Forms.Button
     Friend WithEvents Button84 As System.Windows.Forms.Button
     Friend WithEvents Label27 As System.Windows.Forms.Label
@@ -1491,6 +1457,11 @@ Partial Class Automatikprogramme
     Friend WithEvents Button25 As System.Windows.Forms.Button
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents NumericUpDown5 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents NumericUpDown6 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Button29 As System.Windows.Forms.Button
+    Friend WithEvents Button20 As System.Windows.Forms.Button
+    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
+    Friend WithEvents Button30 As System.Windows.Forms.Button
 
 End Class

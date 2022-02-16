@@ -3,6 +3,7 @@
 Public Class KlausEBspecificPlugin
     Implements PluginManagerLibrary.PluginInterface
 
+    Private startpos As New WeichenStartposition
     Private automatiken As Automatikprogramme = Nothing
 
     Public ReadOnly Property beschreibung As String Implements PluginManagerLibrary.PluginInterface.beschreibung
