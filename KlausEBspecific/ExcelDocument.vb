@@ -3,11 +3,28 @@ Imports System.IO
 
 Public Class ExcelDocument
     Dim _Excel As ExcelPackage
+    Dim _FileWatcher As FileSystemWatcher
 
     Public Sub New(ByRef file As String)
-        Dim fileInfo As FileInfo = New FileInfo(file)
+        Dim directory = Path.GetDirectoryName(file)
+        Dim filename = Path.GetFileName(file)
+        _FileWatcher = New FileSystemWatcher(directory) With {
+            .Filter = "*.*",
+            .EnableRaisingEvents = True,
+            .NotifyFilter = NotifyFilters.LastWrite
+        }
+        AddHandler _FileWatcher.Changed, AddressOf OnExcelChanged
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-        _Excel = New ExcelPackage(fileInfo)
+        OpenExcel(file)
+    End Sub
+
+    Private Sub OpenExcel(ByRef file As String)
+        Dim FileInfo As FileInfo = New FileInfo(file)
+        _Excel = New ExcelPackage(FileInfo)
+    End Sub
+
+    Private Sub OnExcelChanged(sender As Object, e As FileSystemEventArgs)
+        OpenExcel(e.FullPath)
     End Sub
 
     Public Function GetValue(ByRef table As String, ByRef cell As String) As String
