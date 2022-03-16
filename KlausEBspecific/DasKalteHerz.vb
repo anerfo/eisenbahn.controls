@@ -13,8 +13,9 @@ Public Class DasKalteHerz
     Public Event StoryProgress(ByVal progressEvent As ProgressEvent)
     Public Event VideoFinished()
 
-    Private ImageBasePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase),
-                                                   "..", "..", "..", "controls", "KlausEBspecific", "Das kalte Herz Fotos")
+    'Private ImageBasePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase),
+    '                                               "..", "..", "..", "Plugins", "KlausEBspecific", "Das kalte Herz Fotos")
+    Private ImageBasePath = "H:\EB_Media\Das kalte Herz Fotos"
     Private _eb As Communication.KernelInterface
     Private _daten As Daten.DatenInterface
     Private _dmxServer As DMXServer.IDMXServer

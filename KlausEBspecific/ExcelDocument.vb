@@ -4,8 +4,10 @@ Imports System.IO
 Public Class ExcelDocument
     Dim _Excel As ExcelPackage
     Dim _FileWatcher As FileSystemWatcher
+    Dim _File As String
 
     Public Sub New(ByRef file As String)
+        _File = file
         Dim directory = Path.GetDirectoryName(file)
         Dim filename = Path.GetFileName(file)
         _FileWatcher = New FileSystemWatcher(directory) With {
@@ -19,7 +21,7 @@ Public Class ExcelDocument
     End Sub
 
     Private Sub OpenExcel(ByRef file As String)
-        Dim FileInfo As FileInfo = New FileInfo(file)
+        Dim FileInfo As FileInfo = New FileInfo(_File)
         _Excel = New ExcelPackage(FileInfo)
     End Sub
 
