@@ -1197,16 +1197,16 @@ Public Class Automatikprogramme
         Dim timer4 As Double = daten.read_from_table(TimerTableName, 3)
 
         If timer1 = 0 Then
-            timer1 = 15000
+            timer1 = NumericUpDown1.Minimum * 1000
         End If
         If timer2 = 0 Then
-            timer2 = 15000
+            timer2 = NumericUpDown2.Minimum * 1000
         End If
         If timer3 = 0 Then
-            timer3 = 15000
+            timer3 = NumericUpDown3.Minimum * 1000
         End If
         If timer4 = 0 Then
-            timer4 = 15000
+            timer4 = NumericUpDown4.Minimum * 1000
         End If
 
         Timer_1 = New Timers.Timer(timer3)
