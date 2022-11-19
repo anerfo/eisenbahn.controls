@@ -10,14 +10,17 @@ Public Class ExcelDocument
         _File = file
         Dim directory = Path.GetDirectoryName(file)
         Dim filename = Path.GetFileName(file)
-        _FileWatcher = New FileSystemWatcher(directory) With {
-            .Filter = "*.*",
-            .EnableRaisingEvents = True,
-            .NotifyFilter = NotifyFilters.LastWrite
-        }
-        AddHandler _FileWatcher.Changed, AddressOf OnExcelChanged
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-        OpenExcel(file)
+        If System.IO.File.Exists(file) Then
+            _FileWatcher = New FileSystemWatcher(directory) With {
+                .Filter = "*.*",
+                .EnableRaisingEvents = True,
+                .NotifyFilter = NotifyFilters.LastWrite
+            }
+            AddHandler _FileWatcher.Changed, AddressOf OnExcelChanged
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+            OpenExcel(file)
+        End If
     End Sub
 
     Private Sub OpenExcel(ByRef file As String)

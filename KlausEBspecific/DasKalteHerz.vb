@@ -58,7 +58,10 @@ Public Class DasKalteHerz
 
     Public WriteOnly Property StoryImage As String
         Set(value As String)
-            StoryPictureBox.Load(System.IO.Path.Combine(ImageBasePath, value))
+            Dim path As String = IO.Path.Combine(ImageBasePath, value)
+            If IO.File.Exists(path) Then
+                StoryPictureBox.Load(path)
+            End If
         End Set
     End Property
 
