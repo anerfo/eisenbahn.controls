@@ -280,8 +280,8 @@ Public Class Automatikprogramme
         ' *** 3 (Auto) - 0 (Marxzel) - 1 (Forbach) - 2 (Windeck)
 
         Forbach = 2
-        Marxzel = 0
-        Windeck = 1
+        Marxzel = 1
+        Windeck = 0
 
         _Betriebsart0_3Var = 0
         _Betriebsart0_4Var = 0
@@ -425,21 +425,21 @@ Public Class Automatikprogramme
         If _Funktionsmodelle = 0 Then
             Button14.Text = "Funk.-Modelle aus"
             Button14.BackColor = Drawing.Color.LightGray
-            _eb.weicheSchalten(30, Klassen.WeichenRichtung.rechts)
-            _eb.weicheSchalten(34, Klassen.WeichenRichtung.rechts)
-            _eb.weicheSchalten(40, Klassen.WeichenRichtung.rechts)
+            '_eb.weicheSchalten(30, Klassen.WeichenRichtung.rechts)
+            '_eb.weicheSchalten(34, Klassen.WeichenRichtung.rechts)
+            '_eb.weicheSchalten(40, Klassen.WeichenRichtung.rechts)
         ElseIf _Funktionsmodelle = 1 Then
             Button14.Text = "Funk.-Modelle ein"
             Button14.BackColor = Drawing.Color.LightGreen
-            _eb.weicheSchalten(30, Klassen.WeichenRichtung.links)
-            _eb.weicheSchalten(34, Klassen.WeichenRichtung.links)
-            _eb.weicheSchalten(40, Klassen.WeichenRichtung.links)
+            '_eb.weicheSchalten(30, Klassen.WeichenRichtung.links)
+            '_eb.weicheSchalten(34, Klassen.WeichenRichtung.links)
+            '_eb.weicheSchalten(40, Klassen.WeichenRichtung.links)
         ElseIf _Funktionsmodelle = 2 Then
             Button14.Text = "Funk.-Modelle Auto"
             Button14.BackColor = Drawing.Color.LightYellow
-            _eb.weicheSchalten(30, Klassen.WeichenRichtung.rechts)
-            _eb.weicheSchalten(34, Klassen.WeichenRichtung.rechts)
-            _eb.weicheSchalten(40, Klassen.WeichenRichtung.rechts)
+            '_eb.weicheSchalten(30, Klassen.WeichenRichtung.rechts)
+            '_eb.weicheSchalten(34, Klassen.WeichenRichtung.rechts)
+            '_eb.weicheSchalten(40, Klassen.WeichenRichtung.rechts)
         End If
 
 
@@ -847,94 +847,94 @@ Public Class Automatikprogramme
         _HueBridge = Hue.HueBridgeLocator.Locate()
         _HueLight = _HueBridge.GetLight(HueLightName)
 
-        If Hue_Control = 0 Then
-            _HueBridge.SetLightOnOff(_HueLight, False)
-            _HueHell = 0
-            _HueAus = 1
-        End If
-        If Hue_Control = 1 Or Hue_Control = 2 Then
-            _HueBridge.SetLightOnOff(_HueLight, True)
-            _HueHell = 0
-            _HueAus = 0
-            Hue_Control_M = _Hue
-            Hue_Control_aktuell = Hue_Control
-            If _Hue = 0 Then
-                _HueBridge.SetLightCT(_HueLight, 256)
-                _HueBridge.SetLight(_HueLight, bri:=255)
-                CT_soll = 256
-                CT_aktuell = 256
-                Bri_soll = 255
-                Bri_aktuell = 255
-            ElseIf _Hue = 1 Then
-                _HueBridge.SetLightCT(_HueLight, 256)
-                _HueBridge.SetLight(_HueLight, bri:=160)
-                CT_soll = 256
-                CT_aktuell = 256
-                Bri_soll = 160
-                Bri_aktuell = 160
-            ElseIf _Hue = 2 Then
-                _HueBridge.SetLightCT(_HueLight, 256)
-                _HueBridge.SetLight(_HueLight, bri:=80)
-                CT_soll = 256
-                CT_aktuell = 256
-                Bri_soll = 80
-                Bri_aktuell = 80
-            ElseIf _Hue = 3 Then
-                _HueBridge.SetLight(_HueLight, sat:=254)
-                _HueBridge.SetLight(_HueLight, bri:=80)
-                _HueBridge.SetLight(_HueLight, hue:=64000)
-                Bri_soll = 80
-                Bri_aktuell = 80
-                Sat_soll = 256
-                Sat_aktuell = 256
-                Col_soll = 64000
-                Col_aktuell = 64000
-            ElseIf _Hue = 4 Then
-                _HueBridge.SetLight(_HueLight, sat:=254)
-                _HueBridge.SetLight(_HueLight, bri:=80)
-                _HueBridge.SetLight(_HueLight, hue:=45000)
-                Bri_soll = 80
-                Bri_aktuell = 80
-                Sat_soll = 256
-                Sat_aktuell = 256
-                Col_soll = 45000
-                Col_aktuell = 45000
-            ElseIf _Hue = 5 Then
-                _HueBridge.SetLight(_HueLight, sat:=254)
-                _HueBridge.SetLight(_HueLight, bri:=80)
-                _HueBridge.SetLight(_HueLight, hue:=20500)
-                Bri_soll = 80
-                Bri_aktuell = 80
-                Sat_soll = 256
-                Sat_aktuell = 256
-                Col_soll = 20500
-                Col_aktuell = 20500
-            ElseIf _Hue = 6 Then
-                _HueBridge.SetLight(_HueLight, sat:=254)
-                _HueBridge.SetLight(_HueLight, bri:=80)
-                _HueBridge.SetLight(_HueLight, hue:=10000)
-                Bri_soll = 80
-                Bri_aktuell = 80
-                Sat_soll = 256
-                Sat_aktuell = 256
-                Col_soll = 10000
-                Col_aktuell = 10000
-            Else
-                _Hue = 6
-            End If
-        End If
-        If Hue_Control = 4 Then
-            _HueHell = 1
-            _HueAus = 0
-            _HueBridge.SetLightOnOff(_HueLight, True)
-            _HueBridge.SetLightCT(_HueLight, 256)
-            _HueBridge.SetLight(_HueLight, bri:=255)
-            Bri_soll = 250
-            Bri_aktuell = 250
-            CT_soll = 256
-            CT_aktuell = 256
-            Hue_Control_aktuell = 4
-        End If
+        'If Hue_Control = 0 Then
+        '    _HueBridge.SetLightOnOff(_HueLight, False)
+        '    _HueHell = 0
+        '    _HueAus = 1
+        'End If
+        'If Hue_Control = 1 Or Hue_Control = 2 Then
+        '    _HueBridge.SetLightOnOff(_HueLight, True)
+        '    _HueHell = 0
+        '    _HueAus = 0
+        '    Hue_Control_M = _Hue
+        '    Hue_Control_aktuell = Hue_Control
+        '    If _Hue = 0 Then
+        '        _HueBridge.SetLightCT(_HueLight, 256)
+        '        _HueBridge.SetLight(_HueLight, bri:=255)
+        '        CT_soll = 256
+        '        CT_aktuell = 256
+        '        Bri_soll = 255
+        '        Bri_aktuell = 255
+        '    ElseIf _Hue = 1 Then
+        '        _HueBridge.SetLightCT(_HueLight, 256)
+        '        _HueBridge.SetLight(_HueLight, bri:=160)
+        '        CT_soll = 256
+        '        CT_aktuell = 256
+        '        Bri_soll = 160
+        '        Bri_aktuell = 160
+        '    ElseIf _Hue = 2 Then
+        '        _HueBridge.SetLightCT(_HueLight, 256)
+        '        _HueBridge.SetLight(_HueLight, bri:=80)
+        '        CT_soll = 256
+        '        CT_aktuell = 256
+        '        Bri_soll = 80
+        '        Bri_aktuell = 80
+        '    ElseIf _Hue = 3 Then
+        '        _HueBridge.SetLight(_HueLight, sat:=254)
+        '        _HueBridge.SetLight(_HueLight, bri:=80)
+        '        _HueBridge.SetLight(_HueLight, hue:=64000)
+        '        Bri_soll = 80
+        '        Bri_aktuell = 80
+        '        Sat_soll = 256
+        '        Sat_aktuell = 256
+        '        Col_soll = 64000
+        '        Col_aktuell = 64000
+        '    ElseIf _Hue = 4 Then
+        '        _HueBridge.SetLight(_HueLight, sat:=254)
+        '        _HueBridge.SetLight(_HueLight, bri:=80)
+        '        _HueBridge.SetLight(_HueLight, hue:=45000)
+        '        Bri_soll = 80
+        '        Bri_aktuell = 80
+        '        Sat_soll = 256
+        '        Sat_aktuell = 256
+        '        Col_soll = 45000
+        '        Col_aktuell = 45000
+        '    ElseIf _Hue = 5 Then
+        '        _HueBridge.SetLight(_HueLight, sat:=254)
+        '        _HueBridge.SetLight(_HueLight, bri:=80)
+        '        _HueBridge.SetLight(_HueLight, hue:=20500)
+        '        Bri_soll = 80
+        '        Bri_aktuell = 80
+        '        Sat_soll = 256
+        '        Sat_aktuell = 256
+        '        Col_soll = 20500
+        '        Col_aktuell = 20500
+        '    ElseIf _Hue = 6 Then
+        '        _HueBridge.SetLight(_HueLight, sat:=254)
+        '        _HueBridge.SetLight(_HueLight, bri:=80)
+        '        _HueBridge.SetLight(_HueLight, hue:=10000)
+        '        Bri_soll = 80
+        '        Bri_aktuell = 80
+        '        Sat_soll = 256
+        '        Sat_aktuell = 256
+        '        Col_soll = 10000
+        '        Col_aktuell = 10000
+        '    Else
+        '        _Hue = 6
+        '    End If
+        'End If
+        'If Hue_Control = 4 Then
+        '    _HueHell = 1
+        '    _HueAus = 0
+        '    _HueBridge.SetLightOnOff(_HueLight, True)
+        '    _HueBridge.SetLightCT(_HueLight, 256)
+        '    _HueBridge.SetLight(_HueLight, bri:=255)
+        '    Bri_soll = 250
+        '    Bri_aktuell = 250
+        '    CT_soll = 256
+        '    CT_aktuell = 256
+        '    Hue_Control_aktuell = 4
+        'End If
 
         If Betriebsart = 0 Then
             Button10.BackColor = Drawing.Color.LightYellow
@@ -3239,7 +3239,8 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
-        Dim Index As Integer
+        Dim Index, Fun01, Fun11, Fun21, Fun31 As Integer
+        Dim Abstellen As Integer
         Index = 10 + 4
 
         Faktor_Beleuchtung = 100
@@ -3254,7 +3255,15 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        Fun01 = Betriebsparameter.GetValue("LokführerAnweisungen", 4, Index)
+        Fun11 = Betriebsparameter.GetValue("LokführerAnweisungen", 9, Index)
+        Fun21 = Betriebsparameter.GetValue("LokführerAnweisungen", 14, Index)
+        Fun31 = Betriebsparameter.GetValue("LokführerAnweisungen", 19, Index)
 
+        Abstellen = 0
+        If (_GlsL10 = 2 And AutomatikParameter = 200 And Betriebsparameter.GetValue("Fahrplan", 3, 11)) Then
+            Abstellen = 1
+        End If
         If A_StopB = 1 Then
             V_100 = 8000
         Else
@@ -3397,6 +3406,13 @@ Public Class Automatikprogramme
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
         ElseIf _Prog10 = 24 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+        ElseIf _Prog10 = 25 Then
+        ElseIf _Prog10 = 26 Then
+            If _Motor < 2 Then
+                If Fun11 = 0 Then
+                    _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
+                End If
+            End If
 
             ' Lok abstellen
 
@@ -3412,7 +3428,9 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog10 = 53 Then
             If _Motor < 2 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
+                If Fun31 = 0 Then
+                    _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
+                End If
             End If
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
@@ -3477,6 +3495,9 @@ Public Class Automatikprogramme
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 1)
         ElseIf _Prog10 = 182 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+            If Abstellen = 1 Then
+                _Prog10 = 50
+            End If
 
             ' Tunnelausfahrt
 
@@ -9917,10 +9938,10 @@ Public Class Automatikprogramme
             ' Zindelstein
 
         ElseIf _Prog34 = 500 Then
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = V_500
         ElseIf _Prog34 = 501 Then
             _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = T_500
         ElseIf _Prog34 = 502 Then
             _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
         ElseIf _Prog34 = 503 Then
@@ -19475,12 +19496,12 @@ Public Class Automatikprogramme
             T_100 = T_100 - 800
             T_130 = T_130 - 800
             T_160 = T_160 - 800
-            V_180 = V_180 - 1500
+            V_180 = V_180 - 900
         ElseIf Stufe2 = 2 Then
             T_100 = T_100 - 500
             T_130 = T_130 - 500
             T_160 = T_160 - 500
-            V_180 = V_180 - 1000
+            V_180 = V_180 - 700
         ElseIf Stufe2 = 3 Then
             T_100 = T_100 - 200
             T_130 = T_130 - 200
@@ -19870,31 +19891,30 @@ Public Class Automatikprogramme
 
         If _Prog71 = 0 Then
             Prog_Lok71.Interval = 2000
-        ElseIf _Prog71 = 1 Then
             If _Durchsagen = 1 And (_TypL71 = 1 Or _TypL71 = 3) Then
                 PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
             Else
-                _Prog71 = 6
+                _Prog71 = 5
             End If
+        ElseIf _Prog71 = 1 Then
         ElseIf _Prog71 = 2 Then
         ElseIf _Prog71 = 3 Then
         ElseIf _Prog71 = 4 Then
         ElseIf _Prog71 = 5 Then
-        ElseIf _Prog71 = 6 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog71 = 7 Then
+        ElseIf _Prog71 = 6 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog71 = 8 Then
+        ElseIf _Prog71 = 7 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog71 = 9 Then
+        ElseIf _Prog71 = 8 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog71 = 10 Then
+        ElseIf _Prog71 = 9 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog71 = 11 Then
+        ElseIf _Prog71 = 10 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog71 = 12 Then
+        ElseIf _Prog71 = 11 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
             ' Lok abstellen
@@ -19973,12 +19993,12 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog71 = 200 Then
+            Prog_Lok71.Interval = 2000
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok71.Interval = 2000
         ElseIf _Prog71 = 201 Then
         ElseIf _Prog71 = 202 Then
         ElseIf _Prog71 = 203 Then
@@ -22564,7 +22584,7 @@ Public Class Automatikprogramme
                 ElseIf Ort_Lok3 = 312 Then
                     Button63.BackColor = Drawing.Color.Red
                 ElseIf Ort_Lok3 = 320 Then
-                    Button93.BackColor = Drawing.Color.Red
+                    Button53.BackColor = Drawing.Color.Red
                 End If
                 AutomatikParameter = Ort_Lok3
                 Timer_EinzelLok3.Interval = NumericUpDown3.Value * 1000
@@ -37700,6 +37720,7 @@ Public Class Automatikprogramme
         If _Betriebsart3_0Var = 0 Then
             _Betriebsart3_0Var = 1
             Button19.Text = "V1"
+            TextBox1.Text = "Züge 1 und 2 fahren hintereinander über Gleis 1 und 2 (Route OBEN LANG ist festgelegt)"
             _Route_Gleis1 = 2
             _daten.write_to_table(AutomatikParameterTableName, 3, _Route_Gleis1)
             ARoute_Lok1 = _Route_Gleis1
@@ -37741,6 +37762,7 @@ Public Class Automatikprogramme
         Else
             _Betriebsart3_0Var = 0
             Button19.Text = "V0"
+            TextBox1.Text = "Züge 1 und 2 fahren über die gewählten Routen (Standard)"
             ButtonsVisible(999)
         End If
         _Weichen_in_Startposition = False
