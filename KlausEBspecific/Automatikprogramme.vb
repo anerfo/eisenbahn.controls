@@ -3261,6 +3261,9 @@ Public Class Automatikprogramme
         Fun31 = Betriebsparameter.GetValue("LokführerAnweisungen", 19, Index)
 
         Abstellen = 0
+        If (_GlsL10 = 1 And AutomatikParameter = 100 And Betriebsparameter.GetValue("Fahrplan", 3, 10)) Then
+            Abstellen = 1
+        End If
         If (_GlsL10 = 2 And AutomatikParameter = 200 And Betriebsparameter.GetValue("Fahrplan", 3, 11)) Then
             Abstellen = 1
         End If
