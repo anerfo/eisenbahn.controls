@@ -3230,9 +3230,9 @@ Public Class Automatikprogramme
     Private Sub HandleTimerElapsed22(sender As System.Object, e As System.EventArgs) Handles Prog_Lok10.Elapsed
 
         '*** Fahrprogramm TEE VT 11.5
-        '*** Datum: 20.06.2020
+        '*** Datum: 05.01.2023
 
-        SetText(TextBox1, "TEE VT 11.5                                                    IBS: 17.01.2021 - V3 : 8")
+        SetText(TextBox1, "TEE VT 11.5                                                    IBS: 05.01.2023 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_TEE_01.jpg")
         GeschwindikeitenSetzen(10)
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
@@ -3261,11 +3261,45 @@ Public Class Automatikprogramme
         Fun31 = Betriebsparameter.GetValue("LokführerAnweisungen", 19, Index)
 
         Abstellen = 0
-        If (_GlsL10 = 1 And AutomatikParameter = 100 And Betriebsparameter.GetValue("Fahrplan", 3, 10)) Then
-            Abstellen = 1
+        If (_GlsL10 = 1 And Ort_Lok1 = 100) Then
+            If Betriebsparameter.GetValue("Fahrplan", 3, 10) = 1 Then
+                Abstellen = 1
+            End If
         End If
-        If (_GlsL10 = 2 And AutomatikParameter = 200 And Betriebsparameter.GetValue("Fahrplan", 3, 11)) Then
-            Abstellen = 1
+        If (_GlsL10 = 2 And Ort_Lok2 = 200) Then
+            If Betriebsparameter.GetValue("Fahrplan", 3, 11) = 1 Then
+                Abstellen = 1
+            End If
+        End If
+        If (_GlsL10 = 3 And Ort_Lok3 = 300) Then
+            If Betriebsparameter.GetValue("Fahrplan", 3, 20) = 1 Then
+                Abstellen = 1
+            End If
+        End If
+        If (_GlsL10 = 4 And Ort_Lok4 = 400) Then
+            If Betriebsparameter.GetValue("Fahrplan", 3, 21) = 1 Then
+                Abstellen = 1
+            End If
+        End If
+        If (_GlsL10 = 1 And Ort_Lok1 = 105) Then
+            If Betriebsparameter.GetValue("Fahrplan", 9, 10) = 1 Then
+                Abstellen = 1
+            End If
+        End If
+        If (_GlsL10 = 2 And Ort_Lok2 = 205) Then
+            If Betriebsparameter.GetValue("Fahrplan", 9, 11) = 1 Then
+                Abstellen = 1
+            End If
+        End If
+        If (_GlsL10 = 3 And Ort_Lok3 = 315) Then
+            If Betriebsparameter.GetValue("Fahrplan", 9, 20) = 1 Then
+                Abstellen = 1
+            End If
+        End If
+        If (_GlsL10 = 4 And Ort_Lok4 = 415) Then
+            If Betriebsparameter.GetValue("Fahrplan", 9, 21) = 1 Then
+                Abstellen = 1
+            End If
         End If
         If A_StopB = 1 Then
             V_100 = 8000
@@ -3279,37 +3313,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(10, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
+        ElseIf Stufe2 = 2 Then
             T_100 = T_100 + 200
             T_130 = T_130 + 200
             T_160 = T_160 + 200
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+            V_180 = V_180 + 350
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
-            V_180 = V_180 + 1000
-        Else
+            V_180 = V_180 + 700
+        ElseIf Stufe2 = 4 Then
             T_100 = T_100 + 800
             T_130 = T_130 + 800
             T_160 = T_160 + 800
-            V_180 = V_180 + 1500
+            V_180 = V_180 + 1000
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 1100
+            T_130 = T_130 + 1100
+            T_160 = T_160 + 1100
+            V_180 = V_180 + 1350
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1300
+            T_130 = T_130 + 1300
+            T_160 = T_160 + 1300
+            V_180 = V_180 + 1700
+        Else
+            T_100 = T_100 + 1300
+            T_130 = T_130 + 1300
+            T_160 = T_160 + 1300
+            V_180 = V_180 + 2000
         End If
 
         Stufe2 = Stufe1
@@ -3491,8 +3528,13 @@ Public Class Automatikprogramme
             ' Rangierzug
 
         ElseIf _Prog10 = 180 Then
-            _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
             Prog_Lok10.Interval = V_180
+            If _TypL10 < 5 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+                _Prog10 = 181
+            Else
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            End If
         ElseIf _Prog10 = 181 Then
             Prog_Lok10.Interval = T_180
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 1)
@@ -3759,8 +3801,13 @@ Public Class Automatikprogramme
             ' Rangierzug
 
         ElseIf _Prog11 = 180 Then
-            _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 2)
             Prog_Lok11.Interval = V_180
+            If _TypL11 < 5 Then
+                _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+                _Prog11 = 181
+            Else
+                _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            End If
         ElseIf _Prog11 = 181 Then
             Prog_Lok11.Interval = T_180
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, 1)
@@ -4026,8 +4073,13 @@ Public Class Automatikprogramme
             ' Rangierzug
 
         ElseIf _Prog12 = 180 Then
-            _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, 4)
             Prog_Lok12.Interval = V_180
+            If _TypL12 < 5 Then
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+                _Prog12 = 181
+            Else
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            End If
         ElseIf _Prog12 = 181 Then
             Prog_Lok12.Interval = T_180
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, 3)
@@ -19689,8 +19741,13 @@ Public Class Automatikprogramme
             ' Rangierzug
 
         ElseIf _Prog70 = 180 Then
-            _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, 2)
             Prog_Lok70.Interval = V_180
+            If _TypL70 < 5 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+                _Prog70 = 181
+            Else
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, 2)
+            End If
         ElseIf _Prog70 = 181 Then
             Prog_Lok70.Interval = T_180
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, 1)
@@ -23492,7 +23549,8 @@ Public Class Automatikprogramme
         Ort_Lok1 = 105
         A_StopH = 0
         If _StopZug1 > 0 Then
-            StopZug1()
+            Zug1(nachlauf)
+            'StopZug1()
         End If
         If _StopZug1 = 0 Then       ' *** kein Halt
             AutomatikParameter = 106
@@ -23502,11 +23560,11 @@ Public Class Automatikprogramme
                 _aktuelleKamera = Forbach
             End If
         ElseIf _StopZug1 = 1 Then    ' *** Halt
-            If _NachlaufZug1 = False Then
-                Zug1(abstellen)
-            Else
-                Zug1(nachlauf)
-            End If
+            'If _NachlaufZug1 = False Then
+            '    Zug1(abstellen)
+            'Else
+            '    Zug1(nachlauf)
+            'End If
         ElseIf _StopZug1 = 2 Then    ' *** Wechsel > 2
             _Route_Gleis2 = ARoute_Lok2
             ButtonsVisible(999)
@@ -23640,7 +23698,8 @@ Public Class Automatikprogramme
         Ort_Lok2 = 205
         A_StopH = 0
         If _StopZug2 > 0 Then
-            StopZug2()
+            Zug2(nachlauf)
+            'StopZug2()
         End If
         If _StopZug2 = 0 Then       ' *** kein Halt
             AutomatikParameter = 206
@@ -23650,11 +23709,11 @@ Public Class Automatikprogramme
                 _aktuelleKamera = Forbach
             End If
         ElseIf _StopZug2 = 2 Then    ' *** Halt
-            If _NachlaufZug2 = False Then
-                Zug2(abstellen)
-            Else
-                Zug2(nachlauf)
-            End If
+            'If _NachlaufZug2 = False Then
+            '    Zug2(abstellen)
+            'Else
+            '    Zug2(nachlauf)
+            'End If
         ElseIf _StopZug2 = 1 Then    ' *** Wechsel > 1
             _Route_Gleis1 = ARoute_Lok1
             ButtonsVisible(999)
@@ -23801,7 +23860,8 @@ Public Class Automatikprogramme
         Ort_Lok3 = 315
         A_StopH = 0
         If _StopZug3 > 0 Then
-            StopZug3()
+            Zug3(nachlauf)
+            'StopZug3()
         End If
         If _Bhf2_Gleis3 = 0 Then
             ' ***
@@ -23820,12 +23880,12 @@ Public Class Automatikprogramme
             End If
             AutomatikParameter = 305
         ElseIf _StopZug3 = 3 Then    ' *** Halt
-            If _NachlaufZug3 = False Then
-                StopZug3()
-                Zug3(abstellen)
-            Else
-                Zug3(nachlauf)
-            End If
+            'If _NachlaufZug3 = False Then
+            '    StopZug3()
+            '    Zug3(abstellen)
+            'Else
+            '    Zug3(nachlauf)
+            'End If
             If _SBhf_Gleis3 = 1 Or _SBhf_Gleis3 = 2 Then
                 _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
             End If
@@ -23978,7 +24038,8 @@ Public Class Automatikprogramme
         Ort_Lok4 = 415
         A_StopH = 0
         If _StopZug4 > 0 Then
-            StopZug4()
+            Zug4(nachlauf)
+            'StopZug4()
         End If
         If _StopZug4 = 0 Then
             ' ***
@@ -23997,12 +24058,12 @@ Public Class Automatikprogramme
             End If
             AutomatikParameter = 405
         ElseIf _StopZug4 = 4 Then    ' *** Halt
-            If _NachlaufZug4 = False Then
-                'StopZug4()
-                Zug4(abstellen)
-            Else
-                Zug4(nachlauf)
-            End If
+            'If _NachlaufZug4 = False Then
+            '    'StopZug4()
+            '    Zug4(abstellen)
+            'Else
+            '    Zug4(nachlauf)
+            'End If
             If _SBhf_Gleis4 = 1 Or _SBhf_Gleis4 = 2 Then
                 _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
             End If
@@ -28433,7 +28494,7 @@ Public Class Automatikprogramme
         ' ***
         ' *** Betriebsart 1/2=0 und ' *** Betriebsart 3/4=3
         ' ***
-        ' *** Datum:          07.02.2021
+        ' *** Datum:          06.01.2023
         ' ***
         ' *** steuert die Fahrt des Zuges auf Gleis 3
         ' ***     
@@ -28495,12 +28556,13 @@ Public Class Automatikprogramme
                 End If
                 AutomatikParameter = 300
             Else
-                If _NachlaufZug3 = False Then
-                    StopZug3()
-                    Zug3(abstellen)
-                Else
-                    Zug3(nachlauf)
-                End If
+                Zug3(nachlauf)
+                'If _NachlaufZug3 = False Then
+                '    StopZug3()
+                '    Zug3(abstellen)
+                'Else
+                'Zug3(nachlauf)
+                'End If
             End If
             _AutomatikParameterH = 0
         End If
@@ -29729,7 +29791,7 @@ Public Class Automatikprogramme
     Private Sub Betriebsart2_0(ByVal Kontakt As Klassen.Kontakt)
         ' *** Betriebsart 1/2=2 und ' *** Betriebsart 3/4=0
         ' ***
-        ' *** Datum:          14.01.2020
+        ' *** Datum:          06.01.2023
         ' ***
         ' *** Kommentar allgemein            : kein
         ' ***       
@@ -29789,12 +29851,13 @@ Public Class Automatikprogramme
                 ' Weichen 17 und 27 müssen nicht geschaltet werden (Betriebsart12 = 1 und Betriebsart34 =0)
                 AutomatikParameter = 200
             Else
-                If _NachlaufZug2 = False Then
-                    StopZug2()
-                    Zug2(abstellen)
-                Else
-                    Zug2(nachlauf)
-                End If
+                Zug2(nachlauf)
+                'If _NachlaufZug2 = False Then
+                '    StopZug2()
+                '    Zug2(abstellen)
+                'Else
+                '    Zug2(nachlauf)
+                'End If
             End If
             _AutomatikParameterH = 0
         End If
