@@ -3627,37 +3627,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(11, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
+        ElseIf Stufe2 = 2 Then
             T_100 = T_100 + 200
             T_130 = T_130 + 200
             T_160 = T_160 + 200
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+            V_180 = V_180 + 200
+        ElseIf Stufe2 = 3 Then
+            T_100 = T_100 + 400
+            T_130 = T_130 + 400
+            T_160 = T_160 + 400
+            V_180 = V_180 + 400
+        ElseIf Stufe2 = 4 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
-            V_180 = V_180 + 1000
-        Else
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 600
+        ElseIf Stufe2 = 6 Then
             T_100 = T_100 + 800
             T_130 = T_130 + 800
             T_160 = T_160 + 800
-            V_180 = V_180 + 1500
+            V_180 = V_180 + 800
+        Else
+            T_100 = T_100 + 500
+            T_130 = T_130 + 500
+            T_160 = T_160 + 500
+            V_180 = V_180 + 500
         End If
 
         Stufe2 = Stufe1
@@ -3751,15 +3754,13 @@ Public Class Automatikprogramme
         ElseIf _Prog11 = 100 Then
             Prog_Lok11.Interval = V_100
         ElseIf _Prog11 = 101 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
             Prog_Lok11.Interval = T_100
         ElseIf _Prog11 = 102 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
-        ElseIf _Prog11 = 103 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
-        ElseIf _Prog11 = 104 Then
+        ElseIf _Prog11 = 103 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
-        ElseIf _Prog11 = 105 Then
+        ElseIf _Prog11 = 104 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von links)
@@ -3767,17 +3768,15 @@ Public Class Automatikprogramme
         ElseIf _Prog11 = 130 Then
             Prog_Lok11.Interval = V_130
         ElseIf _Prog11 = 131 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
             Prog_Lok11.Interval = T_130
         ElseIf _Prog11 = 132 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
-        ElseIf _Prog11 = 133 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
-        ElseIf _Prog11 = 134 Then
+        ElseIf _Prog11 = 133 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
-        ElseIf _Prog11 = 135 Then
+        ElseIf _Prog11 = 134 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
-        ElseIf _Prog11 = 136 Then
+        ElseIf _Prog11 = 135 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, 0)
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
@@ -3785,17 +3784,15 @@ Public Class Automatikprogramme
         ElseIf _Prog11 = 160 Then
             Prog_Lok11.Interval = V_160
         ElseIf _Prog11 = 161 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
             Prog_Lok11.Interval = T_160
         ElseIf _Prog11 = 162 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
-        ElseIf _Prog11 = 163 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
-        ElseIf _Prog11 = 164 Then
+        ElseIf _Prog11 = 163 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
-        ElseIf _Prog11 = 165 Then
+        ElseIf _Prog11 = 164 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
-        ElseIf _Prog11 = 166 Then
+        ElseIf _Prog11 = 165 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, 0)
 
             ' Rangierzug
@@ -3824,8 +3821,6 @@ Public Class Automatikprogramme
             End If
             Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 201 Then
-        ElseIf _Prog11 = 202 Then
-        ElseIf _Prog11 = 203 Then
 
             ' Zindelstein
 
@@ -3896,37 +3891,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(12, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -4171,37 +4169,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(13, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -4345,8 +4346,13 @@ Public Class Automatikprogramme
             ' Rangierzug
 
         ElseIf _Prog13 = 180 Then
-            _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
             Prog_Lok13.Interval = V_180
+            If _TypL13 < 5 Then
+                _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+                _Prog13 = 181
+            Else
+                _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            End If
         ElseIf _Prog13 = 181 Then
             Prog_Lok13.Interval = T_180
             _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, 1)
@@ -4435,37 +4441,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(14, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -4700,37 +4709,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(15, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -4966,37 +4978,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(16, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -5194,7 +5209,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 12X 001-5
         '*** Datum: 13.12.2020
 
-        SetText(TextBox1, "E-Lok 12X 001-5                                                  IBS: 13.12.2020 - V3: 9")
+        SetText(TextBox1, "E-Lok 12X 001-5                                                  IBS: 03.02.2023 - V3: 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_12X_01.jpg")
         GeschwindikeitenSetzen(17)
 
@@ -5230,37 +5245,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(17, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
+        ElseIf Stufe2 = 2 Then
             T_100 = T_100 + 200
             T_130 = T_130 + 200
             T_160 = T_160 + 200
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+            V_180 = V_180 + 200
+        ElseIf Stufe2 = 3 Then
+            T_100 = T_100 + 400
+            T_130 = T_130 + 400
+            T_160 = T_160 + 400
+            V_180 = V_180 + 400
+        ElseIf Stufe2 = 4 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
-            V_180 = V_180 + 1000
-        Else
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 600
+        ElseIf Stufe2 = 6 Then
             T_100 = T_100 + 800
             T_130 = T_130 + 800
             T_160 = T_160 + 800
-            V_180 = V_180 + 1500
+            V_180 = V_180 + 800
+        Else
+            T_100 = T_100 + 500
+            T_130 = T_130 + 500
+            T_160 = T_160 + 500
+            V_180 = V_180 + 500
         End If
 
         Stufe2 = Stufe1
@@ -5309,7 +5327,7 @@ Public Class Automatikprogramme
 
         If _Prog17 = 0 Then
             Prog_Lok17.Interval = 2000
-            If _Innenbeleuchtung2 > 0 Then
+            If _Fernlicht > 0 Then
                 _eb.lokSteuern(17, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog17 = 1 Then
@@ -5344,8 +5362,7 @@ Public Class Automatikprogramme
         ElseIf _Prog17 = 50 Then
             Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 51 Then
-        ElseIf _Prog17 = 52 Then
-            If _Fahrzeugbeleuchtung2 < 2 Then
+            If _Fernlicht < 2 Then
                 _eb.lokSteuern(17, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
 
@@ -5495,37 +5512,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(18, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -5761,37 +5781,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(19, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -6033,37 +6056,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(20, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -6295,37 +6321,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(21, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -6562,37 +6591,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(22, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -6827,37 +6859,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(23, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -7093,37 +7128,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(24, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -7360,37 +7398,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(25, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -7625,37 +7666,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(26, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -7890,37 +7934,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(27, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -8151,37 +8198,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(28, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -8439,37 +8489,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(29, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -8719,37 +8772,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(30, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -8994,37 +9050,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(31, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -9261,37 +9320,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(32, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -9529,37 +9591,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(33, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -9795,37 +9860,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(34, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -10059,37 +10127,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(35, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -10324,37 +10395,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(36, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -10589,37 +10663,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(37, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -10854,37 +10931,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(38, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -11088,7 +11168,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok E60 10
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok E60 10                                                   IBS: 15.01.2021 - V3:7")
+        SetText(TextBox1, "E-Lok E60 10                                                   IBS: 18.02.2023 - V3:7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_60_01.jpg")
         GeschwindikeitenSetzen(39)
 
@@ -11124,37 +11204,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(39, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -11389,37 +11472,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(40, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -11665,7 +11751,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "SBB RCe 2/4 604 Roter Pfeil" 
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Triebwagen RCe 2/4 604 Roter Pfeil                              IBS: 17.02.2021 - V3 : 8")
+        SetText(TextBox1, "Triebwagen RCe 2/4 604 Roter Pfeil                              IBS: 18.02.2023 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_RCe_01.jpg")
         GeschwindikeitenSetzen(41)
 
@@ -11701,37 +11787,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(41, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -11987,37 +12076,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(42, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -12281,37 +12373,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(43, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -12542,37 +12637,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(44, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -12806,37 +12904,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(45, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -13070,37 +13171,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(46, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -13337,37 +13441,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(47, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -13603,37 +13710,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(48, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -13893,37 +14003,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(49, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -14161,37 +14274,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(50, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -14423,37 +14539,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(51, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -14684,37 +14803,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(52, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -14945,37 +15067,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(53, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -15206,37 +15331,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(54, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -15464,37 +15592,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(55, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -15727,37 +15858,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(56, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -15985,37 +16119,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(57, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -16249,37 +16386,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(58, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -16523,37 +16663,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(59, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -16789,37 +16932,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(60, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -17082,37 +17228,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(61, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -17343,37 +17492,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(62, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -17604,37 +17756,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(63, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -17865,37 +18020,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(64, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -18132,37 +18290,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(65, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -18404,37 +18565,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(66, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -18700,37 +18864,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(67, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -18975,37 +19142,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(68, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -19273,37 +19443,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(69, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -19510,9 +19683,9 @@ Public Class Automatikprogramme
     Private Sub HandleTimerElapsed82(sender As System.Object, e As System.EventArgs) Handles Prog_Lok70.Elapsed
 
         '*** Fahrprogramm für Dampflok 18 427
-        '*** Datum: 23.02.2020 +
+        '*** Datum: 11.01.2023
 
-        SetText(TextBox1, "Dampflok 18 427                                                IBS: 13.12.2020 - V3 : 8")
+        SetText(TextBox1, "Dampflok 18 427                                                IBS: 11.01.2023 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_18_02.jpg")
         GeschwindikeitenSetzen(70)
 
@@ -19520,7 +19693,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
-        Dim Index As Integer
+        Dim Index, Fun01, Fun11, Fun21, Fun31 As Integer
         Index = 70 + 4
 
         Faktor_Beleuchtung = 100
@@ -19535,6 +19708,10 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        Fun01 = Betriebsparameter.GetValue("LokführerAnweisungen", 4, Index)
+        Fun11 = Betriebsparameter.GetValue("LokführerAnweisungen", 9, Index)
+        Fun21 = Betriebsparameter.GetValue("LokführerAnweisungen", 14, Index)
+        Fun31 = Betriebsparameter.GetValue("LokführerAnweisungen", 19, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19548,37 +19725,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(70, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 900
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 700
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -19673,7 +19853,12 @@ Public Class Automatikprogramme
         ElseIf _Prog70 = 19 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
         ElseIf _Prog70 = 20 Then
-            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            If _Dampf < 2 Then
+                If Fun11 = 0 Then
+                    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+                End If
+            End If
+
         ElseIf _Prog70 = 21 Then
 
             ' Lok abstellen
@@ -19867,37 +20052,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(71, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -20133,37 +20321,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(72, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -20395,37 +20586,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(73, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -20661,37 +20855,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(74, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -20923,37 +21120,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(75, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -21184,37 +21384,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(76, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -21459,37 +21662,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(77, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -21697,9 +21903,9 @@ Public Class Automatikprogramme
     Private Sub HandleTimerElapsed90(sender As System.Object, e As System.EventArgs) Handles Prog_Lok78.Elapsed
 
         '*** Fahrprogramm für Dampflok Rheinheim
-        '*** Datum: 23.02.2020
+        '*** Datum: 21.02.2023
 
-        SetText(TextBox1, "Dampflok Rheinheim ( IBS nein)")
+        SetText(TextBox1, "Dampflok Rheinheim                                              IBS: 21.02.2023 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Rheinheim_03.jpg")
         GeschwindikeitenSetzen(78)
 
@@ -21735,37 +21941,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(78, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -21924,8 +22133,6 @@ Public Class Automatikprogramme
             End If
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 201 Then
-        ElseIf _Prog78 = 202 Then
-        ElseIf _Prog78 = 203 Then
 
             ' Zindelstein
 
@@ -21997,37 +22204,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(79, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -22279,37 +22489,40 @@ Public Class Automatikprogramme
         Stufe4 = _LokStufen.Holen(80, 4)
 
         If Stufe2 = 1 Then
-            T_100 = T_100 - 800
-            T_130 = T_130 - 800
-            T_160 = T_160 - 800
-            V_180 = V_180 - 1500
-        ElseIf Stufe2 = 2 Then
-            T_100 = T_100 - 500
-            T_130 = T_130 - 500
-            T_160 = T_160 - 500
-            V_180 = V_180 - 1000
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 - 200
-            T_130 = T_130 - 200
-            T_160 = T_160 - 200
-            V_180 = V_180 - 500
-        ElseIf Stufe2 = 4 Then
+            T_100 = T_100
+            T_130 = T_130
+            T_160 = T_160
             V_180 = V_180
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+        ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 6 Then
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
             V_180 = V_180 + 1000
-        Else
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+        ElseIf Stufe2 = 4 Then
+            T_100 = T_100 + 700
+            T_130 = T_130 + 700
+            T_160 = T_160 + 700
             V_180 = V_180 + 1500
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
+        Else
+            T_100 = T_100 + 1200
+            T_130 = T_130 + 1200
+            T_160 = T_160 + 1200
+            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -23439,8 +23652,11 @@ Public Class Automatikprogramme
         _AutomatikParameterH = 104
         A_StopH = 0
         If _Bhf2_Gleis1 = 0 Then       ' *** kein Halt
-            If Weiche17schalten = True Then
-                _eb.weicheSchalten(17, Klassen.WeichenRichtung.links)
+            'If Weiche17schalten = True Then
+            '    _eb.weicheSchalten(17, Klassen.WeichenRichtung.links)
+            'End If
+            If Weiche27schalten = True Then
+                _eb.weicheSchalten(27, Klassen.WeichenRichtung.rechts)
             End If
             AutomatikParameter = 105
             _LokStufen.EinzelLokSenden(1, 3)
@@ -23588,8 +23804,11 @@ Public Class Automatikprogramme
         _AutomatikParameterH = 204
         A_StopH = 0
         If _Bhf2_Gleis2 = 0 Then       ' *** kein Halt
-            If Weiche17schalten = True Then
-                _eb.weicheSchalten(17, Klassen.WeichenRichtung.links)
+            'If Weiche17schalten = True Then
+            '    _eb.weicheSchalten(17, Klassen.WeichenRichtung.links)
+            'End If
+            If Weiche27schalten = True Then
+                _eb.weicheSchalten(27, Klassen.WeichenRichtung.rechts)
             End If
             AutomatikParameter = 205
             _LokStufen.EinzelLokSenden(2, 3)
@@ -27344,7 +27563,7 @@ Public Class Automatikprogramme
         ' *** Bergfahrt
         ' *** Datum: 04.01.2020
         ' ***
-        Dim Stufe3, Stufe4 As Integer
+        Dim Stufe1, Stufe3, Stufe4 As Integer
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 110 Then
             Bergfahrt110Lok1()
@@ -27432,12 +27651,16 @@ Public Class Automatikprogramme
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 115 And _StopZug1 = 0 Then
             AutomatikParameter = 115
 
+            Stufe1 = _LokStufen.Holen(NumericUpDown8.Value, 1)
             Stufe3 = _LokStufen.Holen(NumericUpDown8.Value, 3)
             Stufe4 = _LokStufen.Holen(NumericUpDown8.Value, 4)
             If Stufe4 < Stufe3 Then
                 _LokStufen.EinzelLokSenden(1, 4)
             Else
                 _LokStufen.EinzelLokSenden(1, 3)
+            End If
+            If NumericUpDown8.Value = 78 Then
+                _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1 + 1)
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 115 Then
@@ -27475,7 +27698,7 @@ Public Class Automatikprogramme
         ' *** Bergfahrt
         ' *** Datum: 04.01.2020
         ' ***
-        Dim Stufe3, Stufe4 As Integer
+        Dim Stufe1, Stufe3, Stufe4 As Integer
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 210 Then
             Bergfahrt110Lok2()
@@ -27563,12 +27786,16 @@ Public Class Automatikprogramme
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 215 And _StopZug2 = 0 Then
             AutomatikParameter = 215
 
+            Stufe1 = _LokStufen.Holen(NumericUpDown9.Value, 1)
             Stufe3 = _LokStufen.Holen(NumericUpDown9.Value, 3)
             Stufe4 = _LokStufen.Holen(NumericUpDown9.Value, 4)
             If Stufe4 < Stufe3 Then
                 _LokStufen.EinzelLokSenden(2, 4)
             Else
                 _LokStufen.EinzelLokSenden(2, 3)
+            End If
+            If NumericUpDown9.Value = 78 Then
+                _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1 + 1)
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 215 Then
@@ -27606,7 +27833,7 @@ Public Class Automatikprogramme
         ' *** Bergfahrt
         ' *** Datum: 04.01.2020
         ' ***
-        Dim Stufe3, Stufe4 As Integer
+        Dim Stufe1, Stufe3, Stufe4 As Integer
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 301 Then
             Bergfahrt110Lok3()
@@ -27694,12 +27921,16 @@ Public Class Automatikprogramme
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 315 And _StopZug3 = 0 Then
             AutomatikParameter = 315
 
+            Stufe1 = _LokStufen.Holen(NumericUpDown10.Value, 1)
             Stufe3 = _LokStufen.Holen(NumericUpDown10.Value, 3)
             Stufe4 = _LokStufen.Holen(NumericUpDown10.Value, 4)
             If Stufe4 < Stufe3 Then
                 _LokStufen.EinzelLokSenden(3, 4)
             Else
                 _LokStufen.EinzelLokSenden(3, 3)
+            End If
+            If NumericUpDown10.Value = 78 Then
+                _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1 + 1)
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 315 Then
@@ -27737,7 +27968,7 @@ Public Class Automatikprogramme
         ' *** Bergfahrt
         ' *** Datum: 04.01.2020
         ' ***
-        Dim Stufe3, Stufe4 As Integer
+        Dim Stufe1, Stufe3, Stufe4 As Integer
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 401 Then
             Bergfahrt110Lok4()
@@ -27801,12 +28032,16 @@ Public Class Automatikprogramme
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 415 And _StopZug4 = 0 Then
             AutomatikParameter = 415
 
+            Stufe1 = _LokStufen.Holen(NumericUpDown11.Value, 1)
             Stufe3 = _LokStufen.Holen(NumericUpDown11.Value, 3)
             Stufe4 = _LokStufen.Holen(NumericUpDown11.Value, 4)
             If Stufe4 < Stufe3 Then
                 _LokStufen.EinzelLokSenden(4, 4)
             Else
                 _LokStufen.EinzelLokSenden(4, 3)
+            End If
+            If NumericUpDown11.Value = 78 Then
+                _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1 + 1)
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 415 Then
