@@ -7894,11 +7894,11 @@ Public Class Automatikprogramme
     End Sub
     Private Sub HandleTimerElapsed39(sender As System.Object, e As System.EventArgs) Handles Prog_Lok27.Elapsed
 
-        '*** Fahrprogramm für "nicht verwendet"
-        '*** Datum: 23.02.2020
+        '*** Fahrprogramm für "Krokodil braun"
+        '*** Datum: 10.10.2023
 
-        'SetText(TextBox1, "E-Lok 12X 001-5 ( IBS nein)")
-        'LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_12X_01.jpg")
+        SetText(TextBox1, "E-Lok CE 6/8  14253 V3: 7")
+        LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
         GeschwindikeitenSetzen(27)
 
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
@@ -8016,8 +8016,11 @@ Public Class Automatikprogramme
 
         If _Prog27 = 0 Then
             Prog_Lok27.Interval = 2000
-        ElseIf _Prog25 = 1 Then
-            If _Durchsagen = 1 And (_TypL25 = 1 Or _TypL25 = 3) Then
+            If _Fahrzeugbeleuchtung2 > 0 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
+            End If
+        ElseIf _Prog27 = 1 Then
+            If _Durchsagen = 1 And (_TypL27 = 1 Or _TypL27 = 3) Then
                 PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
             Else
                 _Prog27 = 6
@@ -8027,26 +8030,56 @@ Public Class Automatikprogramme
         ElseIf _Prog27 = 4 Then
         ElseIf _Prog27 = 5 Then
         ElseIf _Prog27 = 6 Then
+        ElseIf _Prog27 = 7 Then
+            If _Motor > 0 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            Else
+                _Prog27 = 16
+            End If
+        ElseIf _Prog27 = 8 Then
+        ElseIf _Prog27 = 9 Then
+        ElseIf _Prog27 = 10 Then
+        ElseIf _Prog27 = 11 Then
+        ElseIf _Prog27 = 12 Then
+        ElseIf _Prog27 = 13 Then
+        ElseIf _Prog27 = 14 Then
+        ElseIf _Prog27 = 15 Then
+        ElseIf _Prog27 = 16 Then
 
             ' Bahnhofsausfahrt
-
-        ElseIf _Prog27 = 7 Then
+        ElseIf _Prog27 = 17 Then
+            If _AkustischeSignale = 1 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
+            End If
+        ElseIf _Prog27 = 18 Then
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+        ElseIf _Prog27 = 19 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog27 = 8 Then
+        ElseIf _Prog27 = 20 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog27 = 9 Then
+        ElseIf _Prog27 = 21 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog27 = 10 Then
+        ElseIf _Prog27 = 22 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog27 = 11 Then
+        ElseIf _Prog27 = 23 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog27 = 12 Then
+        ElseIf _Prog27 = 24 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+        ElseIf _Prog27 = 25 Then
+        ElseIf _Prog27 = 26 Then
+        ElseIf _Prog27 = 27 Then
+        ElseIf _Prog27 = 28 Then
+            If _Motor < 2 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
 
             ' Lok abstellen
 
         ElseIf _Prog27 = 50 Then
             Prog_Lok27.Interval = 2000
+            If _Motor < 2 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
         ElseIf _Prog27 = 51 Then
         ElseIf _Prog27 = 52 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
@@ -9284,7 +9317,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Krokodil grün
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok CE 6/8 ( IBS nein)")
+        SetText(TextBox1, "E-Lok CE 6/8  13302   V3: 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Krokodil_01.jpg")
         GeschwindikeitenSetzen(32)
 
@@ -9423,7 +9456,7 @@ Public Class Automatikprogramme
         ElseIf _Prog32 = 7 Then
             _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
         ElseIf _Prog32 = 8 Then
-            _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
+            _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
         ElseIf _Prog32 = 9 Then
             _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
         ElseIf _Prog32 = 10 Then
@@ -9510,8 +9543,8 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog32 = 200 Then
-            If Stufe4 < Stufe3 Then
-                _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            If Stufe4 < 10 Then
+                _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, 12)
             Else
                 _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
@@ -9519,6 +9552,13 @@ Public Class Automatikprogramme
         ElseIf _Prog32 = 201 Then
         ElseIf _Prog32 = 202 Then
         ElseIf _Prog32 = 203 Then
+        ElseIf _Prog32 = 204 Then
+        ElseIf _Prog32 = 205 Then
+            If Stufe4 < Stufe3 Then
+                _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            Else
+                _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
 
             ' Zindelstein
 
@@ -9551,20 +9591,19 @@ Public Class Automatikprogramme
     Private Sub HandleTimerElapsed45(sender As System.Object, e As System.EventArgs) Handles Prog_Lok33.Elapsed
 
         '*** Fahrprogramm für Krokodil braun
-        '*** Datum: 23.02.2020
+        '*** Datum: 16.10.2023
 
-        SetText(TextBox1, "E-Lok CE 6/8 ( IBS nein)")
+        SetText(TextBox1, "E-Lok CE 6/8 14301   V3: 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Krokodil_12.jpg")
         GeschwindikeitenSetzen(33)
 
-        Dim Stufe1, Stufe2, Stufe3, Stufe4, Rundenzeit As Integer
+        Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim Index As Integer
         Index = 33 + 4
 
-        Rundenzeit = 43000
 
         Faktor_Beleuchtung = 100
 
@@ -9780,8 +9819,8 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog33 = 200 Then
-            If Stufe4 < Stufe3 Then
-                _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            If Stufe4 < 10 Then
+                _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, 12)
             Else
                 _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
@@ -9789,6 +9828,13 @@ Public Class Automatikprogramme
         ElseIf _Prog33 = 201 Then
         ElseIf _Prog33 = 202 Then
         ElseIf _Prog33 = 203 Then
+        ElseIf _Prog33 = 204 Then
+        ElseIf _Prog33 = 205 Then
+            If Stufe4 < Stufe3 Then
+                _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            Else
+                _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
 
             ' Zindelstein
 
@@ -12038,9 +12084,9 @@ Public Class Automatikprogramme
     Private Sub HandleTimerElapsed54(sender As System.Object, e As System.EventArgs) Handles Prog_Lok42.Elapsed
 
         '*** Fahrprogramm für Diesel-Lok V160 028
-        '*** Datum: 23.02.2020
+        '*** Datum: 15.10.2023
 
-        SetText(TextBox1, "Diesel-Lok V160 028                                             IBS: 21.12.2020 - V3 : 8")
+        SetText(TextBox1, "Diesel-Lok V160 028                                             IBS: 15.10.2023 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_160_02.jpg")
         GeschwindikeitenSetzen(42)
 
@@ -12169,7 +12215,7 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 3 Then
         ElseIf _Prog42 = 4 Then
             If _Motor > 0 Then
-                _eb.lokSteuern(17, Klassen.LokEigenschaften.Funktion3, 1) ' Kompressor ein
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion3, 1) ' Kompressor ein
             End If
         ElseIf _Prog42 = 5 Then
             _eb.lokSteuern(17, Klassen.LokEigenschaften.Funktion3, 0) ' Kompressor aus
@@ -12188,10 +12234,10 @@ Public Class Automatikprogramme
 
         ElseIf _Prog42 = 11 Then
             If _AkustischeSignale = 1 Then
-                _eb.lokSteuern(17, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe 1 ein
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe 1 ein
             End If
         ElseIf _Prog42 = 12 Then
-            _eb.lokSteuern(17, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe 1 aus
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe 1 aus
         ElseIf _Prog42 = 13 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
         ElseIf _Prog42 = 14 Then
@@ -12204,6 +12250,13 @@ Public Class Automatikprogramme
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
         ElseIf _Prog42 = 18 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+        ElseIf _Prog42 = 19 Then
+        ElseIf _Prog42 = 20 Then
+        ElseIf _Prog42 = 21 Then
+
+            If _Motor < 2 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
 
             'Lok abstellen
 
@@ -18529,7 +18582,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 23 003
         '*** Datum: 17.07.2020
 
-        SetText(TextBox1, "Dampf-Lok 23 003                                                IBS: 27.01.2021 - V3 : 8")
+        SetText(TextBox1, "Dampf-Lok 23 003                                                IBS: 26.03.2023 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_023_03.jpg")
         GeschwindikeitenSetzen(66)
 
@@ -18651,16 +18704,28 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
                 SetAutoParaLabel1("Licht ein")
             End If
-        ElseIf _Prog66 = 1 Then
-            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
-        ElseIf _Prog66 = 2 Then
             If _Dampf > 0 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
-        ElseIf _Prog66 = 3 Then
+            If _Dampf = 0 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
             If _Motor > 0 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
             End If
+            If _Motor = 0 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            End If
+        ElseIf _Prog66 = 1 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog66 = 2 Then
+            'If _Dampf > 0 Then
+            '    _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            'End If
+        ElseIf _Prog66 = 3 Then
+            'If _Motor > 0 Then
+            '    _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            'End If
         ElseIf _Prog66 = 4 Then
         ElseIf _Prog66 = 5 Then
             If _Durchsagen = 1 And (_TypL66 = 1 Or _TypL66 = 3) Then
@@ -18686,6 +18751,9 @@ Public Class Automatikprogramme
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
         ElseIf _Prog66 = 13 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
+            If _Dampf < 2 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
         ElseIf _Prog66 = 14 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
         ElseIf _Prog66 = 15 Then
@@ -18693,8 +18761,8 @@ Public Class Automatikprogramme
         ElseIf _Prog66 = 16 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
         ElseIf _Prog66 = 17 Then
-            If _Dampf < 2 Then
-                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            If _Motor < 2 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
 
             ' Lok abstellen
@@ -18718,6 +18786,12 @@ Public Class Automatikprogramme
 
         ElseIf _Prog66 = 100 Then
             Prog_Lok66.Interval = V_100
+            If _Motor > 0 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+            If _Dampf > 0 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
         ElseIf _Prog66 = 101 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
             Prog_Lok66.Interval = T_100
@@ -19810,12 +19884,17 @@ Public Class Automatikprogramme
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
-        ElseIf _Prog70 = 1 Then
             If _Dampf > 0 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             Else
                 _Prog70 = 6
             End If
+            If _Dampf = 0 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            Else
+                _Prog70 = 6
+            End If
+        ElseIf _Prog70 = 1 Then
         ElseIf _Prog70 = 2 Then
         ElseIf _Prog70 = 3 Then
         ElseIf _Prog70 = 4 Then
@@ -19854,9 +19933,7 @@ Public Class Automatikprogramme
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
         ElseIf _Prog70 = 20 Then
             If _Dampf < 2 Then
-                If Fun11 = 0 Then
-                    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-                End If
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
 
         ElseIf _Prog70 = 21 Then
@@ -30086,13 +30163,13 @@ Public Class Automatikprogramme
                 ' Weichen 17 und 27 müssen nicht geschaltet werden (Betriebsart12 = 1 und Betriebsart34 =0)
                 AutomatikParameter = 200
             Else
-                Zug2(nachlauf)
-                'If _NachlaufZug2 = False Then
-                '    StopZug2()
-                '    Zug2(abstellen)
-                'Else
-                '    Zug2(nachlauf)
-                'End If
+                'Zug2(nachlauf)
+                If _NachlaufZug2 = False Then
+                    StopZug2()
+                    Zug2(abstellen)
+                Else
+                    Zug2(nachlauf)
+                End If
             End If
             _AutomatikParameterH = 0
         End If
@@ -30849,9 +30926,9 @@ Public Class Automatikprogramme
             Ort_Lok2 = 202
             AutomatikParameter = 103
         End If
-        If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 200 Then
-            AutomatikParameter = 210
-        End If
+        'If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 200 Then
+        '    AutomatikParameter = 210
+        'End If
         ' ***
         ' *** Anhalten Lok1 im Bahnhof ->
         ' ***
