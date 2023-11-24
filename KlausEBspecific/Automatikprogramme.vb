@@ -990,8 +990,14 @@ Public Class Automatikprogramme
             Button3.Text = "Motor aus"
         ElseIf _Motor = 1 Then
             Button3.BackColor = Drawing.Color.LightYellow
-            Button3.Text = "Motor ein/aus"
+            Button3.Text = "Motor ein/aus 1"
         ElseIf _Motor = 2 Then
+            Button3.BackColor = Drawing.Color.LightYellow
+            Button3.Text = "Motor ein/aus 2"
+        ElseIf _Motor = 3 Then
+            Button3.BackColor = Drawing.Color.LightYellow
+            Button3.Text = "Motor ein/aus 3"
+        ElseIf _Motor = 4 Then
             Button3.BackColor = Drawing.Color.LightYellow
             Button3.Text = "Motor ein"
         End If
@@ -3854,9 +3860,9 @@ Public Class Automatikprogramme
     Private Sub HandleTimerElapsed24(sender As System.Object, e As System.EventArgs) Handles Prog_Lok12.Elapsed
 
         '*** Fahrprogramm für E103 113-7
-        '*** Datum: 23.02.2020
+        '*** Datum: 12.11.2023
 
-        SetText(TextBox1, "E-Lok 103 113-7                                                IBS: 05.04.2021 - V3 : 10")
+        SetText(TextBox1, "E-Lok 103 113-7                                                IBS: 12.11.2023 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_103_01.jpg")
         GeschwindikeitenSetzen(12)
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
@@ -4087,8 +4093,8 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog12 = 200 Then
-            If Stufe4 < Stufe3 Then
-                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            If Stufe4 < 12 Then
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, 12)
             Else
                 _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
@@ -4096,6 +4102,14 @@ Public Class Automatikprogramme
         ElseIf _Prog12 = 201 Then
         ElseIf _Prog12 = 202 Then
         ElseIf _Prog12 = 203 Then
+        ElseIf _Prog12 = 204 Then
+        ElseIf _Prog12 = 205 Then
+            If Stufe4 < Stufe3 Then
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            Else
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
+            Prog_Lok12.Interval = 2000
 
             ' Zindelstein
 
@@ -6510,8 +6524,8 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog21 = 200 Then
-            If Stufe4 < Stufe3 Then
-                _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            If Stufe4 < 12 Then
+                _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, 12)
             Else
                 _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
@@ -6519,6 +6533,13 @@ Public Class Automatikprogramme
         ElseIf _Prog21 = 201 Then
         ElseIf _Prog21 = 202 Then
         ElseIf _Prog21 = 203 Then
+        ElseIf _Prog21 = 204 Then
+        ElseIf _Prog21 = 205 Then
+            If Stufe4 < Stufe3 Then
+                _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            Else
+                _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
 
             ' Zindelstein
 
@@ -8077,7 +8098,7 @@ Public Class Automatikprogramme
 
         ElseIf _Prog27 = 50 Then
             Prog_Lok27.Interval = 2000
-            If _Motor < 2 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
         ElseIf _Prog27 = 51 Then
@@ -12654,7 +12675,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok 216 090-1
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesel-Lok 216 090-1  ( IBS nein)")
+        SetText(TextBox1, "Diesel-Lok 216 090-1                                                IBS: 24.11.2023 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_216_03.jpg")
         GeschwindikeitenSetzen(44)
 
@@ -12878,8 +12899,8 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog44 = 200 Then
-            If Stufe4 < Stufe3 Then
-                _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            If Stufe4 < 12 Then
+                _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, 12)
             Else
                 _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
@@ -12887,6 +12908,14 @@ Public Class Automatikprogramme
         ElseIf _Prog44 = 201 Then
         ElseIf _Prog44 = 202 Then
         ElseIf _Prog44 = 203 Then
+        ElseIf _Prog44 = 204 Then
+        ElseIf _Prog44 = 205 Then
+            If Stufe4 < Stufe3 Then
+                _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            Else
+                _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
+            Prog_Lok44.Interval = 200
 
             ' Zindelstein
 
@@ -22244,7 +22273,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 50 082-7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 50 082-7   ( IBS nein)")
+        SetText(TextBox1, "Dampflok 50 082-7                                                IBS: 12.11.2023 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_50_01.jpg")
         GeschwindikeitenSetzen(79)
 
@@ -22479,22 +22508,38 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog79 = 200 Then
+            If Stufe4 < 12 Then
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, 12)
+            Else
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
+            Prog_Lok79.Interval = 2000
+        ElseIf _Prog79 = 201 Then
+            If _Dampf > 0 Then
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Dampf ein
+            End If
+        ElseIf _Prog79 = 202 Then
+        ElseIf _Prog79 = 203 Then
+            If Stufe4 < 10 Then
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, 10)
+            Else
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
+        ElseIf _Prog79 = 204 Then
+        ElseIf _Prog79 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok79.Interval = 12000
-        ElseIf _Prog79 = 201 Then
-            If _Dampf > 0 Then
-                _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Dampf ein
-            End If
-            Prog_Lok79.Interval = 12000
-        ElseIf _Prog79 = 202 Then
+            Prog_Lok79.Interval = 10000
+        ElseIf _Prog79 = 206 Then
             If _Dampf < 2 Then
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
             End If
-            Prog_Lok79.Interval = 200
+            Prog_Lok79.Interval = 2000
+
+
 
             ' Zindelstein
 
@@ -41011,7 +41056,7 @@ Public Class Automatikprogramme
 
                 If Startzug = 3 Then
                     _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
-                    If _Route_Gleis1 = 1 Then
+                    If _Route_Gleis2 = 1 Then
                         If _Route_Gleis3 = 0 Then
                             _eb.weicheSchalten(27, Klassen.WeichenRichtung.links)
                         Else
@@ -42955,12 +43000,20 @@ Public Class Automatikprogramme
         If _Motor = 0 Then
             _Motor = 1
             Button3.BackColor = Drawing.Color.LightYellow
-            Button3.Text = "Motor ein/aus"
+            Button3.Text = "Motor ein/aus 1"
         ElseIf _Motor = 1 Then
             _Motor = 2
             Button3.BackColor = Drawing.Color.LightYellow
-            Button3.Text = "Motor ein"
+            Button3.Text = "Motor ein/aus 2"
+            'ElseIf _Motor = 2 Then
+            '    _Motor = 3
+            '    Button3.BackColor = Drawing.Color.LightYellow
+            '    Button3.Text = "Motor ein/aus 3"
         ElseIf _Motor = 2 Then
+            _Motor = 3
+            Button3.BackColor = Drawing.Color.LightYellow
+            Button3.Text = "Motor ein"
+        ElseIf _Motor = 3 Then
             _Motor = 0
             Button3.BackColor = Drawing.Color.LightGray
             Button3.Text = "Motor aus"
