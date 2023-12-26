@@ -3246,6 +3246,7 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim Index, Fun01, Fun11, Fun21, Fun31 As Integer
+        Dim G_200 As Integer
         Dim Abstellen As Integer
         Index = 10 + 4
 
@@ -3265,6 +3266,7 @@ Public Class Automatikprogramme
         Fun11 = Betriebsparameter.GetValue("LokführerAnweisungen", 9, Index)
         Fun21 = Betriebsparameter.GetValue("LokführerAnweisungen", 14, Index)
         Fun31 = Betriebsparameter.GetValue("LokführerAnweisungen", 19, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         Abstellen = 0
         If (_GlsL10 = 1 And Ort_Lok1 = 100) Then
@@ -3389,6 +3391,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL10 = 3 Or _GlsL10 = 4) Then
@@ -3553,15 +3562,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog10 = 200 Then
+            _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok10.Interval = 2000
+        ElseIf _Prog10 = 201 Then
+        ElseIf _Prog10 = 202 Then
+        ElseIf _Prog10 = 203 Then
+        ElseIf _Prog10 = 204 Then
+        ElseIf _Prog10 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok10.Interval = 2000
-        ElseIf _Prog10 = 201 Then
-        ElseIf _Prog10 = 202 Then
-        ElseIf _Prog10 = 203 Then
 
             ' Zindelstein
 
@@ -3605,6 +3617,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 11 + 4
 
@@ -3620,6 +3633,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 5000
@@ -3703,6 +3717,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL11 = 3 Or _GlsL11 = 4) Then
@@ -3820,13 +3841,19 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog11 = 200 Then
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok11.Interval = 2000
+        ElseIf _Prog11 = 201 Then
+        ElseIf _Prog11 = 202 Then
+        ElseIf _Prog11 = 203 Then
+        ElseIf _Prog11 = 204 Then
+        ElseIf _Prog11 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok11.Interval = 2000
-        ElseIf _Prog11 = 201 Then
+
 
             ' Zindelstein
 
@@ -3869,6 +3896,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 12 + 4
 
@@ -3884,6 +3912,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 4000
@@ -3967,6 +3996,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL12 = 3 Or _GlsL12 = 4) Then
@@ -4093,11 +4129,7 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog12 = 200 Then
-            If Stufe4 < 12 Then
-                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, 12)
-            Else
-                _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 201 Then
         ElseIf _Prog12 = 202 Then
@@ -4109,7 +4141,6 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok12.Interval = 2000
 
             ' Zindelstein
 
@@ -4155,6 +4186,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 13 + 4
 
@@ -4170,6 +4202,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -4253,6 +4286,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL13 = 3 Or _GlsL13 = 4) Then
@@ -4376,15 +4416,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog13 = 200 Then
+            _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok13.Interval = 2000
+        ElseIf _Prog13 = 201 Then
+        ElseIf _Prog13 = 202 Then
+        ElseIf _Prog13 = 203 Then
+        ElseIf _Prog13 = 204 Then
+        ElseIf _Prog13 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok13.Interval = 2000
-        ElseIf _Prog13 = 201 Then
-        ElseIf _Prog13 = 202 Then
-        ElseIf _Prog13 = 203 Then
 
             ' Zindelstein
 
@@ -4427,6 +4470,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 14 + 4
 
@@ -4442,6 +4486,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -4526,7 +4571,13 @@ Public Class Automatikprogramme
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
         End If
-
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
+        End If
 
         If Betriebsart = 1 And (_GlsL14 = 3 Or _GlsL14 = 4) Then
             SetProgramCounterLabel1(_Prog14)
@@ -4644,15 +4695,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog14 = 200 Then
+            _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok14.Interval = 2000
+        ElseIf _Prog14 = 201 Then
+        ElseIf _Prog14 = 202 Then
+        ElseIf _Prog14 = 203 Then
+        ElseIf _Prog14 = 204 Then
+        ElseIf _Prog14 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok14.Interval = 2000
-        ElseIf _Prog14 = 201 Then
-        ElseIf _Prog14 = 202 Then
-        ElseIf _Prog14 = 203 Then
 
             ' Zindelstein
         ElseIf _Prog14 = 500 Then
@@ -4695,6 +4749,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 15 + 4
 
@@ -4710,6 +4765,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -4793,6 +4849,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL15 = 3 Or _GlsL15 = 4) Then
@@ -4913,15 +4976,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog15 = 200 Then
+            _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok15.Interval = 2000
+        ElseIf _Prog15 = 201 Then
+        ElseIf _Prog15 = 202 Then
+        ElseIf _Prog15 = 203 Then
+        ElseIf _Prog15 = 204 Then
+        ElseIf _Prog15 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok15.Interval = 2000
-        ElseIf _Prog15 = 201 Then
-        ElseIf _Prog15 = 202 Then
-        ElseIf _Prog15 = 203 Then
 
             ' Zindelstein
 
@@ -4964,6 +5030,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 16 + 4
 
@@ -4979,6 +5046,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -5062,6 +5130,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL16 = 3 Or _GlsL16 = 4) Then
@@ -5180,15 +5255,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog16 = 200 Then
+            _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok16.Interval = 2000
+        ElseIf _Prog16 = 201 Then
+        ElseIf _Prog16 = 202 Then
+        ElseIf _Prog16 = 203 Then
+        ElseIf _Prog16 = 204 Then
+        ElseIf _Prog16 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok16.Interval = 2000
-        ElseIf _Prog16 = 201 Then
-        ElseIf _Prog16 = 202 Then
-        ElseIf _Prog16 = 203 Then
 
             ' Zindelstein
 
@@ -5231,6 +5309,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 17 + 4
 
@@ -5246,6 +5325,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -5329,6 +5409,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL17 = 3 Or _GlsL17 = 4) Then
@@ -5447,15 +5534,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog17 = 200 Then
+            _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok17.Interval = 2000
+        ElseIf _Prog17 = 201 Then
+        ElseIf _Prog17 = 202 Then
+        ElseIf _Prog17 = 203 Then
+        ElseIf _Prog17 = 204 Then
+        ElseIf _Prog17 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok17.Interval = 2000
-        ElseIf _Prog17 = 201 Then
-        ElseIf _Prog17 = 202 Then
-        ElseIf _Prog17 = 203 Then
 
             ' Zindelstein
 
@@ -5498,6 +5588,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 18 + 4
 
@@ -5513,6 +5604,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 3000
@@ -5596,6 +5688,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL18 = 3 Or _GlsL18 = 4) Then
@@ -5714,15 +5813,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog18 = 200 Then
+            _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok18.Interval = 2000
+        ElseIf _Prog18 = 201 Then
+        ElseIf _Prog18 = 202 Then
+        ElseIf _Prog18 = 203 Then
+        ElseIf _Prog18 = 204 Then
+        ElseIf _Prog18 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok18.Interval = 2000
-        ElseIf _Prog18 = 201 Then
-        ElseIf _Prog18 = 202 Then
-        ElseIf _Prog18 = 203 Then
 
             ' Zindelstein
 
@@ -5767,6 +5869,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 19 + 4
 
@@ -5782,6 +5885,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -5865,6 +5969,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL19 = 3 Or _GlsL19 = 4) Then
@@ -5991,15 +6102,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog19 = 200 Then
+            _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok19.Interval = 2000
+        ElseIf _Prog19 = 201 Then
+        ElseIf _Prog19 = 202 Then
+        ElseIf _Prog19 = 203 Then
+        ElseIf _Prog19 = 204 Then
+        ElseIf _Prog19 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok19.Interval = 2000
-        ElseIf _Prog19 = 201 Then
-        ElseIf _Prog19 = 202 Then
-        ElseIf _Prog19 = 203 Then
 
             ' Zindelstein
 
@@ -6042,6 +6156,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 20 + 4
 
@@ -6057,6 +6172,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -6140,6 +6256,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL20 = 3 Or _GlsL20 = 4) Then
@@ -6255,17 +6378,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog20 = 200 Then
-            _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, 14)
+            _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 201 Then
         ElseIf _Prog20 = 202 Then
         ElseIf _Prog20 = 203 Then
+        ElseIf _Prog20 = 204 Then
+        ElseIf _Prog20 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok20.Interval = 2000
 
             ' Zindelstein
         ElseIf _Prog20 = 500 Then
@@ -6307,6 +6431,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 21 + 4
 
@@ -6322,6 +6447,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -6405,6 +6531,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL21 = 3 Or _GlsL21 = 4) Then
@@ -6524,11 +6657,7 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog21 = 200 Then
-            If Stufe4 < 12 Then
-                _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, 12)
-            Else
-                _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 201 Then
         ElseIf _Prog21 = 202 Then
@@ -6583,6 +6712,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 22 + 4
 
@@ -6599,6 +6729,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 5000
@@ -6683,7 +6814,13 @@ Public Class Automatikprogramme
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
         End If
-
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
+        End If
 
         If Betriebsart = 1 And (_GlsL22 = 3 Or _GlsL22 = 4) Then
             SetProgramCounterLabel1(_Prog22)
@@ -6801,15 +6938,23 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog22 = 200 Then
+            _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok22.Interval = 2000
+        ElseIf _Prog22 = 201 Then
+        ElseIf _Prog22 = 202 Then
+        ElseIf _Prog22 = 203 Then
+            If Stufe4 < 10 Then
+                _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, 10)
+            Else
+                _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
+        ElseIf _Prog22 = 204 Then
+        ElseIf _Prog22 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok22.Interval = 2000
-        ElseIf _Prog22 = 201 Then
-        ElseIf _Prog22 = 202 Then
-        ElseIf _Prog22 = 203 Then
 
             ' Zindelstein
 
@@ -6852,6 +6997,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 23 + 4
 
@@ -6867,6 +7013,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 4000
@@ -6950,6 +7097,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL23 = 3 Or _GlsL23 = 4) Then
@@ -7068,15 +7222,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog23 = 200 Then
+            _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok23.Interval = 2000
+        ElseIf _Prog23 = 201 Then
+        ElseIf _Prog23 = 202 Then
+        ElseIf _Prog23 = 203 Then
+        ElseIf _Prog23 = 204 Then
+        ElseIf _Prog23 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok23.Interval = 2000
-        ElseIf _Prog23 = 201 Then
-        ElseIf _Prog23 = 202 Then
-        ElseIf _Prog23 = 203 Then
 
             ' Zindelstein
 
@@ -7120,6 +7277,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 24 + 4
 
@@ -7136,6 +7294,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -7219,6 +7378,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
 
@@ -7338,15 +7504,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog24 = 200 Then
+            _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok24.Interval = 2000
+        ElseIf _Prog24 = 201 Then
+        ElseIf _Prog24 = 202 Then
+        ElseIf _Prog24 = 203 Then
+        ElseIf _Prog24 = 204 Then
+        ElseIf _Prog24 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok24.Interval = 2000
-        ElseIf _Prog24 = 201 Then
-        ElseIf _Prog24 = 202 Then
-        ElseIf _Prog24 = 203 Then
 
             ' Zindelstein
 
@@ -7391,6 +7560,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 25 + 4
 
@@ -7406,6 +7576,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -7489,6 +7660,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL25 = 3 Or _GlsL25 = 4) Then
@@ -7607,15 +7785,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog25 = 200 Then
+            _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok25.Interval = 2000
+        ElseIf _Prog25 = 201 Then
+        ElseIf _Prog25 = 202 Then
+        ElseIf _Prog25 = 203 Then
+        ElseIf _Prog25 = 204 Then
+        ElseIf _Prog25 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok25.Interval = 2000
-        ElseIf _Prog25 = 201 Then
-        ElseIf _Prog25 = 202 Then
-        ElseIf _Prog25 = 203 Then
 
             ' Zindelstein
 
@@ -7658,6 +7839,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 26 + 4
 
@@ -7674,6 +7856,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -7757,6 +7940,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL26 = 3 Or _GlsL26 = 4) Then
@@ -7875,15 +8065,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog26 = 200 Then
+            _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok26.Interval = 2000
+        ElseIf _Prog26 = 201 Then
+        ElseIf _Prog26 = 202 Then
+        ElseIf _Prog26 = 203 Then
+        ElseIf _Prog26 = 204 Then
+        ElseIf _Prog26 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok26.Interval = 2000
-        ElseIf _Prog26 = 201 Then
-        ElseIf _Prog26 = 202 Then
-        ElseIf _Prog26 = 203 Then
 
             ' Zindelstein
 
@@ -7926,6 +8119,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 27 + 4
 
@@ -7942,6 +8136,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -8025,6 +8220,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL27 = 3 Or _GlsL27 = 4) Then
@@ -8173,15 +8375,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog27 = 200 Then
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 201 Then
+        ElseIf _Prog27 = 202 Then
+        ElseIf _Prog27 = 203 Then
+        ElseIf _Prog27 = 204 Then
+        ElseIf _Prog27 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok27.Interval = 2000
-        ElseIf _Prog27 = 201 Then
-        ElseIf _Prog27 = 202 Then
-        ElseIf _Prog27 = 203 Then
 
             ' Zindelstein
 
@@ -8224,6 +8429,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 28 + 4
 
@@ -8239,6 +8445,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -8322,6 +8529,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL28 = 3 Or _GlsL28 = 4) Then
@@ -8452,17 +8666,19 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog28 = 200 Then
-            If Stufe4 < Stufe3 Then
-                _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
-            Else
-                _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok28.Interval = 2000
         ElseIf _Prog28 = 201 Then
         ElseIf _Prog28 = 202 Then
         ElseIf _Prog28 = 203 Then
         ElseIf _Prog28 = 204 Then
         ElseIf _Prog28 = 205 Then
+            If Stufe4 < Stufe3 Then
+                _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            Else
+                _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
+        ElseIf _Prog28 = 206 Then
             If _AkustischeSignale = 1 Then
                 If _Prog28H = 0 Then
                     _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
@@ -8472,7 +8688,6 @@ Public Class Automatikprogramme
                     _Prog28H = 0
                 End If
             End If
-        ElseIf _Prog28 = 206 Then
 
             ' Zindelstein
 
@@ -8515,6 +8730,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 29 + 4
 
@@ -8530,6 +8746,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -8613,6 +8830,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL29 = 3 Or _GlsL29 = 4) Then
@@ -8746,15 +8970,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog29 = 200 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 201 Then
+        ElseIf _Prog29 = 202 Then
+        ElseIf _Prog29 = 203 Then
+        ElseIf _Prog29 = 204 Then
+        ElseIf _Prog29 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok29.Interval = 2000
-        ElseIf _Prog29 = 201 Then
-        ElseIf _Prog29 = 202 Then
-        ElseIf _Prog29 = 203 Then
 
             ' Zindelstein
 
@@ -8798,6 +9025,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 30 + 4
 
@@ -8813,6 +9041,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -8896,6 +9125,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL30 = 3 Or _GlsL30 = 4) Then
@@ -9023,15 +9259,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog30 = 200 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 201 Then
+        ElseIf _Prog30 = 202 Then
+        ElseIf _Prog30 = 203 Then
+        ElseIf _Prog30 = 204 Then
+        ElseIf _Prog30 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok30.Interval = 2000
-        ElseIf _Prog30 = 201 Then
-        ElseIf _Prog30 = 202 Then
-        ElseIf _Prog30 = 203 Then
 
             ' Zindelstein
 
@@ -9076,6 +9315,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 31 + 4
 
@@ -9091,6 +9331,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 3000
@@ -9174,6 +9415,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL31 = 3 Or _GlsL31 = 4) Then
@@ -9293,15 +9541,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog31 = 200 Then
+            _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok31.Interval = 2000
+        ElseIf _Prog31 = 201 Then
+        ElseIf _Prog31 = 202 Then
+        ElseIf _Prog31 = 203 Then
+        ElseIf _Prog31 = 204 Then
+        ElseIf _Prog31 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok31.Interval = 2000
-        ElseIf _Prog31 = 201 Then
-        ElseIf _Prog31 = 202 Then
-        ElseIf _Prog31 = 203 Then
 
             ' Zindelstein
 
@@ -9346,6 +9597,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 32 + 4
 
@@ -9361,6 +9613,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 6000
@@ -9445,13 +9698,19 @@ Public Class Automatikprogramme
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
         End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
+        End If
 
         If Betriebsart = 1 And (_GlsL32 = 3 Or _GlsL32 = 4) Then
             SetProgramCounterLabel1(_Prog32)
         Else
             SetProgramCounterLabel(_Prog32)
         End If
-        'TextBox1.Text = "SBB Krokodil grün"
 
         ' Lok starten - Bahnhofsausfahrt
 
@@ -9564,11 +9823,7 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog32 = 200 Then
-            If Stufe4 < 10 Then
-                _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, 12)
-            Else
-                _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 201 Then
         ElseIf _Prog32 = 202 Then
@@ -9622,6 +9877,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 33 + 4
 
@@ -9638,6 +9894,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 6000
@@ -9722,13 +9979,19 @@ Public Class Automatikprogramme
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
         End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
+        End If
 
         If Betriebsart = 1 And (_GlsL33 = 3 Or _GlsL33 = 4) Then
             SetProgramCounterLabel1(_Prog33)
         Else
             SetProgramCounterLabel(_Prog33)
         End If
-        'TextBox1.Text = "SBB Krokodil braun"
 
         ' Lok starten - Bahnhofsausfahrt
 
@@ -9840,11 +10103,7 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog33 = 200 Then
-            If Stufe4 < 10 Then
-                _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, 12)
-            Else
-                _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 201 Then
         ElseIf _Prog33 = 202 Then
@@ -9899,6 +10158,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 34 + 4
 
@@ -9914,6 +10174,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -9997,6 +10258,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL34 = 3 Or _GlsL34 = 4) Then
@@ -10115,15 +10383,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog34 = 200 Then
+            _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok34.Interval = 2000
+        ElseIf _Prog34 = 201 Then
+        ElseIf _Prog34 = 202 Then
+        ElseIf _Prog34 = 203 Then
+        ElseIf _Prog34 = 204 Then
+        ElseIf _Prog34 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok34.Interval = 2000
-        ElseIf _Prog34 = 201 Then
-        ElseIf _Prog34 = 202 Then
-        ElseIf _Prog34 = 203 Then
 
             ' Zindelstein
 
@@ -10166,6 +10437,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 35 + 4
 
@@ -10181,6 +10453,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 6000
@@ -10264,6 +10537,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL35 = 3 Or _GlsL35 = 4) Then
@@ -10382,15 +10662,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog35 = 200 Then
+            _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok35.Interval = 2000
+        ElseIf _Prog35 = 201 Then
+        ElseIf _Prog35 = 202 Then
+        ElseIf _Prog35 = 203 Then
+        ElseIf _Prog35 = 204 Then
+        ElseIf _Prog35 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok35.Interval = 2000
-        ElseIf _Prog35 = 201 Then
-        ElseIf _Prog35 = 202 Then
-        ElseIf _Prog35 = 203 Then
 
             ' Zindelstein
 
@@ -10434,6 +10717,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 36 + 4
 
@@ -10449,6 +10733,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 5000
@@ -10532,6 +10817,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL36 = 3 Or _GlsL36 = 4) Then
@@ -10650,15 +10942,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog36 = 200 Then
+            _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok36.Interval = 2000
+        ElseIf _Prog36 = 201 Then
+        ElseIf _Prog36 = 202 Then
+        ElseIf _Prog36 = 203 Then
+        ElseIf _Prog36 = 204 Then
+        ElseIf _Prog36 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok36.Interval = 2000
-        ElseIf _Prog36 = 201 Then
-        ElseIf _Prog36 = 202 Then
-        ElseIf _Prog36 = 203 Then
 
             ' Zindelstein
 
@@ -10702,6 +10997,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 37 + 4
 
@@ -10717,6 +11013,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -10800,6 +11097,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL37 = 3 Or _GlsL37 = 4) Then
@@ -10918,15 +11222,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog37 = 200 Then
+            _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok37.Interval = 2000
+        ElseIf _Prog37 = 201 Then
+        ElseIf _Prog37 = 202 Then
+        ElseIf _Prog37 = 203 Then
+        ElseIf _Prog37 = 204 Then
+        ElseIf _Prog37 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok37.Interval = 2000
-        ElseIf _Prog37 = 201 Then
-        ElseIf _Prog37 = 202 Then
-        ElseIf _Prog37 = 203 Then
 
             ' Zindelstein
 
@@ -10970,6 +11277,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 38 + 4
 
@@ -10985,6 +11293,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -11068,6 +11377,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL38 = 3 Or _GlsL38 = 4) Then
@@ -11191,15 +11507,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog38 = 200 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 201 Then
+        ElseIf _Prog38 = 202 Then
+        ElseIf _Prog38 = 203 Then
+        ElseIf _Prog38 = 204 Then
+        ElseIf _Prog38 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok38.Interval = 2000
-        ElseIf _Prog38 = 201 Then
-        ElseIf _Prog38 = 202 Then
-        ElseIf _Prog38 = 203 Then
 
             ' Zindelstein
 
@@ -11243,6 +11562,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 39 + 4
 
@@ -11258,6 +11578,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -11341,6 +11662,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL39 = 3 Or _GlsL39 = 4) Then
@@ -11459,15 +11787,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog39 = 200 Then
+            _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok39.Interval = 2000
+        ElseIf _Prog39 = 201 Then
+        ElseIf _Prog39 = 202 Then
+        ElseIf _Prog39 = 203 Then
+        ElseIf _Prog39 = 204 Then
+        ElseIf _Prog39 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok39.Interval = 2000
-        ElseIf _Prog39 = 201 Then
-        ElseIf _Prog39 = 202 Then
-        ElseIf _Prog39 = 203 Then
 
             ' Zindelstein
 
@@ -11511,6 +11842,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 40 + 4
 
@@ -11526,6 +11858,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -11609,6 +11942,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL40 = 3 Or _GlsL40 = 4) Then
@@ -11773,15 +12113,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog40 = 200 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 201 Then
+        ElseIf _Prog40 = 202 Then
+        ElseIf _Prog40 = 203 Then
+        ElseIf _Prog40 = 204 Then
+        ElseIf _Prog40 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok40.Interval = 2000
-        ElseIf _Prog40 = 201 Then
-        ElseIf _Prog40 = 202 Then
-        ElseIf _Prog40 = 203 Then
 
             ' Zindelstein
 
@@ -11826,6 +12169,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 41 + 4
 
@@ -11841,6 +12185,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 4000
@@ -11924,6 +12269,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL41 = 3 Or _GlsL41 = 4) Then
@@ -12062,15 +12414,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog41 = 200 Then
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 201 Then
+        ElseIf _Prog41 = 202 Then
+        ElseIf _Prog41 = 203 Then
+        ElseIf _Prog41 = 204 Then
+        ElseIf _Prog41 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok41.Interval = 2000
-        ElseIf _Prog41 = 201 Then
-        ElseIf _Prog41 = 202 Then
-        ElseIf _Prog41 = 203 Then
 
             ' Zindelstein
 
@@ -12115,6 +12470,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 42 + 4
 
@@ -12130,6 +12486,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -12213,6 +12570,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL42 = 3 Or _GlsL42 = 4) Then
@@ -12368,15 +12732,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog42 = 200 Then
+            _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok42.Interval = 2000
+        ElseIf _Prog42 = 201 Then
+        ElseIf _Prog42 = 202 Then
+        ElseIf _Prog42 = 203 Then
+        ElseIf _Prog42 = 204 Then
+        ElseIf _Prog42 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok42.Interval = 2000
-        ElseIf _Prog42 = 201 Then
-        ElseIf _Prog42 = 202 Then
-        ElseIf _Prog42 = 203 Then
 
             ' Zindelstein
 
@@ -12419,6 +12786,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 43 + 4
 
@@ -12434,6 +12802,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -12517,6 +12886,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL43 = 3 Or _GlsL43 = 4) Then
@@ -12632,15 +13008,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog43 = 200 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 201 Then
+        ElseIf _Prog43 = 202 Then
+        ElseIf _Prog43 = 203 Then
+        ElseIf _Prog43 = 204 Then
+        ElseIf _Prog43 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok43.Interval = 2000
-        ElseIf _Prog43 = 201 Then
-        ElseIf _Prog43 = 202 Then
-        ElseIf _Prog43 = 203 Then
 
             ' Zindelstein
 
@@ -12675,7 +13054,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok 216 090-1
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesel-Lok 216 090-1                                                IBS: 24.11.2023 - V3 : 10")
+        SetText(TextBox1, "Diesel-Lok 216 090-1                                                IBS: 24.11.2023 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_216_03.jpg")
         GeschwindikeitenSetzen(44)
 
@@ -12683,6 +13062,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 44 + 4
 
@@ -12698,6 +13078,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -12781,6 +13162,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL44 = 3 Or _GlsL44 = 4) Then
@@ -12899,11 +13287,7 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog44 = 200 Then
-            If Stufe4 < 12 Then
-                _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, 12)
-            Else
-                _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 201 Then
         ElseIf _Prog44 = 202 Then
@@ -12958,6 +13342,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 45 + 4
 
@@ -12973,6 +13358,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -13056,6 +13442,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL45 = 3 Or _GlsL45 = 4) Then
@@ -13174,15 +13567,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog45 = 200 Then
+            _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok45.Interval = 2000
+        ElseIf _Prog45 = 201 Then
+        ElseIf _Prog45 = 202 Then
+        ElseIf _Prog45 = 203 Then
+        ElseIf _Prog45 = 204 Then
+        ElseIf _Prog45 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok45.Interval = 2000
-        ElseIf _Prog45 = 201 Then
-        ElseIf _Prog45 = 202 Then
-        ElseIf _Prog45 = 203 Then
 
             ' Zindelstein
 
@@ -13225,6 +13621,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 46 + 4
 
@@ -13240,6 +13637,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -13323,6 +13721,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL46 = 3 Or _GlsL46 = 4) Then
@@ -13442,17 +13847,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog46 = 200 Then
-            _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, 14)
+            _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 201 Then
         ElseIf _Prog46 = 202 Then
         ElseIf _Prog46 = 203 Then
+        ElseIf _Prog46 = 204 Then
+        ElseIf _Prog46 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-        ElseIf _Prog46 = 204 Then
 
             ' Zindelstein
 
@@ -13495,6 +13901,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 47 + 4
 
@@ -13510,6 +13917,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -13593,6 +14001,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe1 + 8
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 7 And (_GlsL47 = 3 Or _GlsL47 = 4) Then
@@ -13711,15 +14126,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog47 = 200 Then
+            _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok47.Interval = 2000
+        ElseIf _Prog47 = 201 Then
+        ElseIf _Prog47 = 202 Then
+        ElseIf _Prog47 = 203 Then
+        ElseIf _Prog47 = 204 Then
+        ElseIf _Prog47 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok47.Interval = 2000
-        ElseIf _Prog47 = 201 Then
-        ElseIf _Prog47 = 202 Then
-        ElseIf _Prog47 = 203 Then
 
             ' Zindelstein
 
@@ -13764,6 +14182,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 48 + 4
 
@@ -13779,6 +14198,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -13862,6 +14282,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL48 = 3 Or _GlsL48 = 4) Then
@@ -14005,15 +14432,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog48 = 200 Then
+            _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 201 Then
+        ElseIf _Prog48 = 202 Then
+        ElseIf _Prog48 = 203 Then
+        ElseIf _Prog48 = 204 Then
+        ElseIf _Prog48 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok48.Interval = 2000
-        ElseIf _Prog48 = 201 Then
-        ElseIf _Prog48 = 202 Then
-        ElseIf _Prog48 = 203 Then
 
             ' Zindelstein
 
@@ -14057,6 +14487,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 49 + 4
 
@@ -14072,6 +14503,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -14156,7 +14588,13 @@ Public Class Automatikprogramme
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
         End If
-
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
+        End If
 
         If Betriebsart = 1 And (_GlsL49 = 3 Or _GlsL49 = 4) Then
             SetProgramCounterLabel1(_Prog49)
@@ -14276,15 +14714,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog49 = 200 Then
+            _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok49.Interval = 2000
+        ElseIf _Prog49 = 201 Then
+        ElseIf _Prog49 = 202 Then
+        ElseIf _Prog49 = 203 Then
+        ElseIf _Prog49 = 204 Then
+        ElseIf _Prog49 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok49.Interval = 2000
-        ElseIf _Prog49 = 201 Then
-        ElseIf _Prog49 = 202 Then
-        ElseIf _Prog49 = 203 Then
 
             ' Zindelstein
 
@@ -14328,6 +14769,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 50 + 4
 
@@ -14343,6 +14785,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -14426,6 +14869,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL50 = 3 Or _GlsL50 = 4) Then
@@ -14542,15 +14992,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog50 = 200 Then
+            _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 201 Then
+        ElseIf _Prog50 = 202 Then
+        ElseIf _Prog50 = 203 Then
+        ElseIf _Prog50 = 204 Then
+        ElseIf _Prog50 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok50.Interval = 2000
-        ElseIf _Prog50 = 201 Then
-        ElseIf _Prog50 = 202 Then
-        ElseIf _Prog50 = 203 Then
 
             ' Zindelstein
 
@@ -14593,6 +15046,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 50 + 4
 
@@ -14608,6 +15062,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -14691,6 +15146,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL51 = 3 Or _GlsL51 = 4) Then
@@ -14806,15 +15268,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog51 = 200 Then
+            _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 201 Then
+        ElseIf _Prog51 = 202 Then
+        ElseIf _Prog51 = 203 Then
+        ElseIf _Prog51 = 204 Then
+        ElseIf _Prog51 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok51.Interval = 2000
-        ElseIf _Prog51 = 201 Then
-        ElseIf _Prog51 = 202 Then
-        ElseIf _Prog51 = 203 Then
 
             ' Zindelstein
 
@@ -14857,6 +15322,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 52 + 4
 
@@ -14872,6 +15338,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -14955,6 +15422,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL52 = 3 Or _GlsL52 = 4) Then
@@ -15070,15 +15544,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog52 = 200 Then
+            _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 201 Then
+        ElseIf _Prog52 = 202 Then
+        ElseIf _Prog52 = 203 Then
+        ElseIf _Prog52 = 204 Then
+        ElseIf _Prog52 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok52.Interval = 2000
-        ElseIf _Prog52 = 201 Then
-        ElseIf _Prog52 = 202 Then
-        ElseIf _Prog52 = 203 Then
 
             ' Zindelstein
 
@@ -15121,6 +15598,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 53 + 4
 
@@ -15136,6 +15614,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -15219,6 +15698,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL53 = 3 Or _GlsL53 = 4) Then
@@ -15334,15 +15820,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog53 = 200 Then
+            _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 201 Then
+        ElseIf _Prog53 = 202 Then
+        ElseIf _Prog53 = 203 Then
+        ElseIf _Prog53 = 204 Then
+        ElseIf _Prog53 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok53.Interval = 2000
-        ElseIf _Prog53 = 201 Then
-        ElseIf _Prog53 = 202 Then
-        ElseIf _Prog53 = 203 Then
 
             ' Zindelstein
 
@@ -15385,6 +15874,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 54 + 4
 
@@ -15400,6 +15890,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -15483,6 +15974,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL54 = 3 Or _GlsL54 = 4) Then
@@ -15595,15 +16093,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog54 = 200 Then
+            _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok54.Interval = 2000
+        ElseIf _Prog54 = 201 Then
+        ElseIf _Prog54 = 202 Then
+        ElseIf _Prog54 = 203 Then
+        ElseIf _Prog54 = 204 Then
+        ElseIf _Prog54 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok54.Interval = 2000
-        ElseIf _Prog54 = 201 Then
-        ElseIf _Prog54 = 202 Then
-        ElseIf _Prog54 = 203 Then
 
             ' Zindelstein
 
@@ -15646,6 +16147,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 55 + 4
 
@@ -15661,6 +16163,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -15744,6 +16247,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL55 = 3 Or _GlsL55 = 4) Then
@@ -15859,15 +16369,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog55 = 200 Then
+            _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok55.Interval = 2000
+        ElseIf _Prog55 = 201 Then
+        ElseIf _Prog55 = 202 Then
+        ElseIf _Prog55 = 203 Then
+        ElseIf _Prog55 = 204 Then
+        ElseIf _Prog55 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok55.Interval = 2000
-        ElseIf _Prog55 = 201 Then
-        ElseIf _Prog55 = 202 Then
-        ElseIf _Prog55 = 203 Then
 
             ' Zindelstein
 
@@ -15912,6 +16425,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 56 + 4
 
@@ -15927,6 +16441,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -16010,6 +16525,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL56 = 3 Or _GlsL56 = 4) Then
@@ -16122,15 +16644,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog56 = 200 Then
+            _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok56.Interval = 2000
+        ElseIf _Prog56 = 201 Then
+        ElseIf _Prog56 = 202 Then
+        ElseIf _Prog56 = 203 Then
+        ElseIf _Prog56 = 204 Then
+        ElseIf _Prog56 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok56.Interval = 2000
-        ElseIf _Prog56 = 201 Then
-        ElseIf _Prog56 = 202 Then
-        ElseIf _Prog56 = 203 Then
 
             ' Zindelstein
 
@@ -16173,6 +16698,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 57 + 4
 
@@ -16188,6 +16714,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -16271,6 +16798,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL57 = 3 Or _GlsL57 = 4) Then
@@ -16389,15 +16923,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog57 = 200 Then
+            _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok57.Interval = 2000
+        ElseIf _Prog57 = 201 Then
+        ElseIf _Prog57 = 202 Then
+        ElseIf _Prog57 = 203 Then
+        ElseIf _Prog57 = 204 Then
+        ElseIf _Prog57 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok57.Interval = 2000
-        ElseIf _Prog57 = 201 Then
-        ElseIf _Prog57 = 202 Then
-        ElseIf _Prog57 = 203 Then
 
             ' Zindelstein
 
@@ -16440,6 +16977,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 58 + 4
 
@@ -16455,6 +16993,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -16538,6 +17077,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL58 = 3 Or _GlsL58 = 4) Then
@@ -16664,15 +17210,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog58 = 200 Then
+            _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok58.Interval = 2000
+        ElseIf _Prog58 = 201 Then
+        ElseIf _Prog58 = 202 Then
+        ElseIf _Prog58 = 203 Then
+        ElseIf _Prog58 = 204 Then
+        ElseIf _Prog58 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok58.Interval = 2000
-        ElseIf _Prog58 = 201 Then
-        ElseIf _Prog58 = 202 Then
-        ElseIf _Prog58 = 203 Then
 
             ' Zindelstein
 
@@ -16715,6 +17264,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 59 + 4
 
@@ -16732,6 +17282,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -16815,6 +17366,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL59 = 3 Or _GlsL59 = 4) Then
@@ -16935,15 +17493,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog59 = 200 Then
+            _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok59.Interval = 2000
+        ElseIf _Prog59 = 201 Then
+        ElseIf _Prog59 = 202 Then
+        ElseIf _Prog59 = 203 Then
+        ElseIf _Prog59 = 204 Then
+        ElseIf _Prog59 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok59.Interval = 2000
-        ElseIf _Prog59 = 201 Then
-        ElseIf _Prog59 = 202 Then
-        ElseIf _Prog59 = 203 Then
 
             ' Zindelstein
 
@@ -16986,6 +17547,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 60 + 4
 
@@ -17001,6 +17563,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -17084,6 +17647,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL60 = 3 Or _GlsL60 = 4) Then
@@ -17226,15 +17796,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog60 = 200 Then
+            _eb.lokSteuern(60, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok60.Interval = 2000
+        ElseIf _Prog60 = 201 Then
+        ElseIf _Prog60 = 202 Then
+        ElseIf _Prog60 = 203 Then
+        ElseIf _Prog60 = 204 Then
+        ElseIf _Prog60 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok60.Interval = 2000
-        ElseIf _Prog60 = 201 Then
-        ElseIf _Prog60 = 202 Then
-        ElseIf _Prog60 = 203 Then
 
             ' Zindelstein
 
@@ -17282,6 +17855,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 61 + 4
 
@@ -17297,6 +17871,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -17380,6 +17955,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL61 = 3 Or _GlsL61 = 4) Then
@@ -17495,15 +18077,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog61 = 200 Then
+            _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok61.Interval = 2000
+        ElseIf _Prog61 = 201 Then
+        ElseIf _Prog61 = 202 Then
+        ElseIf _Prog61 = 203 Then
+        ElseIf _Prog61 = 204 Then
+        ElseIf _Prog61 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok61.Interval = 2000
-        ElseIf _Prog61 = 201 Then
-        ElseIf _Prog61 = 202 Then
-        ElseIf _Prog61 = 203 Then
 
             ' Zindelstein
 
@@ -17546,6 +18131,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 62 + 4
 
@@ -17561,6 +18147,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -17644,6 +18231,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL62 = 3 Or _GlsL62 = 4) Then
@@ -17759,15 +18353,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog62 = 200 Then
+            _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok62.Interval = 2000
+        ElseIf _Prog62 = 201 Then
+        ElseIf _Prog62 = 202 Then
+        ElseIf _Prog62 = 203 Then
+        ElseIf _Prog62 = 204 Then
+        ElseIf _Prog62 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok62.Interval = 2000
-        ElseIf _Prog62 = 201 Then
-        ElseIf _Prog62 = 202 Then
-        ElseIf _Prog62 = 203 Then
 
             ' Zindelstein
 
@@ -17810,6 +18407,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 63 + 4
 
@@ -17825,6 +18423,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -17908,6 +18507,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL63 = 3 Or _GlsL63 = 4) Then
@@ -18023,15 +18629,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog63 = 200 Then
+            _eb.lokSteuern(63, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok63.Interval = 2000
+        ElseIf _Prog63 = 201 Then
+        ElseIf _Prog63 = 202 Then
+        ElseIf _Prog63 = 203 Then
+        ElseIf _Prog63 = 204 Then
+        ElseIf _Prog63 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(63, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(63, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok63.Interval = 2000
-        ElseIf _Prog63 = 201 Then
-        ElseIf _Prog63 = 202 Then
-        ElseIf _Prog63 = 203 Then
 
             ' Zindelstein
 
@@ -18074,6 +18683,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 64 + 4
 
@@ -18089,6 +18699,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -18172,6 +18783,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL64 = 3 Or _GlsL64 = 4) Then
@@ -18293,15 +18911,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog64 = 200 Then
+            _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok64.Interval = 2000
+        ElseIf _Prog64 = 201 Then
+        ElseIf _Prog64 = 202 Then
+        ElseIf _Prog64 = 203 Then
+        ElseIf _Prog64 = 204 Then
+        ElseIf _Prog64 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok64.Interval = 2000
-        ElseIf _Prog64 = 201 Then
-        ElseIf _Prog64 = 202 Then
-        ElseIf _Prog64 = 203 Then
 
             ' Zindelstein
 
@@ -18344,6 +18965,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 65 + 4
 
@@ -18359,6 +18981,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -18442,6 +19065,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL65 = 3 Or _GlsL65 = 4) Then
@@ -18567,16 +19197,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog65 = 200 Then
+            _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok65.Interval = 2000
+        ElseIf _Prog65 = 201 Then
+        ElseIf _Prog65 = 202 Then
+        ElseIf _Prog65 = 203 Then
+        ElseIf _Prog65 = 204 Then
+        ElseIf _Prog65 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok65.Interval = 2000
-        ElseIf _Prog65 = 201 Then
-        ElseIf _Prog65 = 202 Then
-        ElseIf _Prog65 = 203 Then
-            Prog_Lok65.Interval = 200
 
             ' Zindelstein
 
@@ -18619,6 +19251,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 66 + 4
 
@@ -18634,6 +19267,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -18717,6 +19351,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL66 = 3 Or _GlsL66 = 4) Then
@@ -18884,15 +19525,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog66 = 200 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok66.Interval = 2000
+        ElseIf _Prog66 = 201 Then
+        ElseIf _Prog66 = 202 Then
+        ElseIf _Prog66 = 203 Then
+        ElseIf _Prog66 = 204 Then
+        ElseIf _Prog66 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok66.Interval = 2000
-        ElseIf _Prog66 = 201 Then
-        ElseIf _Prog66 = 202 Then
-        ElseIf _Prog66 = 203 Then
 
             ' Zindelstein
 
@@ -18939,6 +19583,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 67 + 4
 
@@ -18954,6 +19599,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19037,6 +19683,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL67 = 3 Or _GlsL67 = 4) Then
@@ -19166,15 +19819,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog67 = 200 Then
+            _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok67.Interval = 2000
+        ElseIf _Prog67 = 201 Then
+        ElseIf _Prog67 = 202 Then
+        ElseIf _Prog67 = 203 Then
+        ElseIf _Prog67 = 204 Then
+        ElseIf _Prog67 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok67.Interval = 2000
-        ElseIf _Prog67 = 201 Then
-        ElseIf _Prog67 = 202 Then
-        ElseIf _Prog67 = 203 Then
 
             ' Zindelstein
 
@@ -19217,6 +19873,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 68 + 4
 
@@ -19232,6 +19889,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19315,6 +19973,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL68 = 3 Or _GlsL68 = 4) Then
@@ -19467,15 +20132,19 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog68 = 200 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 201 Then
+        ElseIf _Prog68 = 202 Then
+        ElseIf _Prog68 = 203 Then
+        ElseIf _Prog68 = 204 Then
+        ElseIf _Prog68 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok68.Interval = 2000
-        ElseIf _Prog68 = 201 Then
-        ElseIf _Prog68 = 202 Then
-        ElseIf _Prog68 = 203 Then
+
 
             ' Zindelstein
 
@@ -19518,6 +20187,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 69 + 4
 
@@ -19533,6 +20203,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19616,6 +20287,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL69 = 3 Or _GlsL69 = 4) Then
@@ -19745,15 +20423,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog69 = 200 Then
+            _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok69.Interval = 2000
+        ElseIf _Prog69 = 201 Then
+        ElseIf _Prog69 = 202 Then
+        ElseIf _Prog69 = 203 Then
+        ElseIf _Prog69 = 204 Then
+        ElseIf _Prog69 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok69.Interval = 2000
-        ElseIf _Prog69 = 201 Then
-        ElseIf _Prog69 = 202 Then
-        ElseIf _Prog69 = 203 Then
 
             ' Zindelstein
 
@@ -19797,6 +20478,7 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim Index, Fun01, Fun11, Fun21, Fun31 As Integer
+        Dim G_200 As Integer
         Index = 70 + 4
 
         Faktor_Beleuchtung = 100
@@ -19811,6 +20493,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
         Fun01 = Betriebsparameter.GetValue("LokführerAnweisungen", 4, Index)
         Fun11 = Betriebsparameter.GetValue("LokführerAnweisungen", 9, Index)
         Fun21 = Betriebsparameter.GetValue("LokführerAnweisungen", 14, Index)
@@ -19898,6 +20581,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL70 = 3 Or _GlsL70 = 4) Then
@@ -20048,11 +20738,7 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog70 = 200 Then
-            If Stufe4 < Stufe3 Then
-                _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
-            Else
-                _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok70.Interval = 2000
         ElseIf _Prog70 = 201 Then
             'If _Dampf > 0 Then
@@ -20061,6 +20747,12 @@ Public Class Automatikprogramme
         ElseIf _Prog70 = 202 Then
         ElseIf _Prog70 = 203 Then
         ElseIf _Prog70 = 204 Then
+        ElseIf _Prog70 = 205 Then
+            If Stufe4 < Stufe3 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            Else
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
             'ElseIf _Prog70 = 205 Then
             '    If _AkustischeSignale = 1 Then
             '        _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
@@ -20130,6 +20822,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 71 + 4
 
@@ -20145,6 +20838,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -20229,11 +20923,13 @@ Public Class Automatikprogramme
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
         End If
-
-        '*** Fahrstufe 1: 3
-        '*** Fahrstufe 2: 2
-        '*** Fahrstufe 3: 4
-        '*** Fahrstufe 4: 5
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
+        End If
 
         If Betriebsart = 1 And (_GlsL71 = 3 Or _GlsL71 = 4) Then
             SetProgramCounterLabel1(_Prog71)
@@ -20348,14 +21044,17 @@ Public Class Automatikprogramme
 
         ElseIf _Prog71 = 200 Then
             Prog_Lok71.Interval = 2000
+            _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+        ElseIf _Prog71 = 201 Then
+        ElseIf _Prog71 = 202 Then
+        ElseIf _Prog71 = 203 Then
+        ElseIf _Prog71 = 204 Then
+        ElseIf _Prog71 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-        ElseIf _Prog71 = 201 Then
-        ElseIf _Prog71 = 202 Then
-        ElseIf _Prog71 = 203 Then
 
             ' Zindelstein
 
@@ -20399,6 +21098,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 72 + 4
 
@@ -20414,6 +21114,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -20497,6 +21198,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL72 = 3 Or _GlsL72 = 4) Then
@@ -20612,15 +21320,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog72 = 200 Then
+            _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok72.Interval = 2000
+        ElseIf _Prog72 = 201 Then
+        ElseIf _Prog72 = 202 Then
+        ElseIf _Prog72 = 203 Then
+        ElseIf _Prog72 = 204 Then
+        ElseIf _Prog72 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok72.Interval = 2000
-        ElseIf _Prog72 = 201 Then
-        ElseIf _Prog72 = 202 Then
-        ElseIf _Prog72 = 203 Then
 
             ' Zindelstein
 
@@ -20664,6 +21375,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 73 + 4
 
@@ -20679,6 +21391,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -20762,6 +21475,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL73 = 3 Or _GlsL73 = 4) Then
@@ -20880,15 +21600,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog73 = 200 Then
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok73.Interval = 2000
+        ElseIf _Prog73 = 201 Then
+        ElseIf _Prog73 = 202 Then
+        ElseIf _Prog73 = 203 Then
+        ElseIf _Prog73 = 204 Then
+        ElseIf _Prog73 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok73.Interval = 2000
-        ElseIf _Prog73 = 201 Then
-        ElseIf _Prog73 = 202 Then
-        ElseIf _Prog73 = 203 Then
 
             ' Zindelstein
 
@@ -20933,6 +21656,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 74 + 4
 
@@ -20948,6 +21672,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -21031,6 +21756,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL74 = 3 Or _GlsL74 = 4) Then
@@ -21146,15 +21878,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog74 = 200 Then
+            _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok74.Interval = 2000
+        ElseIf _Prog74 = 201 Then
+        ElseIf _Prog74 = 202 Then
+        ElseIf _Prog74 = 203 Then
+        ElseIf _Prog74 = 204 Then
+        ElseIf _Prog74 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok74.Interval = 2000
-        ElseIf _Prog74 = 201 Then
-        ElseIf _Prog74 = 202 Then
-        ElseIf _Prog74 = 203 Then
 
             ' Zindelstein
 
@@ -21198,6 +21933,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 75 + 4
 
@@ -21213,6 +21949,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -21296,6 +22033,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL75 = 3 Or _GlsL75 = 4) Then
@@ -21411,15 +22155,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog75 = 200 Then
+            _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok75.Interval = 2000
+        ElseIf _Prog75 = 201 Then
+        ElseIf _Prog75 = 202 Then
+        ElseIf _Prog75 = 203 Then
+        ElseIf _Prog75 = 204 Then
+        ElseIf _Prog75 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok75.Interval = 2000
-        ElseIf _Prog75 = 201 Then
-        ElseIf _Prog75 = 202 Then
-        ElseIf _Prog75 = 203 Then
 
             ' Zindelstein
 
@@ -21462,6 +22209,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 76 + 4
 
@@ -21477,6 +22225,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -21560,6 +22309,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 5  '*** +5
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL76 = 3 Or _GlsL76 = 4) Then
@@ -21689,15 +22445,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog76 = 200 Then
+            _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok76.Interval = 2000
+        ElseIf _Prog76 = 201 Then
+        ElseIf _Prog76 = 202 Then
+        ElseIf _Prog76 = 203 Then
+        ElseIf _Prog76 = 204 Then
+        ElseIf _Prog76 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok76.Interval = 2000
-        ElseIf _Prog76 = 201 Then
-        ElseIf _Prog76 = 202 Then
-        ElseIf _Prog76 = 203 Then
 
             ' Zindelstein
 
@@ -21740,6 +22499,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 77 + 4
 
@@ -21755,6 +22515,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -21838,6 +22599,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL77 = 3 Or _GlsL77 = 4) Then
@@ -21967,15 +22735,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog77 = 200 Then
+            _eb.lokSteuern(77, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok77.Interval = 2000
+        ElseIf _Prog77 = 201 Then
+        ElseIf _Prog77 = 202 Then
+        ElseIf _Prog77 = 203 Then
+        ElseIf _Prog77 = 204 Then
+        ElseIf _Prog77 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(77, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(77, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok77.Interval = 2000
-        ElseIf _Prog77 = 201 Then
-        ElseIf _Prog77 = 202 Then
-        ElseIf _Prog77 = 203 Then
 
             ' Zindelstein
 
@@ -22019,6 +22790,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 78 + 4
 
@@ -22034,6 +22806,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -22117,6 +22890,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL78 = 3 Or _GlsL78 = 4) Then
@@ -22232,13 +23012,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog78 = 200 Then
+            _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok78.Interval = 2000
+        ElseIf _Prog78 = 201 Then
+        ElseIf _Prog78 = 202 Then
+        ElseIf _Prog78 = 203 Then
+        ElseIf _Prog78 = 204 Then
+        ElseIf _Prog78 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok78.Interval = 2000
-        ElseIf _Prog78 = 201 Then
 
             ' Zindelstein
 
@@ -22281,6 +23066,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 79 + 4
 
@@ -22296,6 +23082,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
 
         If A_StopB = 1 Then
@@ -22380,6 +23167,14 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL79 = 3 Or _GlsL79 = 4) Then
@@ -22508,11 +23303,7 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog79 = 200 Then
-            If Stufe4 < 12 Then
-                _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, 12)
-            Else
-                _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
-            End If
+            _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 201 Then
             If _Dampf > 0 Then
@@ -22537,7 +23328,7 @@ Public Class Automatikprogramme
             If _Dampf < 2 Then
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
             End If
-            Prog_Lok79.Interval = 2000
+
 
 
 
@@ -22583,6 +23374,7 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
+        Dim G_200 As Integer
         Dim Index As Integer
         Index = 80 + 4
 
@@ -22598,6 +23390,7 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -22681,6 +23474,13 @@ Public Class Automatikprogramme
         Stufe24 = Stufe2 + 4
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
+        End If
+        If G_200 > 0 Then
+            If G_200 < Stufe4 Then
+                G_200 = Stufe4
+            End If
+        Else
+            G_200 = Stufe4
         End If
 
         If Betriebsart = 1 And (_GlsL80 = 3 Or _GlsL80 = 4) Then
@@ -22793,15 +23593,18 @@ Public Class Automatikprogramme
             ' Tunnelausfahrt
 
         ElseIf _Prog80 = 200 Then
+            _eb.lokSteuern(80, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
+            Prog_Lok80.Interval = 2000
+        ElseIf _Prog80 = 201 Then
+        ElseIf _Prog80 = 202 Then
+        ElseIf _Prog80 = 203 Then
+        ElseIf _Prog80 = 204 Then
+        ElseIf _Prog80 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(80, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(80, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok80.Interval = 2000
-        ElseIf _Prog80 = 201 Then
-        ElseIf _Prog80 = 202 Then
-        ElseIf _Prog80 = 203 Then
 
             ' Zindelstein
 
@@ -38051,6 +38854,15 @@ Public Class Automatikprogramme
         End If
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
+        _Betriebsart0_3Var = 0
+        Button30.Text = "V0"
+        _Betriebsart0_4Var = 0
+        Button35.Text = "V0"
+        _Betriebsart0_5Var = 0
+        Button38.Text = "V0"
+        _Betriebsart3_0Var = 0
+        Button19.Text = "V0"
+        TextBox1.Text = " "
         Button43.BackColor = Drawing.Color.White
         ButtonsVisible(999)
     End Sub
@@ -38069,9 +38881,14 @@ Public Class Automatikprogramme
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
         _Betriebsart0_3Var = 0
+        Button30.Text = "V0"
         _Betriebsart0_4Var = 0
+        Button35.Text = "V0"
         _Betriebsart0_5Var = 0
+        Button38.Text = "V0"
         _Betriebsart3_0Var = 0
+        Button19.Text = "V0"
+        TextBox1.Text = " "
         Button43.BackColor = Drawing.Color.White
         ButtonsVisible(999)
     End Sub
