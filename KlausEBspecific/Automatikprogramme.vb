@@ -1343,7 +1343,7 @@ Public Class Automatikprogramme
 
         _kalteHerz = New DasKalteHerz(_eb, _daten, _dmxServer)
 
-        StoryImage = "Anlage_000.jpg"
+        StoryImage = "0-Grundbild.jpg"
         If ComboBox1.SelectedIndex = 0 Then
             StoryText = "Aus"
         ElseIf ComboBox1.SelectedIndex = 1 Then
@@ -19574,7 +19574,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm Baureihe 38 (382581)
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 38 2581 ( IBS nein)")
+        SetText(TextBox1, "Dampflok 38 2581                                                IBS: 10.01.2024 - V3 : 6")
         'PictureBox1.Visible = True
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_38_01.jpg")
         GeschwindikeitenSetzen(67)
@@ -24051,7 +24051,7 @@ Public Class Automatikprogramme
             AutomatikParameter = 110
             Ort_Lok1 = 110
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 4000
+                Timer_Kamera0.Interval = 9000
                 Timer_Kamera0.Start()
             End If
             If ComboBox1.SelectedIndex = 1 Then
@@ -24068,7 +24068,7 @@ Public Class Automatikprogramme
             AutomatikParameter = 210
             Ort_Lok2 = 210
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 4000
+                Timer_Kamera0.Interval = 9000
                 Timer_Kamera0.Start()
             End If
             If ComboBox1.SelectedIndex = 1 Then
@@ -24084,7 +24084,7 @@ Public Class Automatikprogramme
         AutomatikParameter = 307
         Ort_Lok3 = 317
         If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-            Timer_Kamera0.Interval = 4000
+            Timer_Kamera0.Interval = 9000
             Timer_Kamera0.Start()
         End If
     End Sub
@@ -24092,7 +24092,7 @@ Public Class Automatikprogramme
         AutomatikParameter = 407
         Ort_Lok4 = 417
         If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-            Timer_Kamera0.Interval = 4000
+            Timer_Kamera0.Interval = 9000
             Timer_Kamera0.Start()
         End If
     End Sub
@@ -25247,7 +25247,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 111
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 4000
+            Timer_Kamera1.Interval = 5000
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25264,7 +25264,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 211
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 4000
+            Timer_Kamera1.Interval = 5000
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25281,7 +25281,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 311
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 4000
+            Timer_Kamera1.Interval = 5000
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25298,7 +25298,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 411
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 4000
+            Timer_Kamera1.Interval = 5000
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25346,7 +25346,7 @@ Public Class Automatikprogramme
                 Timer_EinzelLok1.Start()
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 100
+                Timer_Kamera0.Interval = 3000
                 Timer_Kamera0.Start()
             End If
         End If
@@ -25386,7 +25386,7 @@ Public Class Automatikprogramme
                 Timer_EinzelLok2.Start()
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 100
+                Timer_Kamera0.Interval = 3000
                 Timer_Kamera0.Start()
             End If
         End If
@@ -25423,7 +25423,7 @@ Public Class Automatikprogramme
                 End If
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 100
+                Timer_Kamera0.Interval = 3000
                 Timer_Kamera0.Start()
             End If
         ElseIf Talstrecke_Gleis3 = 1 Then
@@ -25486,7 +25486,7 @@ Public Class Automatikprogramme
                 End If
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 100
+                Timer_Kamera0.Interval = 3000
                 Timer_Kamera0.Start()
             End If
         ElseIf Talstrecke_Gleis4 = 1 Then
@@ -29660,7 +29660,6 @@ Public Class Automatikprogramme
         ' ***     
         ' ***
         ' ***
-
         ' ***
         ' *** Bahnhofsausfahrt Zug auf Gleis 3
         ' ***
@@ -29716,13 +29715,13 @@ Public Class Automatikprogramme
                 End If
                 AutomatikParameter = 300
             Else
-                Zug3(nachlauf)
-                'If _NachlaufZug3 = False Then
-                '    StopZug3()
-                '    Zug3(abstellen)
-                'Else
                 'Zug3(nachlauf)
-                'End If
+                If _NachlaufZug3 = False Then
+                    StopZug3()
+                    Zug3(abstellen)
+                Else
+                    Zug3(nachlauf)
+                End If
             End If
             _AutomatikParameterH = 0
         End If
@@ -34442,6 +34441,266 @@ Public Class Automatikprogramme
         ElseIf ComboBox1.SelectedIndex = 2 Then
 
             If _StoryPointer = 0 Then
+                ' ***
+                ' *** Vorwort - eine Geschichte aus dem Schwarzwald
+                ' ***
+
+                Hue_Control = 1
+                CT_soll = 260
+                Bri_soll = 128
+                _Hue = 3
+                _Hue_Reset = 1
+                Timer_HUE.Start()
+                ButtonsVisible(999)
+
+                StoryText = "0-0: Das kalte Herz"
+                StoryImage = "0-Vorwort.jpg"
+                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-1.mp4")
+                Timer_Story_Auto.Interval = _StoryZeit
+                _StoryPointer = 1
+            ElseIf _StoryPointer = 1 Then
+                StoryText = "0-1: Das kalte Herz "
+                StoryImage = "0-Vorwort.jpg"
+                Timer_Story_Auto.Interval = _StoryZeit
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-2.mp4")
+                _StoryPointer = 2
+            ElseIf _StoryPointer = 2 Then
+                StoryText = "0-2:  "
+                StoryImage = "0-Vorwort.jpg"
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-3.mp4")
+                _StoryPointer = 100
+
+            ElseIf _StoryPointer = 100 Then
+
+                ' ***
+                ' *** Kapitel 1 - der Schwarzwald und die Bahnstrecke
+                ' ***
+
+                Hue_Control = 1
+                CT_soll = 260
+                Bri_soll = 128
+                StoryText = "1-0: Kapitel 1 - der Schwarzwald und die Bahnstrecke"
+                StoryImage = "0-Vorwort.jpg"
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-1.mp4")
+                _StoryPointer = 101
+
+            ElseIf _StoryPointer = 101 Then
+                StoryText = "1-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-2.mp4")
+                _StoryPointer = 102
+
+            ElseIf _StoryPointer = 102 Then
+                _kalteHerz.StopVideo()
+                StoryText = "1-2:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-3.mp4")
+                _StoryPointer = 200
+
+            ElseIf _StoryPointer = 200 Then
+
+                ' ***
+                ' *** Kapitel 2 - die Ankunft 
+                ' ***
+
+                Hue_Control = 1
+                CT_soll = 260
+                Bri_soll = 128
+
+                StoryText = "2-0: Kapitel 2 - Die Anreise "
+                StoryImage = "Anlage_035.jpg"
+                _StoryPointer = 201
+            ElseIf _StoryPointer = 201 Then
+                StoryText = "2-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 202
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 2-1.mp4")
+            ElseIf _StoryPointer = 202 Then
+                StoryText = "2-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 300
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 2-2 Modelleisenbahn.mp4")
+            ElseIf _StoryPointer = 300 Then
+
+                ' ***
+                ' *** Kapitel 3 - der Schatzhauser und der Schmied Ezechiel
+                ' ***
+
+                Hue_Control = 2
+                Bri_soll = 20
+                Sat_soll = 250
+                Col_soll = 42500
+
+                StoryText = "3-0: Kapitel 3 - Der Schatzhauser und der Schmied Ezechiel "
+                _StoryPointer = 301
+            ElseIf _StoryPointer = 301 Then
+                StoryText = "3-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 302
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-1.mp4")
+
+            ElseIf _StoryPointer = 302 Then
+                StoryText = "3-2:  "
+                StoryImage = "Kaltes Herz.jpg"
+                Timer_Music.Interval = 290000
+                _Music_laeuft = 1
+                Timer_Music.Start()
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Alan Parsons Project - Old and Wise - Lyrics on screen (720p).mp4")
+                StoryText = "3-1: Alan Parsons Project - Old and Wise"
+                _StoryPointer = 303
+
+            ElseIf _StoryPointer = 303 Then
+                StoryText = "3-3:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 304
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-2.mp4")
+            ElseIf _StoryPointer = 304 Then
+                StoryText = "3-4:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-3 Fast Train.mp4")
+                _StoryPointer = 305
+            ElseIf _StoryPointer = 305 Then
+                StoryText = "3-5:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _kalteHerz.StopVideo()
+                _StoryPointer = 400
+
+            ElseIf _StoryPointer = 400 Then
+
+                ' ***
+                ' *** Kapitel 4 - der Bürgermeister
+                ' ***
+
+                Hue_Control = 1
+                CT_soll = 260
+                Bri_soll = 100
+
+                DMX(3, 20, 0, 0, 128, 160, 128, 0, 0)
+
+                StoryText = "4-0: Kapitel 4 - der Bürgermeister"
+                StoryImage = "Anlage_017.jpg"
+                Timer_Story_Auto.Interval = _StoryZeit
+                _StoryPointer = 401
+            ElseIf _StoryPointer = 401 Then
+                StoryText = "4-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 500
+
+            ElseIf _StoryPointer = 500 Then
+
+                ' ***
+                ' *** Kapitel 5 - die schöne Tochter des Müllers
+                ' ***
+
+                Hue_Control = 1
+                CT_soll = 260
+                Bri_soll = 200
+
+                StoryText = "5-0: Kapitel 5 - die schöne Tochter des Müllers  "
+                StoryImage = "Kaltes Herz_46.jpg"
+                _StoryPointer = 501
+            ElseIf _StoryPointer = 501 Then
+                StoryText = "5-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 600
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 5-1 Geli.mp4")
+
+
+            ElseIf _StoryPointer = 600 Then
+
+                ' ***
+                ' *** Kapitel 6 - Peter Kohlenmunk
+                ' ***
+
+                Hue_Control = 1
+                CT_soll = 260
+                Bri_soll = 100
+
+                StoryText = "6-0: Kapitel 6 - Peter Kohlenmunk "
+                StoryImage = "Kaltes Herz_61.jpg"
+                _StoryPointer = 601
+            ElseIf _StoryPointer = 601 Then
+                StoryText = "6-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 700
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 6-2 für immer jung.mp4")
+
+            ElseIf _StoryPointer = 700 Then
+
+                ' ***
+                ' *** Kapitel 7 - Peter Kohlenmunk trifft das Glasmännlein und wird reich
+                ' ***
+
+                Hue_Control = 1
+                Bri_soll = 50
+                CT_soll = 260
+
+                PlayMusic("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kap7-Peter_1.mp3")
+
+                StoryText = "7-0: Kapitel 7 - Peter Kohlenmunk trifft das Glasmännlein und wird reich "
+                StoryImage = "Kaltes Herz_88.jpg"
+                _StoryPointer = 701
+
+            ElseIf _StoryPointer = 701 Then
+                StoryText = "7-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 800
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 7-1.mp4")
+
+            ElseIf _StoryPointer = 800 Then
+
+                ' ***
+                ' *** Kapitel 8 - Peter Kohlenmunk wird böse
+                ' ***
+
+                Hue_Control = 1
+                Bri_soll = 100
+                CT_soll = 260
+
+                StoryImage = "Kaltes Herz_101.jpg"
+                StoryText = "8-0: Kapitel 8 - Peter Kohlenmunk wird böse "
+                _StoryPointer = 801
+            ElseIf _StoryPointer = 801 Then
+                StoryText = "8-1:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 900
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 8-1 blank & jones & mark reeder ft. robert smith - a forest (ma).mp4")
+
+            ElseIf _StoryPointer = 900 Then
+
+                ' ***
+                ' *** Kapitel 9 - die Feier zum Abschluss
+                ' ***
+
+                Hue_Control = 1
+                Bri_soll = 200
+                CT_soll = 260
+
+                Timer_Story_Auto.Interval = _StoryZeit
+                StoryText = "9-0: Kapitel 9 - Die Feier zum Abschluss"
+                StoryImage = "Kaltes Herz_115a.jpg"
+                _StoryPointer = 901
+            ElseIf _StoryPointer = 901 Then
+
+            End If
+
+        ElseIf ComboBox1.SelectedIndex = 99 Then
+
+            If _StoryPointer = 0 Then
 
                 ' ***
                 ' *** Vorwort - eine Geschichte aus dem Schwarzwald
@@ -34454,7 +34713,7 @@ Public Class Automatikprogramme
                 _Hue_Reset = 1
                 Timer_HUE.Start()
 
-                DMX(3, 1, 0, 0, 0, 0, 0, 0, 0)
+                'DMX(3, 1, 0, 0, 0, 0, 0, 0, 0)
 
                 ButtonsVisible(999)
 
@@ -34463,20 +34722,29 @@ Public Class Automatikprogramme
                 StoryImage = "Kaltes Herz.jpg"
                 Timer_Story_Auto.Interval = _StoryZeit
                 _StoryPointer = 1
+
             ElseIf _StoryPointer = 1 Then
 
-                DMX(3, 20, 128, 128, 128, 128, 128, 128, 128)
+                'DMX(3, 20, 128, 128, 128, 128, 128, 128, 128)
 
                 StoryText = "0-1: Das kalte Herz "
                 StoryImage = "Kaltes Herz.jpg"
                 Timer_Story_Auto.Interval = _StoryZeit
                 _StoryPointer = 2
             ElseIf _StoryPointer = 2 Then
-                StoryText = "0-2: eine Geschichte aus dem Schwarzwald. "
+                StoryText = "0-2:  "
                 StoryImage = "Kaltes Herz.jpg"
                 _StoryPointer = 3
             ElseIf _StoryPointer = 3 Then
-                StoryText = "0-3: nach einem Märchen von Wilhelm Hauff "
+                StoryText = "0-3:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 4
+            ElseIf _StoryPointer = 4 Then
+                StoryText = "0-4:  "
+                StoryImage = "Kaltes Herz.jpg"
+                _StoryPointer = 5
+            ElseIf _StoryPointer = 5 Then
+                StoryText = "0-5:  "
                 StoryImage = "Kaltes Herz.jpg"
                 _StoryPointer = 100
             ElseIf _StoryPointer = 100 Then
@@ -34489,7 +34757,7 @@ Public Class Automatikprogramme
                 CT_soll = 260
                 Bri_soll = 128
 
-                DMX(3, 20, 0, 80, 128, 164, 128, 80, 0)
+                'DMX(3, 20, 0, 80, 128, 164, 128, 80, 0)
 
                 If _StoryAuto = 0 Then
                     StoryColor = Drawing.Color.LightGray
@@ -34533,6 +34801,7 @@ Public Class Automatikprogramme
                 StoryImage = "Kaltes Herz_4.jpg"
                 _StoryPointer = 108
             ElseIf _StoryPointer = 108 Then
+                PlayMusic("H:\EB_Media\Media\Stop.mp3")
                 StoryText = "1-9: Auch wenn wir ihn auf unserer Eisenbahnanlage nicht sehen können. "
                 StoryImage = "Kaltes Herz_4.jpg"
                 _StoryPointer = 109
@@ -35866,11 +36135,15 @@ Public Class Automatikprogramme
                 Bri_soll = 50
                 CT_soll = 260
 
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
+                'DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
+
+                PlayMusic("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kap7-Peter_1.mp3")
 
                 StoryText = "7-1: Kapitel 7 - Peter Kohlenmunk trifft das Glasmännlein und wird reich "
                 StoryImage = "Kaltes Herz_88.jpg"
-                _StoryPointer = 701
+                '_StoryPointer = 701
+                _StoryPointer = 710
+
             ElseIf _StoryPointer = 701 Then
                 StoryText = "7-2: Als Peter in den kommenden Tagen wieder zum Holzsammeln in den Wald geht, kommt er am Tannenbühl mit den mächtigen Holländer-Tannen vorbei. "
                 StoryImage = "Kaltes Herz_88.jpg"
@@ -36368,7 +36641,7 @@ Public Class Automatikprogramme
         _kalteHerz.StopVideo()
         Timer_Music.Stop()
         StoryText = "0 - Klicken zum Starten"
-        StoryImage = "Kaltes Herz_0.jpg"
+        StoryImage = "0 - Vorwort.jpg"
         StoryColor = Drawing.Color.LightGray
         StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
     End Sub
@@ -37223,12 +37496,12 @@ Public Class Automatikprogramme
 
                 End If
                 If _Betriebsart0_5Var = 0 Then
-                    Button53.Visible = True
-                    Button54.Visible = True
-                    Button73.Visible = True
-                    Button74.Visible = True
-                    Button83.Visible = False
-                    Button84.Visible = False
+                    'Button53.Visible = True
+                    'Button54.Visible = True
+                    'Button73.Visible = True
+                    'Button74.Visible = True
+                    'Button83.Visible = False
+                    'Button84.Visible = False
                     Button53.Location = New System.Drawing.Point(882, 354)
                     Button73.Location = New System.Drawing.Point(778, 354)
                     Button83.Location = New System.Drawing.Point(678, 354)
@@ -39052,11 +39325,11 @@ Public Class Automatikprogramme
             _Route_Gleis4 = 2
             _daten.write_to_table(AutomatikParameterTableName, 6, _Route_Gleis4)
             ARoute_Lok4 = _Route_Gleis4
-            _SBhf_Gleis3 = 4
+            _SBhf_Gleis3 = 0
             _SBhf_Gleis4 = 3
             Diagonale_Gleis3 = 4
             Diagonale_Gleis4 = 3
-            Talstrecke_Gleis3 = 4
+            Talstrecke_Gleis3 = 0
             Talstrecke_Gleis4 = 3
             Button53.Text = "kein Halt"
             Button53.BackColor = Drawing.Color.LightGreen
@@ -39068,8 +39341,8 @@ Public Class Automatikprogramme
             Button84.BackColor = Drawing.Color.LightYellow
             Button93.Text = "kein Halt"
             Button93.BackColor = Drawing.Color.LightGreen
-            Button94.Text = "kein Halt"
-            Button94.BackColor = Drawing.Color.LightGreen
+            Button94.Text = "Wechsel > 3"
+            Button94.BackColor = Drawing.Color.LightYellow
 
             ButtonsVisible(999)
         Else
