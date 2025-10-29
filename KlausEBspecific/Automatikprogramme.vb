@@ -60,7 +60,7 @@ Public Class Automatikprogramme
     Private _AutomatikParameter, _AutomatikParameter1, _AutomatikParameterH, _Betriebsart, _Betriebsart12, _Betriebsart34, A_Stop, A_StopH, A_StopB, _Route_Gleis1, _Route_Gleis2, _Route_Gleis3, _Route_Gleis4, _StopZug1, _StopZug2, _StopZug3, _StopZug4 As Integer
     Private _Bhf_Gleis1, _Bhf_Gleis2, _Bhf_Gleis3, _Bhf_Gleis4, _Bhf2_Gleis1, _Bhf2_Gleis2, _Bhf2_Gleis3, _Bhf2_Gleis4, _SBhf_Gleis1, _SBhf_Gleis2, _SBhf_Gleis3, _SBhf_Gleis4, _Berg_Gleis1, _Berg_Gleis2, _Berg_Gleis3, _Berg_Gleis4, Diagonale_Gleis1, Diagonale_Gleis2, Diagonale_Gleis3, Diagonale_Gleis4, Talstrecke_Gleis1, Talstrecke_Gleis2, Talstrecke_Gleis3, Talstrecke_Gleis4 As Integer
     Private _Kurzzug1, _Kurzzug2, _Kurzzug3, _Kurzzug4, _NachlaufZug1, _NachlaufZug2, _NachlaufZug3, _NachlaufZug4, _Weichen_in_Startposition, _Weichen_initialisiert, _Signale_in_Startposition, _Signale_initialisiert, Start_Betaetigt, Stop_Betaetigt,
-            _TimerStory_laeuft, _Fahrzeugbeleuchtung, _Innenbeleuchtung As Boolean
+            _TimerStory_laeuft, _Innenbeleuchtung As Boolean
     Private _Beleuchtung, _Funktionsmodelle, _Hue, _HueHell, _Hue_Reset, _HueAus, _StoryPointer, _StoryControl, _StoryAuto, _StoryZeit, _Music_laeuft, _Zug_laeuft, _Motor, _Innenbeleuchtung2, _Fahrzeugbeleuchtung2, _Dampf, _AkustischeSignale, _Durchsagen, _Fernlicht As Integer
     Private Ort_Lok1, Ort_Lok2, Ort_Lok3, Ort_Lok4, ARoute_Lok1, ARoute_Lok2, ARoute_Lok3, ARoute_Lok4, _Kamera, _aktuelleKamera, Startzug As Integer
     Private _GleisFrei1, _GleisFrei2, _GleisFrei3, _GleisFrei4 As Integer
@@ -105,14 +105,15 @@ Public Class Automatikprogramme
     Private Signal9schalten, Signal10schalten, Signal11schalten, Signal12schalten As Boolean
     '*** Clips
     Private Film, Pfad As String
-    Private FilmZeile, FilmSpalte, FilmZeileMin, FilmZeileMax, FilmSpalteMax As Integer
     '*** Hilfsariablen definieren
     Private _Prog28H As Integer
     Private _Zugtyp1, _Zugtyp2, _Zugtyp3, _Zugtyp4 As Integer
     Private Forbach, Marxzel, Windeck As Integer
+
     Private L1_aktuell, L2_aktuell, L3_aktuell, L4_aktuell, L5_aktuell, L6_aktuell, L7_aktuell, L1_soll, L2_soll, L3_soll, L4_soll, L5_soll, L6_soll, L7_soll, S_DMX, Szene, Faktor_Beleuchtung, DMX_Pointer, DMX_Klick As Integer
+
     Private Bri_aktuell, Sat_aktuell, Col_aktuell, CT_aktuell, CT_M, Bri_soll, Bri_M, Sat_soll, Col_soll, CT_soll, Hue_Control, Hue_Control_aktuell, Hue_Control_M, Hue_Takt, Hue_Aenderung, Hue_Neue_Aenderung As Integer
-    Private FilmZeilenMerker, FilmSpaltenMerker, FilmFortschritt As Integer
+    Private FilmFortschritt As Integer
     Private Fahrplan, Warte1A1, Warte1A2, Warte1SB, Warte1BA, Warte1TA, Warte1DI, Warte2A1, Warte2A2, Warte2SB, Warte2BA, Warte2TA, Warte2DI, Warte3A1, Warte3A2, Warte3SB, Warte3BA, Warte3TA, Warte3DI, Warte4A1, Warte4A2, Warte4SB, Warte4BA, Warte4TA, Warte4DI As Integer
 
     Private Property AutomatikParameter As Integer
@@ -237,9 +238,9 @@ Public Class Automatikprogramme
 
     Private WithEvents Timer_1, Timer_2, Timer_3, Timer_4, Timer_5, Timer_6, Timer_7, Timer_8, Timer_9, Timer_10, Timer_11, Timer_12 As Timers.Timer  ' *** , Timer_Event_ein, Timer_Event_aus
     Private WithEvents Timer_EinzelLok1, Timer_EinzelLok2, Timer_EinzelLok3, Timer_EinzelLok4, Timer_Music As Timers.Timer
-    Private WithEvents Timer_Story_DMX, Timer_Story_Film, Timer_Story_Auto, Timer_Kamera0, Timer_Kamera1, Timer_Kamera2, Timer_DMX, Timer_HUE As Timers.Timer
+    Private WithEvents Timer_Story_Auto, Timer_Kamera0, Timer_Kamera1, Timer_Kamera2, Timer_DMX, Timer_HUE, Delay_Automatik_110, Delay_Automatik_210 As Timers.Timer
     'Private WithEvents Timer_Story1, Timer_Story_DMX, Timer_Story3, Timer_Story4, Timer_Story5, Timer_Story6, Timer_Story7, Timer_Story8, Timer_Story_Film, Timer_Story_Auto, Timer_Kamera0, Timer_Kamera1, Timer_Kamera2, Timer_DMX, Timer_HUE As Timers.Timer
-    '*** Fahrprogramm für Züge erstellen FPZ
+    '*** Fahrprogramm für Züge erstellen FPZ Timer_Story_DMX, Timer_Story_Film,
     '*** Timer definieren (Programme)
     Private WithEvents Prog_Lok10, Prog_Lok11, Prog_Lok12, Prog_Lok13, Prog_Lok14, Prog_Lok15, Prog_Lok16, Prog_Lok17, Prog_Lok18, Prog_Lok19 As Timers.Timer
     Private WithEvents Prog_Lok20, Prog_Lok21, Prog_Lok22, Prog_Lok23, Prog_Lok24, Prog_Lok25, Prog_Lok26, Prog_Lok27, Prog_Lok28, Prog_Lok29 As Timers.Timer
@@ -270,11 +271,7 @@ Public Class Automatikprogramme
         Faktor_Beleuchtung = 1000
 
         Pfad = "H:\EB_Media\Clips\"
-        FilmZeileMin = 10
-        FilmZeileMax = 80       '*** letzte Zeile in der Excel-Tabelle mit Film- und Fotoeinträgen
-        FilmSpalteMax = 21
-        FilmZeile = FilmZeileMin
-        FilmSpalte = 1
+
         FilmFortschritt = 0
 
         ' *** 3 (Auto) - 0 (Marxzel) - 1 (Forbach) - 2 (Windeck)
@@ -303,6 +300,7 @@ Public Class Automatikprogramme
         Button38.Text = "V0"
         Button30.Text = "V0"
         Button35.Text = "V0"
+        Button40.Text = "V0"
 
         AutomatikParameter = 0
         AutomatikParameter1 = 0
@@ -374,7 +372,7 @@ Public Class Automatikprogramme
         Hue_Control = _daten.read_from_table(AutomatikParameterTableName, 53)
 
 
-        FilmZeile = _daten.read_from_table(AutomatikParameterTableName, 51)
+        'FilmZeile = _daten.read_from_table(AutomatikParameterTableName, 51)
 
         ComboBox1.SelectedIndex = _daten.read_from_table(AutomatikParameterTableName, 52)
 
@@ -973,10 +971,6 @@ Public Class Automatikprogramme
             Betriebsart = 0
         End If
 
-        If _Fahrzeugbeleuchtung2 = 1 Or _Fahrzeugbeleuchtung2 = 2 Then
-            _Fahrzeugbeleuchtung = True
-        End If
-
         Button3.BackColor = Drawing.Color.LightGray
         Button4.BackColor = Drawing.Color.LightGray
         Button5.BackColor = Drawing.Color.LightGray
@@ -1018,8 +1012,11 @@ Public Class Automatikprogramme
             Button5.Text = "Dampf aus"
         ElseIf _Dampf = 1 Then
             Button5.BackColor = Drawing.Color.LightYellow
-            Button5.Text = "Dampf ein/aus"
+            Button5.Text = "Dampf ein/aus 1"
         ElseIf _Dampf = 2 Then
+            Button5.BackColor = Drawing.Color.LightYellow
+            Button5.Text = "Dampf ein/aus 2"
+        ElseIf _Dampf = 3 Then
             Button5.BackColor = Drawing.Color.LightYellow
             Button5.Text = "Dampf ein"
         End If
@@ -1035,7 +1032,17 @@ Public Class Automatikprogramme
             Button6.Text = "Innenlicht ein"
         End If
 
-        If _AkustischeSignale = 1 Then Button7.BackColor = Drawing.Color.LightYellow
+        If _AkustischeSignale = 0 Then
+            Button7.BackColor = Drawing.Color.LightGray
+            Button7.Text = "akust. Signale aus"
+        ElseIf _AkustischeSignale = 1 Then
+            Button7.BackColor = Drawing.Color.LightYellow
+            Button7.Text = "akust. Signale ein 1"
+        ElseIf _AkustischeSignale = 2 Then
+            Button7.BackColor = Drawing.Color.LightYellow
+            Button7.Text = "akust. Signale ein 2"
+        End If
+
         If _Durchsagen = 1 Then Button8.BackColor = Drawing.Color.LightYellow
         If _Fernlicht = 1 Then Button9.BackColor = Drawing.Color.LightYellow
 
@@ -1236,17 +1243,19 @@ Public Class Automatikprogramme
         Timer_Kamera0 = New Timers.Timer(4000)
         Timer_Kamera1 = New Timers.Timer(4000)
         Timer_Kamera2 = New Timers.Timer(4000)
+        Delay_Automatik_110 = New Timers.Timer(5000)
+        Delay_Automatik_210 = New Timers.Timer(5000)
 
         Timer_Music = New Timers.Timer(411000)
         'Timer_Story1 = New Timers.Timer(15900)
-        Timer_Story_DMX = New Timers.Timer(100)
+        'Timer_Story_DMX = New Timers.Timer(100)
         'Timer_Story3 = New Timers.Timer(25500)
         'Timer_Story4 = New Timers.Timer(12250)
         'Timer_Story5 = New Timers.Timer(50000)
         'Timer_Story6 = New Timers.Timer(60000)
         'Timer_Story7 = New Timers.Timer(70000)
         'Timer_Story8 = New Timers.Timer(80000)
-        Timer_Story_Film = New Timers.Timer(300)
+        'Timer_Story_Film = New Timers.Timer(300)
         Timer_Story_Auto = New Timers.Timer(100000)
 
         Timer_DMX = New Timers.Timer(100)
@@ -1347,13 +1356,13 @@ Public Class Automatikprogramme
         If ComboBox1.SelectedIndex = 0 Then
             StoryText = "Aus"
         ElseIf ComboBox1.SelectedIndex = 1 Then
-            StoryText = "Filme"
+            StoryText = "Eisenbahn"
         ElseIf ComboBox1.SelectedIndex = 2 Then
             StoryText = "Das kalte Herz"
         ElseIf ComboBox1.SelectedIndex = 3 Then
-            StoryText = "Tag und Nacht"
+            'StoryText = "Tag und Nacht"
         ElseIf ComboBox1.SelectedIndex = 4 Then
-            StoryText = "Zug verfolgen"
+            'StoryText = "Zug verfolgen"
         Else
             StoryText = "Modelleisenbahnanlage 'Altenstein' "
         End If
@@ -1426,12 +1435,14 @@ Public Class Automatikprogramme
         Timer_Kamera0.Stop()
         Timer_Kamera1.Stop()
         Timer_Kamera2.Stop()
+        Delay_Automatik_110.Stop()
+        Delay_Automatik_210.Stop()
 
         Timer_Music.Stop()
 
-        Timer_Story_DMX.Stop()
+        'Timer_Story_DMX.Stop()
 
-        Timer_Story_Film.Stop()
+        'Timer_Story_Film.Stop()
         Timer_Story_Auto.Stop()
 
         Timer_DMX.Stop()
@@ -1639,6 +1650,7 @@ Public Class Automatikprogramme
         Button38.Enabled = aktiv
         Button30.Enabled = aktiv
         Button35.Enabled = aktiv
+        Button40.Enabled = aktiv
 
     End Sub
 
@@ -2097,9 +2109,6 @@ Public Class Automatikprogramme
                 End If
             End If
         End If
-        If ComboBox1.SelectedIndex = 1 Then
-            StoryImage = Betriebsparameter.GetValue("Filme", 21, NumericUpDown8.Value)
-        End If
     End Sub
     Private Sub HandleTimerElapsed14(sender As System.Object, e As System.EventArgs) Handles Timer_EinzelLok2.Elapsed
         If Me.InvokeRequired Then
@@ -2309,10 +2318,6 @@ Public Class Automatikprogramme
                     End If
                 End If
             End If
-        End If
-
-        If ComboBox1.SelectedIndex = 1 Then
-            StoryImage = Betriebsparameter.GetValue("Filme", 21, NumericUpDown9.Value)
         End If
     End Sub
     Private Sub HandleTimerElapsed15(sender As System.Object, e As System.EventArgs) Handles Timer_EinzelLok3.Elapsed
@@ -2549,10 +2554,6 @@ Public Class Automatikprogramme
                 End If
             End If
         End If
-
-        If ComboBox1.SelectedIndex = 1 Then
-            StoryImage = Betriebsparameter.GetValue("Filme", 21, NumericUpDown10.Value)
-        End If
     End Sub
     Private Sub HandleTimerElapsed16(sender As System.Object, e As System.EventArgs) Handles Timer_EinzelLok4.Elapsed
         If Me.InvokeRequired Then
@@ -2729,12 +2730,6 @@ Public Class Automatikprogramme
         Else
             Zyklusende()
         End If
-
-        If ComboBox1.SelectedIndex = 1 Then
-            StoryImage = Betriebsparameter.GetValue("Filme", 20, FilmZeile)
-            StoryText = Betriebsparameter.GetValue("Texte", 20, FilmZeile)
-        End If
-
         If ComboBox1.SelectedIndex = 5 Then
             If _Bhf_Gleis4 <> 0 Then
                 If Ort_Lok4 = 400 Then
@@ -2787,213 +2782,176 @@ Public Class Automatikprogramme
             StoryColor = Drawing.Color.LightBlue
         End If
     End Sub
-    Private Sub HandleTimerElapsed18(sender As System.Object, e As System.EventArgs) Handles Timer_Story_DMX.Elapsed
-        ' ***
-        ' *** Datum: 22.02.2022
-        ' ***
-        ' *** Faktor Faktor_Beleuchtung = 100 gilt für Lok13 mit Fahrstufe 3
-        ' *** Zeit für eine Runde "oben kurz" über Gleis 4: 374 Sekunden (Stufe 3)
-        ' ***
-        ' *** Zeit für eine Runde "oben kurz" über Gleis 4: 177 Sekunden (Stufe 6)
+    'Private Sub HandleTimerElapsed18(sender As System.Object, e As System.EventArgs) Handles Timer_Story_DMX.Elapsed
+    '    ' ***
+    '    ' *** Datum: 22.02.2022
+    '    ' ***
+    '    ' *** Faktor Faktor_Beleuchtung = 100 gilt für Lok13 mit Fahrstufe 3
+    '    ' *** Zeit für eine Runde "oben kurz" über Gleis 4: 374 Sekunden (Stufe 3)
+    '    ' ***
+    '    ' *** Zeit für eine Runde "oben kurz" über Gleis 4: 177 Sekunden (Stufe 6)
 
-        'If Me.InvokeRequired Then
-        '    Me.Invoke(Sub() HandleTimerElapsed41(sender, e))
-        '    Return
-        'End If
+    '    'If Me.InvokeRequired Then
+    '    '    Me.Invoke(Sub() HandleTimerElapsed41(sender, e))
+    '    '    Return
+    '    'End If
 
-        Dim Fac As Integer
+    '    Dim Fac As Integer
 
-        If Faktor_Beleuchtung < 50 Or Faktor_Beleuchtung > 150 Then
-            Faktor_Beleuchtung = 100
-        End If
+    '    If Faktor_Beleuchtung < 50 Or Faktor_Beleuchtung > 150 Then
+    '        Faktor_Beleuchtung = 100
+    '    End If
 
-        Fac = (Faktor_Beleuchtung * 177) / 374
-        Fac = 70
+    '    Fac = (Faktor_Beleuchtung * 177) / 374
+    '    Fac = 70
 
-        'If ComboBox1.SelectedIndex = 4 Then
-        If _Beleuchtung = 10 Then
+    '    'If ComboBox1.SelectedIndex = 4 Then
+    '    If _Beleuchtung = 10 Then
 
-            If DMX_Pointer = 0 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 0)
-                DMX_Pointer = 90
+    '        If DMX_Pointer = 0 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0)
+    '            DMX_Pointer = 90
 
-            ElseIf DMX_Pointer = 1 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 0)
-                Timer_Story_DMX.Interval = 300 * Fac
-            ElseIf DMX_Pointer = 2 Then
-                DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Tunnelausfahrt
-                Timer_Story_DMX.Interval = 65 * Fac
-            ElseIf DMX_Pointer = 3 Then
-                DMX(9, 4, 0, 0, 80, 128, 0, 0, 0) ' Brücke mitte
-                DMX_Pointer = 90
+    '        ElseIf DMX_Pointer = 1 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0)
+    '            Timer_Story_DMX.Interval = 300 * Fac
+    '        ElseIf DMX_Pointer = 2 Then
+    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Tunnelausfahrt
+    '            Timer_Story_DMX.Interval = 65 * Fac
+    '        ElseIf DMX_Pointer = 3 Then
+    '            DMX(9, 4, 0, 0, 80, 128, 0, 0, 0) ' Brücke mitte
+    '            DMX_Pointer = 90
 
-            ElseIf DMX_Pointer = 10 Then
-                DMX(9, 4, 0, 0, 80, 128, 0, 0, 0) ' Brücke mitte (fest)
-                Timer_Story_DMX.Interval = 50 * Fac
-            ElseIf DMX_Pointer = 11 Then
-                DMX(9, 4, 0, 0, 0, 0, 128, 80, 0) ' Brücke rechts
-                Timer_Story_DMX.Interval = 90 * Fac
-            ElseIf DMX_Pointer = 12 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 128, 0) ' Mühle
-                Timer_Story_DMX.Interval = 80 * Fac
-            ElseIf DMX_Pointer = 13 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Mühle
-                Timer_Story_DMX.Interval = 110 * Fac
-            ElseIf DMX_Pointer = 14 Then
-                'DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
-                Timer_Story_DMX.Interval = 35 * Fac
-            ElseIf DMX_Pointer = 15 Then
-                'DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-                Timer_Story_DMX.Interval = 75 * Fac
-            ElseIf DMX_Pointer = 16 Then
-                'DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-                Timer_Story_DMX.Interval = 50 * Fac
-            ElseIf DMX_Pointer = 17 Then
-                DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-                Timer_Story_DMX.Interval = 50 * Fac
-            ElseIf DMX_Pointer = 18 Then
-                DMX(9, 4, 128, 128, 0, 0, 0, 0, 0) ' Kirche
-                'DMX(9, 4, 128, 0, 0, 0, 0, 0, 0) ' Schmiede
-                Timer_Story_DMX.Interval = 70 * Fac
-            ElseIf DMX_Pointer = 19 Then
-                'DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-                Timer_Story_DMX.Interval = 45 * Fac
-            ElseIf DMX_Pointer = 20 Then
-                DMX(9, 4, 80, 80, 128, 0, 0, 0, 0) ' Brücke links
-                DMX_Pointer = 90
+    '        ElseIf DMX_Pointer = 10 Then
+    '            DMX(9, 4, 0, 0, 80, 128, 0, 0, 0) ' Brücke mitte (fest)
+    '            Timer_Story_DMX.Interval = 50 * Fac
+    '        ElseIf DMX_Pointer = 11 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 128, 80, 0) ' Brücke rechts
+    '            Timer_Story_DMX.Interval = 90 * Fac
+    '        ElseIf DMX_Pointer = 12 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 128, 0) ' Mühle
+    '            Timer_Story_DMX.Interval = 80 * Fac
+    '        ElseIf DMX_Pointer = 13 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Mühle
+    '            Timer_Story_DMX.Interval = 110 * Fac
+    '        ElseIf DMX_Pointer = 14 Then
+    '            'DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
+    '            Timer_Story_DMX.Interval = 35 * Fac
+    '        ElseIf DMX_Pointer = 15 Then
+    '            'DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
+    '            Timer_Story_DMX.Interval = 75 * Fac
+    '        ElseIf DMX_Pointer = 16 Then
+    '            'DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
+    '            Timer_Story_DMX.Interval = 50 * Fac
+    '        ElseIf DMX_Pointer = 17 Then
+    '            DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
+    '            Timer_Story_DMX.Interval = 50 * Fac
+    '        ElseIf DMX_Pointer = 18 Then
+    '            DMX(9, 4, 128, 128, 0, 0, 0, 0, 0) ' Kirche
+    '            'DMX(9, 4, 128, 0, 0, 0, 0, 0, 0) ' Schmiede
+    '            Timer_Story_DMX.Interval = 70 * Fac
+    '        ElseIf DMX_Pointer = 19 Then
+    '            'DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
+    '            Timer_Story_DMX.Interval = 45 * Fac
+    '        ElseIf DMX_Pointer = 20 Then
+    '            DMX(9, 4, 80, 80, 128, 0, 0, 0, 0) ' Brücke links
+    '            DMX_Pointer = 90
 
-            ElseIf DMX_Pointer = 30 Then
-                DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links (fest)
-                Timer_Story_DMX.Interval = 30 * Fac
-            ElseIf DMX_Pointer = 31 Then
-                DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-                DMX_Pointer = 90
+    '        ElseIf DMX_Pointer = 30 Then
+    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links (fest)
+    '            Timer_Story_DMX.Interval = 30 * Fac
+    '        ElseIf DMX_Pointer = 31 Then
+    '            DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
+    '            DMX_Pointer = 90
 
-            ElseIf DMX_Pointer = 40 Then
-                DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts (fest)
-                Timer_Story_DMX.Interval = 70 * Fac
-            ElseIf DMX_Pointer = 41 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 128) ' Zindelstein
-                Timer_Story_DMX.Interval = 100 * Fac
-            ElseIf DMX_Pointer = 42 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' aus
-                DMX_Pointer = 90
-
-
-            ElseIf DMX_Pointer = 51 Then
-                DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts (fest)
-                Timer_Story_DMX.Interval = 100 * Fac
-            ElseIf DMX_Pointer = 52 Then
-                DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-                Timer_Story_DMX.Interval = 70 * Fac
-            ElseIf DMX_Pointer = 53 Then
-                DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-                Timer_Story_DMX.Interval = 50 * Fac
-            ElseIf DMX_Pointer = 54 Then
-                DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-                Timer_Story_DMX.Interval = 75 * Fac
-            ElseIf DMX_Pointer = 55 Then
-                DMX(9, 4, 128, 128, 0, 0, 0, 0, 0) ' Kirche
-                'DMX(9, 4, 128, 0, 0, 0, 0, 0, 0) ' Schmiede
-                Timer_Story_DMX.Interval = 75 * Fac
-            ElseIf DMX_Pointer = 56 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Kirche
-                'DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-                Timer_Story_DMX.Interval = 50 * Fac
-            ElseIf DMX_Pointer = 57 Then
-                'DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-                Timer_Story_DMX.Interval = 50 * Fac
-            ElseIf DMX_Pointer = 58 Then
-                'DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-                Timer_Story_DMX.Interval = 50 * Fac
-            ElseIf DMX_Pointer = 59 Then
-                'DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
-                Timer_Story_DMX.Interval = 80 * Fac
-            ElseIf DMX_Pointer = 60 Then
-                'DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' aus
-                Timer_Story_DMX.Interval = 70 * Fac
-            ElseIf DMX_Pointer = 61 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 128, 0) ' Mühle
-                Timer_Story_DMX.Interval = 90 * Fac
-            ElseIf DMX_Pointer = 62 Then
-                DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
-                DMX_Pointer = 90
+    '        ElseIf DMX_Pointer = 40 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts (fest)
+    '            Timer_Story_DMX.Interval = 70 * Fac
+    '        ElseIf DMX_Pointer = 41 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 128) ' Zindelstein
+    '            Timer_Story_DMX.Interval = 100 * Fac
+    '        ElseIf DMX_Pointer = 42 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' aus
+    '            DMX_Pointer = 90
 
 
-            ElseIf DMX_Pointer = 70 Then
-                DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte (fest)
-                Timer_Story_DMX.Interval = 35 * Fac
-            ElseIf DMX_Pointer = 71 Then
-                DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-                Timer_Story_DMX.Interval = 80 * Fac
-            ElseIf DMX_Pointer = 72 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Ende
-                DMX_Pointer = 90
+    '        ElseIf DMX_Pointer = 51 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts (fest)
+    '            Timer_Story_DMX.Interval = 100 * Fac
+    '        ElseIf DMX_Pointer = 52 Then
+    '            DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
+    '            Timer_Story_DMX.Interval = 70 * Fac
+    '        ElseIf DMX_Pointer = 53 Then
+    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
+    '            Timer_Story_DMX.Interval = 50 * Fac
+    '        ElseIf DMX_Pointer = 54 Then
+    '            DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
+    '            Timer_Story_DMX.Interval = 75 * Fac
+    '        ElseIf DMX_Pointer = 55 Then
+    '            DMX(9, 4, 128, 128, 0, 0, 0, 0, 0) ' Kirche
+    '            'DMX(9, 4, 128, 0, 0, 0, 0, 0, 0) ' Schmiede
+    '            Timer_Story_DMX.Interval = 75 * Fac
+    '        ElseIf DMX_Pointer = 56 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Kirche
+    '            'DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
+    '            Timer_Story_DMX.Interval = 50 * Fac
+    '        ElseIf DMX_Pointer = 57 Then
+    '            'DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
+    '            Timer_Story_DMX.Interval = 50 * Fac
+    '        ElseIf DMX_Pointer = 58 Then
+    '            'DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
+    '            Timer_Story_DMX.Interval = 50 * Fac
+    '        ElseIf DMX_Pointer = 59 Then
+    '            'DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
+    '            Timer_Story_DMX.Interval = 80 * Fac
+    '        ElseIf DMX_Pointer = 60 Then
+    '            'DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' aus
+    '            Timer_Story_DMX.Interval = 70 * Fac
+    '        ElseIf DMX_Pointer = 61 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 128, 0) ' Mühle
+    '            Timer_Story_DMX.Interval = 90 * Fac
+    '        ElseIf DMX_Pointer = 62 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
+    '            DMX_Pointer = 90
 
 
-            ElseIf DMX_Pointer = 80 Then
-                DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Ende
-                DMX_Pointer = 90
+    '        ElseIf DMX_Pointer = 70 Then
+    '            DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte (fest)
+    '            Timer_Story_DMX.Interval = 35 * Fac
+    '        ElseIf DMX_Pointer = 71 Then
+    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
+    '            Timer_Story_DMX.Interval = 80 * Fac
+    '        ElseIf DMX_Pointer = 72 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Ende
+    '            DMX_Pointer = 90
 
-            Else
-                DMX_Pointer = 90
-            End If
-            DMX_Pointer = DMX_Pointer + 1
-            If DMX_Pointer > 90 Then
-                DMX_Pointer = 90
-                Timer_Story_DMX.Interval = 100
-            End If
 
-        Else
-            Timer_Story_DMX.Stop()
-        End If
-    End Sub
-    Private Sub HandleTimerElapsed19(sender As System.Object, e As System.EventArgs) Handles Timer_Story_Film.Elapsed
-        If Me.InvokeRequired Then
-            Me.Invoke(Sub() HandleTimerElapsed19(sender, e))
-            Return
-        End If
+    '        ElseIf DMX_Pointer = 80 Then
+    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Ende
+    '            DMX_Pointer = 90
 
-        Timer_Story_Film.Interval = 400
+    '        Else
+    '            DMX_Pointer = 90
+    '        End If
+    '        DMX_Pointer = DMX_Pointer + 1
+    '        If DMX_Pointer > 90 Then
+    '            DMX_Pointer = 90
+    '            Timer_Story_DMX.Interval = 100
+    '        End If
 
-        If ComboBox1.SelectedIndex = 1 Then
-            If FilmZeile > FilmZeileMax Then
-                FilmZeile = FilmZeileMin
-            End If
-            _daten.write_to_table(AutomatikParameterTableName, 51, FilmZeile)
-            FilmFortschritt = FilmFortschritt + 1
-            If FilmFortschritt > 10 Then
+    '    Else
+    '        Timer_Story_DMX.Stop()
+    '    End If
+    'End Sub
+    'Private Sub HandleTimerElapsed19(sender As System.Object, e As System.EventArgs) Handles Timer_Story_Film.Elapsed
+    '    If Me.InvokeRequired Then
+    '        Me.Invoke(Sub() HandleTimerElapsed19(sender, e))
+    '        Return
+    '    End If
 
-                If FilmZeilenMerker = FilmZeile And FilmSpaltenMerker = FilmSpalte Then
-                Else
-                    FilmFortschritt = 1
-                    StoryText = Betriebsparameter.GetValue("Texte", FilmSpalte, FilmZeile)
+    '    Timer_Story_Film.Interval = 400
 
-                    Film = Betriebsparameter.GetValue("Filme", FilmSpalte, FilmZeile)
-                    If (Film.EndsWith(".MOV")) Or (Film.EndsWith(".MP4")) Then
-                        _kalteHerz.StartVideo(Pfad + Film)
-                        StoryImage = Betriebsparameter.GetValue("Fotos", FilmSpalte, FilmZeile)
-                    ElseIf Film.EndsWith(".jpg") Then
-                        StoryImage = Film
-                    Else
-                        StoryImage = "Anlage_000.jpg"
-                    End If
-                    FilmZeilenMerker = FilmZeile
-                    FilmSpaltenMerker = FilmSpalte
-                End If
-            End If
-            If FilmFortschritt > 20 Then
-                FilmSpalte = FilmSpalte + 1
-                If FilmSpalte > 21 Then
-                    FilmSpalte = 1
-                    FilmZeile = FilmZeile + 1
-                End If
-            End If
-        Else
-            Timer_Story_Film.Stop()
-        End If
-
-    End Sub
+    'End Sub
     Private Sub HandleTimerElapsed20(sender As System.Object, e As System.EventArgs) Handles Timer_Story_Auto.Elapsed
         If _StoryAuto = 1 Then
             StoryProgress(DasKalteHerz.ProgressEvent.StepForward)
@@ -3148,17 +3106,6 @@ Public Class Automatikprogramme
         _dmxServer.SetData(6, L5_aktuell)
         _dmxServer.SetData(7, L6_aktuell)
         _dmxServer.SetData(8, L7_aktuell)
-
-        'If L4_aktuell > 250 Then
-        '    _dmxServer.SetData(1, 0)
-        '    _dmxServer.SetData(2, 0)
-        '    _dmxServer.SetData(3, 0)
-        '    _dmxServer.SetData(4, 0)
-        '    _dmxServer.SetData(6, 0)
-        '    _dmxServer.SetData(7, 0)
-        '    _dmxServer.SetData(8, 0)
-        '    Timer_DMX.Stop()
-        'End If
 
         If L1_aktuell = L1_soll And L2_aktuell = L2_soll And L3_aktuell = L3_soll And L4_aktuell = L4_soll And L5_aktuell = L5_soll And L6_aktuell = L6_soll And L7_aktuell = L7_soll Then
             Timer_DMX.Stop()
@@ -8419,9 +8366,9 @@ Public Class Automatikprogramme
     Private Sub HandleTimerElapsed40(sender As System.Object, e As System.EventArgs) Handles Prog_Lok28.Elapsed
 
         '*** Fahrprogramm für E-Lok 111 095-6
-        '*** Datum: 23.02.2020
+        '*** Datum: 05.10.2025
 
-        SetText(TextBox1, "E-Lok 111 095-6                                                 IBS: 29.12.2020 - V3 : 7")
+        SetText(TextBox1, "E-Lok 111 095-6                                                 IBS: 11.10.2025 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_111_10.jpg")
         GeschwindikeitenSetzen(28)
 
@@ -8548,26 +8495,30 @@ Public Class Automatikprogramme
 
         If _Prog28 = 0 Then
             Prog_Lok28.Interval = 2000
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog28 = 1 Then
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
+            Else
+                _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
-        ElseIf _Prog28 = 1 Then
+        ElseIf _Prog28 = 2 Then
             If _Durchsagen = 1 And (_TypL28 = 1 Or _TypL28 = 3) Then
                 PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
             Else
                 _Prog28 = 7
             End If
-        ElseIf _Prog28 = 2 Then
         ElseIf _Prog28 = 3 Then
         ElseIf _Prog28 = 4 Then
         ElseIf _Prog28 = 5 Then
         ElseIf _Prog28 = 6 Then
         ElseIf _Prog28 = 7 Then
+        ElseIf _Prog28 = 8 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog28 = 8 Then
-            If _AkustischeSignale = 1 Then
+        ElseIf _Prog28 = 9 Then
+            If _AkustischeSignale > 0 Then
                 If _Prog28H = 0 Then
                     _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
                     _Prog28H = 1
@@ -8576,18 +8527,18 @@ Public Class Automatikprogramme
                     _Prog28H = 0
                 End If
             End If
-        ElseIf _Prog28 = 9 Then
         ElseIf _Prog28 = 10 Then
-            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
         ElseIf _Prog28 = 11 Then
-            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
         ElseIf _Prog28 = 12 Then
-            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
         ElseIf _Prog28 = 13 Then
-            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
         ElseIf _Prog28 = 14 Then
-            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
         ElseIf _Prog28 = 15 Then
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
+        ElseIf _Prog28 = 16 Then
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
             ' Lok abstellen
@@ -8633,6 +8584,10 @@ Public Class Automatikprogramme
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog28 = 136 Then
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog28 = 137 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -8651,6 +8606,10 @@ Public Class Automatikprogramme
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog28 = 166 Then
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog28 = 167 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -8665,7 +8624,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog28 = 200 Then
+        ElseIf _Prog28 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok28.Interval = 2000
         ElseIf _Prog28 = 201 Then
@@ -8679,7 +8638,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
         ElseIf _Prog28 = 206 Then
-            If _AkustischeSignale = 1 Then
+            If _AkustischeSignale > 1 Then
                 If _Prog28H = 0 Then
                     _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
                     _Prog28H = 1
@@ -8688,6 +8647,97 @@ Public Class Automatikprogramme
                     _Prog28H = 0
                 End If
             End If
+        ElseIf _Prog28 = 207 Then
+
+        ElseIf _Prog28 = 220 Then ' Kontakt 3.1 -> (bergauf)
+            Prog_Lok28.Interval = 2000
+        ElseIf _Prog28 = 221 Then
+
+        ElseIf _Prog28 = 240 Then ' Kontakt 3.7 <- (bergauf)
+            Prog_Lok28.Interval = 2000
+        ElseIf _Prog28 = 241 Then
+        ElseIf _Prog28 = 242 Then
+        ElseIf _Prog28 = 243 Then
+            If _AkustischeSignale > 1 Then
+                If _Prog28H = 0 Then
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
+                    _Prog28H = 1
+                Else
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+                    _Prog28H = 0
+                End If
+            End If
+        ElseIf _Prog28 = 244 Then
+
+        ElseIf _Prog28 = 260 Then ' Kontakt 3.3
+            Prog_Lok28.Interval = 2000
+        ElseIf _Prog28 = 261 Then
+        ElseIf _Prog28 = 262 Then
+
+        ElseIf _Prog28 = 600 Then ' Kontakt 3.5
+            Prog_Lok28.Interval = 1000
+        ElseIf _Prog28 = 601 Then
+            If _AkustischeSignale > 1 Then
+                If _Prog28H = 0 Then
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
+                    _Prog28H = 1
+                Else
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+                    _Prog28H = 0
+                End If
+            End If
+        ElseIf _Prog28 = 602 Then
+
+        ElseIf _Prog28 = 620 Then ' Kontakt 3.7 -> Talfahrt
+            Prog_Lok28.Interval = 3000
+        ElseIf _Prog28 = 621 Then
+            If _AkustischeSignale > 1 Then
+                If _Prog28H = 0 Then
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
+                    _Prog28H = 1
+                Else
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+                    _Prog28H = 0
+                End If
+            End If
+        ElseIf _Prog28 = 622 Then
+
+        ElseIf _Prog28 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok28.Interval = 2000
+        ElseIf _Prog28 = 641 Then
+        ElseIf _Prog28 = 642 Then
+
+        ElseIf _Prog28 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok28.Interval = 4000
+        ElseIf _Prog28 = 661 Then
+        ElseIf _Prog28 = 662 Then
+        ElseIf _Prog28 = 663 Then
+            If _AkustischeSignale > 1 Then
+                If _Prog28H = 0 Then
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
+                    _Prog28H = 1
+                Else
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+                    _Prog28H = 0
+                End If
+            End If
+        ElseIf _Prog28 = 664 Then
+
+        ElseIf _Prog28 = 700 Then
+            Prog_Lok28.Interval = 4000
+        ElseIf _Prog28 = 701 Then
+        ElseIf _Prog28 = 702 Then
+        ElseIf _Prog28 = 703 Then
+            If _AkustischeSignale > 1 Then
+                If _Prog28H = 0 Then
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
+                    _Prog28H = 1
+                Else
+                    _eb.lokSteuern(28, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+                    _Prog28H = 0
+                End If
+            End If
+        ElseIf _Prog28 = 704 Then
 
             ' Zindelstein
 
@@ -12462,7 +12512,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok V160 028
         '*** Datum: 15.10.2023
 
-        SetText(TextBox1, "Diesel-Lok V160 028                                             IBS: 15.10.2023 - V3 : 8")
+        SetText(TextBox1, "Diesel-Lok V160 028                                             IBS: 11.10.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_160_02.jpg")
         GeschwindikeitenSetzen(42)
 
@@ -12591,11 +12641,15 @@ Public Class Automatikprogramme
             Prog_Lok42.Interval = 2000
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Hauptfunktion, 1)
+            Else
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Hauptfunktion, 0)
             End If
         ElseIf _Prog42 = 1 Then
         ElseIf _Prog42 = 2 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+            Else
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
         ElseIf _Prog42 = 3 Then
         ElseIf _Prog42 = 4 Then
@@ -12603,7 +12657,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion3, 1) ' Kompressor ein
             End If
         ElseIf _Prog42 = 5 Then
-            _eb.lokSteuern(17, Klassen.LokEigenschaften.Funktion3, 0) ' Kompressor aus
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion3, 0) ' Kompressor aus
         ElseIf _Prog42 = 6 Then
         ElseIf _Prog42 = 7 Then
             If _Durchsagen = 1 And (_TypL42 = 1 Or _TypL42 = 3) Then
@@ -12636,10 +12690,7 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 18 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
         ElseIf _Prog42 = 19 Then
-        ElseIf _Prog42 = 20 Then
-        ElseIf _Prog42 = 21 Then
-
-            If _Motor < 2 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
 
@@ -12649,7 +12700,7 @@ Public Class Automatikprogramme
             Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 51 Then
         ElseIf _Prog42 = 52 Then
-            If _Motor < 2 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
         ElseIf _Prog42 = 53 Then
@@ -12681,6 +12732,10 @@ Public Class Automatikprogramme
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog42 = 105 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+        ElseIf _Prog42 = 106 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von links)
 
@@ -12699,6 +12754,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog42 = 136 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog42 = 137 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
+        ElseIf _Prog42 = 138 Then
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -12717,6 +12777,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog42 = 166 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog42 = 167 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
+        ElseIf _Prog42 = 168 Then
 
             ' Rangierzug
 
@@ -12738,12 +12803,112 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 202 Then
         ElseIf _Prog42 = 203 Then
         ElseIf _Prog42 = 204 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+            End If
         ElseIf _Prog42 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog42 = 206 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 207 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe 1 ein
+            End If
+        ElseIf _Prog42 = 208 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe 1 aus
+
+        ElseIf _Prog42 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok42.Interval = 2000
+        ElseIf _Prog42 = 221 Then
+        ElseIf _Prog42 = 222 Then
+        ElseIf _Prog42 = 223 Then
+        ElseIf _Prog42 = 224 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog42 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok42.Interval = 3000
+        ElseIf _Prog42 = 241 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+            End If
+        ElseIf _Prog42 = 242 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 243 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
+            End If
+        ElseIf _Prog42 = 244 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
+
+        ElseIf _Prog42 = 260 Then ' Kontakt 3.3
+            Prog_Lok42.Interval = 2000
+        ElseIf _Prog42 = 261 Then
+        ElseIf _Prog42 = 262 Then
+        ElseIf _Prog42 = 263 Then
+
+        ElseIf _Prog42 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
+            End If
+        ElseIf _Prog42 = 602 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
+        ElseIf _Prog42 = 603 Then
+
+        ElseIf _Prog42 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok42.Interval = 3000
+        ElseIf _Prog42 = 621 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 622 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
+            End If
+        ElseIf _Prog42 = 623 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
+
+        ElseIf _Prog42 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok42.Interval = 2000
+        ElseIf _Prog42 = 641 Then
+        ElseIf _Prog42 = 642 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog42 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok42.Interval = 4000
+        ElseIf _Prog42 = 661 Then
+        ElseIf _Prog42 = 662 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 663 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
+            End If
+        ElseIf _Prog42 = 664 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
+
+        ElseIf _Prog42 = 700 Then
+            Prog_Lok42.Interval = 3000
+        ElseIf _Prog42 = 701 Then
+        ElseIf _Prog42 = 702 Then
+        ElseIf _Prog42 = 703 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+            End If
+        ElseIf _Prog42 = 704 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 705 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
+            End If
+        ElseIf _Prog42 = 706 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
 
             ' Zindelstein
 
@@ -16690,7 +16855,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für bayerische Gattung B VI
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "bayerische B VI ( IBS nein)")
+        SetText(TextBox1, "bayerische B VI ( IBS 16.09.2025)")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_BVI_10.jpg")
         GeschwindikeitenSetzen(57)
 
@@ -16890,6 +17055,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog57 = 136 Then
             _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog57 = 137 Then
+        ElseIf _Prog57 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(57, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -16908,6 +17078,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog57 = 166 Then
             _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog57 = 167 Then
+        ElseIf _Prog57 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(57, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -16969,7 +17144,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für bayerische Gattung B VI
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "bayerische B VI ( IBS nein)")
+        SetText(TextBox1, "bayerische B VI ( IBS 16.09.2025)")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_BVI_01.jpg")
         GeschwindikeitenSetzen(58)
 
@@ -17130,11 +17305,18 @@ Public Class Automatikprogramme
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
         ElseIf _Prog58 = 14 Then
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+        ElseIf _Prog58 = 15 Then
+            Prog_Lok58.Interval = 2000
+        ElseIf _Prog58 = 16 Then
+        ElseIf _Prog58 = 17 Then
+            If _Motor < 2 Then
+                _eb.lokSteuern(58, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
 
             ' Lok abstellen
 
         ElseIf _Prog58 = 50 Then
-            If _Motor < 2 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(58, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
             Prog_Lok58.Interval = 2000
@@ -17163,6 +17345,9 @@ Public Class Automatikprogramme
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von links)
 
         ElseIf _Prog58 = 130 Then
+            If _Motor > 0 Then
+                _eb.lokSteuern(58, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
             Prog_Lok58.Interval = V_130
         ElseIf _Prog58 = 131 Then
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
@@ -17177,6 +17362,16 @@ Public Class Automatikprogramme
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog58 = 136 Then
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+            Prog_Lok58.Interval = 2000
+        ElseIf _Prog58 = 137 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(58, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog58 = 138 Then
+        ElseIf _Prog58 = 139 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(58, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -17195,6 +17390,16 @@ Public Class Automatikprogramme
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog58 = 166 Then
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+            Prog_Lok58.Interval = 2000
+        ElseIf _Prog58 = 167 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(58, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog58 = 168 Then
+        ElseIf _Prog58 = 169 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(58, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -17256,7 +17461,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "Glaskasten" 4541
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok Glaskasten 4541 ( IBS nein)")
+        SetText(TextBox1, "Dampflok Glaskasten 4541 ( IBS 20.09.2025)")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Glas_01.jpg")
         GeschwindikeitenSetzen(59)
 
@@ -17363,7 +17568,7 @@ Public Class Automatikprogramme
         If Stufe23 > Stufe3 Then
             Stufe23 = Stufe3
         End If
-        Stufe24 = Stufe2 + 4
+        Stufe24 = Stufe2 + 5
         If Stufe24 > Stufe3 Then
             Stufe24 = Stufe3
         End If
@@ -17389,32 +17594,29 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(59, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog59 = 1 Then
+            If _Durchsagen = 1 And (_TypL59 = 1 Or _TypL59 = 3) Then
+                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
+            Else
+                _Prog59 = 5
+            End If
         ElseIf _Prog59 = 2 Then
         ElseIf _Prog59 = 3 Then
         ElseIf _Prog59 = 4 Then
         ElseIf _Prog59 = 5 Then
-            If _Durchsagen = 1 And (_TypL59 = 1 Or _TypL59 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog59 = 8
-            End If
-        ElseIf _Prog59 = 6 Then
-        ElseIf _Prog59 = 7 Then
-        ElseIf _Prog59 = 8 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog59 = 9 Then
+        ElseIf _Prog59 = 6 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog59 = 10 Then
+        ElseIf _Prog59 = 7 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog59 = 11 Then
+        ElseIf _Prog59 = 8 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog59 = 12 Then
+        ElseIf _Prog59 = 9 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog59 = 13 Then
+        ElseIf _Prog59 = 10 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog59 = 14 Then
+        ElseIf _Prog59 = 11 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
             ' Lok abstellen
@@ -17460,6 +17662,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog59 = 136 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog59 = 137 Then
+        ElseIf _Prog59 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(59, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -17478,6 +17685,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog59 = 166 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog59 = 167 Then
+        ElseIf _Prog59 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(59, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -19243,7 +19455,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 23 003
         '*** Datum: 17.07.2020
 
-        SetText(TextBox1, "Dampf-Lok 23 003                                                IBS: 26.03.2023 - V3 : 8")
+        SetText(TextBox1, "Dampf-Lok 23 003                                                IBS: 11.10.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_023_03.jpg")
         GeschwindikeitenSetzen(66)
 
@@ -19370,81 +19582,76 @@ Public Class Automatikprogramme
 
         If _Prog66 = 0 Then
             Prog_Lok66.Interval = 2000
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog66 = 1 Then
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
-                SetAutoParaLabel1("Licht ein")
+            Else
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
-            If _Dampf > 0 Then
-                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            End If
-            If _Dampf = 0 Then
-                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
+        ElseIf _Prog66 = 2 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
-            End If
-            If _Motor = 0 Then
+            Else
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
-        ElseIf _Prog66 = 1 Then
-            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
-        ElseIf _Prog66 = 2 Then
-            'If _Dampf > 0 Then
-            '    _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            'End If
         ElseIf _Prog66 = 3 Then
-            'If _Motor > 0 Then
-            '    _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
-            'End If
         ElseIf _Prog66 = 4 Then
         ElseIf _Prog66 = 5 Then
+        ElseIf _Prog66 = 6 Then
+            If _Dampf > 0 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            Else
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog66 = 7 Then
             If _Durchsagen = 1 And (_TypL66 = 1 Or _TypL66 = 3) Then
                 PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
             Else
-                _Prog66 = 7
+                _Prog66 = 9
             End If
-        ElseIf _Prog66 = 6 Then
-        ElseIf _Prog66 = 7 Then
         ElseIf _Prog66 = 8 Then
-            If _AkustischeSignale = 1 Then
+        ElseIf _Prog66 = 9 Then
+        ElseIf _Prog66 = 10 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog66 = 9 Then
+        ElseIf _Prog66 = 11 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
-        ElseIf _Prog66 = 10 Then
+        ElseIf _Prog66 = 12 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog66 = 11 Then
-            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog66 = 12 Then
-            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
         ElseIf _Prog66 = 13 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
+        ElseIf _Prog66 = 14 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
+        ElseIf _Prog66 = 15 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-            If _Dampf < 2 Then
+        ElseIf _Prog66 = 16 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
+        ElseIf _Prog66 = 17 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
+        ElseIf _Prog66 = 18 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+            If _Dampf < 3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
-        ElseIf _Prog66 = 14 Then
-            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog66 = 15 Then
-            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog66 = 16 Then
-            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
-        ElseIf _Prog66 = 17 Then
-            If _Motor < 2 Then
+        ElseIf _Prog66 = 19 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
 
             ' Lok abstellen
 
         ElseIf _Prog66 = 50 Then
-        ElseIf _Prog66 = 51 Then
             Prog_Lok66.Interval = 2000
-            If _Dampf < 2 Then
+        ElseIf _Prog66 = 51 Then
+            If _Dampf < 3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
         ElseIf _Prog66 = 52 Then
-            If _Motor < 2 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
         ElseIf _Prog66 = 53 Then
@@ -19458,9 +19665,6 @@ Public Class Automatikprogramme
             Prog_Lok66.Interval = V_100
             If _Motor > 0 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
-            End If
-            If _Dampf > 0 Then
-                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
         ElseIf _Prog66 = 101 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
@@ -19492,6 +19696,19 @@ Public Class Automatikprogramme
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog66 = 136 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog66 = 137 Then
+            Prog_Lok66.Interval = 1000
+            If _Dampf < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog66 = 138 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            End If
+        ElseIf _Prog66 = 139 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -19510,6 +19727,19 @@ Public Class Automatikprogramme
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog66 = 166 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog66 = 167 Then
+            Prog_Lok66.Interval = 1000
+            If _Dampf < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog66 = 168 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            End If
+        ElseIf _Prog66 = 169 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -19526,17 +19756,130 @@ Public Class Automatikprogramme
 
         ElseIf _Prog66 = 200 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
-            Prog_Lok66.Interval = 2000
+            Prog_Lok66.Interval = 3000
         ElseIf _Prog66 = 201 Then
         ElseIf _Prog66 = 202 Then
         ElseIf _Prog66 = 203 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
         ElseIf _Prog66 = 204 Then
+            Prog_Lok66.Interval = 1000
         ElseIf _Prog66 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog66 = 206 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog66 = 207 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog66 = 208 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+
+        ElseIf _Prog66 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok66.Interval = 3000
+        ElseIf _Prog66 = 221 Then
+        ElseIf _Prog66 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog66 = 222 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog66 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok66.Interval = 3000
+        ElseIf _Prog66 = 241 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog66 = 242 Then
+            Prog_Lok66.Interval = 1000
+        ElseIf _Prog66 = 243 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog66 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog66 = 245 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+        ElseIf _Prog66 = 246 Then
+
+        ElseIf _Prog66 = 260 Then ' Kontakt 3.3
+            Prog_Lok66.Interval = 2000
+        ElseIf _Prog66 = 261 Then
+        ElseIf _Prog66 = 262 Then
+        ElseIf _Prog66 = 263 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+
+        ElseIf _Prog66 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok66.Interval = 1000
+        ElseIf _Prog66 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog66 = 602 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog66 = 603 Then
+
+        ElseIf _Prog66 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok66.Interval = 3000
+        ElseIf _Prog66 = 621 Then
+            Prog_Lok66.Interval = 1000
+        ElseIf _Prog66 = 622 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog66 = 623 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog66 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok66.Interval = 2000
+        ElseIf _Prog66 = 641 Then
+        ElseIf _Prog66 = 642 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog66 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok66.Interval = 4000
+        ElseIf _Prog66 = 661 Then
+        ElseIf _Prog66 = 662 Then
+            Prog_Lok66.Interval = 1000
+        ElseIf _Prog66 = 663 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog66 = 664 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
+
+        ElseIf _Prog66 = 700 Then
+            Prog_Lok66.Interval = 3000
+        ElseIf _Prog66 = 701 Then
+        ElseIf _Prog66 = 702 Then
+        ElseIf _Prog66 = 703 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog66 = 704 Then
+            Prog_Lok66.Interval = 1000
+        ElseIf _Prog66 = 705 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog66 = 706 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
 
             ' Zindelstein
 
@@ -21056,6 +21399,14 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
 
+        ElseIf _Prog71 = 220 Then
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 221 Then
+
+        ElseIf _Prog71 = 700 Then
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 701 Then
+
             ' Zindelstein
 
         ElseIf _Prog71 = 500 Then
@@ -21925,7 +22276,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 24 058
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 24 058                                               IBS: 03.08.2021 - V3 : 10")
+        SetText(TextBox1, "Dampflok 24 058                                               IBS: 08.10.2025 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_24_01.jpg")
         GeschwindikeitenSetzen(75)
 
@@ -22167,6 +22518,15 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+
+        ElseIf _Prog75 = 220 Then
+            Prog_Lok75.Interval = 2000
+        ElseIf _Prog75 = 221 Then
+
+        ElseIf _Prog75 = 700 Then
+            Prog_Lok75.Interval = 2000
+        ElseIf _Prog75 = 701 Then
+
 
             ' Zindelstein
 
@@ -23666,6 +24026,14 @@ Public Class Automatikprogramme
             End If
         End If
     End Sub
+    Private Sub HandleTimerElapsed97(sender As System.Object, e As System.EventArgs) Handles Delay_Automatik_110.Elapsed
+        Delay_Automatik_110.Stop()
+        AutomatikParameter = 110
+    End Sub
+    Private Sub HandleTimerElapsed98(sender As System.Object, e As System.EventArgs) Handles Delay_Automatik_210.Elapsed
+        Delay_Automatik_210.Stop()
+        AutomatikParameter = 210
+    End Sub
 
     ' *** Kontakt 0.0 false - Bahnhofsausfahrt
     Private Sub BahnhofsausfahrtLok1(Kontakt)
@@ -23678,7 +24046,6 @@ Public Class Automatikprogramme
             '    End If
             'End If
             AutomatikParameter = 101
-            FilmSpalte = 18
         End If
     End Sub
     ' *** Kontakt 0.2 false
@@ -23692,7 +24059,6 @@ Public Class Automatikprogramme
             '    End If
             'End If
             AutomatikParameter = 201
-            FilmSpalte = 18
         End If
     End Sub
     ' *** Kontakt 1.6 false
@@ -23706,7 +24072,6 @@ Public Class Automatikprogramme
                 End If
             End If
             AutomatikParameter = 301
-            FilmSpalte = 19
         End If
     End Sub
     ' *** Kontakt 1.4 false
@@ -23720,7 +24085,6 @@ Public Class Automatikprogramme
                 End If
             End If
             AutomatikParameter = 401
-            FilmSpalte = 19
         End If
     End Sub
 
@@ -23807,7 +24171,6 @@ Public Class Automatikprogramme
                 Timer_EinzelLok4.Start()
             End If
         End If
-        FilmSpalte = 12
     End Sub
     Private Sub NurUntenLok2(Kontakt)
         If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 201 Then
@@ -23890,7 +24253,6 @@ Public Class Automatikprogramme
                 Timer_EinzelLok4.Interval = NumericUpDown4.Value * 1000
                 Timer_EinzelLok4.Start()
             End If
-            FilmSpalte = 12
         End If
     End Sub
     ' *** Kontakt 1.3 true  -  Nur Unten
@@ -23966,7 +24328,6 @@ Public Class Automatikprogramme
                 Timer_EinzelLok4.Interval = NumericUpDown4.Value * 1000
                 Timer_EinzelLok4.Start()
             End If
-            FilmSpalte = 14
         End If
     End Sub
     Private Sub NurUntenLok4(Kontakt)
@@ -24041,43 +24402,34 @@ Public Class Automatikprogramme
                 Timer_EinzelLok4.Interval = Warte4SB
                 Timer_EinzelLok4.Start()
             End If
-            FilmSpalte = 14
         End If
     End Sub
 
     ' *** Kontakt 0.4 true Diagonale  -->
     Private Sub ObenKurzLok1(Kontakt)
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 101 Then
-            AutomatikParameter = 110
+            'AutomatikParameter = 110
+            Delay_Automatik_110.Interval = 9000
+            Delay_Automatik_110.Start()
+            AutomatikParameter = 102
             Ort_Lok1 = 110
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
                 Timer_Kamera0.Interval = 9000
                 Timer_Kamera0.Start()
             End If
-            If ComboBox1.SelectedIndex = 1 Then
-                Film = Betriebsparameter.GetValue("Filme", 10, FilmZeile)
-                If (Film.EndsWith(".MOV")) Or (Film.EndsWith(".MP4")) Then
-                    _kalteHerz.StartVideo(Pfad + Film)
-                End If
-            End If
-            FilmSpalte = 10
         End If
     End Sub
     Private Sub ObenKurzLok2(Kontakt)
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 201 Then
-            AutomatikParameter = 210
+            'AutomatikParameter = 210
+            Delay_Automatik_210.Interval = 9000
+            Delay_Automatik_210.Start()
+            AutomatikParameter = 202
             Ort_Lok2 = 210
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
                 Timer_Kamera0.Interval = 9000
                 Timer_Kamera0.Start()
             End If
-            If ComboBox1.SelectedIndex = 1 Then
-                Film = Betriebsparameter.GetValue("Filme", 10, FilmZeile)
-                If (Film.EndsWith(".MOV")) Or (Film.EndsWith(".MP4")) Then
-                    _kalteHerz.StartVideo(Pfad + Film)
-                End If
-            End If
-            FilmSpalte = 10
         End If
     End Sub
     Private Sub ObenLang104Lok3()
@@ -24108,18 +24460,18 @@ Public Class Automatikprogramme
             Timer_EinzelLok1.Interval = Warte1DI
             Timer_EinzelLok1.Start()
         End If
-        If _GleisFrei2 = 1 And Betriebsart12 = 1 And Betriebsart34 = 0 Then
-            _eb.weicheSchalten(19, Klassen.WeichenRichtung.rechts)
-            _eb.weicheSchalten(21, Klassen.WeichenRichtung.links)
-        End If
-        If _GleisFrei3 = 1 And Betriebsart12 = 1 And Betriebsart34 = 0 Then
-            _eb.weicheSchalten(14, Klassen.WeichenRichtung.rechts)
-            _eb.weicheSchalten(20, Klassen.WeichenRichtung.links)
-        End If
-        If _GleisFrei4 = 1 And Betriebsart12 = 1 And Betriebsart34 = 0 Then
-            _eb.weicheSchalten(14, Klassen.WeichenRichtung.rechts)
-            _eb.weicheSchalten(20, Klassen.WeichenRichtung.rechts)
-        End If
+        'If _GleisFrei2 = 1 And Betriebsart12 = 1 And Betriebsart34 = 0 Then
+        '    _eb.weicheSchalten(19, Klassen.WeichenRichtung.rechts)
+        '    _eb.weicheSchalten(21, Klassen.WeichenRichtung.links)
+        'End If
+        'If _GleisFrei3 = 1 And Betriebsart12 = 1 And Betriebsart34 = 0 Then
+        '    _eb.weicheSchalten(14, Klassen.WeichenRichtung.rechts)
+        '    _eb.weicheSchalten(20, Klassen.WeichenRichtung.links)
+        'End If
+        'If _GleisFrei4 = 1 And Betriebsart12 = 1 And Betriebsart34 = 0 Then
+        '    _eb.weicheSchalten(14, Klassen.WeichenRichtung.rechts)
+        '    _eb.weicheSchalten(20, Klassen.WeichenRichtung.rechts)
+        'End If
         If Weiche14schalten = True Then
             _eb.weicheSchalten(14, Klassen.WeichenRichtung.links)
         End If
@@ -24169,14 +24521,13 @@ Public Class Automatikprogramme
                 Button83.BackColor = Drawing.Color.Red
                 Timer_EinzelLok3.Interval = Warte3DI
                 Timer_EinzelLok3.Start()
+            Else
+                Zug3(700)
             End If
-            If ComboBox1.SelectedIndex = 1 Then
-                Film = Betriebsparameter.GetValue("Filme", 10, FilmZeile)
-                If (Film.EndsWith(".MOV")) Or (Film.EndsWith(".MP4")) Then
-                    _kalteHerz.StartVideo(Pfad + Film)
-                End If
+            If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
+                Timer_Kamera1.Interval = 100
+                Timer_Kamera1.Start()
             End If
-            FilmSpalte = 10
         End If
     End Sub
     Private Sub ObenKurzLok4(Kontakt)
@@ -24194,14 +24545,13 @@ Public Class Automatikprogramme
                 Button84.BackColor = Drawing.Color.Red
                 Timer_EinzelLok4.Interval = Warte4DI
                 Timer_EinzelLok4.Start()
+            Else
+                Zug4(700)
             End If
-            If ComboBox1.SelectedIndex = 1 Then
-                Film = Betriebsparameter.GetValue("Filme", 10, FilmZeile)
-                If (Film.EndsWith(".MOV")) Or (Film.EndsWith(".MP4")) Then
-                    _kalteHerz.StartVideo(Pfad + Film)
-                End If
+            If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
+                Timer_Kamera1.Interval = 100
+                Timer_Kamera1.Start()
             End If
-            FilmSpalte = 10
         End If
     End Sub
 
@@ -25247,7 +25597,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 111
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 5000
+            Timer_Kamera1.Interval = 3500
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25264,7 +25614,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 211
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 5000
+            Timer_Kamera1.Interval = 3500
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25281,7 +25631,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 311
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 5000
+            Timer_Kamera1.Interval = 3500
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25298,7 +25648,7 @@ Public Class Automatikprogramme
 
         AutomatikParameter = 411
         If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
-            Timer_Kamera1.Interval = 5000
+            Timer_Kamera1.Interval = 3500
             Timer_Kamera1.Start()
         End If
     End Sub
@@ -25346,7 +25696,7 @@ Public Class Automatikprogramme
                 Timer_EinzelLok1.Start()
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 3000
+                Timer_Kamera0.Interval = 1000
                 Timer_Kamera0.Start()
             End If
         End If
@@ -25386,10 +25736,11 @@ Public Class Automatikprogramme
                 Timer_EinzelLok2.Start()
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 3000
+                Timer_Kamera0.Interval = 1000
                 Timer_Kamera0.Start()
             End If
         End If
+        Zug2(660)
     End Sub
     Private Sub Bergfahrt112Lok3()
         Ort_Lok3 = 313
@@ -25423,7 +25774,7 @@ Public Class Automatikprogramme
                 End If
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 3000
+                Timer_Kamera0.Interval = 1000
                 Timer_Kamera0.Start()
             End If
         ElseIf Talstrecke_Gleis3 = 1 Then
@@ -25486,7 +25837,7 @@ Public Class Automatikprogramme
                 End If
             End If
             If _Kamera = 3 And _aktuelleKamera <> Forbach Then
-                Timer_Kamera0.Interval = 3000
+                Timer_Kamera0.Interval = 1000
                 Timer_Kamera0.Start()
             End If
         ElseIf Talstrecke_Gleis4 = 1 Then
@@ -28369,23 +28720,19 @@ Public Class Automatikprogramme
     Private Sub ObenLangLok1(Kontakt)
         If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 101 Then
             ObenLang101Lok1()
-            FilmSpalte = 13
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 102 Then
             ObenLang102Lok1()
-            FilmSpalte = 11
         End If
         If _GleisFrei2 = 0 And _GleisFrei3 = 0 And _GleisFrei4 = 0 Then
             If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And AutomatikParameter = 103 Then
                 ObenLang103Lok1()
-                FilmSpalte = 17
             End If
             If Kontakt.Modul = 0 And Kontakt.Adresse = 1 And Kontakt.status = True And _AutomatikParameterH = 104 Then
                 ObenLang104Lok1()
             End If
             If Kontakt.Modul = 0 And Kontakt.Adresse = 1 And Kontakt.status = False And AutomatikParameter = 106 Then
                 ObenLang105Lok1()
-                FilmSpalte = 19
             End If
         ElseIf _GleisFrei2 = 1 Then
             If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 103 Then
@@ -28422,64 +28769,52 @@ Public Class Automatikprogramme
     Private Sub ObenLangLok2(Kontakt)
         If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 201 Then
             ObenLang101Lok2()
-            FilmSpalte = 13
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 202 Then
             ObenLang102Lok2()
-            FilmSpalte = 11
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 203 Then
             ObenLang103Lok2()
-            FilmSpalte = 17
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = True And _AutomatikParameterH = 204 Then
             ObenLang104Lok2()
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = False And AutomatikParameter = 206 Then
             ObenLang105Lok2()
-            FilmSpalte = 19
         End If
     End Sub
     Private Sub ObenLangLok3(Kontakt)
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And AutomatikParameter = 317 And _AutomatikParameterH <> 318 Then
             ObenLang101Lok3()
-            FilmSpalte = 16
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = True And _AutomatikParameterH = 318 Then
             ObenLang102Lok3()
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = False And AutomatikParameter = 305 Then
             ObenLang103Lok3()
-            FilmSpalte = 18
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 306 Then
             ObenLang104Lok3()
-            FilmSpalte = 11
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 307 Then
             ObenLang105Lok3()
-            FilmSpalte = 15
         End If
     End Sub
     Private Sub ObenLangLok4(Kontakt)
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 417 And _AutomatikParameterH <> 418 Then
             ObenLang101Lok4()
-            FilmSpalte = 16
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 5 And Kontakt.status = True And _AutomatikParameterH = 418 Then
             ObenLang102Lok4()
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 405 Then
             ObenLang103Lok4()
-            FilmSpalte = 18
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 406 Then
             ObenLang104Lok4()
-            FilmSpalte = 11
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 407 Then
             ObenLang105Lok4()
-            FilmSpalte = 12
         End If
     End Sub
 
@@ -28494,10 +28829,9 @@ Public Class Automatikprogramme
             Bergfahrt110Lok1()
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 1
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 1
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 111 Then
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
@@ -28505,32 +28839,32 @@ Public Class Automatikprogramme
                 SetText(Button13, "Burg Windeck")
                 _aktuelleKamera = Windeck
             End If
+            Zug1(220)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 10
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 112
-            FilmSpalte = 2
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 112 Then
+            Zug1(240)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 14
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 112
-            FilmSpalte = 3
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 112 Then
             _LokStufen.EinzelLokSenden(1, 3)
+            Zug1(260)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 30
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 113
-            FilmSpalte = 4
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 113 Then
             Ort_Lok1 = 112
@@ -28551,10 +28885,9 @@ Public Class Automatikprogramme
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 40
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 5
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 114 Then
             If _StopZug1 = 1 Then
@@ -28565,13 +28898,14 @@ Public Class Automatikprogramme
             AutomatikParameter = 115
             If _StopZug1 > 0 Then
                 StopZug1()
+            Else
+                Zug1(600)
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 51
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 6
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 115 And _StopZug1 = 0 Then
             AutomatikParameter = 115
@@ -28589,7 +28923,7 @@ Public Class Automatikprogramme
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 115 Then
-            FilmSpalte = 7
+            Zug1(620)
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 115 Then
             If Talstrecke_Gleis1 > 0 Then
@@ -28600,22 +28934,21 @@ Public Class Automatikprogramme
                 SetText(Button13, "Marxzell")
                 _aktuelleKamera = Marxzel
             End If
+            Zug1(640)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 70
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 116
-            FilmSpalte = 8
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 116 Or AutomatikParameter = 112) Then
             Bergfahrt112Lok1()
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 80
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 9
         End If
     End Sub
     Private Sub BergfahrtLok2(ByVal Kontakt As Klassen.Kontakt)
@@ -28629,10 +28962,9 @@ Public Class Automatikprogramme
             Bergfahrt110Lok2()
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 1
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 1
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 211 Then
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
@@ -28640,32 +28972,32 @@ Public Class Automatikprogramme
                 SetText(Button13, "Burg Windeck")
                 _aktuelleKamera = Windeck
             End If
+            Zug2(220)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 10
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 212
-            FilmSpalte = 2
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 212 Then
+            Zug2(240)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 14
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 212
-            FilmSpalte = 3
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 212 Then
             _LokStufen.EinzelLokSenden(2, 3)
+            Zug2(260)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 30
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 213
-            FilmSpalte = 4
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 213 Then
             Ort_Lok2 = 212
@@ -28686,10 +29018,9 @@ Public Class Automatikprogramme
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 40
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 5
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 214 Then
             If _StopZug2 = 1 Then
@@ -28700,13 +29031,14 @@ Public Class Automatikprogramme
             AutomatikParameter = 215
             If _StopZug2 > 0 Then
                 StopZug2()
+            Else
+                Zug2(600)
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 51
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 6
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 215 And _StopZug2 = 0 Then
             AutomatikParameter = 215
@@ -28724,7 +29056,7 @@ Public Class Automatikprogramme
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 215 Then
-            FilmSpalte = 7
+            Zug2(620)
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 215 Then
             If Talstrecke_Gleis2 > 0 Then
@@ -28735,22 +29067,21 @@ Public Class Automatikprogramme
                 SetText(Button13, "Marxzell")
                 _aktuelleKamera = Marxzel
             End If
+            Zug2(640)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 70
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 216
-            FilmSpalte = 8
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 216 Or AutomatikParameter = 212) Then
             Bergfahrt112Lok2()
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 80
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 9
         End If
     End Sub
     Private Sub BergfahrtLok3(ByVal Kontakt As Klassen.Kontakt)
@@ -28764,12 +29095,12 @@ Public Class Automatikprogramme
             Bergfahrt110Lok3()
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 1
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 1
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 311 Then
+            Zug3(220)
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
                 _Webcams.SetWebcam(0, Windeck)
                 SetText(Button13, "Burg Windeck")
@@ -28777,30 +29108,29 @@ Public Class Automatikprogramme
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 10
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 312
-            FilmSpalte = 2
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 312 Then
+            Zug3(240)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 14
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 312
-            FilmSpalte = 3
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 312 Then
             _LokStufen.EinzelLokSenden(3, 3)
+            Zug3(260)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 30
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 313
-            FilmSpalte = 4
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 313 Then
             Ort_Lok3 = 312
@@ -28821,10 +29151,9 @@ Public Class Automatikprogramme
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 40
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 5
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 314 Then
             If _StopZug3 = 1 Then
@@ -28835,13 +29164,14 @@ Public Class Automatikprogramme
             AutomatikParameter = 315
             If _StopZug3 > 0 Then
                 StopZug3()
+            Else
+                Zug3(600)
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 51
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 6
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 315 And _StopZug3 = 0 Then
             AutomatikParameter = 315
@@ -28859,7 +29189,7 @@ Public Class Automatikprogramme
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 315 Then
-            FilmSpalte = 7
+            Zug3(620)
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 315 Then
             If Talstrecke_Gleis3 > 0 Then
@@ -28870,22 +29200,22 @@ Public Class Automatikprogramme
                 SetText(Button13, "Marxzell")
                 _aktuelleKamera = Marxzel
             End If
+            Zug3(640)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 70
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 316
-            FilmSpalte = 8
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 316 Or AutomatikParameter = 312) Then
             Bergfahrt112Lok3()
+            Zug3(660)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 80
-                Timer_Story_DMX.Interval() = 100
-                Timer_Story_DMX.Start()
+                'Timer_Story_DMX.Interval() = 100
+                'Timer_Story_DMX.Start()
             End If
-            FilmSpalte = 9
         End If
     End Sub
     Private Sub BergfahrtLok4(ByVal Kontakt As Klassen.Kontakt)
@@ -28897,28 +29227,27 @@ Public Class Automatikprogramme
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 401 Then
             Bergfahrt110Lok4()
-            FilmSpalte = 1
             DMX_Pointer = 1
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 411 Then
+            Zug4(220)
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
                 _Webcams.SetWebcam(0, Windeck)
                 SetText(Button13, "Burg Windeck")
                 _aktuelleKamera = Windeck
             End If
             AutomatikParameter = 412
-            FilmSpalte = 2
             DMX_Pointer = 10
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 412 Then
+            Zug4(240)
             AutomatikParameter = 412
-            FilmSpalte = 3
             DMX_Pointer = 14
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 412 Then
             _LokStufen.EinzelLokSenden(4, 3)
+            Zug4(260)
             AutomatikParameter = 413
-            FilmSpalte = 4
             DMX_Pointer = 30
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 413 Then
@@ -28938,7 +29267,6 @@ Public Class Automatikprogramme
                 Timer_EinzelLok4.Interval = Warte4BA
                 Timer_EinzelLok4.Start()
             End If
-            FilmSpalte = 5
             DMX_Pointer = 40
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 414 Then
@@ -28950,8 +29278,9 @@ Public Class Automatikprogramme
             AutomatikParameter = 415
             If _StopZug4 > 0 Then
                 StopZug4()
+            Else
+                Zug4(600)
             End If
-            FilmSpalte = 6
             DMX_Pointer = 51
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 415 And _StopZug4 = 0 Then
@@ -28970,24 +29299,24 @@ Public Class Automatikprogramme
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 415 Then
-            FilmSpalte = 7
+            Zug4(620)
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 415 Then
             If Talstrecke_Gleis4 > 0 Then
                 _eb.weicheSchalten(12, Klassen.WeichenRichtung.rechts)
             End If
+            Zug4(640)
             If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
                 _Webcams.SetWebcam(0, Marxzel)
                 SetText(Button13, "Marxzell")
                 _aktuelleKamera = Marxzel
             End If
             AutomatikParameter = 416
-            FilmSpalte = 8
             DMX_Pointer = 70
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 416 Or AutomatikParameter = 412) Then
             Bergfahrt112Lok4()
-            FilmSpalte = 9
+            Zug4(660)
             DMX_Pointer = 80
         End If
     End Sub
@@ -29700,8 +30029,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -29745,13 +30072,6 @@ Public Class Automatikprogramme
         BergfahrtLok3(Kontakt)
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And AutomatikParameter = 317 And _AutomatikParameterH <> 318 Then
             ObenLang101Lok3()
-            If ComboBox1.SelectedIndex = 1 Then
-                StoryText = Betriebsparameter.GetValue("Texte", 16, FilmZeile)
-                Film = Betriebsparameter.GetValue("Filme", 16, FilmZeile)
-                If (Film.EndsWith(".MOV")) Or (Film.EndsWith(".MP4")) Then
-                    _kalteHerz.StartVideo(Pfad + Film)
-                End If
-            End If
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = True And _AutomatikParameterH = 318 Then
             ObenLang102Lok3()
@@ -29761,13 +30081,11 @@ Public Class Automatikprogramme
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 306 Then
             ObenLang104Lok3()
-            FilmSpalte = 11
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 307 Then
             'ObenLang105Lok3()
             AutomatikParameter = 320
             Ort_Lok3 = 320
-            FilmSpalte = 15
         End If
 
         ' ***
@@ -29790,8 +30108,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -29867,8 +30183,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -29911,11 +30225,6 @@ Public Class Automatikprogramme
         BergfahrtLok4(Kontakt)
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 417 And _AutomatikParameterH <> 418 Then
             ObenLang101Lok4()
-            If ComboBox1.SelectedIndex = 1 Then
-                StoryText = Betriebsparameter.GetValue("Texte", 16, FilmZeile)
-                Film = Betriebsparameter.GetValue("Filme", 16, FilmZeile)
-                _kalteHerz.StartVideo(Pfad + Film)
-            End If
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 5 And Kontakt.status = True And _AutomatikParameterH = 418 Then
             ObenLang102Lok4()
@@ -29925,13 +30234,11 @@ Public Class Automatikprogramme
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 406 Then
             ObenLang104Lok4()
-            FilmSpalte = 11
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 407 Then
             'ObenLang105Lok4()
             AutomatikParameter = 420
             Ort_Lok4 = 420
-            FilmSpalte = 15
         End If
 
         ' ***
@@ -29954,8 +30261,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -30033,8 +30338,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -30100,8 +30403,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             Ort_Lok4 = 400
@@ -30142,14 +30443,12 @@ Public Class Automatikprogramme
         ' *** Bahnhofsausfahrt Lok3 und Lok4
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = False And AutomatikParameter = 300 Then
             AutomatikParameter = 301
-            FilmSpalte = 19
             Talstrecke_Gleis3 = 0
             Talstrecke_Gleis4 = 0
             ButtonsVisible(999)
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 300 Then
             AutomatikParameter = 301
-            FilmSpalte = 19
             Talstrecke_Gleis3 = 4
             Talstrecke_Gleis4 = 3
             Button83.Text = "Wechsel > 4"
@@ -30168,7 +30467,6 @@ Public Class Automatikprogramme
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 400 Then
             AutomatikParameter = 401
-            FilmSpalte = 19
         End If
 
         BergfahrtLok3(Kontakt)
@@ -30176,7 +30474,6 @@ Public Class Automatikprogramme
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And AutomatikParameter = 317 And _AutomatikParameterH <> 318 Then
             ObenLang101Lok3()
-            FilmSpalte = 16
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = True And _AutomatikParameterH = 318 Then
             ObenLang102Lok3()
@@ -30187,20 +30484,17 @@ Public Class Automatikprogramme
             Else
                 AutomatikParameter = 306
             End If
-            FilmSpalte = 18
         End If
 
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And AutomatikParameter = 417 And _AutomatikParameterH <> 418 Then
             ObenLang101Lok4()
-            FilmSpalte = 16
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = True And _AutomatikParameterH = 418 Then
             ObenLang102Lok4()
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = False And AutomatikParameter = 405 Then
             AutomatikParameter = 406
-            FilmSpalte = 18
         End If
 
 
@@ -30271,8 +30565,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -30320,8 +30612,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             Ort_Lok4 = 400
@@ -30398,8 +30688,98 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
+            If _StopZug1 = 0 And A_StopH = 0 Then
+                ' Weichen 17 und 27 müssen nicht geschaltet werden (Betriebsart12 = 1 und Betriebsart34 =0)
+                AutomatikParameter = 100
+            Else
+                If _NachlaufZug1 = False Then
+                    StopZug1()
+                    Zug1(abstellen)
+                Else
+                    Zug1(nachlauf)
+                End If
+            End If
+            _AutomatikParameterH = 0
+        End If
+    End Sub
+    Private Sub Betriebsart1_0Var1(ByVal Kontakt As Klassen.Kontakt)
+        ' *** Betriebsart 1/2=1 und ' *** Betriebsart 3/4=0
+        ' ***
+        ' *** Datum:          21.04.2025
+        ' ***
+        ' *** steuert die Fahrt des Zuges auf Gleis 1
+        ' ***                
+        ' ***                       
+        ' ***
+        ' ***
+
+        ' ***
+        ' *** Bahnhofsausfahrt Zug auf Gleis 1
+        ' ***
+
+        BahnhofsausfahrtLok1(Kontakt)
+
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 101 Then
+            'AutomatikParameter = 110
+            Delay_Automatik_110.Interval = 9000
+            Delay_Automatik_110.Start()
+            Ort_Lok1 = 110
+            If _Kamera = 3 And _aktuelleKamera <> Forbach Then
+                Timer_Kamera0.Interval = 9000
+                Timer_Kamera0.Start()
+            End If
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 110 Then
+            AutomatikParameter = 103
+            Ort_Lok1 = 111
+        End If
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 103 Then
+            ObenLang103Lok1()
+        End If
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 104 Then
+            ObenLang104Lok1()
+        End If
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = False And AutomatikParameter = 106 Then
+            ObenLang105Lok1()
+        End If
+        BergfahrtLok1(Kontakt)
+        'If _Route_Gleis1 = 0 Then     ' *** Route "nur unten"
+
+        '    NurUntenLok1(Kontakt)
+
+        'ElseIf _Route_Gleis1 = 1 Then ' *** Route "oben kurz"
+
+        '    ObenKurzLok1(Kontakt)
+        '    BergfahrtLok1(Kontakt)
+
+        'ElseIf _Route_Gleis1 = 2 Then ' *** Route "oben lang"
+
+        '    ObenLangLok1(Kontakt)
+        '    BergfahrtLok1(Kontakt)
+
+        'End If
+        ' ***
+        ' *** Ankunft im Bahnhof
+        ' ***
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 120 Then
+            Ort_Lok1 = 100
+            _AutomatikParameterH = 121
+            If A_Stop = 0 Then
+                A_StopH = 0
+                If _Bhf_Gleis1 = 0 Then
+                    _StopZug1 = 0
+                    AutomatikParameter = 121
+                Else
+                    _StopZug1 = 1
+                    StopStart120Lok(1, 1)
+                End If
+            Else
+                A_StopH = 1
+                _StopZug1 = 1
+                StopStart120Lok(1, 1)
+            End If
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             If _StopZug1 = 0 And A_StopH = 0 Then
@@ -30471,8 +30851,6 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             If _StopZug1 = 0 And A_StopH = 0 Then
@@ -30544,8 +30922,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -30630,8 +31006,6 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             Ort_Lok1 = 100
@@ -30704,8 +31078,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -30788,8 +31160,6 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             If _StopZug1 = 0 And A_StopH = 0 Then
@@ -30856,8 +31226,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -30923,8 +31291,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -31002,8 +31368,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart120Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             If _StopZug2 = 0 And A_StopH = 0 Then
@@ -31074,8 +31438,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart120Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             If _StopZug2 = 0 And A_StopH = 0 Then
@@ -31148,8 +31510,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -31231,8 +31591,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart120Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             If _StopZug2 = 0 And A_StopH = 0 Then
@@ -31305,8 +31663,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -31392,8 +31748,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart121Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             If _StopZug2 = 0 And A_StopH = 0 Then
@@ -31468,8 +31822,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart121Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -31543,8 +31895,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart121Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -31628,8 +31978,6 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             If _StopZug1 = 0 And A_StopH = 0 Then
@@ -31704,8 +32052,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart120Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             Ort_Lok2 = 200
@@ -31791,8 +32137,6 @@ Public Class Automatikprogramme
             Button71.BackColor = Drawing.Color.Red
             Timer_EinzelLok1.Interval = NumericUpDown1.Value * 1000
             Timer_EinzelLok1.Start()
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 104 Then
             StopZug1()
@@ -31861,8 +32205,6 @@ Public Class Automatikprogramme
             Button72.BackColor = Drawing.Color.Red
             Timer_EinzelLok2.Interval = NumericUpDown2.Value * 1000
             Timer_EinzelLok2.Start()
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 204 Then
             StopZug2()
@@ -31965,8 +32307,6 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             If _StopZug1 = 0 And A_StopH = 0 Then
@@ -32049,8 +32389,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart120Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             If _StopZug2 = 0 And A_StopH = 0 Then
@@ -32133,8 +32471,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -32225,8 +32561,6 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             If _StopZug1 = 0 And A_StopH = 0 Then
@@ -32299,8 +32633,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart120Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             If _StopZug2 = 0 And A_StopH = 0 Then
@@ -32372,8 +32704,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -32459,8 +32789,6 @@ Public Class Automatikprogramme
                 _StopZug1 = 1
                 StopStart120Lok(1, 1)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
             If _StopZug1 = 0 And A_StopH = 0 Then
@@ -32537,8 +32865,6 @@ Public Class Automatikprogramme
                 _StopZug2 = 2
                 StopStart120Lok(2, 2)
             End If
-            FilmSpalte = 16
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And _AutomatikParameterH = 221 Then
             If _StopZug2 = 0 And A_StopH = 0 Then
@@ -32615,8 +32941,6 @@ Public Class Automatikprogramme
                 _StopZug3 = 3
                 StopStart120Lok(3, 3)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 321 Then
             If _StopZug3 = 0 And A_StopH = 0 Then
@@ -32692,8 +33016,6 @@ Public Class Automatikprogramme
                 _StopZug4 = 4
                 StopStart120Lok(4, 4)
             End If
-            FilmSpalte = 17
-            FilmZeile = FilmZeile + 1
         End If
         If Kontakt.Modul = 1 And Kontakt.Adresse = 4 And Kontakt.status = True And _AutomatikParameterH = 421 Then
             If _StopZug4 = 0 And A_StopH = 0 Then
@@ -33057,7 +33379,12 @@ Public Class Automatikprogramme
                 End If
 
                 If Betriebsart12 = 1 And Betriebsart34 = 0 Then
-                    Betriebsart1_0(Kontakt)
+                    'Betriebsart1_0(Kontakt)
+                    If _Betriebsart1_0Var = 1 Then
+                        Betriebsart1_0Var1(Kontakt)
+                    Else
+                        Betriebsart1_0(Kontakt)
+                    End If
                 End If
 
                 If Betriebsart12 = 1 And Betriebsart34 = 3 Then
@@ -34418,25 +34745,104 @@ Public Class Automatikprogramme
 
         If ComboBox1.SelectedIndex = 1 Then
 
-            Film = Betriebsparameter.GetValue("Filme", FilmSpalte, FilmZeile)
-            If (Film.EndsWith(".MOV")) Or (Film.EndsWith(".MP4")) Then
-                _kalteHerz.StartVideo(Pfad + Film)
+            If _StoryPointer = 0 Then
+
+                StoryText = "10: Der Transeuropaexpress fährt durch Altenstein"
+                Timer_Story_Auto.Interval = 88000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok10.mp4")
+                _StoryPointer = 1
+            ElseIf _StoryPointer = 1 Then
+
+                StoryText = "15: E 103 mit Intercity"
+                Timer_Story_Auto.Interval = 97000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok15.mp4")
+                _StoryPointer = 2
+            ElseIf _StoryPointer = 2 Then
+
+                StoryText = "69: Baureihe 55"
+                Timer_Story_Auto.Interval = 123000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok69.mp4")
+                _StoryPointer = 3
+            ElseIf _StoryPointer = 3 Then
+
+                StoryText = "11: ICE"
+                Timer_Story_Auto.Interval = 128000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok11.mp4")
+                _StoryPointer = 4
+            ElseIf _StoryPointer = 4 Then
+
+                StoryText = "14: Baureihe 460 SBB"
+                Timer_Story_Auto.Interval = 70000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok14.mp4")
+                _StoryPointer = 5
+            ElseIf _StoryPointer = 5 Then
+
+                StoryText = "17: 12X (Baureihe 128)"
+                Timer_Story_Auto.Interval = 183000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok17.mp4")
+                _StoryPointer = 6
+            ElseIf _StoryPointer = 6 Then
+
+                StoryText = "12: Baureihe 103"
+                Timer_Story_Auto.Interval = 37000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok12.mp4")
+                _StoryPointer = 7
+            ElseIf _StoryPointer = 7 Then
+
+                StoryText = "13: Baureihe 120"
+                Timer_Story_Auto.Interval = 7000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok13.mp4")
+                _StoryPointer = 8
+            ElseIf _StoryPointer = 8 Then
+
+                StoryText = "16: Baureihe 120"
+                Timer_Story_Auto.Interval = 13000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok16.mp4")
+                _StoryPointer = 9
+            ElseIf _StoryPointer = 9 Then
+
+                StoryText = "18: Baureihe 18"
+                Timer_Story_Auto.Interval = 72000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok18.mp4")
+                _StoryPointer = 10
+            ElseIf _StoryPointer = 10 Then
+
+                StoryText = "19: Baureihe 101"
+                Timer_Story_Auto.Interval = 72000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok19.mp4")
+                _StoryPointer = 11
+            ElseIf _StoryPointer = 11 Then
+
+                StoryText = "37: Baureihe 151"
+                Timer_Story_Auto.Interval = 102000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok37.mp4")
+                _StoryPointer = 12
+            ElseIf _StoryPointer = 12 Then
+
+                StoryText = "44: Baureihe 216"
+                Timer_Story_Auto.Interval = 125000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok44.mp4")
+                _StoryPointer = 13
+            ElseIf _StoryPointer = 13 Then
+
+                StoryText = "49: Baureihe 212"
+                Timer_Story_Auto.Interval = 153000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok49.mp4")
+                _StoryPointer = 14
+            ElseIf _StoryPointer = 14 Then
+
+                StoryText = "73: Baureihe 80"
+                Timer_Story_Auto.Interval = 55000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok73.mp4")
+                _StoryPointer = 15
+            ElseIf _StoryPointer = 15 Then
+
+                StoryText = "78: Rheinheim"
+                Timer_Story_Auto.Interval = 196000
+                _kalteHerz.StartVideo("H:\\EB_Media\\Clips\\Lok78.mp4")
+                _StoryPointer = 0
             End If
-            If Film.EndsWith(".jpg") Then
-                StoryImage = Betriebsparameter.GetValue("Filme", FilmSpalte, FilmZeile)
-            End If
-            StoryText = Betriebsparameter.GetValue("Filme", FilmSpalte, 1) + " (" + Betriebsparameter.GetValue("Filme", 22, FilmZeile) + " " + Betriebsparameter.GetValue("Filme", FilmSpalte, 3) + ") " + Betriebsparameter.GetValue("Filme", FilmSpalte, FilmZeile)
-            _daten.write_to_table(AutomatikParameterTableName, 51, FilmZeile)
 
-            _StoryPointer = 0
-        ElseIf ComboBox1.SelectedIndex = 3 Then
-
-        ElseIf ComboBox1.SelectedIndex = 4 Then
-
-            _Beleuchtung = 10
-
-            Timer_Story_DMX.Interval = 100
-            Timer_Story_DMX.Start()
 
         ElseIf ComboBox1.SelectedIndex = 2 Then
 
@@ -34454,21 +34860,25 @@ Public Class Automatikprogramme
                 ButtonsVisible(999)
 
                 StoryText = "0-0: Das kalte Herz"
-                StoryImage = "0-Vorwort.jpg"
+                StoryImage = "0-Titel.jpg"
                 StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-1.mp4")
-                Timer_Story_Auto.Interval = _StoryZeit
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 1
             ElseIf _StoryPointer = 1 Then
                 StoryText = "0-1: Das kalte Herz "
-                StoryImage = "0-Vorwort.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
+                Timer_Story_Auto.Interval = 12000
                 _kalteHerz.StopVideo()
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-2.mp4")
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-1.mp4")
                 _StoryPointer = 2
             ElseIf _StoryPointer = 2 Then
                 StoryText = "0-2:  "
-                StoryImage = "0-Vorwort.jpg"
+                Timer_Story_Auto.Interval = 30000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-2.mp4")
+                _StoryPointer = 3
+            ElseIf _StoryPointer = 3 Then
+                StoryText = "0-3:  "
+                Timer_Story_Auto.Interval = 186000
                 _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 0-3.mp4")
                 _StoryPointer = 100
@@ -34483,22 +34893,28 @@ Public Class Automatikprogramme
                 CT_soll = 260
                 Bri_soll = 128
                 StoryText = "1-0: Kapitel 1 - der Schwarzwald und die Bahnstrecke"
-                StoryImage = "0-Vorwort.jpg"
+                'StoryImage = "0-Vorwort.jpg"
+                Timer_Story_Auto.Interval = 3000
                 _kalteHerz.StopVideo()
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-1.mp4")
                 _StoryPointer = 101
 
             ElseIf _StoryPointer = 101 Then
                 StoryText = "1-1:  "
-                StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 77000
                 _kalteHerz.StopVideo()
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-2.mp4")
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-1.mp4")
                 _StoryPointer = 102
 
             ElseIf _StoryPointer = 102 Then
-                _kalteHerz.StopVideo()
                 StoryText = "1-2:  "
-                StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 122000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-2.mp4")
+                _StoryPointer = 103
+
+            ElseIf _StoryPointer = 103 Then
+                StoryText = "1-3:  "
+                Timer_Story_Auto.Interval = 144000
                 _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 1-3.mp4")
                 _StoryPointer = 200
@@ -34514,18 +34930,24 @@ Public Class Automatikprogramme
                 Bri_soll = 128
 
                 StoryText = "2-0: Kapitel 2 - Die Anreise "
-                StoryImage = "Anlage_035.jpg"
+                _kalteHerz.StopVideo()
+                'StoryImage = "Anlage_035.jpg"
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 201
             ElseIf _StoryPointer = 201 Then
                 StoryText = "2-1:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 202
+                Timer_Story_Auto.Interval = 47000
+                _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 2-1.mp4")
+                _StoryPointer = 202
+
             ElseIf _StoryPointer = 202 Then
-                StoryText = "2-1:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 300
+                StoryText = "2-2:  "
+                Timer_Story_Auto.Interval = 226000
+                _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 2-2 Modelleisenbahn.mp4")
+                _StoryPointer = 300
+
             ElseIf _StoryPointer = 300 Then
 
                 ' ***
@@ -34537,21 +34959,24 @@ Public Class Automatikprogramme
                 Sat_soll = 250
                 Col_soll = 42500
 
+                _kalteHerz.StopVideo()
                 StoryText = "3-0: Kapitel 3 - Der Schatzhauser und der Schmied Ezechiel "
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 301
             ElseIf _StoryPointer = 301 Then
                 StoryText = "3-1:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 302
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 55000
                 _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-1.mp4")
+                _StoryPointer = 302
 
             ElseIf _StoryPointer = 302 Then
                 StoryText = "3-2:  "
-                StoryImage = "Kaltes Herz.jpg"
+                'StoryImage = "Kaltes Herz.jpg"
                 Timer_Music.Interval = 290000
                 _Music_laeuft = 1
-                Timer_Music.Start()
+                Timer_Story_Auto.Interval = 3000
                 _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Alan Parsons Project - Old and Wise - Lyrics on screen (720p).mp4")
                 StoryText = "3-1: Alan Parsons Project - Old and Wise"
@@ -34559,20 +34984,18 @@ Public Class Automatikprogramme
 
             ElseIf _StoryPointer = 303 Then
                 StoryText = "3-3:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 304
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 48000
                 _kalteHerz.StopVideo()
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-2.mp4")
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-3.mp4")
+                _StoryPointer = 304
+
             ElseIf _StoryPointer = 304 Then
                 StoryText = "3-4:  "
-                StoryImage = "Kaltes Herz.jpg"
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 289000
                 _kalteHerz.StopVideo()
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-3 Fast Train.mp4")
-                _StoryPointer = 305
-            ElseIf _StoryPointer = 305 Then
-                StoryText = "3-5:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 3-4 Fast Train.mp4")
                 _StoryPointer = 400
 
             ElseIf _StoryPointer = 400 Then
@@ -34587,13 +35010,17 @@ Public Class Automatikprogramme
 
                 DMX(3, 20, 0, 0, 128, 160, 128, 0, 0)
 
+                _kalteHerz.StopVideo()
                 StoryText = "4-0: Kapitel 4 - der Bürgermeister"
-                StoryImage = "Anlage_017.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
+                'StoryImage = "Anlage_017.jpg"
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 401
             ElseIf _StoryPointer = 401 Then
                 StoryText = "4-1:  "
-                StoryImage = "Kaltes Herz.jpg"
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 570000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 4-1.mp4")
                 _StoryPointer = 500
 
             ElseIf _StoryPointer = 500 Then
@@ -34606,16 +35033,18 @@ Public Class Automatikprogramme
                 CT_soll = 260
                 Bri_soll = 200
 
+                _kalteHerz.StopVideo()
                 StoryText = "5-0: Kapitel 5 - die schöne Tochter des Müllers  "
-                StoryImage = "Kaltes Herz_46.jpg"
+                'StoryImage = "Kaltes Herz_46.jpg"
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 501
             ElseIf _StoryPointer = 501 Then
                 StoryText = "5-1:  "
                 StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 600
+                Timer_Story_Auto.Interval = 242000
                 _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 5-1 Geli.mp4")
-
+                _StoryPointer = 600
 
             ElseIf _StoryPointer = 600 Then
 
@@ -34627,15 +35056,42 @@ Public Class Automatikprogramme
                 CT_soll = 260
                 Bri_soll = 100
 
+                _kalteHerz.StopVideo()
                 StoryText = "6-0: Kapitel 6 - Peter Kohlenmunk "
-                StoryImage = "Kaltes Herz_61.jpg"
+                'StoryImage = "Kaltes Herz_61.jpg"
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 601
             ElseIf _StoryPointer = 601 Then
                 StoryText = "6-1:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 700
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 207000
                 _kalteHerz.StopVideo()
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 6-2 für immer jung.mp4")
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 6-1.mp4")
+                _StoryPointer = 602
+
+            ElseIf _StoryPointer = 602 Then
+                StoryText = "6-2:  "
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 276000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 6-2 Downtown Train.mp4")
+                _StoryPointer = 603
+
+            ElseIf _StoryPointer = 603 Then
+                StoryText = "6-3:  "
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 222000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 6-3 für immer jung.mp4")
+                _StoryPointer = 604
+
+            ElseIf _StoryPointer = 604 Then
+                StoryText = "6-4:  "
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 32000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 6-4.mp4")
+                _StoryPointer = 700
 
             ElseIf _StoryPointer = 700 Then
 
@@ -34647,18 +35103,24 @@ Public Class Automatikprogramme
                 Bri_soll = 50
                 CT_soll = 260
 
-                PlayMusic("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kap7-Peter_1.mp3")
-
                 StoryText = "7-0: Kapitel 7 - Peter Kohlenmunk trifft das Glasmännlein und wird reich "
-                StoryImage = "Kaltes Herz_88.jpg"
+                'StoryImage = "Kaltes Herz_88.jpg"
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 701
 
             ElseIf _StoryPointer = 701 Then
                 StoryText = "7-1:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 800
+                Timer_Story_Auto.Interval = 418000
                 _kalteHerz.StopVideo()
                 _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 7-1.mp4")
+                _StoryPointer = 702
+            ElseIf _StoryPointer = 702 Then
+                StoryText = "7-2:  "
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 279000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 7-2.mp4")
+                _StoryPointer = 800
 
             ElseIf _StoryPointer = 800 Then
 
@@ -34670,1824 +35132,35 @@ Public Class Automatikprogramme
                 Bri_soll = 100
                 CT_soll = 260
 
-                StoryImage = "Kaltes Herz_101.jpg"
+                _kalteHerz.StopVideo()
+                'StoryImage = "Kaltes Herz_101.jpg"
                 StoryText = "8-0: Kapitel 8 - Peter Kohlenmunk wird böse "
+                Timer_Story_Auto.Interval = 3000
                 _StoryPointer = 801
             ElseIf _StoryPointer = 801 Then
                 StoryText = "8-1:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 900
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 123000
                 _kalteHerz.StopVideo()
-                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 8-1 blank & jones & mark reeder ft. robert smith - a forest (ma).mp4")
-
-            ElseIf _StoryPointer = 900 Then
-
-                ' ***
-                ' *** Kapitel 9 - die Feier zum Abschluss
-                ' ***
-
-                Hue_Control = 1
-                Bri_soll = 200
-                CT_soll = 260
-
-                Timer_Story_Auto.Interval = _StoryZeit
-                StoryText = "9-0: Kapitel 9 - Die Feier zum Abschluss"
-                StoryImage = "Kaltes Herz_115a.jpg"
-                _StoryPointer = 901
-            ElseIf _StoryPointer = 901 Then
-
-            End If
-
-        ElseIf ComboBox1.SelectedIndex = 99 Then
-
-            If _StoryPointer = 0 Then
-
-                ' ***
-                ' *** Vorwort - eine Geschichte aus dem Schwarzwald
-                ' ***
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 128
-                _Hue = 3
-                _Hue_Reset = 1
-                Timer_HUE.Start()
-
-                'DMX(3, 1, 0, 0, 0, 0, 0, 0, 0)
-
-                ButtonsVisible(999)
-
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                StoryText = "0-0: Vorwort"
-                StoryImage = "Kaltes Herz.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 1
-
-            ElseIf _StoryPointer = 1 Then
-
-                'DMX(3, 20, 128, 128, 128, 128, 128, 128, 128)
-
-                StoryText = "0-1: Das kalte Herz "
-                StoryImage = "Kaltes Herz.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 2
-            ElseIf _StoryPointer = 2 Then
-                StoryText = "0-2:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 3
-            ElseIf _StoryPointer = 3 Then
-                StoryText = "0-3:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 4
-            ElseIf _StoryPointer = 4 Then
-                StoryText = "0-4:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 5
-            ElseIf _StoryPointer = 5 Then
-                StoryText = "0-5:  "
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 100
-            ElseIf _StoryPointer = 100 Then
-
-                ' ***
-                ' *** Kapitel 1 - der Schwarzwald und die Bahnstrecke
-                ' ***
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 128
-
-                'DMX(3, 20, 0, 80, 128, 164, 128, 80, 0)
-
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-
-                StoryText = "1-1: Kapitel 1 - der Schwarzwald und die Bahnstrecke"
-                StoryImage = "Kaltes Herz.jpg"
-                _StoryPointer = 101
-            ElseIf _StoryPointer = 101 Then
-                Timer_Music.Interval = 168000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                PlayMusic("H:\\EB_Media\\Das kalte Herz Musik\\OFFICIAL - Westworld Soundtrack - A Forest - Ramin Djawadi (128kbps).mp3")
-                StoryText = "1-2: Ramin Djawadi - A Forest"
-                StoryImage = "Kaltes Herz_0.jpg"
-                _StoryPointer = 102
-            ElseIf _StoryPointer = 102 Then
-                StoryText = "1-3: Altenstein begrüßt seine Gäste. "
-                StoryImage = "Kaltes Herz_0.jpg"
-                _StoryPointer = 103
-            ElseIf _StoryPointer = 103 Then
-                StoryText = "1-4: Die kleine Stadt liegt im Schwarzwald. "
-                StoryImage = "Kaltes Herz_1.jpg"
-                _StoryPointer = 104
-            ElseIf _StoryPointer = 104 Then
-                StoryText = "1-5: Wo sie genau liegt, spielt keine Rolle. Das überlassen wir der Fantasie. "
-                StoryImage = "Kaltes Herz_2.jpg"
-                _StoryPointer = 105
-            ElseIf _StoryPointer = 105 Then
-                StoryText = "1-6: So, wie wir in dieser Geschichte vieles der Fantasie überlassen. "
-                StoryImage = "Kaltes Herz_2.jpg"
-                _StoryPointer = 106
-            ElseIf _StoryPointer = 106 Then
-                StoryText = "1-7: Durch unseren Ort fließt ein kleiner, wilder Bach. "
-                StoryImage = "Kaltes Herz_3.jpg"
-                _StoryPointer = 107
-            ElseIf _StoryPointer = 107 Then
-                StoryText = "1-8: Der Bach gehört zu jedem Ort im Schwarzwald."
-                StoryImage = "Kaltes Herz_4.jpg"
-                _StoryPointer = 108
-            ElseIf _StoryPointer = 108 Then
-                PlayMusic("H:\EB_Media\Media\Stop.mp3")
-                StoryText = "1-9: Auch wenn wir ihn auf unserer Eisenbahnanlage nicht sehen können. "
-                StoryImage = "Kaltes Herz_4.jpg"
-                _StoryPointer = 109
-            ElseIf _StoryPointer = 109 Then
-                StoryText = "1-10: Die Züge aus dem Rheintal kommen aus einem entfernten Ort in der Rheinebene ..."
-                StoryImage = "TunnelausfahrtWest_40.jpg"
-                _StoryPointer = 110
-            ElseIf _StoryPointer = 110 Then
-                StoryText = "1-11: ... und tauchen aus dem Lorettotunnel im Westen auf (links)."
-                StoryImage = "TunnelausfahrtWest_40.jpg"
-                _StoryPointer = 111
-            ElseIf _StoryPointer = 111 Then
-                StoryText = "1-12: Nur die Vorortzüge halten hier."
-                StoryImage = "Anlage_012.jpg"
-                _StoryPointer = 112
-            ElseIf _StoryPointer = 112 Then
-                StoryText = "1-13: Für Intercity-Züge ist unser Ort zu unbedeutend. Sie fahren vorbei, aber halten hier nicht. "
-                StoryImage = "Anlage_017.jpg"
-                _StoryPointer = 113
-            ElseIf _StoryPointer = 113 Then
-                StoryText = "1-14: Güterzüge mit ihrer schweren Ladung holen vor dem Anstieg nocheinmal Schwung."
-                StoryImage = "Anlage_025.jpg"
-                _StoryPointer = 114
-            ElseIf _StoryPointer = 114 Then
-                StoryText = "1-15: Mit Holz beladene Güterzüge kommen aus dem Schwarzwald. Sie fahren Richtung Rheinebene. "
-                StoryImage = "Anlage_025.jpg"
-                _StoryPointer = 115
-            ElseIf _StoryPointer = 115 Then
-                StoryText = "1-16: Holz ist im Schwarzwald ein bedeutender Wirtschaftsfaktor. "
-                StoryImage = "Anlage_025.jpg"
-                _StoryPointer = 116
-            ElseIf _StoryPointer = 116 Then
-                StoryText = "1-17: Bergfahrende Züge entschwinden wieder im Sternwaldtunnel im Osten (rechts). "
-                StoryImage = "TunneleinfahrtOst_40.jpg"
-                _StoryPointer = 117
-            ElseIf _StoryPointer = 117 Then
-                StoryText = "1-18: Nach der Ausfahrt aus dem Sternwald-Tunnel erreichen wir Forbach. "
-                StoryImage = "Anlage_011.jpg"
-                _StoryPointer = 118
-            ElseIf _StoryPointer = 118 Then
-                StoryText = "1-19: Ab dem Abzweig Forbach steigt die Strecke in einem Waldstück nun steil an. "
-                StoryImage = "Anlage_011.jpg"
-                _StoryPointer = 119
-            ElseIf _StoryPointer = 119 Then
-                StoryText = "1-20: Die Bahn passiert nun oberhalb des Abzweigs Marxzell. "
-                StoryImage = "Anlage_011.jpg"
-                _StoryPointer = 120
-            ElseIf _StoryPointer = 120 Then
-                StoryText = "1-21: Die Züge haben nun bereits Höhe gewonnen. Sie kommen aus dem Falkenstein-Tunnel. "
-                StoryImage = "Anlage_037.jpg"
-                _StoryPointer = 121
-            ElseIf _StoryPointer = 121 Then
-                StoryText = "1-22: Die Bahnlinie führt danach durch die Vororte von Altenstein. "
-                StoryImage = "Anlage_026.jpg"
-                _StoryPointer = 122
-            ElseIf _StoryPointer = 122 Then
-                StoryText = "1-23: Sie unterquert in einer Galerie den Park des Rathauses. "
-                StoryImage = "Anlage_027.jpg"
-                _StoryPointer = 123
-            ElseIf _StoryPointer = 123 Then
-                StoryText = "1-24: Und führt an der Mühle vorbei ... "
-                StoryImage = "Anlage_008.jpg"
-                _StoryPointer = 124
-            ElseIf _StoryPointer = 124 Then
-                StoryText = "1-25: ... zum Hirschsprung. "
-                StoryImage = "Anlage_030.jpg"
-                _StoryPointer = 125
-            ElseIf _StoryPointer = 125 Then
-                StoryText = "1-26: Bevor sie im unteren Hirschsprung-Tunnel verschwindet. "
-                StoryImage = "Anlage_030.jpg"
-                _StoryPointer = 126
-            ElseIf _StoryPointer = 126 Then
-                StoryText = "1-27: Vorbei geht es nun an der Burgruine Windeck. "
-                StoryImage = "Kaltes Herz_1-27.jpg"
-                _StoryPointer = 127
-            ElseIf _StoryPointer = 127 Then
-                StoryText = "1-28: Durch den oberen Hirschsprung-Tunnel kommen die Züge wieder in den sichbaren Bereich. "
-                StoryImage = "Anlage_008.jpg"
-                _StoryPointer = 128
-            ElseIf _StoryPointer = 128 Then
-                StoryText = "1-29: Weiter nun in einem großen Bogen um die Kirche Sankt Peter "
-                StoryImage = "Anlage_038.jpg"
-                _StoryPointer = 129
-            ElseIf _StoryPointer = 129 Then
-                StoryText = "1-30: Wir befinden uns nun in schwindelerregender Höhe über dem Tal auf der Ravennabrücke. "
-                StoryImage = "Anlage_021.jpg"
-                _StoryPointer = 130
-            ElseIf _StoryPointer = 130 Then
-                StoryText = "1-31: Die Bahn führt uns nun unterhalb der Burg Eberstein ... "
-                StoryImage = "Anlage_039.jpg"
-                _StoryPointer = 131
-            ElseIf _StoryPointer = 131 Then
-                StoryText = "1-32: ... zum Haltepunkt Zindelstein. "
-                StoryImage = "Anlage_032.jpg"
-                _StoryPointer = 132
-            ElseIf _StoryPointer = 132 Then
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 20
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                StoryText = "1-33: Kurz danach verschwinden die Züge im Ravenna-Tunnel."
-                StoryImage = "Anlage_031.jpg"
-                _StoryPointer = 133
-            ElseIf _StoryPointer = 133 Then
-                StoryText = "1-34: Hinter dem Tunnel liegt die Station Bärental."
-                StoryImage = "Anlage_021.jpg"
-                _StoryPointer = 134
-            ElseIf _StoryPointer = 134 Then
-                StoryText = "1-35: Dann verschwinden die Züge hinter den Höhen des Schwarzwaldes."
-                StoryImage = "Anlage_021.jpg"
-                _StoryPointer = 135
-            ElseIf _StoryPointer = 135 Then
-                StoryText = "1-36: Kommt unser Zug da etwa schon wieder zurück?"
-                If _StoryAuto = 0 Then
-                    If _Music_laeuft = 1 Then
-                        StoryColor = Drawing.Color.LightGreen
-                    Else
-                        StoryColor = Drawing.Color.LightGray
-                    End If
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                _StoryPointer = 136
-            ElseIf _StoryPointer = 136 Then
-                StoryText = "1-37: Kommt unser Zug da etwa schon wieder zurück?"
-                _Music_laeuft = 0
-                Timer_Music.Stop()
-                PlayMusic("H:\EB_Media\Media\Stop.mp3")
-                StoryColor = Drawing.Color.LightGray
-                _StoryPointer = 200
-            ElseIf _StoryPointer = 200 Then
-
-                ' ***
-                ' *** Kapitel 2 - die Ankunft 
-                ' ***
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 128
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                StoryText = "2-1: Kapitel 2 - Die Anreise "
-                StoryImage = "Anlage_035.jpg"
-                _StoryPointer = 201
-            ElseIf _StoryPointer = 201 Then
-                StoryText = "2-2: Wir wollen in Altenstein ein paar Tage Urlaub verbringen. Zum Spazierengehen und Radeln. "
-                _StoryPointer = 202
-            ElseIf _StoryPointer = 202 Then
-                StoryText = "2-3: Angereist sind wir mit der Bahn."
-                StoryImage = "Ankunft_67.jpg"
-                Timer_Story_Auto.Interval = 18000
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Anreise.mp4")
-                _StoryPointer = 203
-            ElseIf _StoryPointer = 203 Then
-                _kalteHerz.StopVideo()
-                StoryImage = "Anlage_001.jpg"
-                StoryText = "2-4: Als unser Zug im Bahnhof Altenstein anhält, fällt uns auf dem Gleis gegenüber ein Zug mit Bierwagen auf. "
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\39_Rangieren.mp4")
-                Timer_Story_Auto.Interval = 30000
-                _StoryPointer = 204
-            ElseIf _StoryPointer = 204 Then
-                _kalteHerz.StopVideo()
-                StoryImage = "Anlage_001.jpg"
-                StoryText = "2-5: Nun wissen wir, dass wir im Schwarzwald angekommen sind. "
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 205
-            ElseIf _StoryPointer = 205 Then
-                StoryText = "2-6: Und freuen uns auf unser erstes Tannenzäpfle im Biergarten unseres Hotels."
-                StoryImage = "Anlage_028.jpg"
-                _StoryPointer = 206
-            ElseIf _StoryPointer = 206 Then
-                _kalteHerz.StopVideo()
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 200
-
-                DMX(3, 20, 160, 160, 160, 160, 160, 160, 160)
-
-                StoryText = "2-7: Zum Wohl. Weiter wenn Bierflasche offen."
-                StoryImage = "Kaltes Herz_5a.jpg"
-                _StoryPointer = 207
-            ElseIf _StoryPointer = 207 Then
-                StoryText = "2-8: Während wir das Bier geniessen können wir in Ruhe den Zügen folgen."
-                StoryImage = "Kaltes Herz_5b.jpg"
-                _StoryPointer = 208
-            ElseIf _StoryPointer = 208 Then
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 20
-
-                DMX(3, 20, 80, 80, 80, 80, 80, 80, 80)
-
-                Timer_Story_Auto.Interval = 226000
-                Timer_Music.Interval = 226000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Eisenbahn.mp4")
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGreen
-                Else
-                    StoryColor = Drawing.Color.LightGray
-                End If
-                StoryText = "2-9: Adrian Prath - Modelleisenbahn"
-                StoryImage = "Kaltes Herz_8.jpg"
-                _StoryPointer = 209
-            ElseIf _StoryPointer = 209 Then
-                StoryText = "2-10: Weiter wenn die Bierflasche leer oder Musik zu Ende ist."
-                StoryColor = Drawing.Color.LightGray
-                _kalteHerz.StopVideo()
-                Timer_Music.Stop()
-                _Music_laeuft = 0
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 210
-            ElseIf _StoryPointer = 210 Then
-
-                DMX(3, 20, 80, 80, 80, 80, 128, 80, 80)
-
-                StoryText = "2-11: Und abends im Gasthaus erzählt man uns die Geschichten und Sagen, die es an jedem Ort im Schwarzwald gibt. "
-                _StoryPointer = 300
-
-                _StoryPointer = 300
-            ElseIf _StoryPointer = 300 Then
-
-                ' ***
-                ' *** Kapitel 3 - der Schatzhauser und der Schmied Ezechiel
-                ' ***
-
-                Hue_Control = 2
-                Bri_soll = 20
-                Sat_soll = 250
-                Col_soll = 42500
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                StoryText = "3-1: Kapitel 3 - Der Schatzhauser und der Schmied Ezechiel "
-                _StoryPointer = 301
-            ElseIf _StoryPointer = 301 Then
-
-                Hue_Control = 2
-                Bri_soll = 60
-                Sat_soll = 250
-                Col_soll = 42500
-
-                StoryText = "3-2: Unser Urlaub in Altenstein beginnt an einem frischen Sommermorgen."
-                StoryImage = "Kaltes Herz_18.jpg"
-                _StoryPointer = 302
-            ElseIf _StoryPointer = 302 Then
-
-                Hue_Control = 2
-                Bri_soll = 100
-                Sat_soll = 250
-                Col_soll = 42500
-
-                StoryText = "3-3: Auf den Bäumen rund um den Marktplatz spiegelt sich der Tau in der Morgensonne."
-                StoryImage = "Kaltes Herz_18.jpg"
-                _StoryPointer = 303
-            ElseIf _StoryPointer = 303 Then
-
-                Hue_Control = 2
-                Bri_soll = 140
-                Sat_soll = 250
-                Col_soll = 42500
-
-                StoryText = "3-4: Hinter dem Gasthof plätschert die Alb vergnügt durch den Wald."
-                StoryImage = "Kaltes Herz_18.jpg"
-                _StoryPointer = 304
-            ElseIf _StoryPointer = 304 Then
-
-                DMX(3, 20, 0, 0, 70, 70, 70, 0, 0)
-
-                StoryText = "3-5: Wir beginnen unseren Urlaubstag bereits früh mit einem Spaziergang durch die Stadt."
-                StoryImage = "Kaltes Herz_19.jpg"
-                _StoryPointer = 305
-            ElseIf _StoryPointer = 305 Then
-
-                DMX(3, 20, 0, 0, 70, 100, 70, 0, 0)
-
-                StoryText = "3-6: Über den Marktplatz vor dem Martinstor zieht der Duft von frischem Kaffee."
-                StoryImage = "Kaltes Herz_20.jpg"
-                _StoryPointer = 306
-            ElseIf _StoryPointer = 306 Then
-
-                DMX(3, 20, 0, 0, 90, 120, 90, 0, 0)
-
-                StoryText = "3-7: Die Händler haben ihre Markstände aufgebaut und warten jetzt auf ihre Kunden."
-                StoryImage = "Kaltes Herz_20.jpg"
-                _StoryPointer = 307
-            ElseIf _StoryPointer = 307 Then
-                StoryText = "3-8: Sie wärmen ihre Hände an den heissen Kaffebechern. Es ist noch kühl."
-                StoryImage = "Kaltes Herz_20.jpg"
-                _StoryPointer = 308
-            ElseIf _StoryPointer = 308 Then
-
-                DMX(3, 20, 0, 90, 120, 120, 70, 0, 0)
-
-                StoryText = "3-9: Wir gehen links des Martinstores an einem Bürgerhaus vorbei und steigen die Treppe hinauf. "
-                StoryImage = "Anlage_036.jpg"
-                _StoryPointer = 309
-            ElseIf _StoryPointer = 309 Then
-
-                DMX(3, 20, 0, 90, 120, 90, 0, 0, 0)
-
-                StoryText = "3-10: Unter Palisaden schlendern wir an einer Reihe von Geschäften vorbei. Diese sind noch geschlossen. "
-                StoryImage = "Anlage_002.jpg"
-                _StoryPointer = 310
-            ElseIf _StoryPointer = 310 Then
-                StoryText = "3-11: Wir kommen an einen kleinen Brunnen mit frischem Quellwasser vorbei. "
-                StoryImage = "Anlage_042.jpg"
-                _StoryPointer = 311
-            ElseIf _StoryPointer = 311 Then
-
-                DMX(3, 20, 0, 90, 140, 90, 0, 0, 0)
-
-                StoryText = "3-12: Unser Weg führt uns daher direkt zum Haus des Schatzhausers unterhalb der Kirche. "
-                StoryImage = "Anlage_029.jpg"
-                _StoryPointer = 312
-            ElseIf _StoryPointer = 312 Then
-                StoryText = "3-13: Der Schatzhauser ist der älteste Bewohner der Stadt. Er ist sehr weise. "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 313
-            ElseIf _StoryPointer = 313 Then
-                StoryText = "3-14: Als wir an seinem Haus vorbeikommen, lehnt dieser mit der Pfeife in der Hand am Zaun. "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 314
-            ElseIf _StoryPointer = 314 Then
-                StoryText = "3-15: Er begrüßt uns sehr freundlich."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 315
-            ElseIf _StoryPointer = 315 Then
-
-                Hue_Control = 2
-                Bri_soll = 20
-                Sat_soll = 250
-                Col_soll = 42500
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                Timer_Music.Interval = 290000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Alan Parsons Project - Old and Wise - Lyrics on screen (720p).mp4")
-                StoryText = "3-16: Alan Parsons Project - Old and Wise"
-                If _StoryAuto = 0 Then
-                    Timer_Story_Auto.Interval = 290000
-                    StoryColor = Drawing.Color.LightGreen
-                    _StoryPointer = 316
-                Else
-                    Timer_Story_Auto.Interval = 290000
-                    StoryColor = Drawing.Color.LightBlue
-                    _StoryPointer = 316
-                End If
-
-            ElseIf _StoryPointer = 3000 Then
-
-
-            ElseIf _StoryPointer = 316 Then
-
-                Hue_Control = 2
-                Bri_soll = 100
-                Sat_soll = 250
-                Col_soll = 42500
-
-                DMX(3, 20, 0, 90, 140, 90, 0, 0, 0)
-
-                _kalteHerz.StopVideo()
-                Timer_Music.Stop()
-                _Music_laeuft = 0
-                StoryText = "3-17: Der Schatzhauser führt uns durch seinen zauberhaften Garten."
-                StoryImage = "Kaltes Herz_33.jpg"
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 317
-            ElseIf _StoryPointer = 317 Then
-                StoryText = "3-18: Dieser ist voller Blumen und Gemüse. Bereits zu dieser frühen Stunde kümmert er sich liebevoll um seine Pflanzen."
-                StoryImage = "Garten_001.jpg"
-                _StoryPointer = 318
-            ElseIf _StoryPointer = 318 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                StoryText = "3-19: Auf dem Weg durch den Garten fällt unser Blick auf die Holzschnitzereien, die uns an die Sagen- und Märchenwelt des Schwarzwaldes erinnern."
-                StoryImage = "Kaltes Herz_25.jpg"
-                _StoryPointer = 319
-            ElseIf _StoryPointer = 319 Then
-                StoryText = "3-20: Während wir die Holzfiguren betrachten, erzählt uns der Schatzhauser eine alte Sage aus dem Schwarzwald:"
-                StoryImage = "Kaltes Herz_26.jpg"
-                _StoryPointer = 320
-            ElseIf _StoryPointer = 320 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Italic)
-                StoryText = "3-21:  Damals wurden die mächtigsten Schwarzwälder Stämme gefällt, um sie in den Niederlanden für den Schiffsbau zu verkaufen."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 321
-            ElseIf _StoryPointer = 321 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Italic)
-                StoryText = "3-22: Heutzutage lässt man diese Riesen stehen. Sie sind jetzt wieder der Stolz des Schwarzwaldes."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 322
-            ElseIf _StoryPointer = 322 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Italic)
-                StoryText = "3-23: Man  nennt sie nach wie vor 'Holländer'. Im Naturschutzgebiet 'Tannenbühl' sieht man solche uralten 'Holländer' wachsen. "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 323
-            ElseIf _StoryPointer = 323 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Italic)
-                StoryText = "3-24: Manche dieser Tannen erreicht mehr als 50 Meter Höhe. "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 324
-            ElseIf _StoryPointer = 324 Then
-                StoryText = "3-25: So viel ist gewiss, dass der Holländer Michel noch jetzt in Sturmnächten im Tannenbühl die schönsten Tannen aussucht. "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 325
-            ElseIf _StoryPointer = 325 Then
-                StoryText = "3-26: Mein Vater hat ihn eine vier Schuh dicke umbrechen sehen wie ein Rohr."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 326
-            ElseIf _StoryPointer = 326 Then
-                StoryText = "3-27: Mit diesen beschenkt er die, welche sich vom Rechten abwenden und zu ihm gehen. "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 327
-            ElseIf _StoryPointer = 327 Then
-                StoryText = "3-28: Um Mitternacht bringen sie dann den Floß ins Wasser, und er rudert mit ihnen nach Holland."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 328
-            ElseIf _StoryPointer = 328 Then
-                StoryText = "3-29: Aber wäre ich Herr und König in Holland, ich ließe ihn mit Kartätschen in den Boden schmettern."
-                _StoryPointer = 329
-            ElseIf _StoryPointer = 329 Then
-                StoryText = "3-30: Denn alle Schiffe, die von dem Holländer-Michel auch nur einen Balken haben, müssen untergehen. "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 330
-            ElseIf _StoryPointer = 330 Then
-                StoryText = "3-31: Daher kommt es, daß man von so vielen Schiffbrüchigen hört."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 331
-            ElseIf _StoryPointer = 331 Then
-                StoryText = "3-32: Wie könnte denn sonst ein schönes, starkes Schiff, so groß als eine Kirche, zugrund gehen auf dem Wasser? "
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 332
-            ElseIf _StoryPointer = 332 Then
-                StoryText = "3-33: Aber sooft Holländer-Michel in einer Sturmnacht im Schwarzwald eine Tanne fällt, springt eine seiner alten aus den Fugen des Schiffes."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 333
-            ElseIf _StoryPointer = 333 Then
-                StoryText = "3-34: Das Wasser dringt ein und das Schiff ist mit Mann und Maus verloren."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 334
-            ElseIf _StoryPointer = 334 Then
-                StoryText = "3-35: Das ist die Sage vom Holländer-Michel, und wahr ist es, alles Böse im Schwarzwald schreibt sich von ihm her."
-                StoryImage = "Kaltes Herz_33.jpg"
-                _StoryPointer = 335
-            ElseIf _StoryPointer = 335 Then
-                DMX(3, 20, 90, 180, 90, 0, 0, 0, 0)
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                StoryText = "3-36: Wir steigen weiter hinauf zur großen Kirche. Neben der Kirche befindet sich ein kleiner Park."
-                StoryImage = "Anlage_015.jpg"
-                _StoryPointer = 336
-            ElseIf _StoryPointer = 336 Then
-
-                Hue_Control = 2
-                Bri_soll = 80
-                Sat_soll = 250
-                Col_soll = 1000
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                StoryText = "3-37: Wir gehen noch zur großen Kirche."
-                StoryImage = "Kaltes Herz_22.jpg"
-                _StoryPointer = 337
-            ElseIf _StoryPointer = 337 Then
-                StoryText = "3-38: Die Mönche von Sankt Peter versammeln sich zur Frühmesse. "
-                StoryImage = "Kaltes Herz_22.jpg"
-                _StoryPointer = 338
-            ElseIf _StoryPointer = 338 Then
-                StoryText = "3-39: Auch ein paar Gläubige steigen die Treppe zur Kirche hinauf, um an der ersten Messe des heraufdämmernden Tages teilzunehmen."
-                StoryImage = "Kaltes Herz_23.jpg"
-                _StoryPointer = 339
-            ElseIf _StoryPointer = 339 Then
-                StoryText = "3-40: Wir sehen uns die Kirche von Innen an. Den Altar ..."
-                StoryImage = "Kaltes Herz_23.jpg"
-                _StoryPointer = 340
-            ElseIf _StoryPointer = 340 Then
-                StoryText = "3-41: ... und die bemalten Fenster. "
-                StoryImage = "Kaltes Herz_24.jpg"
-                _StoryPointer = 341
-            ElseIf _StoryPointer = 341 Then
-
-                Hue_Control = 2
-                Bri_soll = 100
-                Sat_soll = 250
-                Col_soll = 42500
-
-                DMX(3, 20, 128, 90, 90, 0, 0, 0, 0)
-
-                StoryText = "3-42: Gehen wir ein paar Schritte weiter, so kommen wir zur Schmiede. "
-                StoryImage = "Seebach_014.jpg"
-                _StoryPointer = 342
-            ElseIf _StoryPointer = 342 Then
-                StoryText = "3-43: Hier wohnt der reiche Schmied Ezechiel. "
-                StoryImage = "Seebach_010.jpg"
-                _StoryPointer = 343
-            ElseIf _StoryPointer = 343 Then
-                StoryText = "3-44: Billige Holzkohle und der wirtschaftliche Aufschwung in der Stadt haben ihn reich gemacht. "
-                StoryImage = "Seebach_012.jpg"
-                _StoryPointer = 344
-            ElseIf _StoryPointer = 344 Then
-                StoryText = "3-45: Ersatzteile für Traktoren, die die riesigen Tannen aus dem Wald ziehen, sind für Ezechiel ein gutes Geschäft."
-                StoryImage = "Kaltes Herz_30.jpg"
-                _StoryPointer = 345
-            ElseIf _StoryPointer = 345 Then
-                StoryText = "3-46: Uns fällt noch die kleine Polizeistation auf. "
-                StoryImage = "Anlage_016.jpg"
-                _StoryPointer = 346
-            ElseIf _StoryPointer = 346 Then
-                StoryText = "3-47: Nein, in Altenstein gibt es nicht viele Ereignisse, die den Einsatz der Polizei erfordern. "
-                StoryImage = "Anlage_016.jpg"
-                _StoryPointer = 347
-            ElseIf _StoryPointer = 347 Then
-
-                DMX(3, 20, 90, 140, 90, 0, 0, 0, 0)
-
-                StoryText = "3-48: In dem Park vor der Kirche, halten wir inne."
-                StoryImage = "Anlage_017.jpg"
-                _StoryPointer = 348
-            ElseIf _StoryPointer = 348 Then
-                StoryText = "3-49: Wir richten unseren Blick auf den Bahnhof im Tal und beobachten, wie die Leute in den Zug einsteigen. "
-                StoryImage = "Anlage_017.jpg"
-                _StoryPointer = 349
-            ElseIf _StoryPointer = 349 Then
-                StoryText = "3-50: Die Menschen arbeiten in der Großstadt am Rhein. Die Lokomotive dampft bereits mächtig. Bald wird die Fahrt beginnen. "
-                StoryImage = "Anlage_017.jpg"
-                _StoryPointer = 350
-            ElseIf _StoryPointer = 350 Then
-
-                DMX(3, 20, 90, 110, 120, 120, 120, 110, 90)
-
-                Timer_Music.Interval = 290000
-                Timer_Story_Auto.Interval = 290000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Fast Train.mp4")
-                StoryText = "3-51: Da wir auch Eisenbahnfans sind, machen wir eine Pause und beobachten wir die Züge von hier oben. "
-                StoryImage = "Anlage_017.jpg"
-                StoryColor = Drawing.Color.LightGreen
-                _StoryPointer = 351
-            ElseIf _StoryPointer = 351 Then
-
-                DMX(3, 20, 0, 0, 80, 128, 80, 0, 0)
-
-                _Music_laeuft = 0
-                Timer_Music.Stop()
-                _kalteHerz.StopVideo()
-                StoryText = "3-52:  "
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryImage = "Anlage_017.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 400
-            ElseIf _StoryPointer = 400 Then
-
-                ' ***
-                ' *** Kapitel 4 - der Bürgermeister
-                ' ***
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 100
-
-                DMX(3, 20, 0, 0, 128, 160, 128, 0, 0)
-
-                StoryText = "4-1: Kapitel 4 - der Bürgermeister"
-                StoryImage = "Anlage_017.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 401
-            ElseIf _StoryPointer = 401 Then
-                StoryText = "4-2: Wir gehen wieder zum Marktplatz zurück. Inzwischen herrscht hier geschäftiges Treiben."
-                StoryImage = "Kaltes Herz_34.jpg"
-                _StoryPointer = 402
-            ElseIf _StoryPointer = 402 Then
-                StoryText = "4-3:  Wir schlendern über den Markt und sind von der Vielfalt des Angebotes begeistert. "
-                StoryImage = "Kaltes Herz_35.jpg"
-                _StoryPointer = 403
-            ElseIf _StoryPointer = 403 Then
-                StoryText = "4-4: Gemüse, Obst, Honig, Oliven. "
-                StoryImage = "Kaltes Herz_36.jpg"
-                _StoryPointer = 404
-            ElseIf _StoryPointer = 404 Then
-                StoryText = "4-5: der Duft frischer Melonen ... "
-                StoryImage = "Kaltes Herz_37.jpg"
-                _StoryPointer = 405
-            ElseIf _StoryPointer = 405 Then
-                StoryText = "4-6: und ein Marktstand mit einem Schild - Peter Kohlmunk : Qualitätsholzkohle aus dem Schwarzwald. "
-                StoryImage = "Kaltes Herz_37.jpg"
-                _StoryPointer = 406
-            ElseIf _StoryPointer = 406 Then
-                StoryText = "4-7: Gerne möchten wir hier einkaufen. Aber wir sind ja nur für kurze Zeit hier. "
-                StoryImage = "Kaltes Herz_38.jpg"
-                _StoryPointer = 407
-            ElseIf _StoryPointer = 407 Then
-                StoryText = "4-8: Und da plötzlich steigt uns ein Duft in die Nase, dem wir nicht widerstehen können:   "
-                StoryImage = "Kaltes Herz_38.jpg"
-                _StoryPointer = 408
-            ElseIf _StoryPointer = 408 Then
-                StoryText = "4-9: Wir stehen vor dem Wurststand. Der Duft der Roten Bratwürste mit Zwiebeln. "
-                StoryImage = "Kaltes Herz_39.jpg"
-                _StoryPointer = 409
-            ElseIf _StoryPointer = 409 Then
-                StoryText = "4-10: Wir kaufen eine Wurst und setzen uns an den Rand des Markplatzes."
-                StoryImage = "Kaltes Herz_40.jpg"
-                _StoryPointer = 410
-            ElseIf _StoryPointer = 410 Then
-                StoryText = "4-11: Während wir genüsslich in das knackige 'Weckle mit Wurst' beissen, beobachten wir, wie ein kleiner Güterzug entladen wird."
-                StoryImage = "Kaltes Herz_41.jpg"
-                _StoryPointer = 411
-            ElseIf _StoryPointer = 411 Then
-                StoryText = "4-12: Wir stellen uns gerade vor, wie diese kleine Lok tapfer den Berg hochdampft, über die große Brücke fährt und ab dem Bahnhof Zindelstein seine Fahrt " +
-                    "in den Schwarzwald fortsetzt."
-                StoryImage = "Kaltes Herz_42.jpg"
-                _StoryPointer = 412
-            ElseIf _StoryPointer = 412 Then
-                StoryText = "4-13: Auf dem Marktplatz wenden wir uns nun Richtung Osten und stehen rechts neben dem Martinstor vor einem prächtigen Haus mit Türmchen und Erkern. "
-                StoryImage = "Kaltes Herz_43.jpg"
-                _StoryPointer = 413
-            ElseIf _StoryPointer = 413 Then
-                StoryText = "4-14: Es gehörte einem reichen Kaufmann, der aus der Stadt weggezogen ist."
-                StoryImage = "Kaltes Herz_43.jpg"
-                _StoryPointer = 414
-            ElseIf _StoryPointer = 414 Then
-                StoryText = "4-15: Das Haus steht jetzt leer und ist zu verkaufen. "
-                StoryImage = "Kaltes Herz_43.jpg"
-                _StoryPointer = 415
-            ElseIf _StoryPointer = 415 Then
-                StoryText = "4-16: Wir gehen weiter nach Osten und kommen am Gasthaus 'zum Bären' vorbei."
-                StoryImage = "Kaltes Herz_44.jpg"
-                _StoryPointer = 416
-            ElseIf _StoryPointer = 416 Then
-                StoryText = "4-17: "
-                StoryImage = "Kaltes Herz_44.jpg"
-                _StoryPointer = 417
-            ElseIf _StoryPointer = 417 Then
-
-                DMX(3, 20, 0, 0, 0, 0, 180, 0, 0)
-
-                StoryText = "4-18: Über uns steht das mächtige Rathaus."
-                StoryImage = "Anlage_019.jpg"
-                _StoryPointer = 418
-            ElseIf _StoryPointer = 418 Then
-                Timer_Story_Auto.Interval = 21000
-                Timer_Music.Interval = 104000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                PlayMusic("H:\\H:\Eisenbahn\EisenbahnV4\Plugins\KlausEBspecific\Media\\Rathaus_2.mp3")
-                StoryText = "4-19: Mittags läutet das Glockenspiel des Rathauses..."
-                StoryImage = "Anlage_019.jpg"
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                _StoryPointer = 419
-            ElseIf _StoryPointer = 419 Then
-                StoryText = "4-20: ... und die Figuren drehen sich."
-                StoryImage = "Anlage_019.jpg"
-                _StoryPointer = 420
-            ElseIf _StoryPointer = 420 Then
-                StoryText = "4-21: Das Gebäude war bis 1896 in Universitätsbesitz."
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 421
-            ElseIf _StoryPointer = 421 Then
-                StoryText = "4-22: Dann wurde es von der Stadt gekauft ..."
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 422
-            ElseIf _StoryPointer = 422 Then
-                If _StoryAuto = 0 Then
-                    If _Music_laeuft = 1 Then
-                        StoryColor = Drawing.Color.LightGreen
-                    Else
-                        StoryColor = Drawing.Color.LightGray
-                    End If
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryText = "4-23: ... und bis 1901 zum Neuen Rathaus umgebaut."
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 423
-            ElseIf _StoryPointer = 423 Then
-                Timer_Story_Auto.Interval = _StoryZeit
-                _Music_laeuft = 0
-                Timer_Music.Stop()
-                StopMusic()
-                StoryText = "4-24: "
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 424
-            ElseIf _StoryPointer = 424 Then
-
-                DMX(3, 20, 0, 0, 0, 0, 120, 0, 0)
-
-                Timer_Music.Interval = 406000
-                Timer_Story_Auto.Interval = 50000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                PlayMusic("H:\\EB_Media\\Das kalte Herz Musik\\The Cure - A Forest - Concert Live 1984.mp3")
-                StoryText = "4-25: Der Bürgermeister jedoch ist eine unangenehme Person,... "
-                StoryImage = "Kaltes Herz_45.jpg"
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-
-                _StoryPointer = 425
-            ElseIf _StoryPointer = 425 Then
-                StoryText = "4-26: ... dessen Familie durch den Holzhandel reich geworden ist. "
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 426
-            ElseIf _StoryPointer = 426 Then
-                StoryText = "4-26: Neben dem Holzhandel betreibt er heute auch eine Papierfabrik."
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 427
-            ElseIf _StoryPointer = 427 Then
-                StoryText = "4-28: Steuern zahlt er wenig, aber sein Reichtum sichert ihm noch heute die Herrschaft über die Stadt. "
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 428
-            ElseIf _StoryPointer = 428 Then
-                StoryText = "4-29: Im letzten Jahrhundert haben seine Vorfahren die Stämme durch die Flöserei bis nach Holland gebracht."
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 429
-            ElseIf _StoryPointer = 429 Then
-                StoryText = "4-29:  Heute werden die Stämme auf langen, schweren Zügen bis nach Rotterdam transportiert. "
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 430
-            ElseIf _StoryPointer = 430 Then
-                StoryText = "4-31: Und von dort in die ganze Welt."
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 431
-            ElseIf _StoryPointer = 431 Then
-                If _StoryAuto = 0 Then
-                    If _Music_laeuft = 1 Then
-                        StoryColor = Drawing.Color.LightGreen
-                    Else
-                        StoryColor = Drawing.Color.LightGray
-                    End If
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryText = "4-32:   "
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 432
-            ElseIf _StoryPointer = 432 Then
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 128, 0)
-
-                PlayMusic("H:\EB_Media\Media\\Stop.mp3")
-                _Music_laeuft = 0
-                Timer_Music.Stop()
-                Timer_Story_Auto.Interval = _StoryZeit
-
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryText = "4-33:   "
-                StoryImage = "Kaltes Herz_45.jpg"
-                _StoryPointer = 500
-            ElseIf _StoryPointer = 500 Then
-
-                ' ***
-                ' *** Kapitel 5 - die schöne Tochter des Müllers
-                ' ***
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 200
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 100, 180)
-
-                StoryText = "5-1: Kapitel 5 - die schöne Tochter des Müllers  "
-                StoryImage = "Kaltes Herz_46.jpg"
-                _StoryPointer = 501
-            ElseIf _StoryPointer = 501 Then
-
-                StoryText = "5-2: Wir steigen weiter auf den Berg und kommen zum Haus der Fallers. Die Sonne ist schon höher gestiegen. "
-                StoryImage = "Kaltes Herz_46.jpg"
-                _StoryPointer = 502
-            ElseIf _StoryPointer = 502 Then
-                StoryText = "5-3: Die Fallers sind eine alteigesessene Bauernfamilie im Schwarzwald. "
-                StoryImage = "Kaltes Herz_47.jpg"
-                _StoryPointer = 503
-            ElseIf _StoryPointer = 503 Then
-                StoryText = "5-4: Um ihr Haus herum erstreckt sich ein riesiger Obstgarten."
-                StoryImage = "Kaltes Herz_47.jpg"
-                _StoryPointer = 504
-            ElseIf _StoryPointer = 504 Then
-                StoryText = "5-5: Der Familienbetrieb stellt einen hervorragenden Apfelmost her. "
-                StoryImage = "Kaltes Herz_48.jpg"
-                _StoryPointer = 505
-            ElseIf _StoryPointer = 505 Then
-                StoryText = "5-6: Durch das offene Fenster hören wir ein mehrstimmiges ..."
-                StoryImage = "Kaltes Herz_48.jpg"
-                _StoryPointer = 506
-            ElseIf _StoryPointer = 506 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Italic)
-                StoryText = "5-7: ... Trinke 'mer noch oiner...  "
-                StoryImage = "Kaltes Herz_50.jpg"
-                _StoryPointer = 507
-            ElseIf _StoryPointer = 507 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                StoryText = "5-8: Da trinken wir doch gerne ein Glas Most mit. Es gibt aber auch Tannenzäpfle. "
-                StoryImage = "Kaltes Herz_50.jpg"
-                _StoryPointer = 508
-            ElseIf _StoryPointer = 508 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                StoryText = "5-9: Hier gönnen wir uns eine kleine Pause und beobachten dabei die Züge."
-                StoryImage = "Kaltes Herz_50.jpg"
-                _StoryPointer = 509
-            ElseIf _StoryPointer = 509 Then
-                StoryText = "5-10: In der Nähe begrüßt eine Kapelle mit ihrer zarten Glocke den neuen Tag."
-                StoryImage = "Kaltes Herz_51.jpg"
-                _StoryPointer = 510
-            ElseIf _StoryPointer = 510 Then
-                StoryText = "5-11: Die Maria Hilf Kapelle."
-                StoryImage = "Kaltes Herz_51.jpg"
-                _StoryPointer = 511
-            ElseIf _StoryPointer = 511 Then
-                StoryText = "5-12: Hier geht die Stadt in den Wald über, der auch heute noch schwarz und unheimlich auf die Menschen wirkt."
-                StoryImage = "Kaltes Herz_51.jpg"
-                _StoryPointer = 512
-            ElseIf _StoryPointer = 512 Then
-                StoryText = "5-13: Manchmal meint man, der Wald greife nach den Menschen."
-                StoryImage = "Kaltes Herz_51.jpg"
-                _StoryPointer = 513
-            ElseIf _StoryPointer = 513 Then
-                StoryText = "5-14: Hier beginnt der Weg, der über den Hexenplatz in das Höllental und weiter zur Köhlerei von Peter Kohlenmunk führt. "
-                StoryImage = "Kaltes Herz_52.jpg"
-                _StoryPointer = 514
-            ElseIf _StoryPointer = 514 Then
-                StoryText = "5-15: Die alte Handelsstrasse führte bis an den Bodensee und nach Bayern."
-                StoryImage = "Kaltes Herz_53.jpg"
-                _StoryPointer = 515
-            ElseIf _StoryPointer = 515 Then
-                StoryText = "5-16: Von einer Lichtung sieht man einen großen, stolzen Hirsch."
-                StoryImage = "Kaltes Herz_53.jpg"
-                _StoryPointer = 516
-            ElseIf _StoryPointer = 516 Then
-                StoryText = "5-17: Wir folgen dem Mühlenweg und steigen hinab zur Mühle."
-                StoryImage = "Kaltes Herz_53.jpg"
-                _StoryPointer = 517
-            ElseIf _StoryPointer = 517 Then
-                DMX(3, 20, 0, 0, 0, 0, 0, 180, 0)
-                StoryText = "5-18: Die Mühle ist ein beliebtes Ausflugsziel für die Menschen in Altenstein. Hier soll schon Noah die Bretter für seine Arche gesägt haben."
-                StoryImage = "Kaltes Herz_54.jpg"
-                _StoryPointer = 518
-            ElseIf _StoryPointer = 518 Then
-                DMX(3, 20, 0, 0, 0, 0, 0, 250, 0)
-                StoryText = "5-19: Die Mühle wird an manchen Wochenenden noch betrieben."
-                StoryImage = "Kaltes Herz_55.jpg"
-                _StoryPointer = 519
-            ElseIf _StoryPointer = 519 Then
-                StoryText = "5-20: Hier legen wir die nächste Pause ein."
-                StoryImage = "Kaltes Herz_56.jpg"
-                _StoryPointer = 520
-            ElseIf _StoryPointer = 520 Then
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 20
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                StoryText = "5-21: Der Müller hat eine wunderschöne Tochter namens Lisbeth."
-                StoryImage = "Kaltes Herz_57.jpg"
-                _StoryPointer = 521
-            ElseIf _StoryPointer = 521 Then
-                Timer_Story_Auto.Interval = 242000
-                Timer_Music.Interval = 242000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Geli.mp4")
-                StoryText = "5-22: Rainhard Fendrich - Du bist schön"
-                StoryColor = Drawing.Color.LightGreen
-                _StoryPointer = 522
-            ElseIf _StoryPointer = 522 Then
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 100
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 128, 0)
-
-                _kalteHerz.StopVideo()
-                Timer_Music.Stop()
-                _Music_laeuft = 0
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryText = "5-23: "
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 523
-            ElseIf _StoryPointer = 523 Then
-                StoryText = "5-24: Wir besuchen noch die kleine Kapelle neben der Mühle."
-                StoryImage = "Kaltes Herz_57.jpg"
-                _StoryPointer = 524
-            ElseIf _StoryPointer = 524 Then
-                StoryText = "5-25: Danach gehen wir in die Stadt zurück. Der erste Urlaubstag neigt sich dem Ende zu."
-                StoryImage = "Kaltes Herz_57.jpg"
-                _StoryPointer = 525
-            ElseIf _StoryPointer = 525 Then
-                StoryText = "5-26: An unserem zweiten Urlaubstag fahren wir mit dem Mountainbike zur Köhlerei von Peter Kohlenmunk. "
-                StoryImage = "Kaltes Herz_60.jpg"
-                _StoryPointer = 526
-            ElseIf _StoryPointer = 526 Then
-                StoryText = "5-27: Uns wird bewusst, dass wir nun in die Sagenwelt des Schwarzwaldes eintauchen."
-                StoryImage = "Kaltes Herz_60.jpg"
-                _StoryPointer = 600
-            ElseIf _StoryPointer = 600 Then
-
-                ' ***
-                ' *** Kapitel 6 - Peter Kohlenmunk
-                ' ***
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 100
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 200)
-
-                StoryText = "6-1: Kapitel 6 - Peter Kohlenmunk "
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 601
-            ElseIf _StoryPointer = 601 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 24000
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                StoryText = "6-2: Peter Kohlenmunk betreibt eine Köhlerei, die er von seinem Vater geerbt hat. "
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 602
-            ElseIf _StoryPointer = 602 Then
-                StoryText = "6-3: Aber er ist mit der schmutzigen und anstrengenden Arbeit nicht zufrieden."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 603
-            ElseIf _StoryPointer = 603 Then
-                StoryText = "6-4: Reich geworden sind nur die anderen. "
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 604
-            ElseIf _StoryPointer = 604 Then
-                StoryText = "6-5: Der Schmied kauft viel Holzkohle von Peter, aber er bezahlt nur wenig."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 605
-            ElseIf _StoryPointer = 605 Then
-                StoryText = "6-6: Oder der Müller, der Peters Holzkohle zum Grillen verwendet."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 606
-            ElseIf _StoryPointer = 606 Then
-                StoryText = "6-7: Er kauft gutes, teueres Grillgut, aber die Holzkohle darf nicht viel kosten. "
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 607
-            ElseIf _StoryPointer = 607 Then
-                StoryText = "6-8: Einmal in der Woche bringt Peter seine Holzkohle zu einem kleinen Bahnhof und lädt sie in einen Güterwagen."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 608
-            ElseIf _StoryPointer = 608 Then
-
-                Hue_Control = 2
-                Bri_soll = 100
-                Sat_soll = 250
-                Col_soll = 24000
-
-                DMX(3, 20, 0, 0, 128, 128, 128, 0, 0)
-
-                StoryText = "6-9: Eine kleine Lok zieht die Güterwagen aus dem Schwarzwald in die Stadt."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 609
-            ElseIf _StoryPointer = 609 Then
-                StoryText = "6-10: Nachdem er seine Holzkohle verkauft hat, geht er in die Ladenzeile am Bahnhof, ..."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 610
-            ElseIf _StoryPointer = 610 Then
-                StoryText = "6-11: ... um sich für kleines Geld ein warmes Gericht zu kaufen."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 611
-            ElseIf _StoryPointer = 611 Then
-                StoryText = "6-12: Wenn er mit seinen Geschäften zufrieden ist, trinkt er ein oder zwei Tannenzäpfle dazu."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 612
-            ElseIf _StoryPointer = 612 Then
-                StoryText = "6-13: Und träumt von den gegrillten roten Würstchen auf dem Marktplatz."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 613
-            ElseIf _StoryPointer = 613 Then
-
-                DMX(3, 20, 0, 0, 0, 80, 128, 100, 80)
-
-                StoryText = "6-14: Danach geht er noch zur Mühle."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 614
-            ElseIf _StoryPointer = 614 Then
-                StoryText = "6-15: Auf der Bank bei der kleinen Kapelle ruht er sich bis zur Abfahrt des Zuges aus."
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 615
-            ElseIf _StoryPointer = 615 Then
-                StoryText = "6-16: Wenn er die schöne Tochter des Müllers im Garten sieht und sie ihm zulacht, ... "
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 616
-            ElseIf _StoryPointer = 616 Then
-                StoryText = "6-17: ... dann wird ihm bewusst, dass er bei diesem Mädchen keine Chancen hat. "
-                StoryImage = "Kaltes Herz_61.jpg"
-                _StoryPointer = 617
-            ElseIf _StoryPointer = 617 Then
-
-                DMX(3, 20, 0, 0, 0, 0, 128, 128, 80)
-
-                StoryText = "6-18: Peter wird vom lauten Hupen eines Autos aus seinen Gedanken gerissen. "
-                StoryImage = "Kaltes Herz_71.jpg"
-                _StoryPointer = 618
-            ElseIf _StoryPointer = 618 Then
-                StoryText = "6-19: Er erkennt den Bürgermeister, der von einer Reise nach Holland zurückkehrt ... "
-                StoryImage = "Kaltes Herz_71.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 619
-            ElseIf _StoryPointer = 619 Then
-                StoryText = "6-20: ... und dort gute Geschäfte mit dem Holz aus dem Schwarzwald gemacht hat. "
-                StoryImage = "Kaltes Herz_71.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 620
-            ElseIf _StoryPointer = 620 Then
-                StoryText = "6-21: Peter beobachtet den Bürgermeister, wie er in seinem großen, reich geschmückten Haus verschwindet. "
-                StoryImage = "Kaltes Herz_72.jpg"
-                _StoryPointer = 621
-            ElseIf _StoryPointer = 621 Then
-                StoryText = "6-22: Beim Blick über das Tal merkt er, wie die anstrengende Arbeit ihn müde gemacht hat ... "
-                StoryImage = "Kaltes Herz_70.jpg"
-                _StoryPointer = 622
-            ElseIf _StoryPointer = 622 Then
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 20
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 128, 0)
-
-                StoryText = "6-23: ... und er schläft auf der Bank vor der Kapelle ein."
-                StoryImage = "Kaltes Herz_70.jpg"
-                _StoryPointer = 623
-            ElseIf _StoryPointer = 623 Then
-
-                Timer_Story_Auto.Interval = 12400
-                Timer_Music.Interval = 222000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\für immer jung.mp4")
-                StoryText = "6-24: Wolfgang Ambros und Andre Heller - Für immer jung"
-                StoryImage = "Kaltes Herz_70.jpg"
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                _StoryPointer = 624
-            ElseIf _StoryPointer = 624 Then
-                Timer_Story_Auto.Interval = 35000
-                StoryText = "6-25: Er träumt davon, viel Geld zu haben und angesehen zu sein."
-                _StoryPointer = 625
-            ElseIf _StoryPointer = 625 Then
-                Timer_Story_Auto.Interval = 26300
-                StoryText = "6-26: "
-                _StoryPointer = 626
-            ElseIf _StoryPointer = 626 Then
-                Timer_Story_Auto.Interval = 34200
-                StoryText = "6-27: Ein schnelles Auto möchte er haben."
-                _StoryPointer = 627
-            ElseIf _StoryPointer = 627 Then
-                Timer_Story_Auto.Interval = 25900
-                StoryText = "6-28: "
-                _StoryPointer = 628
-            ElseIf _StoryPointer = 628 Then
-                Timer_Story_Auto.Interval = 34200
-                StoryText = "6-29: Und ein großes Haus."
-                _StoryPointer = 629
-            ElseIf _StoryPointer = 629 Then
-                Timer_Story_Auto.Interval = 70000
-                If _StoryAuto = 0 Then
-                    If _Music_laeuft = 1 Then
-                        StoryColor = Drawing.Color.LightGreen
-                    Else
-                        StoryColor = Drawing.Color.LightGray
-                    End If
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryText = "6-30: "
-                _StoryPointer = 630
-            ElseIf _StoryPointer = 630 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 10000
-
-                DMX(3, 20, 0, 0, 100, 100, 128, 0, 0)
-
-                _kalteHerz.StopVideo()
-                Timer_Music.Stop()
-                _Music_laeuft = 0
-
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                Timer_Story_Auto.Interval = _StoryZeit
-                StoryText = "6-31: Den schönen Sonnenuntergang kann Peter nicht geniessen."
-                StoryImage = "Kaltes Herz_64.jpg"
-                _StoryPointer = 631
-            ElseIf _StoryPointer = 631 Then
-                StoryText = "6-32: Danach geht zurück zu seinem Zug. Über die große Brücke fährt er zurück zu seiner Köhlerei."
-                StoryImage = "Kaltes Herz_64.jpg"
-                _StoryPointer = 632
-            ElseIf _StoryPointer = 632 Then
-                StoryText = "6-33: "
-                StoryImage = "Kaltes Herz_64.jpg"
-                _StoryPointer = 633
-            ElseIf _StoryPointer = 633 Then
-                StoryText = "6-34: "
-                StoryImage = "Kaltes Herz_64.jpg"
-                _StoryPointer = 634
-            ElseIf _StoryPointer = 634 Then
-                StoryText = "6-35: "
-                StoryImage = "Kaltes Herz_64.jpg"
-                _StoryPointer = 635
-            ElseIf _StoryPointer = 635 Then
-                StoryText = "6-36: Wochen später geht Peter in ein abgelegenes Waldstück, um neues Holz für seinen nächsten Meiler zu schlagen."
-                StoryImage = "Kaltes Herz_64.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 636
-            ElseIf _StoryPointer = 636 Then
-
-                Hue_Control = 2
-                Bri_soll = 100
-                Sat_soll = 250
-                Col_soll = 28000
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                StoryText = "6-37: Der Tag beginnt mit morgendlicher Frische. Doch im Laufe des Tages wird die Luft schwül und Peter schwitzt sehr bei seiner Arbeit. "
-                StoryImage = "Kaltes Herz_73.jpg"
-                _StoryPointer = 637
-            ElseIf _StoryPointer = 637 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 38000
-
-                StoryText = "6-38:  Er bemerkt nicht, dass dunkle Wolken den Himmel verfinstern und ein Gewitter heraufzieht."
-                StoryImage = "Kaltes Herz_74.jpg"
-                _StoryPointer = 638
-            ElseIf _StoryPointer = 638 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 38000
-
-                StoryText = "6-39:  Den ersten Donner bemerkt er nicht, so sehr ist er in seine Arbeit vertieft."
-                StoryImage = "Kaltes Herz_74.jpg"
-                _StoryPointer = 639
-            ElseIf _StoryPointer = 639 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 45000
-
-                StoryText = "6-40: Der Tag endet bereits. Die Wolken verfinstern immer mehr den Himmel. Blitze zucken. Donnergrollen."
-                StoryImage = "Kaltes Herz_75.jpg"
-                _StoryPointer = 640
-            ElseIf _StoryPointer = 640 Then
-                StoryText = "6-41: Das Rauschen des Sturmes in den Tannen. "
-                StoryImage = "Kaltes Herz_75.jpg"
-                _StoryPointer = 641
-            ElseIf _StoryPointer = 641 Then
-                StoryText = "6-42: Der Abend bricht an und geht in eine Sturmnacht über. Peter irrt durch den Wald und sucht einen geschützten Platz."
-                StoryImage = "Kaltes Herz_75.jpg"
-                _StoryPointer = 642
-            ElseIf _StoryPointer = 642 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 55000
-
-                StoryText = "6-43: Die Wipfel der Tannen biegen sich im Sturm. Die Blitze werden zu leuchtenden Augen in den Zweigen. Äste werden zu Armen die nach Peter greifen. "
-                StoryImage = "Kaltes Herz_76.jpg"
-                _StoryPointer = 643
-            ElseIf _StoryPointer = 643 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 55000
-
-                StoryText = "6-44: Das Donnergrollen wird zum hämischen Lachen des Bürgermeisters. "
-                StoryImage = "Kaltes Herz_76.jpg"
-                _StoryPointer = 644
-            ElseIf _StoryPointer = 644 Then
-
-                Hue_Control = 2
-                Bri_soll = 120
-                Sat_soll = 250
-                Col_soll = 28000
-
-                StoryText = "6-45: Peter begegnet dem riesigen und gefährlichen Holländer-Michel, der in solchen Nächten als Zauberer sein Unwesen treibt.  "
-                StoryImage = "Kaltes Herz_78.jpg"
-                _StoryPointer = 645
-            ElseIf _StoryPointer = 645 Then
-                StoryText = "6-46 Doch Peter findet Schutz unter einem überhängenden Fels. Und entkommt damit dem Holländer-Michel. "
-                StoryImage = "Kaltes Herz_79.jpg"
-                _StoryPointer = 646
-            ElseIf _StoryPointer = 646 Then
-                StoryText = "6-47: Der Sturm endet in der Nacht und Peter findet noch etwas Ruhe."
-                StoryImage = "Kaltes Herz_79.jpg"
-                _StoryPointer = 647
-            ElseIf _StoryPointer = 647 Then
-                StoryText = "6-48: Bei seiner nächsten Reise nach Altenstein trifft Peter an der kleinen Kapelle den alten Schatzhauser. "
-                StoryImage = "Kaltes Herz_80.jpg"
-                _StoryPointer = 648
-            ElseIf _StoryPointer = 648 Then
-                StoryText = "6-49: Sie sitzen auf der Bank vor der Kapelle."
-                StoryImage = "Kaltes Herz_80.jpg"
-                _StoryPointer = 649
-            ElseIf _StoryPointer = 649 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                StoryText = "6-50: Der Schatzhauser erzählt Peter die Geschichte vom Glasmännlein und wie man es ruft: "
-                StoryImage = "Kaltes Herz_80.jpg"
-                _StoryPointer = 650
-            ElseIf _StoryPointer = 650 Then
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Italic)
-                StoryText = "6-51: Glasmännlein im grünen Tannenwald ..."
-                StoryImage = "Kaltes Herz_85.jpg"
-                _StoryPointer = 651
-            ElseIf _StoryPointer = 651 Then
-                StoryText = "6-52: ... bist schon viel hundert Jahre alt ..."
-                StoryImage = "Kaltes Herz_85.jpg"
-                _StoryPointer = 652
-            ElseIf _StoryPointer = 652 Then
-                StoryText = "6-53: ... Dein ist all Land wo Tannen stehen ..."
-                StoryImage = "Kaltes Herz_85.jpg"
-                _StoryPointer = 653
-            ElseIf _StoryPointer = 653 Then
-                StoryText = "6-54: ... lässt dich nur Sonntagskindern sehn."
-                StoryImage = "Kaltes Herz_85.jpg"
-                _StoryPointer = 654
-            ElseIf _StoryPointer = 654 Then
-
-                Hue_Control = 1
-                CT_soll = 260
-                Bri_soll = 100
-
-                StoryFont = New System.Drawing.Font(StoryFont.FontFamily.Name, StoryFont.Size, Drawing.FontStyle.Bold)
-                StoryText = "6-55: So wie der Schatzhauser die Geschichte vom Glasmännlein erzählt, ... "
-                StoryImage = "Kaltes Herz_87.jpg"
-                _StoryPointer = 655
-            ElseIf _StoryPointer = 655 Then
-                StoryText = "6-56: ... vergeht die Zeit und die Sonne neigt sich schon zum Horizont. "
-                StoryImage = "Kaltes Herz_87.jpg"
-                _StoryPointer = 656
-            ElseIf _StoryPointer = 656 Then
-                StoryText = "6-57: Peter erwischt gerade noch den letzten Zug, um wieder zu seiner Köhlerei zu kommen."
-                StoryImage = "Kaltes Herz_87.jpg"
-                _StoryPointer = 657
-            ElseIf _StoryPointer = 657 Then
-                Timer_Story_Auto.Interval = 290000
-                Timer_Music.Interval = 290000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Downtown Train.mp4")
-                StoryText = "6-58: Rod Stewart - Downtown Train"
-                StoryImage = "Kaltes Herz_64.jpg"
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGreen
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                _StoryPointer = 658
-            ElseIf _StoryPointer = 658 Then
-
-                Hue_Control = 1
-                Bri_soll = 100
-                CT_soll = 260
-
-                DMX(3, 20, 80, 80, 80, 80, 80, 80, 80)
-
-                _kalteHerz.StopVideo()
-                _Music_laeuft = 0
-                Timer_Music.Stop()
-                StoryText = "6-59: "
-                StoryImage = "Kaltes Herz_64.jpg"
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 700
-            ElseIf _StoryPointer = 700 Then
-
-                ' ***
-                ' *** Kapitel 7 - Peter Kohlenmunk trifft das Glasmännlein und wird reich
-                ' ***
-
-                Hue_Control = 1
-                Bri_soll = 50
-                CT_soll = 260
-
-                'DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                PlayMusic("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kap7-Peter_1.mp3")
-
-                StoryText = "7-1: Kapitel 7 - Peter Kohlenmunk trifft das Glasmännlein und wird reich "
-                StoryImage = "Kaltes Herz_88.jpg"
-                '_StoryPointer = 701
-                _StoryPointer = 710
-
-            ElseIf _StoryPointer = 701 Then
-                StoryText = "7-2: Als Peter in den kommenden Tagen wieder zum Holzsammeln in den Wald geht, kommt er am Tannenbühl mit den mächtigen Holländer-Tannen vorbei. "
-                StoryImage = "Kaltes Herz_88.jpg"
-                _StoryPointer = 702
-            ElseIf _StoryPointer = 702 Then
-                StoryText = "7-3: Da fällt ihm der Spruch des Schatzhausers wieder ein und er sagt ihn leise vor sich hin."
-                StoryImage = "Kaltes Herz_88.jpg"
-                _StoryPointer = 703
-            ElseIf _StoryPointer = 703 Then
-                StoryText = "7-4: Glasmännlein im grünen Tannenwald ..."
-                StoryImage = "Kaltes Herz_88.jpg"
-                _StoryPointer = 704
-            ElseIf _StoryPointer = 704 Then
-                StoryText = "7-5: ... bist schon viel hundert Jahre alt ..."
-                StoryImage = "Kaltes Herz_88.jpg"
-                _StoryPointer = 705
-            ElseIf _StoryPointer = 705 Then
-                StoryText = "7-6: ... Dein ist all Land wo Tannen stehen ..."
-                StoryImage = "Kaltes Herz_88.jpg"
-                _StoryPointer = 706
-            ElseIf _StoryPointer = 706 Then
-                StoryText = "7-7: ... lässt dich nur Sonntagskindern sehn."
-                StoryImage = "Kaltes Herz_88.jpg"
-                _StoryPointer = 707
-            ElseIf _StoryPointer = 707 Then
-                StoryText = "7-8: Da erscheint ihm eine kleine Gestalt."
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 708
-            ElseIf _StoryPointer = 708 Then
-                StoryText = "7-9: Vorsichtig schiebt diese ein paar Zweige beiseite und tritt bedächtig auf den Weg vor Peter. "
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 709
-            ElseIf _StoryPointer = 709 Then
-                StoryText = "7-10: Die Gestalt stellt sich als das Glasmännchen vor und bittet Peter freundlich, drei Wünsche zu äußern."
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 710
-            ElseIf _StoryPointer = 710 Then
-                StoryText = "7-11: Peter wünscht sich zuerst, besser zu tanzen als der Tanzbodenkönig ... "
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 711
-            ElseIf _StoryPointer = 711 Then
-                StoryText = "7-12: ... und im Wirtshaus immer soviel Geld in den Taschen zu haben wie der reiche Schmied Ezechiel. "
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 712
-            ElseIf _StoryPointer = 712 Then
-                StoryText = "7-13: Peters dumme Wünsche machen das Glasmännchen wütend, und es droht, ihm den dritten Wunsch zu verweigern, wenn er nicht klug ist."
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 713
-            ElseIf _StoryPointer = 713 Then
-                StoryText = "7-14: Peter wünscht sich als zweites eine Glashütte, schlägt aber den Vorschlag des Glasmännchens aus,.. "
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 714
-            ElseIf _StoryPointer = 714 Then
-                StoryText = "7-15: ... sich als dritten Wunsch den Verstand dazu zu wünschen, eine Glashütte richtig zu führen."
-                _StoryPointer = 715
-            ElseIf _StoryPointer = 715 Then
-                StoryText = "7-15: Peter will lieber ein schnelles Auto haben. Das Glasmännchen gerät so in Rage, dass es Peter den dritten Wunsch verweigert."
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 716
-            ElseIf _StoryPointer = 716 Then
-                StoryText = "7-17: Die zwei Wünsche werden Peter erfüllt und so ist ihm das Glück hold."
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 717
-            ElseIf _StoryPointer = 717 Then
-                StoryText = "7-18: Er hat die schönste Glashütte im Schwarzwald, tanzt besser als alle anderen und ..."
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 718
-            ElseIf _StoryPointer = 718 Then
-                StoryText = "7-19: ... seine Taschen sind beim Spielen im Wirtshaus stets mit soviel Geld gefüllt wie die vom Ezechiel. "
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 719
-            ElseIf _StoryPointer = 719 Then
-                StoryText = "7-20: Er verschenkt sein Geld an Arme und wird schnell zum angesehensten Mann des Schwarzwaldes."
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 720
-            ElseIf _StoryPointer = 720 Then
-                StoryText = "7-21: Seine Glashütte interessiert ihn bald nicht mehr und so verfällt sie. Er wird wieder bettelarm. "
-                StoryImage = "Kaltes Herz_89.jpg"
-                _StoryPointer = 721
-            ElseIf _StoryPointer = 721 Then
-                StoryText = "7-22: Nur wenn er im Wirtshaus den Schmied Ezechiel trifft, hat er stets genau soviel Geld in der Tasche wie er. "
-                StoryImage = "Kaltes Herz_92.jpg"
-                _StoryPointer = 722
-            ElseIf _StoryPointer = 722 Then
-                StoryText = "7-23: Peter gewinnt im Spiel ständig und zieht Ezechiel alles Geld aus den Taschen, bis dieser keines mehr hat."
-                StoryImage = "Kaltes Herz_92.jpg"
-                _StoryPointer = 723
-            ElseIf _StoryPointer = 723 Then
-                StoryText = "7-24: Und damit Peter auch nicht. "
-                StoryImage = "Kaltes Herz_92.jpg"
-                _StoryPointer = 724
-            ElseIf _StoryPointer = 724 Then
-                StoryText = "7-25: Daraufhin wird Peter aus der Stadt gejagt. Er flieht auf dem Weg durch das Höllental. "
-                StoryImage = "Kaltes Herz_92.jpg"
-                _StoryPointer = 725
-            ElseIf _StoryPointer = 725 Then
-
-                Hue_Control = 2
-                Bri_soll = 100
-                Sat_soll = 250
-                Col_soll = 28000
-
-                StoryText = "7-26: Vor lauter Unglück geht Peter in den Wald zum Holländer-Michel ... "
-                StoryImage = "Kaltes Herz_94.jpg"
-                _StoryPointer = 726
-            ElseIf _StoryPointer = 726 Then
-
-                Hue_Control = 2
-                Bri_soll = 20
-                Sat_soll = 250
-                Col_soll = 28000
-
-                StoryText = "7-27:  ... und tauscht bei diesem sein Herz gegen einen kalten Stein und unendlich viel Geld ein. "
-                _StoryPointer = 727
-            ElseIf _StoryPointer = 727 Then
-                Timer_Story_Auto.Interval = 279000
-                Timer_Music.Interval = 279000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\The tell tale heart.mp4")
-                StoryImage = "Kaltes Herz_101.jpg"
-                StoryText = "7-28: The Alan Parsons project - The tell tale heart "
-                StoryColor = Drawing.Color.LightGreen
-                _StoryPointer = 728
-            ElseIf _StoryPointer = 728 Then
-
-                Hue_Control = 2
-                Bri_soll = 100
-                Sat_soll = 250
-                Col_soll = 28000
-
-                _kalteHerz.StopVideo()
-                Timer_Music.Stop()
-                _Music_laeuft = 0
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryText = "7-29:  "
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 800
-            ElseIf _StoryPointer = 800 Then
-
-                ' ***
-                ' *** Kapitel 8 - Peter Kohlenmunk wird böse
-                ' ***
-
-                Hue_Control = 1
-                Bri_soll = 100
-                CT_soll = 260
-
-                DMX(3, 20, 100, 100, 100, 100, 100, 100, 100)
-
-                StoryImage = "Kaltes Herz_101.jpg"
-                StoryText = "8-1: Kapitel 8 - Peter Kohlenmunk wird böse "
-                _StoryPointer = 801
-            ElseIf _StoryPointer = 801 Then
-                StoryText = "8-2: Mit dem vielen Geld in der Tasche beginnt Peter eine Weltreise. "
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 8-1.mp4")
                 _StoryPointer = 802
+
             ElseIf _StoryPointer = 802 Then
-
-                Hue_Control = 1
-                Bri_soll = 20
-                CT_soll = 260
-
-                DMX(3, 20, 0, 0, 0, 0, 0, 0, 0)
-
-                Timer_Story_Auto.Interval = 9500 ' Musik-Intervall geteilt durch 42
-                Timer_Music.Interval = 413000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\blank & jones & mark reeder ft. robert smith - a forest (ma).mp4")
-                StoryText = "8-3: Bald aber muß er feststellen, dass er sich an nichts mehr erfreuen kann. "
-                _StoryPointer = 803
-            ElseIf _StoryPointer = 803 Then
-                StoryColor = Drawing.Color.LightGray
-                StoryText = "8-4: Dass er nicht mehr lachen und weinen kann, keine Liebe empfindet und nichts mehr schön ist."
-                _StoryPointer = 804
-            ElseIf _StoryPointer = 804 Then
-                StoryColor = Drawing.Color.LightGray
-                StoryText = "8-5: Peter reist mit viel Geld durch die Lande; doch er langweilt sich und kann sich an nichts mehr erfreuen."
-                _StoryPointer = 805
-            ElseIf _StoryPointer = 805 Then
-                StoryText = "8-6: Er geht in den Schwarzwald zurück und geht zum Holländer-Michel, um sein Herz zurückzufordern. "
-                _StoryPointer = 806
-            ElseIf _StoryPointer = 806 Then
-                StoryText = "8-7: Michel verweigert den Wunsch mit dem Hinweis, dass er sein Herz nach dem Tod wiedererhält. "
-                _StoryPointer = 807
-            ElseIf _StoryPointer = 807 Then
-                StoryText = "8-8: Dafür gibt er Peter noch mehr Geld und rät ihm zu heiraten. "
-                _StoryPointer = 808
-            ElseIf _StoryPointer = 808 Then
-                StoryText = "8-9 Peter kauft das schöne Haus am Marktplatz und renoviert es. "
-                _StoryPointer = 809
-            ElseIf _StoryPointer = 809 Then
-                StoryText = "8-10: Er arbeitet fortan als Händler und Geldverleiher zu Wucherzinsen."
-                _StoryPointer = 810
-            ElseIf _StoryPointer = 810 Then
-                StoryText = "8-11: Können die Armen ihm nicht alles zurückerstattten, wird er sehr böse und verjagt sie. "
-                _StoryPointer = 811
-            ElseIf _StoryPointer = 811 Then
-                StoryText = "8-12: Seiner kranken Mutter gibt er sonntags widerwillig ein kleines Geldstück."
-                _StoryPointer = 812
-            ElseIf _StoryPointer = 812 Then
-                StoryText = "8-13: In seinem schönen Haus darf sie nicht wohnen."
-                _StoryPointer = 813
-            ElseIf _StoryPointer = 813 Then
-                StoryText = "8-14: Nun geht er auf Brautschau und hält um die Hand von Lisbeth, der wunderschönen Tochter des Müllers an. "
-                _StoryPointer = 814
-            ElseIf _StoryPointer = 814 Then
-                StoryText = "8-15 Sie heiraten, doch Lisbeth fühlt sich bald unglücklich, weil sie den Armen nicht helfen darf,..."
-                _StoryPointer = 815
-            ElseIf _StoryPointer = 815 Then
-                StoryText = "8-16: ... trotz ihres immensen Vermögens."
-                _StoryPointer = 816
-            ElseIf _StoryPointer = 816 Then
-                StoryText = "8-17: Peter ist nur schlecht gelaunt und geizig, aber verbietet Lisbeth alles, weshalb sie für noch geiziger gehalten wird."
-                _StoryPointer = 817
-            ElseIf _StoryPointer = 817 Then
-                StoryText = "8-18: Lisbeth leidet und wünscht sich, Peter nie geheiratet zu haben."
-                _StoryPointer = 818
-            ElseIf _StoryPointer = 818 Then
-                StoryText = "8-19: Als eines Tages Peters alter Freund Schatzhauser vorbeikommt und um einen Schluck Wasser bittet, ... "
-                _StoryPointer = 819
-            ElseIf _StoryPointer = 819 Then
-                StoryText = "8-20: ... bietet ihm Lisbeth Wein und Brot aus Peters Kelch an. "
-                _StoryPointer = 820
-            ElseIf _StoryPointer = 820 Then
-                StoryText = "8-21: Der Mann bedankt sich und meint, dass so ein gutes Herz belohnt werden wird."
-                _StoryPointer = 821
-            ElseIf _StoryPointer = 821 Then
-                StoryText = "8-22: In dem Moment kommt Peter zurück."
-                _StoryPointer = 822
-            ElseIf _StoryPointer = 822 Then
-                StoryText = "8-23: Außer sich vor Wut schlägt er auf Lisbeth ein, die ihn daraufhin verlässt."
-                _StoryPointer = 823
-            ElseIf _StoryPointer = 823 Then
-                StoryText = "8-24: Sie zieht sich in den Schwarzwalsd zurück und versteckt sich vor Peter."
-                _StoryPointer = 824
-            ElseIf _StoryPointer = 824 Then
-                StoryText = "8-25: Als Peter nun alleine in dem großen Haus lebt, bereut er seine Tat."
-                _StoryPointer = 825
-            ElseIf _StoryPointer = 825 Then
-                StoryText = "8-26: Wenn Peter nun über den Markt geht, hört er, wie die Leute tuscheln, ... "
-                _StoryPointer = 826
-            ElseIf _StoryPointer = 826 Then
-                StoryText = "8-27: ... dass Peter die schönste Blume des Schwarzwaldes zertreten hat. "
-                _StoryPointer = 827
-            ElseIf _StoryPointer = 827 Then
-                StoryText = "8-28: Die Leute belügt er, indem er sagt, seine Frau sei bei einer Schönheitskur in Baden-Baden. "
-                _StoryPointer = 828
-            ElseIf _StoryPointer = 828 Then
-                StoryText = "8-29: Peter schläft schlecht und hört Stimmen, die ihm sagen, er solle sich ein wärmeres Herz verschaffen. "
-                _StoryPointer = 829
-            ElseIf _StoryPointer = 829 Then
-                StoryText = "8-30: Er gibt dem Glasmännchen die Schuld, das sich daraufhin in ein Ungeheuer verwandelt, weil ihn Peter beleidigt hat."
-                _StoryPointer = 830
-            ElseIf _StoryPointer = 830 Then
-                StoryText = "8-31: Nur um Peters Frau willen, die ihm half, gibt das Glasmännchen Peter acht Tage Zeit, sein Leben zu überdenken."
-                _StoryPointer = 831
-            ElseIf _StoryPointer = 831 Then
-                StoryText = "8-32 Schließlich geht er in den Wald und ruft das Glasmännchen, da er ja noch einen letzten Wunsch frei hat. "
-                _StoryPointer = 832
-            ElseIf _StoryPointer = 832 Then
-                StoryText = "8-33: Er will sein Herz zurückhaben, doch das Glasmännchen kann ihm nicht helfen. Aber es verrät ihm einen Trick."
-                _StoryPointer = 833
-            ElseIf _StoryPointer = 833 Then
-                StoryText = "8-34: Peter geht zum dritten Mal zum Holländer-Michel und behauptet, dieser habe ihn betrogen."
-                _StoryPointer = 834
-            ElseIf _StoryPointer = 834 Then
-                StoryText = "8-35: Er habe ihm nämlich gar kein Steinherz eingesetzt."
-                _StoryPointer = 835
-            ElseIf _StoryPointer = 835 Then
-                StoryText = "8-36: Michel will ihm das beweisen und setzt ihm 'zur Probe' das Herz nochmals ein."
-                _StoryPointer = 836
-            ElseIf _StoryPointer = 836 Then
-                StoryText = "8-37: Daraufhin nimmt Peter ein Glaskreuz vom Glasmännchen und beginnt zu beten, ..."
-                _StoryPointer = 837
-            ElseIf _StoryPointer = 837 Then
-                StoryText = "8-38: ..., woraufhin der Holländer-Michel sich auf dem Boden windet wie ein Wurm."
-                _StoryPointer = 838
-            ElseIf _StoryPointer = 838 Then
-                StoryText = "8-39: Peter rennt weinend zurück zum Glasmännchen."
-                _StoryPointer = 839
-            ElseIf _StoryPointer = 839 Then
-                StoryText = "8-40: Er bereut sein verpfuschtes Leben, ..."
-                _StoryPointer = 840
-            ElseIf _StoryPointer = 840 Then
-                StoryText = "8-41: ... woraufhin ihm das Glasmännchen seine Mutter bringt und seine Frau Lisbeth zurück kommt."
-                _StoryPointer = 841
-            ElseIf _StoryPointer = 841 Then
-                StoryText = "8-42: Es empfiehlt Peter, er solle fortan als Köhler fleißig arbeiten, ..."
-                _StoryPointer = 842
-            ElseIf _StoryPointer = 842 Then
-                StoryText = "8-43: ... dann würde er auch ohne viel Geld ein anerkannter Mann werden."
-                _StoryPointer = 843
-            ElseIf _StoryPointer = 843 Then
-
-                If _StoryAuto = 0 Then
-                    If _Music_laeuft = 1 Then
-                        StoryColor = Drawing.Color.LightGreen
-                    Else
-                        StoryColor = Drawing.Color.LightGray
-                    End If
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                StoryText = "8-44: "
-                _StoryPointer = 844
-            ElseIf _StoryPointer = 844 Then
-
-                Hue_Control = 1
-                Bri_soll = 100
-                CT_soll = 260
-
-                DMX(3, 20, 100, 100, 100, 100, 100, 100, 100)
-
+                StoryText = "8-2:  "
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 413000
                 _kalteHerz.StopVideo()
-                Timer_Music.Stop()
-                _Music_laeuft = 0
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 8-2 blank & jones & mark reeder ft. robert smith - a forest (ma).mp4")
+                _StoryPointer = 803
 
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-
-                StoryText = "8-45 "
-                StoryImage = "Kaltes Herz_112.jpg"
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 845
-            ElseIf _StoryPointer = 845 Then
-                StoryText = "8-46: Und so war es dann schlussendlich auch. Lisbeth ist zu Peter zurückgekommen."
-                StoryImage = "Kaltes Herz_113.jpg"
-                _StoryPointer = 846
-            ElseIf _StoryPointer = 846 Then
-                StoryText = "8-47: Ihr schönes Haus in Altenstein können sie sich weiterhin leisten."
-                StoryImage = "Kaltes Herz_113.jpg"
-                _StoryPointer = 847
-            ElseIf _StoryPointer = 847 Then
-                StoryText = "8-48: Auch der Bürgermeister und der Schmied haben ihr menschliches Herz zurück bekommen."
-                StoryImage = "Kaltes Herz_113.jpg"
+            ElseIf _StoryPointer = 803 Then
+                StoryText = "8-3:  "
+                'StoryImage = "Kaltes Herz.jpg"
+                Timer_Story_Auto.Interval = 69000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 8-3.mp4")
                 _StoryPointer = 900
+
             ElseIf _StoryPointer = 900 Then
 
                 ' ***
@@ -36498,141 +35171,27 @@ Public Class Automatikprogramme
                 Bri_soll = 200
                 CT_soll = 260
 
-                DMX(3, 20, 100, 100, 130, 160, 130, 100, 100)
-
-                Timer_Story_Auto.Interval = _StoryZeit
-                StoryText = "9-1: Kapitel 9 - Die Feier zum Abschluss"
-                StoryImage = "Kaltes Herz_115a.jpg"
+                _kalteHerz.StopVideo()
+                Timer_Story_Auto.Interval = 3000
+                StoryText = "9-0: Kapitel 9 - Die Feier zum Abschluss"
                 _StoryPointer = 901
             ElseIf _StoryPointer = 901 Then
-                Timer_Music.Interval = 292000
-                Timer_Story_Auto.Interval = 13900
-                _Music_laeuft = 1
-                Timer_Music.Start()
-
-                If _StoryAuto = 0 Then
-                    StoryColor = Drawing.Color.LightGray
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-
-                PlayMusic("H:\\EB_Media\\Das kalte Herz Musik\\The Cure - A Forest - (Perfect Version).mp3")
-
-                StoryText = "9-2: The Cure - A Forest - (Perfect Version)"
-                StoryImage = "Kaltes Herz_115a.jpg"
+                StoryText = "9-1:  "
+                Timer_Story_Auto.Interval = 73000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 9-1.mp4")
                 _StoryPointer = 902
             ElseIf _StoryPointer = 902 Then
-                StoryText = "9-3: Ein Jahr später machen wir unseren nächsten Kurzurlaub in Altenstein. "
-                StoryImage = "Kaltes Herz_115a.jpg"
+                StoryText = "9-2:  "
+                Timer_Story_Auto.Interval = 256000
+                _kalteHerz.StopVideo()
+                _kalteHerz.StartVideo("H:\\2. Dokumentation_EB\10. Texte für Sprachgenerator\\Kapitel 9-2 Midnight Train.mp4")
                 _StoryPointer = 903
             ElseIf _StoryPointer = 903 Then
-                StoryText = "9-4: Wir haben uns mit Peter und Lisbeth angefreundet und gehen mit ihnen in Altenstein spazieren. "
-                StoryImage = "Kaltes Herz_115a.jpg"
-                _StoryPointer = 904
-            ElseIf _StoryPointer = 904 Then
-                StoryText = "9-5: Wir steigen die Treppe zu den Geschäftshäusern hinauf. "
-                StoryImage = "Kaltes Herz_115a.jpg"
-                _StoryPointer = 905
-            ElseIf _StoryPointer = 905 Then
-                StoryText = "9-6: Kaum haben wir die erste Stufe erklommen, sind wir vom Duft des Holzofenbrotes überwältigt. "
-                StoryImage = "Kaltes Herz_115a.jpg"
-                _StoryPointer = 906
-            ElseIf _StoryPointer = 906 Then
-                StoryText = "9-7: Hinter dem Tresen sehen wir den Bäcker, wie er gerade frisches Brot aus dem Ofen holt."
-                StoryImage = "Kaltes Herz_115a.jpg"
-                _StoryPointer = 907
-            ElseIf _StoryPointer = 907 Then
-                StoryText = "9-8: Wir lassen uns verführen und kaufen ein großes Brot mit einer sehr krossen Kruste."
-                StoryImage = "Kaltes Herz_115a.jpg"
-                _StoryPointer = 908
-            ElseIf _StoryPointer = 908 Then
-                StoryText = "9-9: Auf unserem Spaziergang kommen wir nicht weit. Nur bis zum nächsten Laden. "
-                StoryImage = "Kaltes Herz_116.jpg"
-                _StoryPointer = 909
-            ElseIf _StoryPointer = 909 Then
-                StoryText = "9-10: Hier können wir dem Duft des Schwarzwälder Schinkens nicht widerstehen. "
-                StoryImage = "Kaltes Herz_116.jpg"
-                _StoryPointer = 910
-            ElseIf _StoryPointer = 910 Then
-                StoryText = "9-11: Frische Schwarzwürstchen nehmen wir auch noch mit."
-                StoryImage = "Kaltes Herz_116.jpg"
-                _StoryPointer = 911
-            ElseIf _StoryPointer = 911 Then
-                StoryText = "9-12: Und auch am dritten Geschäft kommen wir nicht vorbei."
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 912
-            ElseIf _StoryPointer = 912 Then
-                StoryText = "9-13: Wir kaufen Tannenzäpfle, Affentaler Rotwein und ein Schladerer Kirschwasser. "
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 913
-            ElseIf _StoryPointer = 913 Then
-                StoryText = "9-14: Schwer beladen kommen wir an das Haus des Schatzhausers. "
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 914
-            ElseIf _StoryPointer = 914 Then
-                StoryText = "9-15: In seinem Garten wird eine große Tafel gedeckt. Und jeder, der vorbeikommt, wird eingeladen. "
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 915
-            ElseIf _StoryPointer = 915 Then
-                StoryText = "9-16: Auch der Bürgermeister kommt vorbei."
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 916
-            ElseIf _StoryPointer = 916 Then
-                StoryText = "9-17: Er hat am Ende sogar die gesamte Zeche übernommen und fortan seine Steuern ordentlich bezahlt."
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 917
-            ElseIf _StoryPointer = 917 Then
-                StoryText = "9-18: Und auch der Schmied ist wieder zu Geld gekommen. "
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 918
-            ElseIf _StoryPointer = 918 Then
-                StoryText = "9-19: So endet unsere Geschichte mit einem großen Fest. "
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 919
-            ElseIf _StoryPointer = 919 Then
-                StoryText = "9-20: Die Sonne geht unter, aber es wird an diesem Abend noch lange gefeiert."
-                StoryImage = "Kaltes Herz_117.jpg"
-                _StoryPointer = 920
-            ElseIf _StoryPointer = 920 Then
-                StoryText = "9-21: "
-                If _StoryAuto = 0 Then
-                    If _Music_laeuft = 1 Then
-                        StoryColor = Drawing.Color.LightGreen
-                    Else
-                        StoryColor = Drawing.Color.LightGray
-                    End If
-                Else
-                    StoryColor = Drawing.Color.LightBlue
-                End If
-                _StoryPointer = 921
-            ElseIf _StoryPointer = 921 Then
-
-                Hue_Control = 1
-                Bri_soll = 200
-                CT_soll = 260
-
-                DMX(3, 20, 220, 220, 220, 220, 220, 220, 220)
-
-                PlayMusic("H:\EB_Media\Media\Stop.mp3")
-                _Music_laeuft = 0
-                Timer_Music.Stop()
-                Timer_Story_Auto.Interval = _StoryZeit
-
-                StoryText = "9-22: E N D E der Geschichte "
-                _StoryPointer = 922
-            ElseIf _StoryPointer = 922 Then
-                Timer_Story_Auto.Interval = 256000
-                Timer_Music.Interval = 256000
-                _Music_laeuft = 1
-                Timer_Music.Start()
-                _kalteHerz.StartVideo("H:\EB_Media\Das kalte Herz Videos\Midnight Train.mp4")
-                StoryText = "9-23: Ausklang "
-                _StoryPointer = 923
-            ElseIf _StoryPointer = 923 Then
-                _Music_laeuft = 0
-                Timer_Story_Auto.Interval = _StoryZeit
-                _StoryPointer = 0
+                StoryText = "9-3:    E N D E  "
+                _kalteHerz.StopVideo()
             End If
+
         End If
     End Sub
     Private Sub Das_kalte_Herz_Stop()
@@ -36654,46 +35213,8 @@ Public Class Automatikprogramme
 
                 If ComboBox1.SelectedIndex = 0 Then       ' *** Aus
                 ElseIf ComboBox1.SelectedIndex = 1 Then   ' *** Eisenbahn
-                    FilmSpalte = FilmSpalte + 1
-                    If FilmSpalte > FilmSpalteMax Then
-                        FilmSpalte = 1
-                    End If
                 ElseIf ComboBox1.SelectedIndex = 2 Then   ' *** Das kalte Herz
                 ElseIf ComboBox1.SelectedIndex = 3 Then   ' *** Tag und Nacht
-                ElseIf ComboBox1.SelectedIndex = 4 Then   ' *** Zug verfolgen
-                    If DMX_Klick = 0 Then
-                        DMX_Klick = 1
-                        DMX_Pointer = 1
-                        StoryText = "Schritt 1"
-                    ElseIf DMX_Klick = 1 Then
-                        DMX_Klick = 2
-                        DMX_Pointer = 10
-                        StoryText = "Schritt 2"
-                    ElseIf DMX_Klick = 2 Then
-                        DMX_Klick = 3
-                        DMX_Pointer = 30
-                        StoryText = "Schritt 3"
-                    ElseIf DMX_Klick = 3 Then
-                        DMX_Klick = 4
-                        DMX_Pointer = 40
-                        StoryText = "Schritt 4"
-                    ElseIf DMX_Klick = 4 Then
-                        DMX_Klick = 5
-                        DMX_Pointer = 51
-                        StoryText = "Schritt 5"
-                    ElseIf DMX_Klick = 5 Then
-                        DMX_Klick = 6
-                        DMX_Pointer = 70
-                        StoryText = "Schritt 6"
-                    ElseIf DMX_Klick = 6 Then
-                        DMX_Klick = 7
-                        DMX_Pointer = 80
-                        StoryText = "Schritt 7"
-                    ElseIf DMX_Klick = 7 Then
-                        DMX_Klick = 0
-                        DMX_Pointer = 0
-                        StoryText = "Schritt 0"
-                    End If
                 End If
                 '_StoryAuto = 0
                 Das_kalte_Herz()
@@ -36701,10 +35222,6 @@ Public Class Automatikprogramme
             ElseIf progressEvent = DasKalteHerz.ProgressEvent.StepBackward Then
                 If ComboBox1.SelectedIndex = 0 Then       ' *** Aus
                 ElseIf ComboBox1.SelectedIndex = 1 Then   ' *** Eisenbahn
-                    FilmSpalte = FilmSpalte - 1
-                    If FilmSpalte < 1 Then
-                        FilmSpalte = FilmSpalteMax
-                    End If
                 ElseIf ComboBox1.SelectedIndex = 2 Then   ' *** Das kalte Herz
                     _StoryAuto = 0
                     If _StoryPointer = 0 Then
@@ -36757,40 +35274,6 @@ Public Class Automatikprogramme
                     PlayMusic("H:\Eisenbahn\EisenbahnV4\Plugins\KlausEBspecific\Media\Stop.mp3")
                     _kalteHerz.StopVideo()
                 ElseIf ComboBox1.SelectedIndex = 3 Then   ' *** Tag und Nacht
-                ElseIf ComboBox1.SelectedIndex = 4 Then   ' *** Zug verfolgen
-                    If DMX_Klick = 0 Then
-                        DMX_Klick = 7
-                        DMX_Pointer = 0
-                        StoryText = "Schritt 0"
-                    ElseIf DMX_Klick = 1 Then
-                        DMX_Klick = 0
-                        DMX_Pointer = 1
-                        StoryText = "Schritt 1"
-                    ElseIf DMX_Klick = 2 Then
-                        DMX_Klick = 1
-                        DMX_Pointer = 10
-                        StoryText = "Schritt 2"
-                    ElseIf DMX_Klick = 3 Then
-                        DMX_Klick = 2
-                        DMX_Pointer = 30
-                        StoryText = "Schritt 3"
-                    ElseIf DMX_Klick = 4 Then
-                        DMX_Klick = 3
-                        DMX_Pointer = 40
-                        StoryText = "Schritt 4"
-                    ElseIf DMX_Klick = 5 Then
-                        DMX_Klick = 4
-                        DMX_Pointer = 51
-                        StoryText = "Schritt 5"
-                    ElseIf DMX_Klick = 6 Then
-                        DMX_Klick = 5
-                        DMX_Pointer = 70
-                        StoryText = "Schritt 6"
-                    ElseIf DMX_Klick = 7 Then
-                        DMX_Klick = 6
-                        DMX_Pointer = 80
-                        StoryText = "Schritt 7"
-                    End If
                 End If
 
                 Das_kalte_Herz()
@@ -36798,10 +35281,6 @@ Public Class Automatikprogramme
             ElseIf progressEvent = DasKalteHerz.ProgressEvent.JumpToStart Then
                 If ComboBox1.SelectedIndex = 0 Then       ' *** Aus
                 ElseIf ComboBox1.SelectedIndex = 1 Then   ' *** Eisenbahn
-
-                    FilmSpalte = FilmSpalteMax
-                    FilmZeile = FilmZeileMin - 1
-
                 ElseIf ComboBox1.SelectedIndex = 2 Then   ' *** Das kalte Herz
 
                     _StoryAuto = 0
@@ -36814,20 +35293,12 @@ Public Class Automatikprogramme
                     _StoryPointer = 0
 
                 ElseIf ComboBox1.SelectedIndex = 3 Then   ' *** Tag und Nacht
-                ElseIf ComboBox1.SelectedIndex = 4 Then   ' *** Zug verfolgen
                 End If
 
                 Das_kalte_Herz()
             ElseIf progressEvent = DasKalteHerz.ProgressEvent.JumpToNextChapter Then
                 If ComboBox1.SelectedIndex = 0 Then       ' *** Aus
                 ElseIf ComboBox1.SelectedIndex = 1 Then   ' *** Eisenbahn
-
-                    FilmZeile = FilmZeile + 1
-                    If FilmZeile > FilmZeileMax Then
-                        FilmZeile = FilmZeileMin
-                    End If
-                    'FilmSpalte = FilmSpalteMax
-
                 ElseIf ComboBox1.SelectedIndex = 2 Then   ' *** Das kalte Herz
 
                     _StoryAuto = 0
@@ -36859,21 +35330,12 @@ Public Class Automatikprogramme
                     _kalteHerz.StopVideo()
 
                 ElseIf ComboBox1.SelectedIndex = 3 Then   ' *** Tag und Nacht
-                ElseIf ComboBox1.SelectedIndex = 4 Then   ' *** Zug verfolgen
                 End If
-
 
                 Das_kalte_Herz()
             ElseIf progressEvent = DasKalteHerz.ProgressEvent.JumpToPreviousChapter Then
                 If ComboBox1.SelectedIndex = 0 Then       ' *** Aus
                 ElseIf ComboBox1.SelectedIndex = 1 Then   ' *** Eisenbahn
-
-                    FilmZeile = FilmZeile - 1
-                    If FilmZeile < FilmZeileMin Then
-                        FilmZeile = FilmZeileMax
-                    End If
-                    FilmSpalte = 18
-
                 ElseIf ComboBox1.SelectedIndex = 2 Then   ' *** Das kalte Herz
                     _StoryAuto = 0
 
@@ -36906,7 +35368,6 @@ Public Class Automatikprogramme
                     _kalteHerz.StopVideo()
 
                 ElseIf ComboBox1.SelectedIndex = 3 Then   ' *** Tag und Nacht
-                ElseIf ComboBox1.SelectedIndex = 4 Then   ' *** Zug verfolgen
                 End If
 
                 Das_kalte_Herz()
@@ -36915,13 +35376,16 @@ Public Class Automatikprogramme
 
                 If ComboBox1.SelectedIndex = 0 Then       ' *** Aus
                 ElseIf ComboBox1.SelectedIndex = 1 Then   ' *** Eisenbahn
-
-                    FilmZeile = FilmZeile + 10
-                    If FilmZeile > FilmZeileMax Then
-                        FilmZeile = FilmZeileMin
+                    If _StoryAuto = 0 Then
+                        _StoryAuto = 1
+                        Timer_Story_Auto.Interval = _StoryZeit
+                        Timer_Story_Auto.Start()
+                        StoryColor = Drawing.Color.LightBlue
+                    Else
+                        Timer_Story_Auto.Stop()
+                        StoryColor = Drawing.Color.LightGray
+                        _StoryAuto = 0
                     End If
-                    FilmSpalte = FilmSpalteMax
-
                 ElseIf ComboBox1.SelectedIndex = 2 Then   ' *** Das kalte Herz
                     If _StoryAuto = 0 Then
                         _StoryAuto = 1
@@ -36935,34 +35399,6 @@ Public Class Automatikprogramme
                     End If
 
                 ElseIf ComboBox1.SelectedIndex = 3 Then   ' *** Tag und Nacht
-
-                ElseIf ComboBox1.SelectedIndex = 4 Then   ' *** Zug verfolgen
-                    If DMX_Klick = 0 Then
-                        DMX_Klick = 1
-                        DMX_Pointer = 1
-                    ElseIf DMX_Klick = 1 Then
-                        DMX_Klick = 2
-                        DMX_Pointer = 10
-                    ElseIf DMX_Klick = 2 Then
-                        DMX_Klick = 3
-                        DMX_Pointer = 30
-                    ElseIf DMX_Klick = 3 Then
-                        DMX_Klick = 4
-                        DMX_Pointer = 40
-                    ElseIf DMX_Klick = 4 Then
-                        DMX_Klick = 5
-                        DMX_Pointer = 51
-                    ElseIf DMX_Klick = 5 Then
-                        DMX_Klick = 6
-                        DMX_Pointer = 70
-                    ElseIf DMX_Klick = 6 Then
-                        DMX_Klick = 7
-                        DMX_Pointer = 80
-                    ElseIf DMX_Klick = 7 Then
-                        DMX_Klick = 0
-                        DMX_Pointer = 0
-                    End If
-
                 End If
                 Das_kalte_Herz()
             End If
@@ -37020,6 +35456,12 @@ Public Class Automatikprogramme
         Button38.Visible = False
         Button30.Visible = False
         Button35.Visible = False
+        Button40.Visible = False
+
+        Button15.Visible = False
+        Button16.Visible = False
+        Button17.Visible = False
+        Button18.Visible = False
 
         ' *** Betriebsart = 0
         If _Betriebsart = 0 Then
@@ -37035,6 +35477,7 @@ Public Class Automatikprogramme
             Button38.Visible = False
             Button30.Visible = False
             Button35.Visible = False
+            Button40.Visible = False
 
             Button21.Visible = False
             Button22.Visible = False
@@ -37533,77 +35976,131 @@ Public Class Automatikprogramme
             End If
             '*** Betriebsart12 = 1 und Betriebsart34 = 0
             If _Betriebsart12 = 1 And _Betriebsart34 = 0 Then
+                If _Betriebsart1_0Var = 0 Then
+                    Button15.Visible = False
+                    Button16.Visible = True
+                    Button17.Visible = True
+                    Button18.Visible = True
+                    Button40.Visible = True
 
-                Button15.Visible = False
-                Button16.Visible = True
-                Button17.Visible = True
-                Button18.Visible = True
+                    LineShape1.Visible = True
+                    LineShape2.Visible = True
+                    LineShape3.Visible = True
+                    LineShape4.Visible = True
 
-                LineShape1.Visible = True
-                LineShape2.Visible = True
-                LineShape3.Visible = True
-                LineShape4.Visible = True
+                    NumericUpDown1.Visible = True
+                    NumericUpDown2.Visible = False
+                    NumericUpDown3.Visible = False
+                    NumericUpDown4.Visible = False
+                    Button21.Visible = True
+                    Button22.Visible = False
+                    Button23.Visible = False
+                    Button24.Visible = False
 
-                NumericUpDown1.Visible = True
-                NumericUpDown2.Visible = False
-                NumericUpDown3.Visible = False
-                NumericUpDown4.Visible = False
-                Button21.Visible = True
-                Button22.Visible = False
-                Button23.Visible = False
-                Button24.Visible = False
+                    Button32.Visible = False
+                    Button33.Visible = False
+                    Button34.Visible = False
 
-                Button32.Visible = False
-                Button33.Visible = False
-                Button34.Visible = False
+                    Button52.Visible = False
+                    Button53.Visible = False
+                    Button54.Visible = False
 
-                Button52.Visible = False
-                Button53.Visible = False
-                Button54.Visible = False
+                    Button62.Visible = False
+                    Button63.Visible = False
+                    Button64.Visible = False
 
-                Button62.Visible = False
-                Button63.Visible = False
-                Button64.Visible = False
+                    Button72.Visible = False
+                    Button73.Visible = False
+                    Button74.Visible = False
 
-                Button72.Visible = False
-                Button73.Visible = False
-                Button74.Visible = False
+                    Button82.Visible = False
+                    Button83.Visible = False
+                    Button84.Visible = False
 
-                Button82.Visible = False
-                Button83.Visible = False
-                Button84.Visible = False
-
-                Button92.Visible = False
-                Button93.Visible = False
-                Button94.Visible = False
+                    Button92.Visible = False
+                    Button93.Visible = False
+                    Button94.Visible = False
 
 
 
-                If _Route_Gleis1 = 0 Then
+                    If _Route_Gleis1 = 0 Then
+                        Button31.Visible = True
+                        Button51.Visible = True
+                        Button61.Visible = False
+                        Button71.Visible = False
+                        Button81.Visible = False
+                        Button91.Visible = False
+
+                    ElseIf _Route_Gleis1 = 1 Then
+                        Button31.Visible = True
+                        Button51.Visible = False
+                        Button61.Visible = True
+                        Button71.Visible = False
+                        Button81.Visible = False
+                        Button91.Visible = True
+
+                    ElseIf _Route_Gleis1 = 2 Then
+                        Button31.Visible = True
+                        Button51.Visible = True
+                        Button61.Visible = True
+                        Button71.Visible = True
+                        Button81.Visible = True
+                        Button91.Visible = True
+
+                    End If
+                Else
+                    Button15.Visible = False
+                    Button16.Visible = False
+                    Button17.Visible = True
+                    Button18.Visible = False
+                    Button40.Visible = True
+
+                    LineShape1.Visible = True
+                    LineShape2.Visible = False
+                    LineShape3.Visible = True
+                    LineShape4.Visible = False
+
+                    NumericUpDown1.Visible = True
+                    NumericUpDown2.Visible = False
+                    NumericUpDown3.Visible = False
+                    NumericUpDown4.Visible = False
+                    Button21.Visible = True
+                    Button22.Visible = False
+                    Button23.Visible = False
+                    Button24.Visible = False
+
                     Button31.Visible = True
-                    Button51.Visible = True
-                    Button61.Visible = False
-                    Button71.Visible = False
-                    Button81.Visible = False
-                    Button91.Visible = False
+                    Button32.Visible = False
+                    Button33.Visible = False
+                    Button34.Visible = False
 
-                ElseIf _Route_Gleis1 = 1 Then
-                    Button31.Visible = True
                     Button51.Visible = False
-                    Button61.Visible = True
-                    Button71.Visible = False
-                    Button81.Visible = False
-                    Button91.Visible = True
+                    Button52.Visible = False
+                    Button53.Visible = False
+                    Button54.Visible = False
 
-                ElseIf _Route_Gleis1 = 2 Then
-                    Button31.Visible = True
-                    Button51.Visible = True
                     Button61.Visible = True
+                    Button62.Visible = False
+                    Button63.Visible = False
+                    Button64.Visible = False
+
                     Button71.Visible = True
-                    Button81.Visible = True
+                    Button72.Visible = False
+                    Button73.Visible = False
+                    Button74.Visible = False
+
+                    Button81.Visible = False
+                    Button82.Visible = False
+                    Button83.Visible = False
+                    Button84.Visible = False
+
                     Button91.Visible = True
+                    Button92.Visible = False
+                    Button93.Visible = False
+                    Button94.Visible = False
 
                 End If
+
             End If
             '*** Betriebsart12 = 1 und Betriebsart34 = 3
             If _Betriebsart12 = 1 And _Betriebsart34 = 3 Then
@@ -39367,6 +37864,28 @@ Public Class Automatikprogramme
         End If
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
+    End Sub
+    Private Sub Button40_Click(sender As Object, e As EventArgs) Handles Button40.Click
+        If _Betriebsart1_0Var = 0 Then
+            _Betriebsart1_0Var = 1
+            Button40.Text = "V1"
+            TextBox1.Text = "Züge fahren rückwärts über den inneren Kreis"
+            _Route_Gleis1 = 2
+            _daten.write_to_table(AutomatikParameterTableName, 3, _Route_Gleis1)
+            ARoute_Lok1 = _Route_Gleis1
+            _GleisFrei3 = 1
+            Button17.Text = "frei / benutzt"
+            Button17.BackColor = Drawing.Color.LightGreen
+            'ButtonsVisible(999)
+        Else
+            _Betriebsart1_0Var = 0
+            Button40.Text = "V0"
+            TextBox1.Text = "Züge fahren vorwärts über den inneren Kreis"
+            'ButtonsVisible(999)
+        End If
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        ButtonsVisible(999)
     End Sub
     ' *** Zugtyp
     Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles Button25.Click
@@ -42017,6 +40536,20 @@ Public Class Automatikprogramme
                 Startzug = 1
                 _daten.write_to_table(AutomatikParameterTableName, 43, Startzug)
                 GeschwindikeitenSetzen(NumericUpDown8.Value)
+                If _Betriebsart1_0Var = 0 Then
+                    If _GleisFrei2 = 1 Then
+                        Zeile = 365
+                    End If
+                    If _GleisFrei3 = 1 Then
+                        Zeile = 366
+                    End If
+                    If _GleisFrei4 = 1 Then
+                        Zeile = 367
+                    End If
+                End If
+                If _Betriebsart1_0Var = 1 Then
+                    Zeile = 364
+                End If
             End If
             ' ***
             ' *** Betriebsart 1 - 3
@@ -42266,10 +40799,6 @@ Public Class Automatikprogramme
                         End If
                         _eb.weicheSchalten(19, Klassen.WeichenRichtung.rechts)
                         _eb.weicheSchalten(21, Klassen.WeichenRichtung.links)
-                        If ComboBox1.SelectedIndex = 1 Then
-                            StoryText = Betriebsparameter.GetValue("Texte", 20, FilmZeile)
-                            StoryImage = Betriebsparameter.GetValue("Filme", 20, FilmZeile)
-                        End If
                     Else
                         If _Route_Gleis1 = 1 Then
                             _eb.weicheSchalten(17, Klassen.WeichenRichtung.rechts)
@@ -42278,10 +40807,6 @@ Public Class Automatikprogramme
                         End If
                         _eb.weicheSchalten(19, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(21, Klassen.WeichenRichtung.rechts)
-                        If ComboBox1.SelectedIndex = 1 Then
-                            StoryText = Betriebsparameter.GetValue("Texte", 20, FilmZeile)
-                            StoryImage = Betriebsparameter.GetValue("Filme", 20, FilmZeile)
-                        End If
                     End If
 
                 Else
@@ -42839,7 +41364,7 @@ Public Class Automatikprogramme
                     _eb.weicheSchalten(1, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(2, Klassen.WeichenRichtung.rechts)
                 End If
-                If _GleisFrei2 = 1 Then
+                If _GleisFrei4 = 1 Then
                     _eb.weicheSchalten(3, Klassen.WeichenRichtung.links)
                     _eb.weicheSchalten(4, Klassen.WeichenRichtung.links)
                 Else
@@ -43439,6 +41964,7 @@ Public Class Automatikprogramme
 
         Button19.Enabled = False
         Button38.Enabled = False
+        Button40.Enabled = False
 
         If Start_Betaetigt = False And _Weichen_in_Startposition = True And _Signale_in_Startposition = True Then
 
@@ -43654,9 +42180,6 @@ Public Class Automatikprogramme
                 Button43.BackColor = Drawing.Color.Green
                 Button43.Text = "Stop am Zyklusende"
 
-                If ComboBox1.SelectedIndex = 1 Then
-                    FilmSpalte = 20
-                End If
             End If
 
             _StoryPointer = 0
@@ -43665,53 +42188,42 @@ Public Class Automatikprogramme
 
             If ComboBox1.SelectedIndex = 0 Then ' *** Aus
 
-                Timer_Story_Film.Stop()
+                'Timer_Story_Film.Stop()
 
             ElseIf ComboBox1.SelectedIndex = 1 Then ' *** Eisenbahn - Filme
-
-                Timer_Story_Film.Interval = 300
-                Timer_Story_Film.Start()
-                FilmZeile = FilmZeile + 1
-                If FilmZeile < 10 Then
-                    FilmZeile = 10
-                End If
-                If FilmZeile > 80 Then
-                    FilmZeile = 10
-                End If
-                FilmSpalte = FilmSpalte + 1
-                If FilmSpalte > 20 Then
-                    FilmSpalte = 1
-                End If
+                _StoryPointer = 0
+                StoryImage = "Kaltes Herz.jpg"
+                StoryText = "Eisenbahn Filme "
 
             ElseIf ComboBox1.SelectedIndex = 2 Then ' *** Das kalte Herz
 
-                Das_kalte_Herz()
                 _StoryPointer = 0
                 StoryImage = "Kaltes Herz.jpg"
                 StoryText = "Altenstein begrüßt seine Gäste. "
+                Das_kalte_Herz()
 
-            ElseIf ComboBox1.SelectedIndex = 3 Then ' *** Tag und Nacht
+                'ElseIf ComboBox1.SelectedIndex = 3 Then ' *** Tag und Nacht
 
-                StoryImage = "Time_000.jpg"
+                '    StoryImage = "Time_000.jpg"
 
-            ElseIf ComboBox1.SelectedIndex = 4 Then ' *** Zug mit Spotlicht verfolgen
+                'ElseIf ComboBox1.SelectedIndex = 4 Then ' *** Zug mit Spotlicht verfolgen
 
-                Timer_Story_DMX.Interval = 100
-                Timer_Story_DMX.Start()
+                '    Timer_Story_DMX.Interval = 100
+                '    Timer_Story_DMX.Start()
 
-                DMX_Pointer = 0
+                '    DMX_Pointer = 0
 
-                StoryImage = "Light_000.jpg"
+                '    StoryImage = "Light_000.jpg"
 
-                PlayMusic("H:\Eisenbahn\EisenbahnV4\Plugins\KlausEBspecific\Media\\Let there be light.wav")
+                '    PlayMusic("H:\Eisenbahn\EisenbahnV4\Plugins\KlausEBspecific\Media\\Let there be light.wav")
 
-                _Beleuchtung = 10
+                '    _Beleuchtung = 10
 
-            ElseIf ComboBox1.SelectedIndex = 5 Then ' *** sonstiges
+                'ElseIf ComboBox1.SelectedIndex = 5 Then ' *** sonstiges
 
-                StoryImage = "Time_000.jpg"
+                '    StoryImage = "Time_000.jpg"
 
-                PlayMusic("H:\Eisenbahn\EisenbahnV4\Plugins\KlausEBspecific\Media\\Hans Zimmer - Time (Inception).wav")
+                '    PlayMusic("H:\Eisenbahn\EisenbahnV4\Plugins\KlausEBspecific\Media\\Hans Zimmer - Time (Inception).wav")
 
             Else
 
@@ -43752,6 +42264,9 @@ Public Class Automatikprogramme
         Else
             _GleisFrei1 = 0
         End If
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        ButtonsVisible(999)
     End Sub
     Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
         If _GleisFrei2 = 1 Then
@@ -43771,6 +42286,9 @@ Public Class Automatikprogramme
         Else
             _GleisFrei2 = 0
         End If
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        ButtonsVisible(999)
     End Sub
     Private Sub Button17_Click(sender As System.Object, e As System.EventArgs) Handles Button17.Click
         If _GleisFrei3 = 1 Then
@@ -43790,6 +42308,9 @@ Public Class Automatikprogramme
         Else
             _GleisFrei3 = 0
         End If
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        ButtonsVisible(999)
     End Sub
     Private Sub Button18_Click(sender As System.Object, e As System.EventArgs) Handles Button18.Click
         If _GleisFrei4 = 1 Then
@@ -43809,6 +42330,9 @@ Public Class Automatikprogramme
         Else
             _GleisFrei4 = 0
         End If
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        ButtonsVisible(999)
     End Sub
     ' *** DMX
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
@@ -44113,17 +42637,14 @@ Public Class Automatikprogramme
     ' *** Fahrzeugbeleuchtung
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
         If _Fahrzeugbeleuchtung2 = 0 Then
-            _Fahrzeugbeleuchtung = True
             _Fahrzeugbeleuchtung2 = 1
             Button4.Text = "Beleuchtung ein/aus"
             Button4.BackColor = Drawing.Color.LightYellow
         ElseIf _Fahrzeugbeleuchtung2 = 1 Then
-            _Fahrzeugbeleuchtung = True
             _Fahrzeugbeleuchtung2 = 2
             Button4.Text = "Beleuchtung ein"
             Button4.BackColor = Drawing.Color.LightYellow
         ElseIf _Fahrzeugbeleuchtung2 = 2 Then
-            _Fahrzeugbeleuchtung = False
             _Fahrzeugbeleuchtung2 = 0
             Button4.Text = "Beleuchtung aus"
             Button4.BackColor = Drawing.Color.LightGray
@@ -44134,13 +42655,17 @@ Public Class Automatikprogramme
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
         If _Dampf = 0 Then
             _Dampf = 1
-            Button5.Text = "Dampf ein/aus"
+            Button5.Text = "Dampf ein/aus 1"
             Button5.BackColor = Drawing.Color.LightYellow
         ElseIf _Dampf = 1 Then
             _Dampf = 2
-            Button5.Text = "Dampf ein"
+            Button5.Text = "Dampf ein/aus 2"
             Button5.BackColor = Drawing.Color.LightYellow
         ElseIf _Dampf = 2 Then
+            _Dampf = 3
+            Button5.Text = "Dampf ein"
+            Button5.BackColor = Drawing.Color.LightYellow
+        ElseIf _Dampf = 3 Then
             _Dampf = 0
             Button5.Text = "Dampf aus"
             Button5.BackColor = Drawing.Color.LightGray
@@ -44166,12 +42691,18 @@ Public Class Automatikprogramme
     End Sub
     ' *** Akustische Signale
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
-        If _AkustischeSignale = 1 Then
-            _AkustischeSignale = 0
-            Button7.BackColor = Drawing.Color.LightGray
-        Else
+        If _AkustischeSignale = 0 Then
             _AkustischeSignale = 1
+            Button7.Text = "Akust. Signale ein 1"
             Button7.BackColor = Drawing.Color.LightYellow
+        ElseIf _AkustischeSignale = 1 Then
+            _AkustischeSignale = 2
+            Button7.Text = "Akust. Signale ein 2"
+            Button7.BackColor = Drawing.Color.LightYellow
+        ElseIf _AkustischeSignale = 2 Then
+            _AkustischeSignale = 0
+            Button7.Text = "Akust. Signale aus"
+            Button7.BackColor = Drawing.Color.LightGray
         End If
         _daten.write_to_table(AutomatikParameterTableName, 19, _AkustischeSignale)
     End Sub
@@ -44224,6 +42755,9 @@ Public Class Automatikprogramme
 
     Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Process.Start("http://192.168.178.25/")
+    End Sub
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        Process.Start("http://192.168.178.57/")
     End Sub
 
 End Class

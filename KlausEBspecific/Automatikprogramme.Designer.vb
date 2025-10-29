@@ -25,6 +25,7 @@ Partial Class Automatikprogramme
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.AutoParaLabel = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button39 = New System.Windows.Forms.Button()
         Me.Button22 = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -140,7 +141,8 @@ Partial Class Automatikprogramme
         Me.Label10 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.Button39 = New System.Windows.Forms.Button()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.Button40 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -181,6 +183,8 @@ Partial Class Automatikprogramme
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button19)
+        Me.GroupBox1.Controls.Add(Me.Button40)
         Me.GroupBox1.Controls.Add(Me.Button39)
         Me.GroupBox1.Controls.Add(Me.Button22)
         Me.GroupBox1.Controls.Add(Me.Button21)
@@ -189,7 +193,6 @@ Partial Class Automatikprogramme
         Me.GroupBox1.Controls.Add(Me.Button24)
         Me.GroupBox1.Controls.Add(Me.Button23)
         Me.GroupBox1.Controls.Add(Me.Button38)
-        Me.GroupBox1.Controls.Add(Me.Button19)
         Me.GroupBox1.Controls.Add(Me.Button30)
         Me.GroupBox1.Controls.Add(Me.Button35)
         Me.GroupBox1.Controls.Add(Me.Button37)
@@ -280,6 +283,15 @@ Partial Class Automatikprogramme
         Me.GroupBox1.Size = New System.Drawing.Size(980, 480)
         Me.GroupBox1.TabIndex = 19
         Me.GroupBox1.TabStop = False
+        '
+        'Button39
+        '
+        Me.Button39.Location = New System.Drawing.Point(6, 220)
+        Me.Button39.Name = "Button39"
+        Me.Button39.Size = New System.Drawing.Size(298, 21)
+        Me.Button39.TabIndex = 122
+        Me.Button39.Text = "Fahrplan"
+        Me.Button39.UseVisualStyleBackColor = True
         '
         'Button22
         '
@@ -1338,7 +1350,7 @@ Partial Class Automatikprogramme
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Aus", "Eisenbahn", "Das kalte Herz", "Tag und Nacht", "Zug folgen"})
+        Me.ComboBox1.Items.AddRange(New Object() {"Aus", "Eisenbahn", "Das kalte Herz"})
         Me.ComboBox1.Location = New System.Drawing.Point(55, 27)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(134, 21)
@@ -1354,19 +1366,30 @@ Partial Class Automatikprogramme
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "Kamerawagen"
         '
-        'Button39
+        'LinkLabel2
         '
-        Me.Button39.Location = New System.Drawing.Point(6, 220)
-        Me.Button39.Name = "Button39"
-        Me.Button39.Size = New System.Drawing.Size(298, 21)
-        Me.Button39.TabIndex = 122
-        Me.Button39.Text = "Fahrplan"
-        Me.Button39.UseVisualStyleBackColor = True
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(253, 30)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(88, 13)
+        Me.LinkLabel2.TabIndex = 111
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "statische Kamera"
+        '
+        'Button40
+        '
+        Me.Button40.Location = New System.Drawing.Point(241, 278)
+        Me.Button40.Name = "Button40"
+        Me.Button40.Size = New System.Drawing.Size(29, 23)
+        Me.Button40.TabIndex = 123
+        Me.Button40.Text = "V1"
+        Me.Button40.UseVisualStyleBackColor = True
         '
         'Automatikprogramme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label10)
@@ -1522,5 +1545,6 @@ Partial Class Automatikprogramme
     Friend WithEvents Button36 As System.Windows.Forms.Button
     Friend WithEvents Button38 As System.Windows.Forms.Button
     Friend WithEvents Button39 As System.Windows.Forms.Button
-
+    Friend WithEvents LinkLabel2 As Windows.Forms.LinkLabel
+    Friend WithEvents Button40 As Windows.Forms.Button
 End Class
