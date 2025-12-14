@@ -3508,7 +3508,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog10 = 200 Then
+        ElseIf _Prog10 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok10.Interval = 2000
         ElseIf _Prog10 = 201 Then
@@ -3571,7 +3571,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
 
-
         ElseIf _Prog10 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok10.Interval = 2000
         ElseIf _Prog10 = 261 Then
@@ -3598,7 +3597,7 @@ Public Class Automatikprogramme
             If _Motor > 1 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
-        ElseIf _Prog60 = 124 Then
+        ElseIf _Prog10 = 624 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
             End If
@@ -3624,31 +3623,31 @@ Public Class Automatikprogramme
         ElseIf _Prog10 = 664 Then
         ElseIf _Prog10 = 665 Then
             If _GlsL10 = 1 Or _GlsL10 = 2 Then
-                If _Motor > 1 Then
+                If _Motor > 0 Then
                     _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
                 End If
             End If
         ElseIf _Prog10 = 666 Then
         ElseIf _Prog10 = 667 Then
             If _GlsL10 = 1 Or _GlsL10 = 2 Then
-                If _AkustischeSignale > 1 Then
+                If _AkustischeSignale > 0 Then
                     _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
                 End If
             End If
         ElseIf _Prog10 = 668 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
-        ElseIf _Prog10 = 700 Then ' Diagonale
+        ElseIf _Prog10 = 700 Then ' Kontakt 0.4 Diagonale
             Prog_Lok10.Interval = 2000
         ElseIf _Prog10 = 701 Then
         ElseIf _Prog10 = 702 Then
         ElseIf _Prog10 = 703 Then
         ElseIf _Prog10 = 704 Then
-            If _Motor > 1 Then
+            If _Motor > 0 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
         ElseIf _Prog10 = 705 Then
-            If _AkustischeSignale > 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
             End If
         ElseIf _Prog10 = 706 Then
@@ -3920,7 +3919,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog11 = 200 Then
+        ElseIf _Prog11 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 201 Then
@@ -3935,37 +3934,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog11 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok11.Interval = 1000
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 221 Then
+        ElseIf _Prog11 = 222 Then
 
         ElseIf _Prog11 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok11.Interval = 1000
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 241 Then
+        ElseIf _Prog11 = 242 Then
 
         ElseIf _Prog11 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok11.Interval = 1000
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 261 Then
+        ElseIf _Prog11 = 262 Then
 
         ElseIf _Prog11 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok11.Interval = 1000
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 601 Then
+        ElseIf _Prog11 = 602 Then
 
         ElseIf _Prog11 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok11.Interval = 1000
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 621 Then
+        ElseIf _Prog11 = 622 Then
 
         ElseIf _Prog11 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok11.Interval = 1000
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 641 Then
+        ElseIf _Prog11 = 642 Then
 
         ElseIf _Prog11 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok11.Interval = 1000
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 661 Then
+        ElseIf _Prog11 = 662 Then
 
-        ElseIf _Prog11 = 700 Then ' Diagonale
-            Prog_Lok11.Interval = 1000
+        ElseIf _Prog11 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 701 Then
-
+        ElseIf _Prog11 = 702 Then
 
             ' Zindelstein
 
@@ -4240,7 +4246,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog12 = 200 Then
+        ElseIf _Prog12 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 201 Then
@@ -4255,36 +4261,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog12 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok12.Interval = 1000
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 221 Then
+        ElseIf _Prog12 = 222 Then
 
         ElseIf _Prog12 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok12.Interval = 1000
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 241 Then
+        ElseIf _Prog12 = 242 Then
 
         ElseIf _Prog12 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok12.Interval = 1000
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 261 Then
+        ElseIf _Prog12 = 262 Then
 
         ElseIf _Prog12 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok12.Interval = 1000
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 601 Then
+        ElseIf _Prog12 = 602 Then
 
         ElseIf _Prog12 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok12.Interval = 1000
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 621 Then
+        ElseIf _Prog12 = 622 Then
 
         ElseIf _Prog12 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok12.Interval = 1000
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 641 Then
+        ElseIf _Prog12 = 642 Then
 
         ElseIf _Prog12 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok12.Interval = 1000
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 661 Then
+        ElseIf _Prog12 = 662 Then
 
-        ElseIf _Prog12 = 700 Then ' Diagonale
-            Prog_Lok12.Interval = 1000
+        ElseIf _Prog12 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 701 Then
+        ElseIf _Prog12 = 702 Then
 
             ' Zindelstein
 
@@ -4559,7 +4573,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog13 = 200 Then
+        ElseIf _Prog13 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 201 Then
@@ -4574,36 +4588,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog13 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok13.Interval = 1000
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 221 Then
+        ElseIf _Prog13 = 222 Then
 
         ElseIf _Prog13 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok13.Interval = 1000
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 241 Then
+        ElseIf _Prog13 = 242 Then
 
         ElseIf _Prog13 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok13.Interval = 1000
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 261 Then
+        ElseIf _Prog13 = 262 Then
 
         ElseIf _Prog13 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok13.Interval = 1000
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 601 Then
+        ElseIf _Prog13 = 602 Then
 
         ElseIf _Prog13 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok13.Interval = 1000
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 621 Then
+        ElseIf _Prog13 = 622 Then
 
         ElseIf _Prog13 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok13.Interval = 1000
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 641 Then
+        ElseIf _Prog13 = 642 Then
 
         ElseIf _Prog13 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok13.Interval = 1000
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 661 Then
+        ElseIf _Prog13 = 662 Then
 
-        ElseIf _Prog13 = 700 Then ' Diagonale
-            Prog_Lok13.Interval = 1000
+        ElseIf _Prog13 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 701 Then
+        ElseIf _Prog13 = 702 Then
 
             ' Zindelstein
 
@@ -4870,7 +4892,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog14 = 200 Then
+        ElseIf _Prog14 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 201 Then
@@ -4885,36 +4907,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog14 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok14.Interval = 1000
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 221 Then
+        ElseIf _Prog14 = 222 Then
 
         ElseIf _Prog14 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok14.Interval = 1000
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 241 Then
+        ElseIf _Prog14 = 242 Then
 
         ElseIf _Prog14 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok14.Interval = 1000
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 261 Then
+        ElseIf _Prog14 = 262 Then
 
         ElseIf _Prog14 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok14.Interval = 1000
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 601 Then
+        ElseIf _Prog14 = 602 Then
 
         ElseIf _Prog14 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok14.Interval = 1000
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 621 Then
+        ElseIf _Prog14 = 622 Then
 
         ElseIf _Prog14 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok14.Interval = 1000
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 641 Then
+        ElseIf _Prog14 = 642 Then
 
         ElseIf _Prog14 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok14.Interval = 1000
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 661 Then
+        ElseIf _Prog14 = 662 Then
 
-        ElseIf _Prog14 = 700 Then ' Diagonale
-            Prog_Lok14.Interval = 1000
+        ElseIf _Prog14 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 701 Then
+        ElseIf _Prog14 = 702 Then
 
             ' Zindelstein
 
@@ -5169,7 +5199,7 @@ Public Class Automatikprogramme
             _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog15 = 166 Then
             _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, 0)
-            _Prog15 = 49
+
 
             ' Rangierzug
 
@@ -5184,7 +5214,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog15 = 200 Then
+        ElseIf _Prog15 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 201 Then
@@ -5199,36 +5229,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog15 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok15.Interval = 1000
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 221 Then
+        ElseIf _Prog15 = 222 Then
 
         ElseIf _Prog15 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok15.Interval = 1000
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 241 Then
+        ElseIf _Prog15 = 242 Then
 
         ElseIf _Prog15 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok15.Interval = 1000
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 261 Then
+        ElseIf _Prog15 = 262 Then
 
         ElseIf _Prog15 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok15.Interval = 1000
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 601 Then
+        ElseIf _Prog15 = 602 Then
 
         ElseIf _Prog15 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok15.Interval = 1000
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 621 Then
+        ElseIf _Prog15 = 622 Then
 
         ElseIf _Prog15 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok15.Interval = 1000
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 641 Then
+        ElseIf _Prog15 = 642 Then
 
         ElseIf _Prog15 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok15.Interval = 1000
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 661 Then
+        ElseIf _Prog15 = 662 Then
 
-        ElseIf _Prog15 = 700 Then ' Diagonale
-            Prog_Lok15.Interval = 1000
+        ElseIf _Prog15 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 701 Then
+        ElseIf _Prog15 = 702 Then
 
             ' Zindelstein
 
@@ -5495,7 +5533,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog16 = 200 Then
+        ElseIf _Prog16 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 201 Then
@@ -5510,36 +5548,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog16 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok16.Interval = 1000
+            Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 221 Then
+        ElseIf _Prog16 = 222 Then
 
         ElseIf _Prog16 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok16.Interval = 1000
+            Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 241 Then
+        ElseIf _Prog16 = 242 Then
 
         ElseIf _Prog16 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok16.Interval = 1000
+            Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 261 Then
+        ElseIf _Prog16 = 262 Then
 
         ElseIf _Prog16 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok16.Interval = 1000
+            Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 601 Then
+        ElseIf _Prog16 = 602 Then
 
         ElseIf _Prog16 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok16.Interval = 1000
+            Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 621 Then
+        ElseIf _Prog16 = 622 Then
 
         ElseIf _Prog16 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok16.Interval = 1000
+            Prog_Lok16.Interval = 2000
+        ElseIf _Prog16 = 641 Then
         ElseIf _Prog16 = 641 Then
 
         ElseIf _Prog16 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok16.Interval = 1000
+            Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 661 Then
+        ElseIf _Prog16 = 662 Then
 
-        ElseIf _Prog16 = 700 Then ' Diagonale
-            Prog_Lok16.Interval = 1000
+        ElseIf _Prog16 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 701 Then
+        ElseIf _Prog16 = 702 Then
 
             ' Zindelstein
 
@@ -5806,7 +5852,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog17 = 200 Then
+        ElseIf _Prog17 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 201 Then
@@ -5821,36 +5867,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog17 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok17.Interval = 1000
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 221 Then
+        ElseIf _Prog17 = 222 Then
 
         ElseIf _Prog17 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok17.Interval = 1000
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 241 Then
+        ElseIf _Prog17 = 242 Then
 
         ElseIf _Prog17 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok17.Interval = 1000
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 261 Then
+        ElseIf _Prog17 = 262 Then
 
         ElseIf _Prog17 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok17.Interval = 1000
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 601 Then
+        ElseIf _Prog17 = 602 Then
 
         ElseIf _Prog17 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok17.Interval = 1000
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 621 Then
+        ElseIf _Prog17 = 622 Then
 
         ElseIf _Prog17 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok17.Interval = 1000
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 641 Then
+        ElseIf _Prog17 = 642 Then
 
         ElseIf _Prog17 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok17.Interval = 1000
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 661 Then
+        ElseIf _Prog17 = 662 Then
 
-        ElseIf _Prog17 = 700 Then ' Diagonale
-            Prog_Lok17.Interval = 1000
+        ElseIf _Prog17 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 701 Then
+        ElseIf _Prog17 = 702 Then
 
             ' Zindelstein
 
@@ -6117,7 +6171,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog18 = 200 Then
+        ElseIf _Prog18 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 201 Then
@@ -6132,36 +6186,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog18 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok18.Interval = 1000
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 221 Then
+        ElseIf _Prog18 = 222 Then
 
         ElseIf _Prog18 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok18.Interval = 1000
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 241 Then
+        ElseIf _Prog18 = 242 Then
 
         ElseIf _Prog18 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok18.Interval = 1000
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 261 Then
+        ElseIf _Prog18 = 262 Then
 
         ElseIf _Prog18 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok18.Interval = 1000
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 601 Then
+        ElseIf _Prog18 = 602 Then
 
         ElseIf _Prog18 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok18.Interval = 1000
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 621 Then
+        ElseIf _Prog18 = 622 Then
 
         ElseIf _Prog18 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok18.Interval = 1000
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 641 Then
+        ElseIf _Prog18 = 642 Then
 
         ElseIf _Prog18 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok18.Interval = 1000
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 661 Then
+        ElseIf _Prog18 = 662 Then
 
-        ElseIf _Prog18 = 700 Then ' Diagonale
-            Prog_Lok18.Interval = 1000
+        ElseIf _Prog18 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 701 Then
+        ElseIf _Prog18 = 702 Then
 
             ' Zindelstein
 
@@ -6438,7 +6500,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog19 = 200 Then
+        ElseIf _Prog19 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 201 Then
@@ -6453,36 +6515,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog19 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok19.Interval = 1000
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 221 Then
+        ElseIf _Prog19 = 222 Then
 
         ElseIf _Prog19 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok19.Interval = 1000
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 241 Then
+        ElseIf _Prog19 = 242 Then
 
         ElseIf _Prog19 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok19.Interval = 1000
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 261 Then
+        ElseIf _Prog19 = 262 Then
 
         ElseIf _Prog19 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok19.Interval = 1000
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 601 Then
+        ElseIf _Prog19 = 602 Then
 
         ElseIf _Prog19 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok19.Interval = 1000
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 621 Then
+        ElseIf _Prog19 = 622 Then
 
         ElseIf _Prog19 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok19.Interval = 1000
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 641 Then
+        ElseIf _Prog19 = 642 Then
 
         ElseIf _Prog19 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok19.Interval = 1000
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 661 Then
+        ElseIf _Prog19 = 662 Then
 
-        ElseIf _Prog19 = 700 Then ' Diagonale
-            Prog_Lok19.Interval = 1000
+        ElseIf _Prog19 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 701 Then
+        ElseIf _Prog19 = 702 Then
 
             ' Zindelstein
 
@@ -6746,7 +6816,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog20 = 200 Then
+        ElseIf _Prog20 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 201 Then
@@ -6761,35 +6831,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog20 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok20.Interval = 1000
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 221 Then
+        ElseIf _Prog20 = 222 Then
 
         ElseIf _Prog20 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok20.Interval = 1000
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 241 Then
 
         ElseIf _Prog20 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok20.Interval = 1000
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 261 Then
 
         ElseIf _Prog20 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok20.Interval = 1000
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 601 Then
 
         ElseIf _Prog20 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok20.Interval = 1000
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 621 Then
 
         ElseIf _Prog20 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok20.Interval = 1000
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 641 Then
 
         ElseIf _Prog20 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok20.Interval = 1000
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 661 Then
 
-        ElseIf _Prog20 = 700 Then ' Diagonale
-            Prog_Lok20.Interval = 1000
+        ElseIf _Prog20 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 701 Then
 
             ' Zindelstein
@@ -7058,7 +7129,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog21 = 200 Then
+        ElseIf _Prog21 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 201 Then
@@ -7073,35 +7144,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog21 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok21.Interval = 1000
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 221 Then
+        ElseIf _Prog21 = 222 Then
 
         ElseIf _Prog21 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok21.Interval = 1000
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 241 Then
 
         ElseIf _Prog21 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok21.Interval = 1000
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 261 Then
 
         ElseIf _Prog21 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok21.Interval = 1000
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 601 Then
 
         ElseIf _Prog21 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok21.Interval = 1000
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 621 Then
 
         ElseIf _Prog21 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok21.Interval = 1000
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 641 Then
 
         ElseIf _Prog21 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok21.Interval = 1000
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 661 Then
 
-        ElseIf _Prog21 = 700 Then ' Diagonale
-            Prog_Lok21.Interval = 1000
+        ElseIf _Prog21 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 701 Then
 
             ' Zindelstein
@@ -7371,7 +7443,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog22 = 200 Then
+        ElseIf _Prog22 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 201 Then
@@ -7391,35 +7463,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog22 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok22.Interval = 1000
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 221 Then
+        ElseIf _Prog22 = 222 Then
 
         ElseIf _Prog22 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok22.Interval = 1000
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 241 Then
 
         ElseIf _Prog22 = 260 Then ' Kontakt 3.3
-            Prog_Lok22.Interval = 1000
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 261 Then
 
         ElseIf _Prog22 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok22.Interval = 1000
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 601 Then
 
         ElseIf _Prog22 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok22.Interval = 1000
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 621 Then
 
         ElseIf _Prog22 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok22.Interval = 1000
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 641 Then
 
         ElseIf _Prog22 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok22.Interval = 1000
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 661 Then
 
-        ElseIf _Prog22 = 700 Then
-            Prog_Lok22.Interval = 1000
+        ElseIf _Prog22 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 701 Then
 
             ' Zindelstein
@@ -7687,7 +7760,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog23 = 200 Then
+        ElseIf _Prog23 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 201 Then
@@ -7702,35 +7775,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog23 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok23.Interval = 1000
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 221 Then
+        ElseIf _Prog23 = 222 Then
 
         ElseIf _Prog23 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok23.Interval = 1000
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 241 Then
 
         ElseIf _Prog23 = 260 Then ' Kontakt 3.3
-            Prog_Lok23.Interval = 1000
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 261 Then
 
         ElseIf _Prog23 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok23.Interval = 1000
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 601 Then
 
         ElseIf _Prog23 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok23.Interval = 1000
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 621 Then
 
         ElseIf _Prog23 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok23.Interval = 1000
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 641 Then
 
         ElseIf _Prog23 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok23.Interval = 1000
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 661 Then
 
-        ElseIf _Prog23 = 700 Then
-            Prog_Lok23.Interval = 1000
+        ElseIf _Prog23 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 701 Then
 
             ' Zindelstein
@@ -8001,7 +8075,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog24 = 200 Then
+        ElseIf _Prog24 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok24.Interval = 2000
         ElseIf _Prog24 = 201 Then
@@ -8025,7 +8099,7 @@ Public Class Automatikprogramme
         ElseIf _Prog24 = 241 Then
         ElseIf _Prog24 = 242 Then
 
-        ElseIf _Prog24 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog24 = 260 Then ' Kontakt 3.3 links der Brücke
             Prog_Lok24.Interval = 2000
         ElseIf _Prog24 = 261 Then
         ElseIf _Prog24 = 262 Then
@@ -8050,7 +8124,7 @@ Public Class Automatikprogramme
         ElseIf _Prog24 = 661 Then
         ElseIf _Prog24 = 662 Then
 
-        ElseIf _Prog24 = 700 Then
+        ElseIf _Prog24 = 700 Then ' Kontakt 0.4 Diagonale
             Prog_Lok24.Interval = 2000
         ElseIf _Prog24 = 701 Then
         ElseIf _Prog24 = 702 Then
@@ -8322,7 +8396,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog25 = 200 Then
+        ElseIf _Prog25 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 201 Then
@@ -8337,35 +8411,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog25 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok25.Interval = 1000
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 221 Then
+        ElseIf _Prog25 = 222 Then
 
         ElseIf _Prog25 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok25.Interval = 1000
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 241 Then
 
         ElseIf _Prog25 = 260 Then ' Kontakt 3.3
-            Prog_Lok25.Interval = 1000
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 261 Then
 
         ElseIf _Prog25 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok25.Interval = 1000
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 601 Then
 
         ElseIf _Prog25 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok25.Interval = 1000
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 621 Then
 
         ElseIf _Prog25 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok25.Interval = 1000
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 641 Then
 
         ElseIf _Prog25 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok25.Interval = 1000
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 661 Then
 
-        ElseIf _Prog25 = 700 Then
-            Prog_Lok25.Interval = 1000
+        ElseIf _Prog25 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 701 Then
 
             ' Zindelstein
@@ -8634,7 +8709,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog26 = 200 Then
+        ElseIf _Prog26 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 201 Then
@@ -8649,35 +8724,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog26 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok26.Interval = 1000
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 221 Then
+        ElseIf _Prog26 = 222 Then
 
         ElseIf _Prog26 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok26.Interval = 1000
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 241 Then
 
         ElseIf _Prog26 = 260 Then ' Kontakt 3.3
-            Prog_Lok26.Interval = 1000
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 261 Then
 
         ElseIf _Prog26 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok26.Interval = 1000
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 601 Then
 
         ElseIf _Prog26 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok26.Interval = 1000
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 621 Then
 
         ElseIf _Prog26 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok26.Interval = 1000
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 641 Then
 
         ElseIf _Prog26 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok26.Interval = 1000
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 661 Then
 
-        ElseIf _Prog26 = 700 Then
-            Prog_Lok26.Interval = 1000
+        ElseIf _Prog26 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 701 Then
 
             ' Zindelstein
@@ -8713,7 +8789,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "Krokodil braun"
         '*** Datum: 10.10.2023
 
-        SetText(TextBox1, "E-Lok CE 6/8  14253 V3: 7")
+        SetText(TextBox1, "E-Lok CE 6/8  14253                             IBS: 10.12.2025 V3: 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
         GeschwindikeitenSetzen(27)
 
@@ -8841,62 +8917,54 @@ Public Class Automatikprogramme
 
         If _Prog27 = 0 Then
             Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 1 Then
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
-        ElseIf _Prog27 = 1 Then
-            If _Durchsagen = 1 And (_TypL27 = 1 Or _TypL27 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog27 = 6
-            End If
         ElseIf _Prog27 = 2 Then
-        ElseIf _Prog27 = 3 Then
-        ElseIf _Prog27 = 4 Then
-        ElseIf _Prog27 = 5 Then
-        ElseIf _Prog27 = 6 Then
-        ElseIf _Prog27 = 7 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             Else
                 _Prog27 = 16
             End If
+        ElseIf _Prog27 = 3 Then
+        ElseIf _Prog27 = 4 Then
+        ElseIf _Prog27 = 5 Then
+        ElseIf _Prog27 = 6 Then
+        ElseIf _Prog27 = 7 Then
         ElseIf _Prog27 = 8 Then
         ElseIf _Prog27 = 9 Then
         ElseIf _Prog27 = 10 Then
         ElseIf _Prog27 = 11 Then
-        ElseIf _Prog27 = 12 Then
-        ElseIf _Prog27 = 13 Then
-        ElseIf _Prog27 = 14 Then
-        ElseIf _Prog27 = 15 Then
-        ElseIf _Prog27 = 16 Then
 
             ' Bahnhofsausfahrt
-        ElseIf _Prog27 = 17 Then
-            If _AkustischeSignale = 1 Then
+
+        ElseIf _Prog27 = 12 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Signal ein
             End If
-        ElseIf _Prog27 = 18 Then
+        ElseIf _Prog27 = 13 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Signal aus
-        ElseIf _Prog27 = 19 Then
+        ElseIf _Prog27 = 14 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog27 = 20 Then
+        ElseIf _Prog27 = 15 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog27 = 21 Then
+        ElseIf _Prog27 = 16 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog27 = 22 Then
+        ElseIf _Prog27 = 17 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog27 = 23 Then
+        ElseIf _Prog27 = 18 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog27 = 24 Then
+        ElseIf _Prog27 = 19 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
-        ElseIf _Prog27 = 25 Then
-        ElseIf _Prog27 = 26 Then
-        ElseIf _Prog27 = 27 Then
-        ElseIf _Prog27 = 28 Then
-            If _Motor < 2 Then
+        ElseIf _Prog27 = 20 Then
+        ElseIf _Prog27 = 21 Then
+        ElseIf _Prog27 = 22 Then
+        ElseIf _Prog27 = 23 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
+        ElseIf _Prog27 = 24 Then
 
             ' Lok abstellen
 
@@ -8944,6 +9012,17 @@ Public Class Automatikprogramme
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog27 = 136 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog27 = 137 Then
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 138 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog27 = 139 Then
+        ElseIf _Prog27 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -8962,6 +9041,17 @@ Public Class Automatikprogramme
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog27 = 166 Then
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog27 = 167 Then
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 168 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog27 = 169 Then
+        ElseIf _Prog27 = 170 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -8976,7 +9066,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog27 = 200 Then
+        ElseIf _Prog27 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok27.Interval = 2000
         ElseIf _Prog27 = 201 Then
@@ -8989,6 +9079,129 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog27 = 206 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog27 = 207 Then
+        ElseIf _Prog27 = 208 Then
+        ElseIf _Prog27 = 209 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog27 = 210 Then
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog27 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 221 Then
+        ElseIf _Prog27 = 222 Then
+        ElseIf _Prog27 = 223 Then
+        ElseIf _Prog27 = 224 Then
+        ElseIf _Prog27 = 225 Then
+        ElseIf _Prog27 = 226 Then
+        ElseIf _Prog27 = 227 Then
+        ElseIf _Prog27 = 228 Then
+        ElseIf _Prog27 = 229 Then
+        ElseIf _Prog27 = 230 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog27 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 241 Then
+        ElseIf _Prog27 = 242 Then
+        ElseIf _Prog27 = 243 Then
+            'If _Motor > 1 Then
+            '    _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            'End If
+        ElseIf _Prog27 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog27 = 245 Then
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog27 = 246 Then
+
+        ElseIf _Prog27 = 260 Then ' Kontakt 3.3 links der Brücke
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 261 Then
+        ElseIf _Prog27 = 262 Then
+        ElseIf _Prog27 = 263 Then
+
+        ElseIf _Prog27 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog27 = 602 Then
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog27 = 603 Then
+
+        ElseIf _Prog27 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 621 Then
+        ElseIf _Prog27 = 622 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog27 = 623 Then
+        ElseIf _Prog27 = 624 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog27 = 625 Then
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog27 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 641 Then
+        ElseIf _Prog27 = 642 Then
+        ElseIf _Prog27 = 643 Then
+        ElseIf _Prog27 = 644 Then
+        ElseIf _Prog27 = 645 Then
+        ElseIf _Prog27 = 646 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog27 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 661 Then
+        ElseIf _Prog27 = 662 Then
+        ElseIf _Prog27 = 663 Then
+            If _GlsL27 = 1 Or _GlsL27 = 2 Then
+                If _Motor > 0 Then
+                    _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                End If
+            End If
+        ElseIf _Prog27 = 664 Then
+            If _GlsL27 = 1 Or _GlsL27 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog27 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok27.Interval = 2000
+        ElseIf _Prog27 = 701 Then
+        ElseIf _Prog27 = 702 Then
+        ElseIf _Prog27 = 703 Then
+        ElseIf _Prog27 = 704 Then
+        ElseIf _Prog27 = 705 Then
+            If _Motor > 0 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog27 = 706 Then
+        ElseIf _Prog27 = 707 Then
+            If _AkustischeSignale > 0 Then
+                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog27 = 708 Then
+            _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
             ' Zindelstein
 
@@ -9378,7 +9591,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog28 = 664 Then
 
-        ElseIf _Prog28 = 700 Then
+        ElseIf _Prog28 = 700 Then ' Kontakt 0.4 Diagonale
             Prog_Lok28.Interval = 4000
         ElseIf _Prog28 = 701 Then
         ElseIf _Prog28 = 702 Then
@@ -9427,7 +9640,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für 
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Triebwagen ET91                                                  IBS: 08.03.2021 - V3 : 9")
+        SetText(TextBox1, "Triebwagen ET91                                                  IBS: 10.12.2025 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_ET91_01.jpg")
         GeschwindikeitenSetzen(29)
 
@@ -9562,7 +9775,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion1, 1) ' Innenbeleuchtung ein
             End If
         ElseIf _Prog29 = 2 Then
-            If _Durchsagen = 1 And _TypL29 = 1 Then
+            If _Durchsagen = 1 Then
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion2, 1) ' Durchsage ein
             Else
                 _Prog29 = 6
@@ -9571,26 +9784,28 @@ Public Class Automatikprogramme
         ElseIf _Prog29 = 4 Then
         ElseIf _Prog29 = 5 Then
         ElseIf _Prog29 = 6 Then
+        ElseIf _Prog29 = 7 Then
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion2, 0) ' Durchsage aus
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog29 = 7 Then
-            If _AkustischeSignale = 1 Then
+        ElseIf _Prog29 = 8 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog29 = 8 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog29 = 9 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog29 = 10 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
         ElseIf _Prog29 = 11 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
         ElseIf _Prog29 = 12 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
         ElseIf _Prog29 = 13 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
+        ElseIf _Prog29 = 14 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
+        ElseIf _Prog29 = 15 Then
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
             ' Lok abstellen
@@ -9641,6 +9856,17 @@ Public Class Automatikprogramme
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog29 = 136 Then
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog29 = 137 Then
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 138 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog29 = 139 Then
+        ElseIf _Prog29 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -9649,17 +9875,27 @@ Public Class Automatikprogramme
         ElseIf _Prog29 = 161 Then
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
             Prog_Lok29.Interval = T_160
-        ElseIf _Prog29 = 161 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
         ElseIf _Prog29 = 162 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
         ElseIf _Prog29 = 163 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
         ElseIf _Prog29 = 164 Then
-            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog29 = 165 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+        ElseIf _Prog29 = 166 Then
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, 0)
-            _Prog29 = 50
+        ElseIf _Prog29 = 137 Then
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 138 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog29 = 139 Then
+        ElseIf _Prog29 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -9674,19 +9910,103 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog29 = 200 Then
+        ElseIf _Prog29 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok29.Interval = 2000
         ElseIf _Prog29 = 201 Then
         ElseIf _Prog29 = 202 Then
         ElseIf _Prog29 = 203 Then
-        ElseIf _Prog29 = 204 Then
-        ElseIf _Prog29 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog29 = 204 Then
+        ElseIf _Prog29 = 205 Then
+        ElseIf _Prog29 = 206 Then
+        ElseIf _Prog29 = 207 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog29 = 208 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog29 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 221 Then
+        ElseIf _Prog29 = 222 Then
+        ElseIf _Prog29 = 223 Then
+
+        ElseIf _Prog29 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 241 Then
+        ElseIf _Prog29 = 242 Then
+        ElseIf _Prog29 = 243 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog29 = 244 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog29 = 245 Then
+
+        ElseIf _Prog29 = 260 Then ' Kontakt 3.3 links der Brücke
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 261 Then
+        ElseIf _Prog29 = 262 Then
+        ElseIf _Prog29 = 263 Then
+
+        ElseIf _Prog29 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog29 = 602 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog29 = 603 Then
+
+        ElseIf _Prog29 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 621 Then
+        ElseIf _Prog29 = 622 Then
+        ElseIf _Prog29 = 623 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog29 = 624 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog29 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 641 Then
+        ElseIf _Prog29 = 642 Then
+
+        ElseIf _Prog29 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 661 Then
+        ElseIf _Prog29 = 662 Then
+        ElseIf _Prog29 = 663 Then
+        ElseIf _Prog29 = 664 Then
+        ElseIf _Prog29 = 665 Then
+            If _GlsL29 = 1 Or _GlsL29 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog29 = 666 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog29 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok29.Interval = 2000
+        ElseIf _Prog29 = 701 Then
+        ElseIf _Prog29 = 702 Then
+        ElseIf _Prog29 = 703 Then
+        ElseIf _Prog29 = 704 Then
+            If _AkustischeSignale > 0 Then
+                _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog29 = 705 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
             ' Zindelstein
 
@@ -9931,6 +10251,17 @@ Public Class Automatikprogramme
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog30 = 136 Then
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog30 = 137 Then
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 138 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog30 = 139 Then
+        ElseIf _Prog30 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -9949,6 +10280,17 @@ Public Class Automatikprogramme
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog30 = 166 Then
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog30 = 167 Then
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 168 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog30 = 169 Then
+        ElseIf _Prog30 = 170 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -9963,7 +10305,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog30 = 200 Then
+        ElseIf _Prog30 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 201 Then
@@ -9976,6 +10318,126 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog30 = 206 Then
+        ElseIf _Prog30 = 207 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog30 = 208 Then
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 209 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog30 = 210 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog30 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 221 Then
+        ElseIf _Prog30 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog30 = 223 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog30 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 241 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog30 = 242 Then
+            Prog_Lok30.Interval = 1000
+        ElseIf _Prog30 = 243 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog30 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog30 = 245 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog30 = 246 Then
+
+        ElseIf _Prog30 = 260 Then ' Kontakt 3.3
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 261 Then
+        ElseIf _Prog30 = 262 Then
+        ElseIf _Prog30 = 263 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+
+        ElseIf _Prog30 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok30.Interval = 1000
+        ElseIf _Prog30 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog30 = 602 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog30 = 603 Then
+
+        ElseIf _Prog30 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 621 Then
+            Prog_Lok30.Interval = 1000
+        ElseIf _Prog30 = 622 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog30 = 623 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog30 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 641 Then
+        ElseIf _Prog30 = 642 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog30 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 661 Then
+        ElseIf _Prog30 = 662 Then
+        ElseIf _Prog30 = 663 Then
+            If _GlsL30 = 1 Or _GlsL30 = 2 Then
+                If _Motor > 0 Then
+                    _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                End If
+            End If
+        ElseIf _Prog30 = 664 Then
+            If _GlsL30 = 1 Or _GlsL30 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog30 = 665 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog30 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok30.Interval = 2000
+        ElseIf _Prog30 = 701 Then
+        ElseIf _Prog30 = 702 Then
+        ElseIf _Prog30 = 703 Then
+            If _Motor > 0 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+
+        ElseIf _Prog30 = 704 Then
+            Prog_Lok30.Interval = 1000
+        ElseIf _Prog30 = 705 Then
+            If _AkustischeSignale > 0 Then
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog30 = 706 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
             ' Zindelstein
 
@@ -10245,7 +10707,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog31 = 200 Then
+        ElseIf _Prog31 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 201 Then
@@ -10260,36 +10722,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog31 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok31.Interval = 1000
+            Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 221 Then
+        ElseIf _Prog31 = 222 Then
 
         ElseIf _Prog31 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok31.Interval = 1000
+            Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 241 Then
+        ElseIf _Prog31 = 242 Then
 
         ElseIf _Prog31 = 260 Then ' Kontakt 3.3
-            Prog_Lok31.Interval = 1000
+            Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 261 Then
+        ElseIf _Prog31 = 262 Then
 
         ElseIf _Prog31 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok31.Interval = 1000
+            Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 601 Then
+        ElseIf _Prog31 = 602 Then
 
         ElseIf _Prog31 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok31.Interval = 1000
+            Prog_Lok31.Interval = 2000
+        ElseIf _Prog31 = 621 Then
         ElseIf _Prog31 = 621 Then
 
         ElseIf _Prog31 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok31.Interval = 1000
+            Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 641 Then
+        ElseIf _Prog31 = 642 Then
 
         ElseIf _Prog31 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok31.Interval = 1000
+            Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 661 Then
+        ElseIf _Prog31 = 662 Then
 
-        ElseIf _Prog31 = 700 Then
-            Prog_Lok31.Interval = 1000
+        ElseIf _Prog31 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 701 Then
+        ElseIf _Prog31 = 702 Then
 
             ' Zindelstein
 
@@ -10559,7 +11029,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog32 = 200 Then
+        ElseIf _Prog32 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 201 Then
@@ -10574,35 +11044,38 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog32 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok32.Interval = 1000
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 221 Then
+        ElseIf _Prog32 = 222 Then
 
         ElseIf _Prog32 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok32.Interval = 1000
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 241 Then
+        ElseIf _Prog32 = 242 Then
 
         ElseIf _Prog32 = 260 Then ' Kontakt 3.3
-            Prog_Lok32.Interval = 1000
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 261 Then
+        ElseIf _Prog32 = 262 Then
 
         ElseIf _Prog32 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok32.Interval = 1000
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 601 Then
 
         ElseIf _Prog32 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok32.Interval = 1000
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 621 Then
 
         ElseIf _Prog32 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok32.Interval = 1000
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 641 Then
 
         ElseIf _Prog32 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok32.Interval = 1000
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 661 Then
 
-        ElseIf _Prog32 = 700 Then
-            Prog_Lok32.Interval = 1000
+        ElseIf _Prog32 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 701 Then
 
             ' Zindelstein
@@ -10871,7 +11344,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog33 = 200 Then
+        ElseIf _Prog33 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 201 Then
@@ -10886,35 +11359,37 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog33 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok33.Interval = 1000
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 221 Then
+        ElseIf _Prog33 = 222 Then
 
         ElseIf _Prog33 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok33.Interval = 1000
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 241 Then
+        ElseIf _Prog33 = 242 Then
 
         ElseIf _Prog33 = 260 Then ' Kontakt 3.3
-            Prog_Lok33.Interval = 1000
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 261 Then
 
         ElseIf _Prog33 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok33.Interval = 1000
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 601 Then
 
         ElseIf _Prog33 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok33.Interval = 1000
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 621 Then
 
         ElseIf _Prog33 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok33.Interval = 1000
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 641 Then
 
         ElseIf _Prog33 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok33.Interval = 1000
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 661 Then
 
-        ElseIf _Prog33 = 700 Then
-            Prog_Lok33.Interval = 1000
+        ElseIf _Prog33 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 701 Then
 
             ' Zindelstein
@@ -11183,7 +11658,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog34 = 200 Then
+        ElseIf _Prog34 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 201 Then
@@ -11198,35 +11673,37 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog34 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 221 Then
+        ElseIf _Prog34 = 222 Then
 
         ElseIf _Prog34 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 241 Then
+        ElseIf _Prog34 = 242 Then
 
         ElseIf _Prog34 = 260 Then ' Kontakt 3.3
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 261 Then
 
         ElseIf _Prog34 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 601 Then
 
         ElseIf _Prog34 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 621 Then
 
         ElseIf _Prog34 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 641 Then
 
         ElseIf _Prog34 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok34.Interval = 1000
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 661 Then
 
-        ElseIf _Prog34 = 700 Then
-            Prog_Lok34.Interval = 1000
+        ElseIf _Prog34 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 701 Then
 
             ' Zindelstein
@@ -11494,7 +11971,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog35 = 200 Then
+        ElseIf _Prog35 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 201 Then
@@ -11509,35 +11986,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog35 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok35.Interval = 1000
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 221 Then
+        ElseIf _Prog35 = 222 Then
 
         ElseIf _Prog35 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok35.Interval = 1000
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 241 Then
 
         ElseIf _Prog35 = 260 Then ' Kontakt 3.3
-            Prog_Lok35.Interval = 1000
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 261 Then
 
         ElseIf _Prog35 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok35.Interval = 1000
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 601 Then
 
         ElseIf _Prog35 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok35.Interval = 1000
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 621 Then
 
         ElseIf _Prog35 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok35.Interval = 1000
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 641 Then
 
         ElseIf _Prog35 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok35.Interval = 1000
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 661 Then
 
-        ElseIf _Prog35 = 700 Then
-            Prog_Lok35.Interval = 1000
+        ElseIf _Prog35 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 701 Then
 
             ' Zindelstein
@@ -11806,7 +12284,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog36 = 200 Then
+        ElseIf _Prog36 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 201 Then
@@ -11821,35 +12299,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog36 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok36.Interval = 1000
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 221 Then
 
         ElseIf _Prog36 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok36.Interval = 1000
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 241 Then
 
         ElseIf _Prog36 = 260 Then ' Kontakt 3.3
-            Prog_Lok36.Interval = 1000
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 261 Then
 
         ElseIf _Prog36 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok36.Interval = 1000
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 601 Then
 
         ElseIf _Prog36 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok36.Interval = 1000
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 621 Then
 
         ElseIf _Prog36 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok36.Interval = 1000
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 641 Then
 
         ElseIf _Prog36 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok36.Interval = 1000
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 661 Then
 
-        ElseIf _Prog36 = 700 Then
-            Prog_Lok36.Interval = 1000
+        ElseIf _Prog36 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 701 Then
 
             ' Zindelstein
@@ -12117,7 +12595,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog37 = 200 Then
+        ElseIf _Prog37 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 201 Then
@@ -12132,35 +12610,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog37 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok37.Interval = 1000
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 221 Then
 
         ElseIf _Prog37 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok37.Interval = 1000
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 241 Then
 
         ElseIf _Prog37 = 260 Then ' Kontakt 3.3
-            Prog_Lok37.Interval = 1000
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 261 Then
 
         ElseIf _Prog37 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok37.Interval = 1000
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 601 Then
 
         ElseIf _Prog37 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok37.Interval = 1000
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 621 Then
 
         ElseIf _Prog37 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok37.Interval = 1000
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 641 Then
 
         ElseIf _Prog37 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok37.Interval = 1000
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 661 Then
 
-        ElseIf _Prog37 = 700 Then
-            Prog_Lok37.Interval = 1000
+        ElseIf _Prog37 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 701 Then
 
             ' Zindelstein
@@ -12329,11 +12807,6 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog38 = 1 Then
         ElseIf _Prog38 = 2 Then
-            If _Durchsagen = 1 And (_TypL38 = 1 Or _TypL38 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog38 = 6
-            End If
         ElseIf _Prog38 = 3 Then
         ElseIf _Prog38 = 4 Then
         ElseIf _Prog38 = 5 Then
@@ -12402,6 +12875,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog38 = 136 Then
             _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog38 = 137 Then
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(38, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -12420,6 +12899,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog38 = 166 Then
             _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog38 = 167 Then
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(38, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -12434,7 +12919,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog38 = 200 Then
+        ElseIf _Prog38 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok38.Interval = 2000
         ElseIf _Prog38 = 201 Then
@@ -12447,6 +12932,85 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog38 = 206 Then
+        ElseIf _Prog38 = 207 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog38 = 208 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog38 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 221 Then
+        ElseIf _Prog38 = 222 Then
+
+        ElseIf _Prog38 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 241 Then
+        ElseIf _Prog38 = 242 Then
+        ElseIf _Prog38 = 243 Then
+        ElseIf _Prog38 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog38 = 245 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog38 = 260 Then ' Kontakt 3.3
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 261 Then
+        ElseIf _Prog38 = 262 Then
+
+        ElseIf _Prog38 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok38.Interval = 1000
+        ElseIf _Prog38 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog38 = 602 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog38 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 621 Then
+        ElseIf _Prog38 = 622 Then
+        ElseIf _Prog38 = 623 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog38 = 624 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog38 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 641 Then
+
+        ElseIf _Prog38 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 661 Then
+        ElseIf _Prog38 = 662 Then
+        ElseIf _Prog38 = 663 Then
+            If _GlsL38 = 1 Or _GlsL38 = 2 Then
+                If _AkustischeSignale > 1 Then
+                    _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog38 = 664 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog38 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok38.Interval = 2000
+        ElseIf _Prog38 = 701 Then
+        ElseIf _Prog38 = 702 Then
+        ElseIf _Prog38 = 703 Then
+        ElseIf _Prog38 = 704 Then
+        ElseIf _Prog38 = 705 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog38 = 706 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
             ' Zindelstein
 
@@ -12714,7 +13278,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog39 = 200 Then
+        ElseIf _Prog39 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 201 Then
@@ -12729,35 +13293,37 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog39 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok39.Interval = 1000
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 221 Then
+        ElseIf _Prog39 = 222 Then
 
         ElseIf _Prog39 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok39.Interval = 1000
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 241 Then
+        ElseIf _Prog39 = 242 Then
 
         ElseIf _Prog39 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok39.Interval = 1000
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 261 Then
 
         ElseIf _Prog39 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok39.Interval = 1000
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 601 Then
 
         ElseIf _Prog39 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok39.Interval = 1000
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 621 Then
 
         ElseIf _Prog39 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok39.Interval = 1000
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 641 Then
 
         ElseIf _Prog39 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok39.Interval = 1000
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 661 Then
 
-        ElseIf _Prog39 = 700 Then ' Diagonale
-            Prog_Lok39.Interval = 1000
+        ElseIf _Prog39 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 701 Then
 
             ' Zindelstein
@@ -12794,7 +13360,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Triebwagen ET 87
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "Triebwagen ET 87                                           IBS: 06.01.2022 V1: 4 - V3: 10")
+        SetText(TextBox1, "Triebwagen ET 87                                           IBS: 10.12.2025 V3: 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_ET87_01.jpg")
         GeschwindikeitenSetzen(40)
 
@@ -12921,71 +13487,62 @@ Public Class Automatikprogramme
 
         If _Prog40 = 0 Then
             Prog_Lok40.Interval = 2000
-            If _Fahrzeugbeleuchtung2 > 0 Then
-                _eb.lokSteuern(40, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
-            End If
-            If _Motor = 0 Then
-                _Prog40 = 7
-            End If
         ElseIf _Prog40 = 1 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog40 = 2 Then
+            If _Fahrzeugbeleuchtung2 > 0 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
+            End If
         ElseIf _Prog40 = 3 Then
+            If _Innenbeleuchtung2 > 0 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion1, 1) ' Innenbeleuchtung ein
+            End If
+        ElseIf _Prog40 = 4 Then
+            If _Motor = 0 Then
+                _Prog40 = 7
+            End If
+        ElseIf _Prog40 = 5 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             Else
                 _Prog40 = 7
             End If
-        ElseIf _Prog40 = 4 Then
-        ElseIf _Prog40 = 5 Then
         ElseIf _Prog40 = 6 Then
         ElseIf _Prog40 = 7 Then
         ElseIf _Prog40 = 8 Then
         ElseIf _Prog40 = 9 Then
-            If _Innenbeleuchtung2 > 0 Then
-                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion1, 1) ' Innenbeleuchtung ein
-            Else
-                _Prog40 = 11
-            End If
-            If _Durchsagen = 0 Then
-                _Prog40 = 16
-                If _AkustischeSignale = 0 Then
-                    _Prog40 = 18
-                End If
-            End If
         ElseIf _Prog40 = 10 Then
         ElseIf _Prog40 = 11 Then
-        ElseIf _Prog40 = 12 Then
-            If _Durchsagen = 1 And (_TypL40 = 1 Or _TypL40 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog40 = 16
-            End If
-        ElseIf _Prog40 = 13 Then
-        ElseIf _Prog40 = 14 Then
-        ElseIf _Prog40 = 15 Then
-        ElseIf _Prog40 = 16 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog40 = 17 Then
-            If _AkustischeSignale = 1 Then
+        ElseIf _Prog40 = 12 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog40 = 18 Then
+        ElseIf _Prog40 = 13 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
-        ElseIf _Prog40 = 19 Then
+        ElseIf _Prog40 = 14 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog40 = 20 Then
+        ElseIf _Prog40 = 15 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog40 = 21 Then
+        ElseIf _Prog40 = 16 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog40 = 22 Then
+        ElseIf _Prog40 = 17 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog40 = 23 Then
+        ElseIf _Prog40 = 18 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog40 = 24 Then
+        ElseIf _Prog40 = 19 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+        ElseIf _Prog40 = 20 Then
+        ElseIf _Prog40 = 21 Then
+        ElseIf _Prog40 = 22 Then
+        ElseIf _Prog40 = 23 Then
+        ElseIf _Prog40 = 24 Then
+        ElseIf _Prog40 = 25 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
 
             ' Lok abstellen
 
@@ -12998,10 +13555,13 @@ Public Class Automatikprogramme
         ElseIf _Prog40 = 52 Then
         ElseIf _Prog40 = 53 Then
         ElseIf _Prog40 = 54 Then
+        ElseIf _Prog40 = 55 Then
+        ElseIf _Prog40 = 56 Then
+        ElseIf _Prog40 = 57 Then
             If _Innenbeleuchtung2 < 2 Then
                 _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
             End If
-        ElseIf _Prog40 = 55 Then
+        ElseIf _Prog40 = 58 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(40, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -13039,6 +13599,27 @@ Public Class Automatikprogramme
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog40 = 136 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog40 = 137 Then
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 138 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog40 = 139 Then
+        ElseIf _Prog40 = 140 Then
+        ElseIf _Prog40 = 141 Then
+        ElseIf _Prog40 = 142 Then
+        ElseIf _Prog40 = 143 Then
+        ElseIf _Prog40 = 144 Then
+        ElseIf _Prog40 = 145 Then
+        ElseIf _Prog40 = 146 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog40 = 147 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -13057,6 +13638,27 @@ Public Class Automatikprogramme
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog40 = 166 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog40 = 167 Then
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 168 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog40 = 169 Then
+        ElseIf _Prog40 = 170 Then
+        ElseIf _Prog40 = 171 Then
+        ElseIf _Prog40 = 172 Then
+        ElseIf _Prog40 = 173 Then
+        ElseIf _Prog40 = 174 Then
+        ElseIf _Prog40 = 175 Then
+        ElseIf _Prog40 = 176 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog40 = 177 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -13072,7 +13674,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog40 = 200 Then
+        ElseIf _Prog40 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok40.Interval = 2000
         ElseIf _Prog40 = 201 Then
@@ -13085,6 +13687,141 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog40 = 206 Then
+        ElseIf _Prog40 = 207 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog40 = 208 Then
+        ElseIf _Prog40 = 209 Then
+        ElseIf _Prog40 = 210 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog40 = 211 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog40 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 221 Then
+        ElseIf _Prog40 = 222 Then
+        ElseIf _Prog40 = 223 Then
+        ElseIf _Prog40 = 224 Then
+        ElseIf _Prog40 = 225 Then
+        ElseIf _Prog40 = 226 Then
+        ElseIf _Prog40 = 227 Then
+        ElseIf _Prog40 = 228 Then
+        ElseIf _Prog40 = 229 Then
+        ElseIf _Prog40 = 230 Then
+        ElseIf _Prog40 = 231 Then
+        ElseIf _Prog40 = 232 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog40 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 241 Then
+        ElseIf _Prog40 = 242 Then
+        ElseIf _Prog40 = 243 Then
+        ElseIf _Prog40 = 244 Then
+        ElseIf _Prog40 = 245 Then
+            Prog_Lok40.Interval = 1000
+        ElseIf _Prog40 = 246 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog40 = 247 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog40 = 248 Then
+
+        ElseIf _Prog40 = 260 Then ' Kontakt 3.3
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 261 Then
+        ElseIf _Prog40 = 262 Then
+        ElseIf _Prog40 = 263 Then
+
+        ElseIf _Prog40 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok40.Interval = 1000
+        ElseIf _Prog40 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog40 = 602 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog40 = 603 Then
+            Prog_Lok40.Interval = 2000
+
+        ElseIf _Prog40 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 621 Then
+        ElseIf _Prog40 = 622 Then
+        ElseIf _Prog40 = 623 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog40 = 624 Then
+            Prog_Lok40.Interval = 1000
+        ElseIf _Prog40 = 625 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog40 = 626 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog40 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 641 Then
+        ElseIf _Prog40 = 642 Then
+        ElseIf _Prog40 = 643 Then
+        ElseIf _Prog40 = 644 Then
+        ElseIf _Prog40 = 645 Then
+        ElseIf _Prog40 = 646 Then
+        ElseIf _Prog40 = 647 Then
+        ElseIf _Prog40 = 648 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog40 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 661 Then
+        ElseIf _Prog40 = 662 Then
+        ElseIf _Prog40 = 663 Then
+            If _GlsL40 = 1 Or _GlsL40 = 2 Then
+                If _Motor > 0 Then
+                    _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                End If
+            End If
+        ElseIf _Prog40 = 664 Then
+        ElseIf _Prog40 = 665 Then
+        ElseIf _Prog40 = 666 Then
+            If _GlsL40 = 1 Or _GlsL40 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog40 = 667 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog40 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok40.Interval = 2000
+        ElseIf _Prog40 = 701 Then
+        ElseIf _Prog40 = 702 Then
+        ElseIf _Prog40 = 703 Then
+        ElseIf _Prog40 = 704 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog40 = 705 Then
+        ElseIf _Prog40 = 706 Then
+            Prog_Lok40.Interval = 1000
+        ElseIf _Prog40 = 707 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog40 = 708 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
             ' Zindelstein
 
@@ -13373,7 +14110,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog41 = 200 Then
+        ElseIf _Prog41 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 201 Then
@@ -13386,6 +14123,125 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog41 = 206 Then
+        ElseIf _Prog41 = 207 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog41 = 208 Then
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 209 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog41 = 210 Then
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog41 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 221 Then
+        ElseIf _Prog41 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog41 = 223 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog41 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 241 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog41 = 242 Then
+            Prog_Lok41.Interval = 1000
+        ElseIf _Prog41 = 243 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog41 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog41 = 245 Then
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog41 = 246 Then
+
+        ElseIf _Prog41 = 260 Then ' Kontakt 3.3
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 261 Then
+        ElseIf _Prog41 = 262 Then
+        ElseIf _Prog41 = 263 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+
+        ElseIf _Prog41 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok41.Interval = 1000
+        ElseIf _Prog41 = 601 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog41 = 602 Then
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog41 = 603 Then
+
+        ElseIf _Prog41 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok41.Interval = 3000
+        ElseIf _Prog41 = 621 Then
+            Prog_Lok41.Interval = 1000
+        ElseIf _Prog41 = 622 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog41 = 623 Then
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog41 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 641 Then
+        ElseIf _Prog41 = 642 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog41 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok41.Interval = 4000
+        ElseIf _Prog41 = 661 Then
+        ElseIf _Prog41 = 662 Then
+        ElseIf _Prog41 = 663 Then
+        ElseIf _Prog41 = 664 Then
+            If _GlsL41 = 1 Or _GlsL41 = 2 Then
+                If _Motor > 0 Then
+                    _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+                End If
+            End If
+        ElseIf _Prog41 = 665 Then
+            If _GlsL41 = 1 Or _GlsL41 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog41 = 666 Then
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog41 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 701 Then
+        ElseIf _Prog41 = 702 Then
+        ElseIf _Prog41 = 703 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog41 = 704 Then
+        ElseIf _Prog41 = 705 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog41 = 706 Then
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
             ' Zindelstein
 
@@ -13422,7 +14278,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok V160 028
         '*** Datum: 15.10.2023
 
-        SetText(TextBox1, "Diesel-Lok V160 028                                             IBS: 11.10.2025 - V3 : 8")
+        SetText(TextBox1, "Diesel-Lok V160 028                                             IBS: 10.12.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_160_02.jpg")
         GeschwindikeitenSetzen(42)
 
@@ -13549,13 +14405,16 @@ Public Class Automatikprogramme
 
         If _Prog42 = 0 Then
             Prog_Lok42.Interval = 2000
+            _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog42 = 1 Then
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Hauptfunktion, 1)
             Else
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Hauptfunktion, 0)
             End If
-        ElseIf _Prog42 = 1 Then
         ElseIf _Prog42 = 2 Then
+            _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog42 = 3 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
             Else
@@ -13563,43 +14422,31 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog42 = 3 Then
         ElseIf _Prog42 = 4 Then
-            If _Motor > 0 Then
-                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion3, 1) ' Kompressor ein
-            End If
         ElseIf _Prog42 = 5 Then
-            _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion3, 0) ' Kompressor aus
         ElseIf _Prog42 = 6 Then
-        ElseIf _Prog42 = 7 Then
-            If _Durchsagen = 1 And (_TypL42 = 1 Or _TypL42 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog42 = 10
-            End If
-        ElseIf _Prog42 = 8 Then
-        ElseIf _Prog42 = 9 Then
-        ElseIf _Prog42 = 10 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog42 = 11 Then
-            If _AkustischeSignale = 1 Then
+        ElseIf _Prog42 = 7 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe 1 ein
             End If
-        ElseIf _Prog42 = 12 Then
+        ElseIf _Prog42 = 8 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe 1 aus
-        ElseIf _Prog42 = 13 Then
+        ElseIf _Prog42 = 9 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog42 = 14 Then
+        ElseIf _Prog42 = 10 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog42 = 15 Then
+        ElseIf _Prog42 = 11 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog42 = 16 Then
+        ElseIf _Prog42 = 12 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog42 = 17 Then
+        ElseIf _Prog42 = 13 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog42 = 18 Then
+        ElseIf _Prog42 = 14 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
-        ElseIf _Prog42 = 19 Then
+        ElseIf _Prog42 = 15 Then
+        ElseIf _Prog42 = 16 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
@@ -13643,9 +14490,6 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 105 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog42 = 106 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
-            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von links)
 
@@ -13706,16 +14550,16 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog42 = 200 Then
+        ElseIf _Prog42 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 201 Then
         ElseIf _Prog42 = 202 Then
         ElseIf _Prog42 = 203 Then
-        ElseIf _Prog42 = 204 Then
             If _Motor > 1 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
             End If
+        ElseIf _Prog42 = 204 Then
         ElseIf _Prog42 = 205 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
@@ -13723,12 +14567,13 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
         ElseIf _Prog42 = 206 Then
-            Prog_Lok42.Interval = 1000
         ElseIf _Prog42 = 207 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 208 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe 1 ein
             End If
-        ElseIf _Prog42 = 208 Then
+        ElseIf _Prog42 = 209 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe 1 aus
 
         ElseIf _Prog42 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
@@ -13737,26 +14582,37 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 222 Then
         ElseIf _Prog42 = 223 Then
         ElseIf _Prog42 = 224 Then
+        ElseIf _Prog42 = 225 Then
+        ElseIf _Prog42 = 226 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
 
         ElseIf _Prog42 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok42.Interval = 3000
+            Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 241 Then
-            If _Motor > 1 Then
-                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
-            End If
         ElseIf _Prog42 = 242 Then
-            Prog_Lok42.Interval = 1000
+            'If _Motor > 1 Then
+            '    _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+            'End If
         ElseIf _Prog42 = 243 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 244 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
             End If
-        ElseIf _Prog42 = 244 Then
+        ElseIf _Prog42 = 245 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
+        ElseIf _Prog42 = 246 Then
+            Prog_Lok42.Interval = 2000
+        ElseIf _Prog42 = 245 Then
+        ElseIf _Prog42 = 246 Then
+        ElseIf _Prog42 = 247 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
 
-        ElseIf _Prog42 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog42 = 260 Then ' Kontakt 3.3 links der Brücke
             Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 261 Then
         ElseIf _Prog42 = 262 Then
@@ -13773,37 +14629,53 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 603 Then
 
         ElseIf _Prog42 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok42.Interval = 3000
+            Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 621 Then
-            Prog_Lok42.Interval = 1000
         ElseIf _Prog42 = 622 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+            End If
+        ElseIf _Prog42 = 623 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 624 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
             End If
-        ElseIf _Prog42 = 623 Then
+        ElseIf _Prog42 = 625 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
 
         ElseIf _Prog42 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 641 Then
         ElseIf _Prog42 = 642 Then
+        ElseIf _Prog42 = 643 Then
+        ElseIf _Prog42 = 644 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
 
         ElseIf _Prog42 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok42.Interval = 4000
+            Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 661 Then
         ElseIf _Prog42 = 662 Then
-            Prog_Lok42.Interval = 1000
-        ElseIf _Prog42 = 663 Then
-            If _AkustischeSignale > 1 Then
-                _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
+            If _GlsL42 = 1 Or _GlsL42 = 2 Then
+                If _Motor > 0 Then
+                    _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 1) ' Motor ein
+                End If
             End If
+        ElseIf _Prog42 = 663 Then
         ElseIf _Prog42 = 664 Then
+            Prog_Lok42.Interval = 1000
+        ElseIf _Prog42 = 665 Then
+            If _GlsL42 = 1 Or _GlsL42 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
+                End If
+            End If
+        ElseIf _Prog42 = 666 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
 
-        ElseIf _Prog42 = 700 Then
+        ElseIf _Prog42 = 700 Then ' Kontakt 0.4 Diagonale
             Prog_Lok42.Interval = 3000
         ElseIf _Prog42 = 701 Then
         ElseIf _Prog42 = 702 Then
@@ -13814,7 +14686,7 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 704 Then
             Prog_Lok42.Interval = 1000
         ElseIf _Prog42 = 705 Then
-            If _AkustischeSignale > 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 1) ' Hupe ein
             End If
         ElseIf _Prog42 = 706 Then
@@ -14082,7 +14954,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog43 = 200 Then
+        ElseIf _Prog43 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok43.Interval = 2000
         ElseIf _Prog43 = 201 Then
@@ -14361,7 +15233,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog44 = 200 Then
+        ElseIf _Prog44 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 201 Then
@@ -14374,38 +15246,40 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok44.Interval = 200
 
         ElseIf _Prog44 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok44.Interval = 1000
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 221 Then
+        ElseIf _Prog44 = 222 Then
 
         ElseIf _Prog44 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok44.Interval = 1000
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 241 Then
+        ElseIf _Prog44 = 242 Then
 
         ElseIf _Prog44 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok44.Interval = 1000
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 261 Then
+        ElseIf _Prog44 = 262 Then
 
         ElseIf _Prog44 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok44.Interval = 1000
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 601 Then
 
         ElseIf _Prog44 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok44.Interval = 1000
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 621 Then
 
         ElseIf _Prog44 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok44.Interval = 1000
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 641 Then
 
         ElseIf _Prog44 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok44.Interval = 1000
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 661 Then
 
-        ElseIf _Prog44 = 700 Then ' Diagonale
-            Prog_Lok44.Interval = 1000
+        ElseIf _Prog44 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 701 Then
 
             ' Zindelstein
@@ -14673,7 +15547,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog45 = 200 Then
+        ElseIf _Prog45 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 201 Then
@@ -14688,35 +15562,36 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog45 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok45.Interval = 1000
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 221 Then
+        ElseIf _Prog45 = 222 Then
 
         ElseIf _Prog45 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok45.Interval = 1000
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 241 Then
 
         ElseIf _Prog45 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok45.Interval = 1000
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 261 Then
 
         ElseIf _Prog45 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok45.Interval = 1000
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 601 Then
 
         ElseIf _Prog45 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok45.Interval = 1000
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 621 Then
 
         ElseIf _Prog45 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok45.Interval = 1000
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 641 Then
 
         ElseIf _Prog45 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok45.Interval = 1000
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 661 Then
 
-        ElseIf _Prog45 = 700 Then ' Diagonale
-            Prog_Lok45.Interval = 1000
+        ElseIf _Prog45 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 701 Then
 
             ' Zindelstein
@@ -14985,7 +15860,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog46 = 200 Then
+        ElseIf _Prog46 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 201 Then
@@ -15000,35 +15875,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog46 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok46.Interval = 1000
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 221 Then
 
         ElseIf _Prog46 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok46.Interval = 1000
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 241 Then
 
         ElseIf _Prog46 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok46.Interval = 1000
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 261 Then
 
         ElseIf _Prog46 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok46.Interval = 1000
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 601 Then
 
         ElseIf _Prog46 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok46.Interval = 1000
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 621 Then
 
         ElseIf _Prog46 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok46.Interval = 1000
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 641 Then
 
         ElseIf _Prog46 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok46.Interval = 1000
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 661 Then
 
-        ElseIf _Prog46 = 700 Then ' Diagonale
-            Prog_Lok46.Interval = 1000
+        ElseIf _Prog46 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 701 Then
 
             ' Zindelstein
@@ -15296,7 +16171,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog47 = 200 Then
+        ElseIf _Prog47 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 201 Then
@@ -15311,35 +16186,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog47 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok47.Interval = 1000
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 221 Then
 
         ElseIf _Prog47 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok47.Interval = 1000
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 241 Then
 
         ElseIf _Prog47 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok47.Interval = 1000
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 261 Then
 
         ElseIf _Prog47 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok47.Interval = 1000
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 601 Then
 
         ElseIf _Prog47 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok47.Interval = 1000
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 621 Then
 
         ElseIf _Prog47 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok47.Interval = 1000
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 641 Then
 
         ElseIf _Prog47 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok47.Interval = 1000
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 661 Then
 
-        ElseIf _Prog47 = 700 Then ' Diagonale
-            Prog_Lok47.Interval = 1000
+        ElseIf _Prog47 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 701 Then
 
             ' Zindelstein
@@ -15634,7 +16509,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog48 = 200 Then
+        ElseIf _Prog48 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok48.Interval = 2000
         ElseIf _Prog48 = 201 Then
@@ -15647,6 +16522,135 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog48 = 206 Then
+        ElseIf _Prog48 = 207 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog48 = 208 Then
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 209 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog48 = 210 Then
+            _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog48 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 221 Then
+        ElseIf _Prog48 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog48 = 223 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog48 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 241 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog48 = 242 Then
+            Prog_Lok48.Interval = 1000
+        ElseIf _Prog48 = 243 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog48 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog48 = 245 Then
+            _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog48 = 246 Then
+
+        ElseIf _Prog48 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 261 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog48 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 601 Then
+        ElseIf _Prog48 = 602 Then
+            'If _AkustischeSignale > 1 Then
+            '    _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            'End If
+        ElseIf _Prog48 = 603 Then
+            '_eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+        ElseIf _Prog48 = 604 Then
+
+        ElseIf _Prog48 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 621 Then
+        ElseIf _Prog48 = 622 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog48 = 623 Then
+        ElseIf _Prog48 = 624 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog48 = 625 Then
+            _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog48 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok48.Interval = 5000
+        ElseIf _Prog48 = 641 Then
+        ElseIf _Prog48 = 642 Then
+        ElseIf _Prog48 = 643 Then
+        ElseIf _Prog48 = 644 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+
+        ElseIf _Prog48 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 661 Then
+        ElseIf _Prog48 = 662 Then
+        ElseIf _Prog48 = 663 Then
+        ElseIf _Prog48 = 664 Then
+        ElseIf _Prog48 = 665 Then
+            If _GlsL48 = 1 Or _GlsL48 = 2 Then
+                If _Motor > 0 Then
+                    _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                End If
+            End If
+        ElseIf _Prog48 = 666 Then
+        ElseIf _Prog48 = 667 Then
+        ElseIf _Prog48 = 668 Then
+        ElseIf _Prog48 = 669 Then
+        ElseIf _Prog48 = 670 Then
+            If _GlsL48 = 1 Or _GlsL48 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+                End If
+            End If
+        ElseIf _Prog48 = 671 Then
+            _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog48 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 701 Then
+        ElseIf _Prog48 = 702 Then
+        ElseIf _Prog48 = 703 Then
+        ElseIf _Prog48 = 704 Then
+            If _Motor > 0 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog48 = 705 Then
+            If _AkustischeSignale > 0 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog48 = 706 Then
+            _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
             ' Zindelstein
 
@@ -15916,7 +16920,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog49 = 200 Then
+        ElseIf _Prog49 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 201 Then
@@ -15931,36 +16935,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog49 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok49.Interval = 1000
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 221 Then
+        ElseIf _Prog49 = 222 Then
 
         ElseIf _Prog49 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok49.Interval = 1000
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 241 Then
+        ElseIf _Prog49 = 242 Then
 
         ElseIf _Prog49 = 260 Then ' Kontakt 3.3
-            Prog_Lok49.Interval = 1000
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 261 Then
+        ElseIf _Prog49 = 262 Then
 
         ElseIf _Prog49 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok49.Interval = 1000
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 601 Then
+        ElseIf _Prog49 = 602 Then
 
         ElseIf _Prog49 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok49.Interval = 1000
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 621 Then
+        ElseIf _Prog49 = 622 Then
 
         ElseIf _Prog49 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok49.Interval = 1000
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 641 Then
+        ElseIf _Prog49 = 642 Then
 
         ElseIf _Prog49 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok49.Interval = 1000
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 661 Then
+        ElseIf _Prog49 = 662 Then
 
-        ElseIf _Prog49 = 700 Then
-            Prog_Lok49.Interval = 1000
+        ElseIf _Prog49 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 701 Then
+        ElseIf _Prog49 = 702 Then
 
             ' Zindelstein
 
@@ -16226,7 +17238,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog50 = 200 Then
+        ElseIf _Prog50 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok50.Interval = 2000
         ElseIf _Prog50 = 201 Then
@@ -16239,6 +17251,46 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+
+        ElseIf _Prog50 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 221 Then
+        ElseIf _Prog50 = 222 Then
+
+        ElseIf _Prog50 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 241 Then
+        ElseIf _Prog50 = 242 Then
+
+        ElseIf _Prog50 = 260 Then ' Kontakt 3.3
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 261 Then
+        ElseIf _Prog50 = 262 Then
+
+        ElseIf _Prog50 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 601 Then
+        ElseIf _Prog50 = 602 Then
+
+        ElseIf _Prog50 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 621 Then
+        ElseIf _Prog50 = 622 Then
+
+        ElseIf _Prog50 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 641 Then
+        ElseIf _Prog50 = 642 Then
+
+        ElseIf _Prog50 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 661 Then
+        ElseIf _Prog50 = 662 Then
+
+        ElseIf _Prog50 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 701 Then
+        ElseIf _Prog50 = 702 Then
 
             ' Zindelstein
 
@@ -16502,7 +17554,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog51 = 200 Then
+        ElseIf _Prog51 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok51.Interval = 2000
         ElseIf _Prog51 = 201 Then
@@ -16515,6 +17567,46 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+
+        ElseIf _Prog51 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 221 Then
+        ElseIf _Prog51 = 222 Then
+
+        ElseIf _Prog51 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 241 Then
+        ElseIf _Prog51 = 242 Then
+
+        ElseIf _Prog51 = 260 Then ' Kontakt 3.3
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 261 Then
+        ElseIf _Prog51 = 262 Then
+
+        ElseIf _Prog51 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 601 Then
+        ElseIf _Prog51 = 602 Then
+
+        ElseIf _Prog51 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 621 Then
+        ElseIf _Prog51 = 622 Then
+
+        ElseIf _Prog51 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 641 Then
+        ElseIf _Prog51 = 642 Then
+
+        ElseIf _Prog51 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 661 Then
+        ElseIf _Prog51 = 662 Then
+
+        ElseIf _Prog51 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 701 Then
+        ElseIf _Prog51 = 702 Then
 
             ' Zindelstein
 
@@ -16778,7 +17870,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog52 = 200 Then
+        ElseIf _Prog52 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok52.Interval = 2000
         ElseIf _Prog52 = 201 Then
@@ -16791,6 +17883,46 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+
+        ElseIf _Prog52 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 221 Then
+        ElseIf _Prog52 = 222 Then
+
+        ElseIf _Prog52 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 241 Then
+        ElseIf _Prog52 = 242 Then
+
+        ElseIf _Prog52 = 260 Then ' Kontakt 3.3
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 261 Then
+        ElseIf _Prog52 = 262 Then
+
+        ElseIf _Prog52 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 601 Then
+        ElseIf _Prog52 = 602 Then
+
+        ElseIf _Prog52 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 621 Then
+        ElseIf _Prog52 = 622 Then
+
+        ElseIf _Prog52 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 641 Then
+        ElseIf _Prog52 = 642 Then
+
+        ElseIf _Prog52 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 661 Then
+        ElseIf _Prog52 = 662 Then
+
+        ElseIf _Prog52 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 701 Then
+        ElseIf _Prog52 = 702 Then
 
             ' Zindelstein
 
@@ -17054,7 +18186,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog53 = 200 Then
+        ElseIf _Prog53 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok53.Interval = 2000
         ElseIf _Prog53 = 201 Then
@@ -17067,6 +18199,46 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+
+        ElseIf _Prog53 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 221 Then
+        ElseIf _Prog53 = 222 Then
+
+        ElseIf _Prog53 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 241 Then
+        ElseIf _Prog53 = 242 Then
+
+        ElseIf _Prog53 = 260 Then ' Kontakt 3.3
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 261 Then
+        ElseIf _Prog53 = 262 Then
+
+        ElseIf _Prog53 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 601 Then
+        ElseIf _Prog53 = 602 Then
+
+        ElseIf _Prog53 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 621 Then
+        ElseIf _Prog53 = 622 Then
+
+        ElseIf _Prog53 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 641 Then
+        ElseIf _Prog53 = 642 Then
+
+        ElseIf _Prog53 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 661 Then
+        ElseIf _Prog53 = 662 Then
+
+        ElseIf _Prog53 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 701 Then
+        ElseIf _Prog53 = 702 Then
 
             ' Zindelstein
 
@@ -17327,7 +18499,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog54 = 200 Then
+        ElseIf _Prog54 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 201 Then
@@ -17342,35 +18514,37 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog54 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok54.Interval = 1000
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 221 Then
+        ElseIf _Prog54 = 222 Then
 
         ElseIf _Prog54 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok54.Interval = 1000
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 241 Then
+        ElseIf _Prog54 = 242 Then
 
         ElseIf _Prog54 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok54.Interval = 1000
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 261 Then
 
         ElseIf _Prog54 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok54.Interval = 1000
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 601 Then
 
         ElseIf _Prog54 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok54.Interval = 1000
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 621 Then
 
         ElseIf _Prog54 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok54.Interval = 1000
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 641 Then
 
         ElseIf _Prog54 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok54.Interval = 1000
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 661 Then
 
-        ElseIf _Prog54 = 700 Then ' Diagonale
-            Prog_Lok54.Interval = 1000
+        ElseIf _Prog54 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 701 Then
 
             ' Zindelstein
@@ -17635,7 +18809,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog55 = 200 Then
+        ElseIf _Prog55 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 201 Then
@@ -17650,35 +18824,37 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog55 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok55.Interval = 1000
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 221 Then
+        ElseIf _Prog55 = 222 Then
 
         ElseIf _Prog55 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok55.Interval = 1000
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 241 Then
+        ElseIf _Prog55 = 242 Then
 
         ElseIf _Prog55 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok55.Interval = 1000
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 261 Then
 
         ElseIf _Prog55 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok55.Interval = 1000
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 601 Then
 
         ElseIf _Prog55 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok55.Interval = 1000
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 621 Then
 
         ElseIf _Prog55 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok55.Interval = 1000
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 641 Then
 
         ElseIf _Prog55 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok55.Interval = 1000
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 661 Then
 
-        ElseIf _Prog55 = 700 Then ' Diagonale
-            Prog_Lok55.Interval = 1000
+        ElseIf _Prog55 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 701 Then
 
             ' Zindelstein
@@ -17942,7 +19118,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog56 = 200 Then
+        ElseIf _Prog56 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 201 Then
@@ -17957,35 +19133,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog56 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok56.Interval = 1000
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 221 Then
 
         ElseIf _Prog56 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok56.Interval = 1000
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 241 Then
 
         ElseIf _Prog56 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok56.Interval = 1000
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 261 Then
 
         ElseIf _Prog56 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok56.Interval = 1000
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 601 Then
 
         ElseIf _Prog56 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok56.Interval = 1000
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 621 Then
 
         ElseIf _Prog56 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok56.Interval = 1000
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 641 Then
 
         ElseIf _Prog56 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok56.Interval = 1000
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 661 Then
 
-        ElseIf _Prog56 = 700 Then ' Diagonale
-            Prog_Lok56.Interval = 1000
+        ElseIf _Prog56 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 701 Then
 
             ' Zindelstein
@@ -18263,7 +19439,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog57 = 200 Then
+        ElseIf _Prog57 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 201 Then
@@ -18278,35 +19454,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog57 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok57.Interval = 1000
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 221 Then
 
         ElseIf _Prog57 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok57.Interval = 1000
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 241 Then
 
         ElseIf _Prog57 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok57.Interval = 1000
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 261 Then
 
         ElseIf _Prog57 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok57.Interval = 1000
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 601 Then
 
         ElseIf _Prog57 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok57.Interval = 1000
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 621 Then
 
         ElseIf _Prog57 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok57.Interval = 1000
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 641 Then
 
         ElseIf _Prog57 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok57.Interval = 1000
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 661 Then
 
-        ElseIf _Prog57 = 700 Then ' Diagonale
-            Prog_Lok57.Interval = 1000
+        ElseIf _Prog57 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 701 Then
 
             ' Zindelstein
@@ -18612,7 +19788,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog58 = 200 Then
+        ElseIf _Prog58 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 201 Then
@@ -18627,35 +19803,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog58 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok58.Interval = 1000
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 221 Then
 
         ElseIf _Prog58 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok58.Interval = 1000
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 241 Then
 
         ElseIf _Prog58 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok58.Interval = 1000
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 261 Then
 
         ElseIf _Prog58 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok58.Interval = 1000
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 601 Then
 
         ElseIf _Prog58 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok58.Interval = 1000
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 621 Then
 
         ElseIf _Prog58 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok58.Interval = 1000
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 641 Then
 
         ElseIf _Prog58 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok58.Interval = 1000
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 661 Then
 
-        ElseIf _Prog58 = 700 Then ' Diagonale
-            Prog_Lok58.Interval = 1000
+        ElseIf _Prog58 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 701 Then
 
             ' Zindelstein
@@ -18934,7 +20110,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog59 = 200 Then
+        ElseIf _Prog59 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 201 Then
@@ -18949,35 +20125,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog59 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok59.Interval = 1000
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 221 Then
 
         ElseIf _Prog59 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok59.Interval = 1000
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 241 Then
 
         ElseIf _Prog59 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok59.Interval = 1000
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 261 Then
 
         ElseIf _Prog59 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok59.Interval = 1000
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 601 Then
 
         ElseIf _Prog59 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok59.Interval = 1000
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 621 Then
 
         ElseIf _Prog59 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok59.Interval = 1000
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 641 Then
 
         ElseIf _Prog59 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok59.Interval = 1000
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 661 Then
 
-        ElseIf _Prog59 = 700 Then ' Diagonale
-            Prog_Lok59.Interval = 1000
+        ElseIf _Prog59 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 701 Then
 
             ' Zindelstein
@@ -19187,8 +20363,11 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 18 Then
             _eb.lokSteuern(60, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
         ElseIf _Prog60 = 19 Then
-            Prog_Lok60.Interval = 8000
         ElseIf _Prog60 = 20 Then
+        ElseIf _Prog60 = 21 Then
+        ElseIf _Prog60 = 22 Then
+        ElseIf _Prog60 = 23 Then
+        ElseIf _Prog60 = 24 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
@@ -19198,16 +20377,10 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 50 Then
             Prog_Lok60.Interval = 2000
         ElseIf _Prog60 = 51 Then
-        ElseIf _Prog60 = 52 Then
-        ElseIf _Prog60 = 53 Then
-        ElseIf _Prog60 = 54 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
-        ElseIf _Prog60 = 55 Then
-        ElseIf _Prog60 = 56 Then
-        ElseIf _Prog60 = 57 Then
-        ElseIf _Prog60 = 58 Then
+        ElseIf _Prog60 = 52 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -19254,6 +20427,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
         ElseIf _Prog60 = 140 Then
+        ElseIf _Prog60 = 141 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -19277,12 +20451,13 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 167 Then
             _eb.lokSteuern(60, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog60 = 168 Then
+            Prog_Lok60.Interval = 2000
+        ElseIf _Prog60 = 169 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
-        ElseIf _Prog60 = 169 Then
-            Prog_Lok60.Interval = 2000
         ElseIf _Prog60 = 170 Then
+        ElseIf _Prog60 = 171 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -19300,7 +20475,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog60 = 200 Then
+        ElseIf _Prog60 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(60, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
         ElseIf _Prog60 = 201 Then
             Prog_Lok60.Interval = 2000
@@ -19336,6 +20511,7 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 225 Then
         ElseIf _Prog60 = 226 Then
         ElseIf _Prog60 = 227 Then
+        ElseIf _Prog60 = 228 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
@@ -19347,11 +20523,12 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 243 Then
         ElseIf _Prog60 = 244 Then
             If _Motor > 1 Then
-                _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                '_eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
         ElseIf _Prog60 = 245 Then
             If _AkustischeSignale > 1 Then
-                _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+                '_eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
             End If
         ElseIf _Prog60 = 246 Then
             _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
@@ -19362,7 +20539,6 @@ Public Class Automatikprogramme
             If _Motor < 3 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
-
 
         ElseIf _Prog60 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok60.Interval = 2000
@@ -19386,10 +20562,10 @@ Public Class Automatikprogramme
             Prog_Lok60.Interval = 2000
         ElseIf _Prog60 = 621 Then
         ElseIf _Prog60 = 622 Then
-        ElseIf _Prog60 = 623 Then
             If _Motor > 1 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
+        ElseIf _Prog60 = 623 Then
         ElseIf _Prog60 = 624 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
@@ -19403,10 +20579,10 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 641 Then
         ElseIf _Prog60 = 642 Then
         ElseIf _Prog60 = 643 Then
+        ElseIf _Prog60 = 644 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
-
 
         ElseIf _Prog60 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok60.Interval = 2000
@@ -19416,31 +20592,34 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 664 Then
         ElseIf _Prog60 = 665 Then
             If _GlsL60 = 1 Or _GlsL60 = 2 Then
-                If _Motor > 1 Then
+                If _Motor > 0 Then
                     _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
                 End If
             End If
         ElseIf _Prog60 = 666 Then
         ElseIf _Prog60 = 667 Then
+        ElseIf _Prog60 = 668 Then
+        ElseIf _Prog60 = 669 Then
+        ElseIf _Prog60 = 670 Then
             If _GlsL60 = 1 Or _GlsL60 = 2 Then
-                If _AkustischeSignale > 1 Then
+                If _AkustischeSignale > 0 Then
                     _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
                 End If
             End If
-        ElseIf _Prog60 = 668 Then
+        ElseIf _Prog60 = 671 Then
             _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
-        ElseIf _Prog60 = 700 Then ' Diagonale
+        ElseIf _Prog60 = 700 Then ' Kontakt 0.4 Diagonale
             Prog_Lok60.Interval = 2000
         ElseIf _Prog60 = 701 Then
         ElseIf _Prog60 = 702 Then
         ElseIf _Prog60 = 703 Then
         ElseIf _Prog60 = 704 Then
-            If _Motor > 1 Then
+            If _Motor > 0 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
         ElseIf _Prog60 = 705 Then
-            If _AkustischeSignale > 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
             End If
         ElseIf _Prog60 = 706 Then
@@ -19713,7 +20892,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog61 = 200 Then
+        ElseIf _Prog61 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 201 Then
@@ -19728,35 +20907,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog61 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok61.Interval = 1000
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 221 Then
 
         ElseIf _Prog61 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok61.Interval = 1000
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 241 Then
 
         ElseIf _Prog61 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok61.Interval = 1000
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 261 Then
 
         ElseIf _Prog61 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok61.Interval = 1000
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 601 Then
 
         ElseIf _Prog61 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok61.Interval = 1000
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 621 Then
 
         ElseIf _Prog61 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok61.Interval = 1000
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 641 Then
 
         ElseIf _Prog61 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok61.Interval = 1000
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 661 Then
 
-        ElseIf _Prog61 = 700 Then ' Diagonale
-            Prog_Lok61.Interval = 1000
+        ElseIf _Prog61 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 701 Then
 
             ' Zindelstein
@@ -20021,7 +21200,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog62 = 200 Then
+        ElseIf _Prog62 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 201 Then
@@ -20036,35 +21215,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog62 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok62.Interval = 1000
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 221 Then
 
         ElseIf _Prog62 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok62.Interval = 1000
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 241 Then
 
         ElseIf _Prog62 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok62.Interval = 1000
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 261 Then
 
         ElseIf _Prog62 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok62.Interval = 1000
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 601 Then
 
         ElseIf _Prog62 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok62.Interval = 1000
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 621 Then
 
         ElseIf _Prog62 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok62.Interval = 1000
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 641 Then
 
         ElseIf _Prog62 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok62.Interval = 1000
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 661 Then
 
-        ElseIf _Prog62 = 700 Then ' Diagonale
-            Prog_Lok62.Interval = 1000
+        ElseIf _Prog62 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 701 Then
 
             ' Zindelstein
@@ -20340,7 +21519,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog63 = 200 Then
+        ElseIf _Prog63 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(63, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 201 Then
@@ -20355,35 +21534,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog63 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok63.Interval = 1000
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 221 Then
 
         ElseIf _Prog63 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok63.Interval = 1000
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 241 Then
 
         ElseIf _Prog63 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok63.Interval = 1000
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 261 Then
 
         ElseIf _Prog63 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok63.Interval = 1000
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 601 Then
 
         ElseIf _Prog63 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok63.Interval = 1000
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 621 Then
 
         ElseIf _Prog63 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok63.Interval = 1000
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 641 Then
 
         ElseIf _Prog63 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok63.Interval = 1000
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 661 Then
 
-        ElseIf _Prog63 = 700 Then ' Diagonale
-            Prog_Lok63.Interval = 1000
+        ElseIf _Prog63 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 701 Then
 
             ' Zindelstein
@@ -20654,7 +21833,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog64 = 200 Then
+        ElseIf _Prog64 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 201 Then
@@ -20669,35 +21848,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog64 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok64.Interval = 1000
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 221 Then
 
         ElseIf _Prog64 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok64.Interval = 1000
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 241 Then
 
         ElseIf _Prog64 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok64.Interval = 1000
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 261 Then
 
         ElseIf _Prog64 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok64.Interval = 1000
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 601 Then
 
         ElseIf _Prog64 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok64.Interval = 1000
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 621 Then
 
         ElseIf _Prog64 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok64.Interval = 1000
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 641 Then
 
         ElseIf _Prog64 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok64.Interval = 1000
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 661 Then
 
-        ElseIf _Prog64 = 700 Then ' Diagonale
-            Prog_Lok64.Interval = 1000
+        ElseIf _Prog64 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 701 Then
 
             ' Zindelstein
@@ -20972,7 +22151,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog65 = 200 Then
+        ElseIf _Prog65 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 201 Then
@@ -20987,35 +22166,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog65 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok65.Interval = 1000
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 221 Then
 
         ElseIf _Prog65 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok65.Interval = 1000
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 241 Then
 
         ElseIf _Prog65 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok65.Interval = 1000
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 261 Then
 
         ElseIf _Prog65 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok65.Interval = 1000
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 601 Then
 
         ElseIf _Prog65 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok65.Interval = 1000
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 621 Then
 
         ElseIf _Prog65 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok65.Interval = 1000
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 641 Then
 
         ElseIf _Prog65 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok65.Interval = 1000
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 661 Then
 
-        ElseIf _Prog65 = 700 Then ' Diagonale
-            Prog_Lok65.Interval = 1000
+        ElseIf _Prog65 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 701 Then
 
             ' Zindelstein
@@ -21350,7 +22529,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog66 = 200 Then
+        ElseIf _Prog66 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok66.Interval = 3000
         ElseIf _Prog66 = 201 Then
@@ -21460,7 +22639,7 @@ Public Class Automatikprogramme
         ElseIf _Prog66 = 664 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog66 = 700 Then
+        ElseIf _Prog66 = 700 Then ' Kontakt 0.4 Diagonale
             Prog_Lok66.Interval = 3000
         ElseIf _Prog66 = 701 Then
         ElseIf _Prog66 = 702 Then
@@ -21757,7 +22936,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog67 = 200 Then
+        ElseIf _Prog67 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 201 Then
@@ -21770,37 +22949,50 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog67 = 206 Then
+        ElseIf _Prog67 = 207 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(67, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog67 = 208 Then
+            Prog_Lok67.Interval = 2000
+        ElseIf _Prog67 = 209 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(67, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog67 = 210 Then
+            _eb.lokSteuern(67, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
         ElseIf _Prog67 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok67.Interval = 1000
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 221 Then
 
         ElseIf _Prog67 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok67.Interval = 1000
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 241 Then
 
         ElseIf _Prog67 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok67.Interval = 1000
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 261 Then
 
         ElseIf _Prog67 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok67.Interval = 1000
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 601 Then
 
         ElseIf _Prog67 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok67.Interval = 1000
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 621 Then
 
         ElseIf _Prog67 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok67.Interval = 1000
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 641 Then
 
         ElseIf _Prog67 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok67.Interval = 1000
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 661 Then
 
-        ElseIf _Prog67 = 700 Then ' Diagonale
-            Prog_Lok67.Interval = 1000
+        ElseIf _Prog67 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 701 Then
 
             ' Zindelstein
@@ -22102,7 +23294,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog68 = 200 Then
+        ElseIf _Prog68 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok68.Interval = 2000
         ElseIf _Prog68 = 201 Then
@@ -22114,6 +23306,31 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
+            End If
+        ElseIf _Prog68 = 206 Then
+        ElseIf _Prog68 = 207 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog68 = 208 Then
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 209 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog68 = 210 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog68 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 221 Then
+        ElseIf _Prog68 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog68 = 223 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
             End If
 
 
@@ -22393,7 +23610,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog69 = 200 Then
+        ElseIf _Prog69 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 201 Then
@@ -22408,35 +23625,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog69 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok69.Interval = 1000
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 221 Then
 
         ElseIf _Prog69 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok69.Interval = 1000
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 241 Then
 
         ElseIf _Prog69 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok69.Interval = 1000
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 261 Then
 
         ElseIf _Prog69 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok69.Interval = 1000
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 601 Then
 
         ElseIf _Prog69 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok69.Interval = 1000
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 621 Then
 
         ElseIf _Prog69 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok69.Interval = 1000
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 641 Then
 
         ElseIf _Prog69 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok69.Interval = 1000
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 661 Then
 
-        ElseIf _Prog69 = 700 Then ' Diagonale
-            Prog_Lok69.Interval = 1000
+        ElseIf _Prog69 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 701 Then
 
             ' Zindelstein
@@ -22740,13 +23957,13 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog70 = 200 Then
+        ElseIf _Prog70 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok70.Interval = 2000
         ElseIf _Prog70 = 201 Then
-            'If _Dampf > 0 Then
-            '    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            'End If
+            If _Dampf > 0 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
         ElseIf _Prog70 = 202 Then
         ElseIf _Prog70 = 203 Then
         ElseIf _Prog70 = 204 Then
@@ -22756,33 +23973,48 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            'ElseIf _Prog70 = 205 Then
-            '    If _AkustischeSignale = 1 Then
-            '        _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
-            '    End If
-            'ElseIf _Prog70 = 206 Then
-            'ElseIf _Prog70 = 207 Then
-            'ElseIf _Prog70 = 208 Then
-            '    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 0) ' Läuten aus
-            'ElseIf _Prog70 = 209 Then
-            'ElseIf _Prog70 = 210 Then
-            'ElseIf _Prog70 = 211 Then
-            '    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
-            '    'If _Dampf = 0 Or _Dampf = 2 Then
-            '    '    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            '    'End If
-            'ElseIf _Prog70 = 212 Then
-            '    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 0) ' Läuten aus
-            'ElseIf _Prog70 = 213 Then
-            'ElseIf _Prog70 = 214 Then
-            'ElseIf _Prog70 = 215 Then
-            'ElseIf _Prog70 = 216 Then
-            'ElseIf _Prog70 = 217 Then
-            'ElseIf _Prog70 = 218 Then
-            '    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
-            'ElseIf _Prog70 = 219 Then
-            '    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 0) ' Läuten aus
+        ElseIf _Prog70 = 205 Then
+            If _AkustischeSignale = 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
+            End If
+        ElseIf _Prog70 = 206 Then
+        ElseIf _Prog70 = 207 Then
+        ElseIf _Prog70 = 208 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 0) ' Läuten aus
+        ElseIf _Prog70 = 209 Then
+        ElseIf _Prog70 = 210 Then
 
+        ElseIf _Prog70 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 221 Then
+        ElseIf _Prog70 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog70 = 223 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog70 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 241 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog70 = 242 Then
+            Prog_Lok70.Interval = 1000
+        ElseIf _Prog70 = 243 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog70 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog70 = 245 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog70 = 246 Then
 
             ' Zindelstein
 
@@ -22817,7 +24049,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 85 007
         '*** Datum: 08.10.2021
 
-        SetText(TextBox1, "Dampf-Lok 85 007                                               IBS: 08.10.2021 - V3 : 8")
+        SetText(TextBox1, "Dampf-Lok 85 007                                               IBS: 10.12.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_85_01.jpg")
         GeschwindikeitenSetzen(71)
 
@@ -22944,30 +24176,22 @@ Public Class Automatikprogramme
 
         If _Prog71 = 0 Then
             Prog_Lok71.Interval = 2000
-            If _Durchsagen = 1 And (_TypL71 = 1 Or _TypL71 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog71 = 5
-            End If
         ElseIf _Prog71 = 1 Then
         ElseIf _Prog71 = 2 Then
-        ElseIf _Prog71 = 3 Then
-        ElseIf _Prog71 = 4 Then
-        ElseIf _Prog71 = 5 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog71 = 6 Then
+        ElseIf _Prog71 = 3 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog71 = 7 Then
+        ElseIf _Prog71 = 4 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog71 = 8 Then
+        ElseIf _Prog71 = 5 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog71 = 9 Then
+        ElseIf _Prog71 = 6 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog71 = 10 Then
+        ElseIf _Prog71 = 7 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog71 = 11 Then
+        ElseIf _Prog71 = 8 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
             ' Lok abstellen
@@ -23045,7 +24269,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog71 = 200 Then
+        ElseIf _Prog71 = 200 Then ' Kontakt 1.2 <- (bergauf)
             Prog_Lok71.Interval = 2000
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
         ElseIf _Prog71 = 201 Then
@@ -23059,13 +24283,45 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
 
-        ElseIf _Prog71 = 220 Then
+        ElseIf _Prog71 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok71.Interval = 2000
         ElseIf _Prog71 = 221 Then
+        ElseIf _Prog71 = 222 Then
 
-        ElseIf _Prog71 = 700 Then
+        ElseIf _Prog71 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 241 Then
+        ElseIf _Prog71 = 242 Then
+
+        ElseIf _Prog71 = 260 Then ' Kontakt 3.3 links der Brücke
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 261 Then
+        ElseIf _Prog71 = 262 Then
+
+        ElseIf _Prog71 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 601 Then
+        ElseIf _Prog71 = 602 Then
+
+        ElseIf _Prog71 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 621 Then
+        ElseIf _Prog71 = 622 Then
+
+        ElseIf _Prog71 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 641 Then
+        ElseIf _Prog71 = 642 Then
+
+        ElseIf _Prog71 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 661 Then
+        ElseIf _Prog71 = 662 Then
+
+        ElseIf _Prog71 = 700 Then ' Kontakt 0.4 Diagonale
             Prog_Lok71.Interval = 2000
         ElseIf _Prog71 = 701 Then
+        ElseIf _Prog71 = 702 Then
 
             ' Zindelstein
 
@@ -23330,7 +24586,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog72 = 200 Then
+        ElseIf _Prog72 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 201 Then
@@ -23345,35 +24601,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog72 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok72.Interval = 1000
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 221 Then
 
         ElseIf _Prog72 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok72.Interval = 1000
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 241 Then
 
         ElseIf _Prog72 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok72.Interval = 1000
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 261 Then
 
         ElseIf _Prog72 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok72.Interval = 1000
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 601 Then
 
         ElseIf _Prog72 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok72.Interval = 1000
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 621 Then
 
         ElseIf _Prog72 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok72.Interval = 1000
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 641 Then
 
         ElseIf _Prog72 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok72.Interval = 1000
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 661 Then
 
-        ElseIf _Prog72 = 700 Then ' Diagonale
-            Prog_Lok72.Interval = 1000
+        ElseIf _Prog72 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 701 Then
 
             ' Zindelstein
@@ -23535,8 +24791,6 @@ Public Class Automatikprogramme
 
         ' Lok starten - Bahnhofsausfahrt
 
-        ' Lok starten - Bahnhofsausfahrt
-
         If _Prog73 = 0 Then
             Prog_Lok73.Interval = 2000
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, 0)
@@ -23569,6 +24823,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog73 = 8 Then
         ElseIf _Prog73 = 9 Then
+            Prog_Lok73.Interval = 1000
         ElseIf _Prog73 = 10 Then
             If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
@@ -23576,7 +24831,7 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 11 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog73 = 12 Then
-            Prog_Lok73.Interval = 3000
+            Prog_Lok73.Interval = 2000
 
             ' Bahnhofsausfahrt
 
@@ -23593,10 +24848,14 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 18 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
         ElseIf _Prog73 = 19 Then
+        ElseIf _Prog73 = 20 Then
+        ElseIf _Prog73 = 21 Then
+        ElseIf _Prog73 = 22 Then
+        ElseIf _Prog73 = 23 Then
             If _Dampf < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
-        ElseIf _Prog73 = 20 Then
+        ElseIf _Prog73 = 24 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
@@ -23643,28 +24902,29 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 130 Then
             Prog_Lok73.Interval = V_130
         ElseIf _Prog73 = 131 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
             Prog_Lok73.Interval = T_130
         ElseIf _Prog73 = 132 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
         ElseIf _Prog73 = 133 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
         ElseIf _Prog73 = 134 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
         ElseIf _Prog73 = 135 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog73 = 136 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog73 = 137 Then
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog73 = 138 Then
             Prog_Lok73.Interval = 1000
             If _Dampf < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
-        ElseIf _Prog73 = 138 Then
+        ElseIf _Prog73 = 139 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
-        ElseIf _Prog73 = 139 Then
+        ElseIf _Prog73 = 140 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -23674,28 +24934,29 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 160 Then
             Prog_Lok73.Interval = V_160
         ElseIf _Prog73 = 161 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
             Prog_Lok73.Interval = T_160
         ElseIf _Prog73 = 162 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
         ElseIf _Prog73 = 163 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
         ElseIf _Prog73 = 164 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
         ElseIf _Prog73 = 165 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog73 = 166 Then
-            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog73 = 167 Then
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog73 = 168 Then
             Prog_Lok73.Interval = 1000
             If _Dampf < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
-        ElseIf _Prog73 = 168 Then
+        ElseIf _Prog73 = 169 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
-        ElseIf _Prog73 = 169 Then
+        ElseIf _Prog73 = 170 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -23713,32 +24974,34 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog73 = 200 Then
+        ElseIf _Prog73 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
-            Prog_Lok73.Interval = 4000
         ElseIf _Prog73 = 201 Then
+            Prog_Lok73.Interval = 2000
         ElseIf _Prog73 = 202 Then
         ElseIf _Prog73 = 203 Then
         ElseIf _Prog73 = 204 Then
-            If _Dampf > 1 Then
-                _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            End If
-            Prog_Lok73.Interval = 1000
         ElseIf _Prog73 = 205 Then
+        ElseIf _Prog73 = 206 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-        ElseIf _Prog73 = 206 Then
+        ElseIf _Prog73 = 207 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog73 = 208 Then
+        ElseIf _Prog73 = 209 Then
             If _Motor > 1 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
             End If
-        ElseIf _Prog73 = 207 Then
+        ElseIf _Prog73 = 210 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog73 = 208 Then
+        ElseIf _Prog73 = 211 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
         ElseIf _Prog73 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
@@ -23813,34 +25076,46 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 641 Then
         ElseIf _Prog73 = 642 Then
 
+
         ElseIf _Prog73 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok73.Interval = 4000
+            Prog_Lok73.Interval = 2000
         ElseIf _Prog73 = 661 Then
         ElseIf _Prog73 = 662 Then
-            Prog_Lok73.Interval = 1000
         ElseIf _Prog73 = 663 Then
-            If _AkustischeSignale > 1 Then
-                _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
-            End If
         ElseIf _Prog73 = 664 Then
+            If _GlsL73 = 1 Or _GlsL73 = 2 Then
+                If _Motor > 1 Then
+                    _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+                End If
+            End If
+        ElseIf _Prog73 = 665 Then
+            If _GlsL73 = 1 Or _GlsL73 = 2 Then
+                If _AkustischeSignale > 1 Then
+                    _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog73 = 667 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog73 = 700 Then
-            Prog_Lok73.Interval = 3000
+        ElseIf _Prog73 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok73.Interval = 2000
         ElseIf _Prog73 = 701 Then
         ElseIf _Prog73 = 702 Then
         ElseIf _Prog73 = 703 Then
-            If _Motor > 1 Then
+        ElseIf _Prog73 = 704 Then
+            If _Motor > 0 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
             End If
-        ElseIf _Prog73 = 704 Then
-            Prog_Lok73.Interval = 1000
         ElseIf _Prog73 = 705 Then
-            If _AkustischeSignale > 1 Then
+            Prog_Lok73.Interval = 1000
+        ElseIf _Prog73 = 706 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog73 = 706 Then
+        ElseIf _Prog73 = 707 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog73 = 708 Then
+            Prog_Lok73.Interval = 2000
 
             ' Zindelstein
 
@@ -24106,7 +25381,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog74 = 200 Then
+        ElseIf _Prog74 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 201 Then
@@ -24121,35 +25396,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog74 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok74.Interval = 1000
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 221 Then
 
         ElseIf _Prog74 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok74.Interval = 1000
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 241 Then
 
         ElseIf _Prog74 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok74.Interval = 1000
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 261 Then
 
         ElseIf _Prog74 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok74.Interval = 1000
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 601 Then
 
         ElseIf _Prog74 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok74.Interval = 1000
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 621 Then
 
         ElseIf _Prog74 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok74.Interval = 1000
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 641 Then
 
         ElseIf _Prog74 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok74.Interval = 1000
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 661 Then
 
-        ElseIf _Prog74 = 700 Then ' Diagonale
-            Prog_Lok74.Interval = 1000
+        ElseIf _Prog74 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 701 Then
 
             ' Zindelstein
@@ -24415,7 +25690,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog75 = 200 Then
+        ElseIf _Prog75 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 201 Then
@@ -24430,36 +25705,44 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog75 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok75.Interval = 1000
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 221 Then
+        ElseIf _Prog75 = 222 Then
 
         ElseIf _Prog75 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok75.Interval = 1000
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 241 Then
+        ElseIf _Prog75 = 242 Then
 
         ElseIf _Prog75 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok75.Interval = 1000
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 261 Then
+        ElseIf _Prog75 = 262 Then
 
         ElseIf _Prog75 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok75.Interval = 1000
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 601 Then
+        ElseIf _Prog75 = 602 Then
 
         ElseIf _Prog75 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok75.Interval = 1000
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 621 Then
+        ElseIf _Prog75 = 622 Then
 
         ElseIf _Prog75 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok75.Interval = 1000
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 641 Then
+        ElseIf _Prog75 = 642 Then
 
         ElseIf _Prog75 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok75.Interval = 1000
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 661 Then
+        ElseIf _Prog75 = 662 Then
 
-        ElseIf _Prog75 = 700 Then ' Diagonale
-            Prog_Lok75.Interval = 1000
+        ElseIf _Prog75 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 701 Then
+        ElseIf _Prog75 = 702 Then
 
             ' Zindelstein
 
@@ -24737,7 +26020,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog76 = 200 Then
+        ElseIf _Prog76 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 201 Then
@@ -24750,37 +26033,62 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+        ElseIf _Prog76 = 206 Then
+        ElseIf _Prog76 = 207 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(76, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog76 = 208 Then
+            Prog_Lok76.Interval = 2000
+        ElseIf _Prog76 = 209 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(76, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog76 = 210 Then
+            _eb.lokSteuern(76, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
         ElseIf _Prog76 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok76.Interval = 1000
+            Prog_Lok76.Interval = 2000
+        ElseIf _Prog76 = 221 Then
+        ElseIf _Prog76 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(76, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog76 = 223 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(76, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog76 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 221 Then
 
         ElseIf _Prog76 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok76.Interval = 1000
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 241 Then
 
         ElseIf _Prog76 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok76.Interval = 1000
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 261 Then
 
         ElseIf _Prog76 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok76.Interval = 1000
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 601 Then
 
         ElseIf _Prog76 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok76.Interval = 1000
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 621 Then
 
         ElseIf _Prog76 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok76.Interval = 1000
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 641 Then
 
         ElseIf _Prog76 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok76.Interval = 1000
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 661 Then
 
-        ElseIf _Prog76 = 700 Then ' Diagonale
-            Prog_Lok76.Interval = 1000
+        ElseIf _Prog76 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 701 Then
 
             ' Zindelstein
@@ -25069,7 +26377,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog77 = 200 Then
+        ElseIf _Prog77 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(77, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 201 Then
@@ -25112,23 +26420,23 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog77 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok77.Interval = 1000
+            Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 601 Then
 
         ElseIf _Prog77 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok77.Interval = 1000
+            Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 621 Then
 
         ElseIf _Prog77 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok77.Interval = 1000
+            Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 641 Then
 
         ElseIf _Prog77 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok77.Interval = 1000
+            Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 661 Then
 
-        ElseIf _Prog77 = 700 Then
-            Prog_Lok77.Interval = 1000
+        ElseIf _Prog77 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 701 Then
 
             ' Zindelstein
@@ -25394,7 +26702,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog78 = 200 Then
+        ElseIf _Prog78 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 201 Then
@@ -25409,35 +26717,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog78 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok78.Interval = 1000
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 221 Then
 
         ElseIf _Prog78 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok78.Interval = 1000
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 241 Then
 
         ElseIf _Prog78 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok78.Interval = 1000
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 261 Then
 
         ElseIf _Prog78 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok78.Interval = 1000
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 601 Then
 
         ElseIf _Prog78 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok78.Interval = 1000
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 621 Then
 
         ElseIf _Prog78 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok78.Interval = 1000
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 641 Then
 
         ElseIf _Prog78 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok78.Interval = 1000
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 661 Then
 
-        ElseIf _Prog78 = 700 Then ' Diagonale
-            Prog_Lok78.Interval = 1000
+        ElseIf _Prog78 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 701 Then
 
             ' Zindelstein
@@ -25717,63 +27025,74 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog79 = 200 Then
+        ElseIf _Prog79 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
-            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 201 Then
+            Prog_Lok79.Interval = 2000
+        ElseIf _Prog79 = 202 Then
             If _Dampf > 0 Then
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Dampf ein
             End If
-        ElseIf _Prog79 = 202 Then
         ElseIf _Prog79 = 203 Then
+        ElseIf _Prog79 = 204 Then
             If Stufe4 < 10 Then
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, 10)
             Else
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-        ElseIf _Prog79 = 204 Then
         ElseIf _Prog79 = 205 Then
+        ElseIf _Prog79 = 206 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-            Prog_Lok79.Interval = 10000
-        ElseIf _Prog79 = 206 Then
+        ElseIf _Prog79 = 207 Then
             If _Dampf < 2 Then
                 _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
             End If
+        ElseIf _Prog79 = 208 Then
+        ElseIf _Prog79 = 209 Then
+        ElseIf _Prog79 = 210 Then
 
         ElseIf _Prog79 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok79.Interval = 1000
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 221 Then
+        ElseIf _Prog79 = 222 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog79 = 223 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+            End If
 
         ElseIf _Prog79 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok79.Interval = 1000
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 241 Then
 
         ElseIf _Prog79 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok79.Interval = 1000
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 261 Then
 
         ElseIf _Prog79 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok79.Interval = 1000
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 601 Then
 
         ElseIf _Prog79 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok79.Interval = 1000
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 621 Then
 
         ElseIf _Prog79 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok79.Interval = 1000
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 641 Then
 
         ElseIf _Prog79 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok79.Interval = 1000
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 661 Then
 
-        ElseIf _Prog79 = 700 Then ' Diagonale
-            Prog_Lok79.Interval = 1000
+        ElseIf _Prog79 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 701 Then
 
 
@@ -26037,7 +27356,7 @@ Public Class Automatikprogramme
 
             ' Tunnelausfahrt
 
-        ElseIf _Prog80 = 200 Then
+        ElseIf _Prog80 = 200 Then ' Kontakt 1.2 <- (bergauf)
             _eb.lokSteuern(80, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 201 Then
@@ -26052,35 +27371,35 @@ Public Class Automatikprogramme
             End If
 
         ElseIf _Prog80 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok80.Interval = 1000
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 221 Then
 
         ElseIf _Prog80 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
-            Prog_Lok80.Interval = 1000
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 241 Then
 
         ElseIf _Prog80 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
-            Prog_Lok80.Interval = 1000
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 261 Then
 
         ElseIf _Prog80 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok80.Interval = 1000
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 601 Then
 
         ElseIf _Prog80 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok80.Interval = 1000
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 621 Then
 
         ElseIf _Prog80 = 640 Then ' Kontakt 3.1 <- Talfahrt
-            Prog_Lok80.Interval = 1000
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 641 Then
 
         ElseIf _Prog80 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok80.Interval = 1000
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 661 Then
 
-        ElseIf _Prog80 = 700 Then ' Diagonale
-            Prog_Lok80.Interval = 1000
+        ElseIf _Prog80 = 700 Then ' Kontakt 0.4 Diagonale
+            Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 701 Then
 
             ' Zindelstein
@@ -28049,356 +29368,427 @@ Public Class Automatikprogramme
             _Prog10 = Ort
             _GlsL10 = 1
             _TypL10 = _Zugtyp1
+            Prog_Lok10.Interval = 200
             Prog_Lok10.Start()
         ElseIf NumericUpDown8.Value = 11 Then
             _Prog11 = Ort
             _GlsL11 = 1
             _TypL11 = _Zugtyp1
+            Prog_Lok11.Interval = 200
             Prog_Lok11.Start()
         ElseIf NumericUpDown8.Value = 12 Then
             _Prog12 = Ort
             _GlsL12 = 1
             _TypL12 = _Zugtyp1
+            Prog_Lok12.Interval = 200
             Prog_Lok12.Start()
         ElseIf NumericUpDown8.Value = 13 Then
             _Prog13 = Ort
             _GlsL13 = 1
             _TypL13 = _Zugtyp1
+            Prog_Lok13.Interval = 200
             Prog_Lok13.Start()
         ElseIf NumericUpDown8.Value = 14 Then
             _Prog14 = Ort
             _GlsL14 = 1
             _TypL14 = _Zugtyp1
+            Prog_Lok14.Interval = 200
             Prog_Lok14.Start()
         ElseIf NumericUpDown8.Value = 15 Then
             _Prog15 = Ort
             _GlsL15 = 1
             _TypL15 = _Zugtyp1
+            Prog_Lok15.Interval = 200
             Prog_Lok15.Start()
         ElseIf NumericUpDown8.Value = 16 Then
             _Prog16 = Ort
             _GlsL16 = 1
             _TypL16 = _Zugtyp1
+            Prog_Lok16.Interval = 200
             Prog_Lok16.Start()
         ElseIf NumericUpDown8.Value = 17 Then
             _Prog17 = Ort
             _GlsL17 = 1
             _TypL17 = _Zugtyp1
+            Prog_Lok17.Interval = 200
             Prog_Lok17.Start()
         ElseIf NumericUpDown8.Value = 18 Then
             _Prog18 = Ort
             _GlsL18 = 1
             _TypL18 = _Zugtyp1
+            Prog_Lok18.Interval = 200
             Prog_Lok18.Start()
         ElseIf NumericUpDown8.Value = 19 Then
             _Prog19 = Ort
             _GlsL19 = 1
             _TypL19 = _Zugtyp1
+            Prog_Lok19.Interval = 200
             Prog_Lok19.Start()
         ElseIf NumericUpDown8.Value = 20 Then
             _Prog20 = Ort
             _GlsL20 = 1
             _TypL20 = _Zugtyp1
+            Prog_Lok20.Interval = 200
             Prog_Lok20.Start()
         ElseIf NumericUpDown8.Value = 21 Then
             _Prog21 = Ort
             _GlsL21 = 1
             _TypL21 = _Zugtyp1
+            Prog_Lok21.Interval = 200
             Prog_Lok21.Start()
         ElseIf NumericUpDown8.Value = 22 Then
             _Prog22 = Ort
             _GlsL22 = 1
             _TypL22 = _Zugtyp1
+            Prog_Lok22.Interval = 200
             Prog_Lok22.Start()
         ElseIf NumericUpDown8.Value = 23 Then
             _Prog23 = Ort
             _GlsL23 = 1
             _TypL23 = _Zugtyp1
+            Prog_Lok23.Interval = 200
             Prog_Lok23.Start()
         ElseIf NumericUpDown8.Value = 24 Then
             _Prog24 = Ort
             _GlsL24 = 1
             _TypL24 = _Zugtyp1
+            Prog_Lok24.Interval = 200
             Prog_Lok24.Start()
         ElseIf NumericUpDown8.Value = 25 Then
             _Prog25 = Ort
             _GlsL25 = 1
             _TypL25 = _Zugtyp1
+            Prog_Lok25.Interval = 200
             Prog_Lok25.Start()
         ElseIf NumericUpDown8.Value = 26 Then
             _Prog26 = Ort
             _GlsL26 = 1
             _TypL26 = _Zugtyp1
+            Prog_Lok26.Interval = 200
             Prog_Lok26.Start()
         ElseIf NumericUpDown8.Value = 27 Then
             _Prog27 = Ort
             _GlsL27 = 1
             _TypL27 = _Zugtyp1
+            Prog_Lok27.Interval = 200
             Prog_Lok27.Start()
         ElseIf NumericUpDown8.Value = 28 Then
             _Prog28 = Ort
             _GlsL28 = 1
             _TypL28 = _Zugtyp1
+            Prog_Lok28.Interval = 200
             Prog_Lok28.Start()
         ElseIf NumericUpDown8.Value = 29 Then
             _Prog29 = Ort
             _GlsL29 = 1
             _TypL29 = _Zugtyp1
+            Prog_Lok29.Interval = 200
             Prog_Lok29.Start()
         ElseIf NumericUpDown8.Value = 30 Then
             _Prog30 = Ort
             _GlsL30 = 1
             _TypL30 = _Zugtyp1
+            Prog_Lok30.Interval = 200
             Prog_Lok30.Start()
         ElseIf NumericUpDown8.Value = 31 Then
             _Prog31 = Ort
             _GlsL31 = 1
             _TypL31 = _Zugtyp1
+            Prog_Lok31.Interval = 200
             Prog_Lok31.Start()
         ElseIf NumericUpDown8.Value = 32 Then
             _Prog32 = Ort
             _GlsL32 = 1
             _TypL32 = _Zugtyp1
+            Prog_Lok32.Interval = 200
             Prog_Lok32.Start()
         ElseIf NumericUpDown8.Value = 33 Then
             _Prog33 = Ort
             _GlsL33 = 1
             _TypL33 = _Zugtyp1
+            Prog_Lok33.Interval = 200
             Prog_Lok33.Start()
         ElseIf NumericUpDown8.Value = 34 Then
             _Prog34 = Ort
             _GlsL34 = 1
             _TypL34 = _Zugtyp1
+            Prog_Lok34.Interval = 200
             Prog_Lok34.Start()
         ElseIf NumericUpDown8.Value = 35 Then
             _Prog35 = Ort
             _GlsL35 = 1
             _TypL35 = _Zugtyp1
+            Prog_Lok35.Interval = 200
             Prog_Lok35.Start()
         ElseIf NumericUpDown8.Value = 36 Then
             _Prog36 = Ort
             _GlsL36 = 1
             _TypL36 = _Zugtyp1
+            Prog_Lok36.Interval = 200
             Prog_Lok36.Start()
         ElseIf NumericUpDown8.Value = 37 Then
             _Prog37 = Ort
             _GlsL37 = 1
             _TypL37 = _Zugtyp1
+            Prog_Lok37.Interval = 200
             Prog_Lok37.Start()
         ElseIf NumericUpDown8.Value = 38 Then
             _Prog38 = Ort
             _GlsL38 = 1
             _TypL38 = _Zugtyp1
+            Prog_Lok38.Interval = 200
             Prog_Lok38.Start()
         ElseIf NumericUpDown8.Value = 39 Then
             _Prog39 = Ort
             _GlsL39 = 1
             _TypL39 = _Zugtyp1
+            Prog_Lok39.Interval = 200
             Prog_Lok39.Start()
         ElseIf NumericUpDown8.Value = 40 Then
             _Prog40 = Ort
             _GlsL40 = 1
             _TypL40 = _Zugtyp1
+            Prog_Lok40.Interval = 200
             Prog_Lok40.Start()
         ElseIf NumericUpDown8.Value = 41 Then
             _Prog41 = Ort
             _GlsL41 = 1
             _TypL41 = _Zugtyp1
+            Prog_Lok41.Interval = 200
             Prog_Lok41.Start()
         ElseIf NumericUpDown8.Value = 42 Then
             _Prog42 = Ort
             _GlsL42 = 1
             _TypL42 = _Zugtyp1
+            Prog_Lok42.Interval = 200
             Prog_Lok42.Start()
         ElseIf NumericUpDown8.Value = 43 Then
             _Prog43 = Ort
             _GlsL43 = 1
             _TypL43 = _Zugtyp1
+            Prog_Lok43.Interval = 200
             Prog_Lok43.Start()
         ElseIf NumericUpDown8.Value = 44 Then
             _Prog44 = Ort
             _GlsL44 = 1
             _TypL44 = _Zugtyp1
+            Prog_Lok44.Interval = 200
             Prog_Lok44.Start()
         ElseIf NumericUpDown8.Value = 45 Then
             _Prog45 = Ort
             _GlsL45 = 1
             _TypL45 = _Zugtyp1
+            Prog_Lok45.Interval = 200
             Prog_Lok45.Start()
         ElseIf NumericUpDown8.Value = 46 Then
             _Prog46 = Ort
             _GlsL46 = 1
             _TypL46 = _Zugtyp1
+            Prog_Lok46.Interval = 200
             Prog_Lok46.Start()
         ElseIf NumericUpDown8.Value = 47 Then
             _Prog47 = Ort
             _GlsL47 = 1
             _TypL47 = _Zugtyp1
+            Prog_Lok47.Interval = 200
             Prog_Lok47.Start()
         ElseIf NumericUpDown8.Value = 48 Then
             _Prog48 = Ort
             _GlsL48 = 1
             _TypL48 = _Zugtyp1
+            Prog_Lok48.Interval = 200
             Prog_Lok48.Start()
         ElseIf NumericUpDown8.Value = 49 Then
             _Prog49 = Ort
             _GlsL49 = 1
             _TypL49 = _Zugtyp1
+            Prog_Lok49.Interval = 200
             Prog_Lok49.Start()
         ElseIf NumericUpDown8.Value = 50 Then
             _Prog50 = Ort
             _GlsL50 = 1
             _TypL50 = _Zugtyp1
+            Prog_Lok50.Interval = 200
             Prog_Lok50.Start()
         ElseIf NumericUpDown8.Value = 51 Then
             _Prog51 = Ort
             _GlsL51 = 1
             _TypL51 = _Zugtyp1
+            Prog_Lok51.Interval = 200
             Prog_Lok51.Start()
         ElseIf NumericUpDown8.Value = 52 Then
             _Prog52 = Ort
             _GlsL52 = 1
             _TypL52 = _Zugtyp1
+            Prog_Lok52.Interval = 200
             Prog_Lok52.Start()
         ElseIf NumericUpDown8.Value = 53 Then
             _Prog53 = Ort
             _GlsL53 = 1
             _TypL53 = _Zugtyp1
+            Prog_Lok53.Interval = 200
             Prog_Lok53.Start()
         ElseIf NumericUpDown8.Value = 54 Then
             _Prog54 = Ort
             _GlsL54 = 1
             _TypL54 = _Zugtyp1
+            Prog_Lok54.Interval = 200
             Prog_Lok54.Start()
         ElseIf NumericUpDown8.Value = 55 Then
             _Prog55 = Ort
             _GlsL55 = 1
             _TypL55 = _Zugtyp1
+            Prog_Lok55.Interval = 200
             Prog_Lok55.Start()
         ElseIf NumericUpDown8.Value = 56 Then
             _Prog56 = Ort
             _GlsL56 = 1
             _TypL56 = _Zugtyp1
+            Prog_Lok56.Interval = 200
             Prog_Lok56.Start()
         ElseIf NumericUpDown8.Value = 57 Then
             _Prog57 = Ort
             _GlsL57 = 1
             _TypL57 = _Zugtyp1
+            Prog_Lok57.Interval = 200
             Prog_Lok57.Start()
         ElseIf NumericUpDown8.Value = 58 Then
             _Prog58 = Ort
             _GlsL58 = 1
             _TypL58 = _Zugtyp1
+            Prog_Lok58.Interval = 200
             Prog_Lok58.Start()
         ElseIf NumericUpDown8.Value = 59 Then
             _Prog59 = Ort
             _GlsL59 = 1
             _TypL59 = _Zugtyp1
+            Prog_Lok59.Interval = 200
             Prog_Lok59.Start()
         ElseIf NumericUpDown8.Value = 60 Then
             _Prog60 = Ort
             _GlsL60 = 1
             _TypL60 = _Zugtyp1
+            Prog_Lok60.Interval = 200
             Prog_Lok60.Start()
         ElseIf NumericUpDown8.Value = 61 Then
             _Prog61 = Ort
             _GlsL61 = 1
             _TypL61 = _Zugtyp1
+            Prog_Lok61.Interval = 200
             Prog_Lok61.Start()
         ElseIf NumericUpDown8.Value = 62 Then
             _Prog62 = Ort
             _GlsL62 = 1
             _TypL62 = _Zugtyp1
+            Prog_Lok62.Interval = 200
             Prog_Lok62.Start()
         ElseIf NumericUpDown8.Value = 63 Then
             _Prog63 = Ort
             _GlsL63 = 1
             _TypL63 = _Zugtyp1
+            Prog_Lok63.Interval = 200
             Prog_Lok63.Start()
         ElseIf NumericUpDown8.Value = 64 Then
             _Prog64 = Ort
             _GlsL64 = 1
             _TypL64 = _Zugtyp1
+            Prog_Lok64.Interval = 200
             Prog_Lok64.Start()
         ElseIf NumericUpDown8.Value = 65 Then
             _Prog65 = Ort
             _GlsL65 = 1
             _TypL65 = _Zugtyp1
+            Prog_Lok65.Interval = 200
             Prog_Lok65.Start()
         ElseIf NumericUpDown8.Value = 66 Then
             _Prog66 = Ort
             _GlsL66 = 1
             _TypL66 = _Zugtyp1
+            Prog_Lok66.Interval = 200
             Prog_Lok66.Start()
         ElseIf NumericUpDown8.Value = 67 Then
             _Prog67 = Ort
             _GlsL67 = 1
             _TypL67 = _Zugtyp1
+            Prog_Lok67.Interval = 200
             Prog_Lok67.Start()
         ElseIf NumericUpDown8.Value = 68 Then
             _Prog68 = Ort
             _GlsL68 = 1
             _TypL68 = _Zugtyp1
+            Prog_Lok68.Interval = 200
             Prog_Lok68.Start()
         ElseIf NumericUpDown8.Value = 69 Then
             _Prog69 = Ort
             _GlsL69 = 1
             _TypL69 = _Zugtyp1
+            Prog_Lok69.Interval = 200
             Prog_Lok69.Start()
         ElseIf NumericUpDown8.Value = 70 Then
             _Prog70 = Ort
             _GlsL70 = 1
             _TypL70 = _Zugtyp1
+            Prog_Lok70.Interval = 200
             Prog_Lok70.Start()
         ElseIf NumericUpDown8.Value = 71 Then
             _Prog71 = Ort
             _GlsL71 = 1
             _TypL71 = _Zugtyp1
+            Prog_Lok71.Interval = 200
             Prog_Lok71.Start()
         ElseIf NumericUpDown8.Value = 72 Then
             _Prog72 = Ort
             _GlsL72 = 1
             _TypL72 = _Zugtyp1
+            Prog_Lok72.Interval = 200
             Prog_Lok72.Start()
         ElseIf NumericUpDown8.Value = 73 Then
             _Prog73 = Ort
             _GlsL73 = 1
             _TypL73 = _Zugtyp1
+            Prog_Lok73.Interval = 200
             Prog_Lok73.Start()
         ElseIf NumericUpDown8.Value = 74 Then
             _Prog74 = Ort
             _GlsL74 = 1
             _TypL74 = _Zugtyp1
+            Prog_Lok74.Interval = 200
             Prog_Lok74.Start()
         ElseIf NumericUpDown8.Value = 75 Then
             _Prog75 = Ort
             _GlsL75 = 1
             _TypL75 = _Zugtyp1
+            Prog_Lok75.Interval = 200
             Prog_Lok75.Start()
         ElseIf NumericUpDown8.Value = 76 Then
             _Prog76 = Ort
             _GlsL76 = 1
             _TypL76 = _Zugtyp1
+            Prog_Lok76.Interval = 200
             Prog_Lok76.Start()
         ElseIf NumericUpDown8.Value = 77 Then
             _Prog77 = Ort
             _GlsL77 = 1
             _TypL77 = _Zugtyp1
+            Prog_Lok77.Interval = 200
             Prog_Lok77.Start()
         ElseIf NumericUpDown8.Value = 78 Then
             _Prog78 = Ort
             _GlsL78 = 1
             _TypL78 = _Zugtyp1
+            Prog_Lok78.Interval = 200
             Prog_Lok78.Start()
         ElseIf NumericUpDown8.Value = 79 Then
             _Prog79 = Ort
             _GlsL79 = 1
             _TypL79 = _Zugtyp1
+            Prog_Lok79.Interval = 200
             Prog_Lok79.Start()
         ElseIf NumericUpDown8.Value = 80 Then
             _Prog80 = Ort
             _GlsL80 = 1
             _TypL80 = _Zugtyp1
+            Prog_Lok80.Interval = 200
             Prog_Lok80.Start()
         Else
             _LokStufen.EinzelLokSenden(1, 2)
@@ -28413,356 +29803,427 @@ Public Class Automatikprogramme
             _Prog10 = Ort
             _GlsL10 = 2
             _TypL10 = _Zugtyp2
+            Prog_Lok10.Interval = 200
             Prog_Lok10.Start()
         ElseIf NumericUpDown9.Value = 11 Then
             _Prog11 = Ort
             _GlsL11 = 2
             _TypL11 = _Zugtyp2
+            Prog_Lok11.Interval = 200
             Prog_Lok11.Start()
         ElseIf NumericUpDown9.Value = 12 Then
             _Prog12 = Ort
             _GlsL12 = 2
             _TypL12 = _Zugtyp2
+            Prog_Lok12.Interval = 200
             Prog_Lok12.Start()
         ElseIf NumericUpDown9.Value = 13 Then
             _Prog13 = Ort
             _GlsL13 = 2
             _TypL13 = _Zugtyp2
+            Prog_Lok13.Interval = 200
             Prog_Lok13.Start()
         ElseIf NumericUpDown9.Value = 14 Then
             _Prog14 = Ort
             _GlsL14 = 2
             _TypL14 = _Zugtyp2
+            Prog_Lok14.Interval = 200
             Prog_Lok14.Start()
         ElseIf NumericUpDown9.Value = 15 Then
             _Prog15 = Ort
             _GlsL15 = 2
             _TypL15 = _Zugtyp2
+            Prog_Lok15.Interval = 200
             Prog_Lok15.Start()
         ElseIf NumericUpDown9.Value = 16 Then
             _Prog16 = Ort
             _GlsL16 = 2
             _TypL16 = _Zugtyp2
+            Prog_Lok16.Interval = 200
             Prog_Lok16.Start()
         ElseIf NumericUpDown9.Value = 17 Then
             _Prog17 = Ort
             _GlsL17 = 2
             _TypL17 = _Zugtyp2
+            Prog_Lok17.Interval = 200
             Prog_Lok17.Start()
         ElseIf NumericUpDown9.Value = 18 Then
             _Prog18 = Ort
             _GlsL18 = 2
             _TypL18 = _Zugtyp2
+            Prog_Lok18.Interval = 200
             Prog_Lok18.Start()
         ElseIf NumericUpDown9.Value = 19 Then
             _Prog19 = Ort
             _GlsL19 = 2
             _TypL19 = _Zugtyp2
+            Prog_Lok19.Interval = 200
             Prog_Lok19.Start()
         ElseIf NumericUpDown9.Value = 20 Then
             _Prog20 = Ort
             _GlsL20 = 2
             _TypL20 = _Zugtyp2
+            Prog_Lok20.Interval = 200
             Prog_Lok20.Start()
         ElseIf NumericUpDown9.Value = 21 Then
             _Prog21 = Ort
             _GlsL21 = 2
             _TypL21 = _Zugtyp2
+            Prog_Lok21.Interval = 200
             Prog_Lok21.Start()
         ElseIf NumericUpDown9.Value = 22 Then
             _Prog22 = Ort
             _GlsL22 = 2
             _TypL22 = _Zugtyp2
+            Prog_Lok22.Interval = 200
             Prog_Lok22.Start()
         ElseIf NumericUpDown9.Value = 23 Then
             _Prog23 = Ort
             _GlsL23 = 2
             _TypL23 = _Zugtyp2
+            Prog_Lok23.Interval = 200
             Prog_Lok23.Start()
         ElseIf NumericUpDown9.Value = 24 Then
             _Prog24 = Ort
             _GlsL24 = 2
             _TypL24 = _Zugtyp2
+            Prog_Lok24.Interval = 200
             Prog_Lok24.Start()
         ElseIf NumericUpDown9.Value = 25 Then
             _Prog25 = Ort
             _GlsL25 = 2
             _TypL25 = _Zugtyp2
+            Prog_Lok25.Interval = 200
             Prog_Lok25.Start()
         ElseIf NumericUpDown9.Value = 26 Then
             _Prog26 = Ort
             _GlsL26 = 2
             _TypL26 = _Zugtyp2
+            Prog_Lok26.Interval = 200
             Prog_Lok26.Start()
         ElseIf NumericUpDown9.Value = 27 Then
             _Prog27 = Ort
             _GlsL27 = 2
             _TypL27 = _Zugtyp2
+            Prog_Lok27.Interval = 200
             Prog_Lok27.Start()
         ElseIf NumericUpDown9.Value = 28 Then
             _Prog28 = Ort
             _GlsL28 = 2
             _TypL28 = _Zugtyp2
+            Prog_Lok28.Interval = 200
             Prog_Lok28.Start()
         ElseIf NumericUpDown9.Value = 29 Then
             _Prog29 = Ort
             _GlsL29 = 2
             _TypL29 = _Zugtyp2
+            Prog_Lok29.Interval = 200
             Prog_Lok29.Start()
         ElseIf NumericUpDown9.Value = 30 Then
             _Prog30 = Ort
             _GlsL30 = 2
             _TypL30 = _Zugtyp2
+            Prog_Lok30.Interval = 200
             Prog_Lok30.Start()
         ElseIf NumericUpDown9.Value = 31 Then
             _Prog31 = Ort
             _GlsL31 = 2
             _TypL31 = _Zugtyp2
+            Prog_Lok31.Interval = 200
             Prog_Lok31.Start()
         ElseIf NumericUpDown9.Value = 32 Then
             _Prog32 = Ort
             _GlsL32 = 2
             _TypL32 = _Zugtyp2
+            Prog_Lok32.Interval = 200
             Prog_Lok32.Start()
         ElseIf NumericUpDown9.Value = 33 Then
             _Prog33 = Ort
             _GlsL33 = 2
             _TypL33 = _Zugtyp2
+            Prog_Lok33.Interval = 200
             Prog_Lok33.Start()
         ElseIf NumericUpDown9.Value = 34 Then
             _Prog34 = Ort
             _GlsL34 = 2
             _TypL34 = _Zugtyp2
+            Prog_Lok34.Interval = 200
             Prog_Lok34.Start()
         ElseIf NumericUpDown9.Value = 35 Then
             _Prog35 = Ort
             _GlsL35 = 2
             _TypL35 = _Zugtyp2
+            Prog_Lok35.Interval = 200
             Prog_Lok35.Start()
         ElseIf NumericUpDown9.Value = 36 Then
             _Prog36 = Ort
             _GlsL36 = 2
             _TypL36 = _Zugtyp2
+            Prog_Lok36.Interval = 200
             Prog_Lok36.Start()
         ElseIf NumericUpDown9.Value = 37 Then
             _Prog37 = Ort
             _GlsL37 = 2
             _TypL37 = _Zugtyp2
+            Prog_Lok37.Interval = 200
             Prog_Lok37.Start()
         ElseIf NumericUpDown9.Value = 38 Then
             _Prog38 = Ort
             _GlsL38 = 2
             _TypL38 = _Zugtyp2
+            Prog_Lok38.Interval = 200
             Prog_Lok38.Start()
         ElseIf NumericUpDown9.Value = 39 Then
             _Prog39 = Ort
             _GlsL39 = 2
             _TypL39 = _Zugtyp2
+            Prog_Lok39.Interval = 200
             Prog_Lok39.Start()
         ElseIf NumericUpDown9.Value = 40 Then
             _Prog40 = Ort
             _GlsL40 = 2
             _TypL40 = _Zugtyp2
+            Prog_Lok40.Interval = 200
             Prog_Lok40.Start()
         ElseIf NumericUpDown9.Value = 41 Then
             _Prog41 = Ort
             _GlsL41 = 2
             _TypL41 = _Zugtyp2
+            Prog_Lok41.Interval = 200
             Prog_Lok41.Start()
         ElseIf NumericUpDown9.Value = 42 Then
             _Prog42 = Ort
             _GlsL42 = 2
             _TypL42 = _Zugtyp2
+            Prog_Lok42.Interval = 200
             Prog_Lok42.Start()
         ElseIf NumericUpDown9.Value = 43 Then
             _Prog43 = Ort
             _GlsL43 = 2
             _TypL43 = _Zugtyp2
+            Prog_Lok43.Interval = 200
             Prog_Lok43.Start()
         ElseIf NumericUpDown9.Value = 44 Then
             _Prog44 = Ort
             _GlsL44 = 2
             _TypL44 = _Zugtyp2
+            Prog_Lok44.Interval = 200
             Prog_Lok44.Start()
         ElseIf NumericUpDown9.Value = 45 Then
             _Prog45 = Ort
             _GlsL45 = 2
             _TypL45 = _Zugtyp2
+            Prog_Lok45.Interval = 200
             Prog_Lok45.Start()
         ElseIf NumericUpDown9.Value = 46 Then
             _Prog46 = Ort
             _GlsL46 = 2
             _TypL46 = _Zugtyp2
+            Prog_Lok46.Interval = 200
             Prog_Lok46.Start()
         ElseIf NumericUpDown9.Value = 47 Then
             _Prog47 = Ort
             _GlsL47 = 2
             _TypL47 = _Zugtyp2
+            Prog_Lok47.Interval = 200
             Prog_Lok47.Start()
         ElseIf NumericUpDown9.Value = 48 Then
             _Prog48 = Ort
             _GlsL48 = 2
             _TypL48 = _Zugtyp2
+            Prog_Lok48.Interval = 200
             Prog_Lok48.Start()
         ElseIf NumericUpDown9.Value = 49 Then
             _Prog49 = Ort
             _GlsL49 = 2
             _TypL49 = _Zugtyp2
+            Prog_Lok49.Interval = 200
             Prog_Lok49.Start()
         ElseIf NumericUpDown9.Value = 50 Then
             _Prog50 = Ort
             _GlsL50 = 2
             _TypL50 = _Zugtyp2
+            Prog_Lok50.Interval = 200
             Prog_Lok50.Start()
         ElseIf NumericUpDown9.Value = 51 Then
             _Prog51 = Ort
             _GlsL51 = 2
             _TypL51 = _Zugtyp2
+            Prog_Lok51.Interval = 200
             Prog_Lok51.Start()
         ElseIf NumericUpDown9.Value = 52 Then
             _Prog52 = Ort
             _GlsL52 = 2
             _TypL52 = _Zugtyp2
+            Prog_Lok52.Interval = 200
             Prog_Lok52.Start()
         ElseIf NumericUpDown9.Value = 53 Then
             _Prog53 = Ort
             _GlsL53 = 2
             _TypL53 = _Zugtyp2
+            Prog_Lok53.Interval = 200
             Prog_Lok53.Start()
         ElseIf NumericUpDown9.Value = 54 Then
             _Prog54 = Ort
             _GlsL54 = 2
             _TypL54 = _Zugtyp2
+            Prog_Lok54.Interval = 200
             Prog_Lok54.Start()
         ElseIf NumericUpDown9.Value = 55 Then
             _Prog55 = Ort
             _GlsL55 = 2
             _TypL55 = _Zugtyp2
+            Prog_Lok55.Interval = 200
             Prog_Lok55.Start()
         ElseIf NumericUpDown9.Value = 56 Then
             _Prog56 = Ort
             _GlsL56 = 2
             _TypL56 = _Zugtyp2
+            Prog_Lok56.Interval = 200
             Prog_Lok56.Start()
         ElseIf NumericUpDown9.Value = 57 Then
             _Prog57 = Ort
             _GlsL57 = 2
             _TypL57 = _Zugtyp2
+            Prog_Lok57.Interval = 200
             Prog_Lok57.Start()
         ElseIf NumericUpDown9.Value = 58 Then
             _Prog58 = Ort
             _GlsL58 = 2
             _TypL58 = _Zugtyp2
+            Prog_Lok58.Interval = 200
             Prog_Lok58.Start()
         ElseIf NumericUpDown9.Value = 59 Then
             _Prog59 = Ort
             _GlsL59 = 2
             _TypL59 = _Zugtyp2
+            Prog_Lok59.Interval = 200
             Prog_Lok59.Start()
         ElseIf NumericUpDown9.Value = 60 Then
             _Prog60 = Ort
             _GlsL60 = 2
             _TypL60 = _Zugtyp2
+            Prog_Lok60.Interval = 200
             Prog_Lok60.Start()
         ElseIf NumericUpDown9.Value = 61 Then
             _Prog61 = Ort
             _GlsL61 = 2
             _TypL61 = _Zugtyp2
+            Prog_Lok61.Interval = 200
             Prog_Lok61.Start()
         ElseIf NumericUpDown9.Value = 62 Then
             _Prog62 = Ort
             _GlsL62 = 2
             _TypL62 = _Zugtyp2
+            Prog_Lok62.Interval = 200
             Prog_Lok62.Start()
         ElseIf NumericUpDown9.Value = 63 Then
             _Prog63 = Ort
             _GlsL63 = 2
             _TypL63 = _Zugtyp2
+            Prog_Lok63.Interval = 200
             Prog_Lok63.Start()
         ElseIf NumericUpDown9.Value = 64 Then
             _Prog64 = Ort
             _GlsL64 = 2
             _TypL64 = _Zugtyp2
+            Prog_Lok64.Interval = 200
             Prog_Lok64.Start()
         ElseIf NumericUpDown9.Value = 65 Then
             _Prog65 = Ort
             _GlsL65 = 2
             _TypL65 = _Zugtyp2
+            Prog_Lok65.Interval = 200
             Prog_Lok65.Start()
         ElseIf NumericUpDown9.Value = 66 Then
             _Prog66 = Ort
             _GlsL66 = 2
             _TypL66 = _Zugtyp2
+            Prog_Lok66.Interval = 200
             Prog_Lok66.Start()
         ElseIf NumericUpDown9.Value = 67 Then
             _Prog67 = Ort
             _GlsL67 = 2
             _TypL67 = _Zugtyp2
+            Prog_Lok67.Interval = 200
             Prog_Lok67.Start()
         ElseIf NumericUpDown9.Value = 68 Then
             _Prog68 = Ort
             _GlsL68 = 2
             _TypL68 = _Zugtyp2
+            Prog_Lok68.Interval = 200
             Prog_Lok68.Start()
         ElseIf NumericUpDown9.Value = 69 Then
             _Prog69 = Ort
             _GlsL69 = 2
             _TypL69 = _Zugtyp2
+            Prog_Lok69.Interval = 200
             Prog_Lok69.Start()
         ElseIf NumericUpDown9.Value = 70 Then
             _Prog70 = Ort
             _GlsL70 = 2
             _TypL70 = _Zugtyp2
+            Prog_Lok70.Interval = 200
             Prog_Lok70.Start()
         ElseIf NumericUpDown9.Value = 71 Then
             _Prog71 = Ort
             _GlsL71 = 2
             _TypL71 = _Zugtyp2
+            Prog_Lok71.Interval = 200
             Prog_Lok71.Start()
         ElseIf NumericUpDown9.Value = 72 Then
             _Prog72 = Ort
             _GlsL72 = 2
             _TypL72 = _Zugtyp2
+            Prog_Lok72.Interval = 200
             Prog_Lok72.Start()
         ElseIf NumericUpDown9.Value = 73 Then
             _Prog73 = Ort
             _GlsL73 = 2
             _TypL73 = _Zugtyp2
+            Prog_Lok73.Interval = 200
             Prog_Lok73.Start()
         ElseIf NumericUpDown9.Value = 74 Then
             _Prog74 = Ort
             _GlsL74 = 2
             _TypL74 = _Zugtyp2
+            Prog_Lok74.Interval = 200
             Prog_Lok74.Start()
         ElseIf NumericUpDown9.Value = 75 Then
             _Prog75 = Ort
             _GlsL75 = 2
             _TypL75 = _Zugtyp2
+            Prog_Lok75.Interval = 200
             Prog_Lok75.Start()
         ElseIf NumericUpDown9.Value = 76 Then
             _Prog76 = Ort
             _GlsL76 = 2
             _TypL76 = _Zugtyp2
+            Prog_Lok76.Interval = 200
             Prog_Lok76.Start()
         ElseIf NumericUpDown9.Value = 77 Then
             _Prog77 = Ort
             _GlsL77 = 2
             _TypL77 = _Zugtyp2
+            Prog_Lok77.Interval = 200
             Prog_Lok77.Start()
         ElseIf NumericUpDown9.Value = 78 Then
             _Prog78 = Ort
             _GlsL78 = 2
             _TypL78 = _Zugtyp2
+            Prog_Lok78.Interval = 200
             Prog_Lok78.Start()
         ElseIf NumericUpDown9.Value = 79 Then
             _Prog79 = Ort
             _GlsL79 = 2
             _TypL79 = _Zugtyp2
+            Prog_Lok79.Interval = 200
             Prog_Lok79.Start()
         ElseIf NumericUpDown9.Value = 80 Then
             _Prog80 = Ort
             _GlsL80 = 2
             _TypL80 = _Zugtyp2
+            Prog_Lok80.Interval = 200
             Prog_Lok80.Start()
         Else
             _LokStufen.EinzelLokSenden(2, 2)
@@ -28777,356 +30238,427 @@ Public Class Automatikprogramme
             _Prog10 = Ort
             _GlsL10 = 3
             _TypL10 = _Zugtyp3
+            Prog_Lok10.Interval = 200
             Prog_Lok10.Start()
         ElseIf NumericUpDown10.Value = 11 Then
             _Prog11 = Ort
             _GlsL11 = 3
             _TypL11 = _Zugtyp3
+            Prog_Lok11.Interval = 200
             Prog_Lok11.Start()
         ElseIf NumericUpDown10.Value = 12 Then
             _Prog12 = Ort
             _GlsL12 = 3
             _TypL12 = _Zugtyp3
+            Prog_Lok12.Interval = 200
             Prog_Lok12.Start()
         ElseIf NumericUpDown10.Value = 13 Then
             _Prog13 = Ort
             _GlsL13 = 3
             _TypL13 = _Zugtyp3
+            Prog_Lok13.Interval = 200
             Prog_Lok13.Start()
         ElseIf NumericUpDown10.Value = 14 Then
             _Prog14 = Ort
             _GlsL14 = 3
             _TypL14 = _Zugtyp3
+            Prog_Lok14.Interval = 200
             Prog_Lok14.Start()
         ElseIf NumericUpDown10.Value = 15 Then
             _Prog15 = Ort
             _GlsL15 = 3
             _TypL15 = _Zugtyp3
+            Prog_Lok15.Interval = 200
             Prog_Lok15.Start()
         ElseIf NumericUpDown10.Value = 16 Then
             _Prog16 = Ort
             _GlsL16 = 3
             _TypL16 = _Zugtyp3
+            Prog_Lok16.Interval = 200
             Prog_Lok16.Start()
         ElseIf NumericUpDown10.Value = 17 Then
             _Prog17 = Ort
             _GlsL17 = 3
             _TypL17 = _Zugtyp3
+            Prog_Lok17.Interval = 200
             Prog_Lok17.Start()
         ElseIf NumericUpDown10.Value = 18 Then
             _Prog18 = Ort
             _GlsL18 = 3
             _TypL18 = _Zugtyp3
+            Prog_Lok18.Interval = 200
             Prog_Lok18.Start()
         ElseIf NumericUpDown10.Value = 19 Then
             _Prog19 = Ort
             _GlsL19 = 3
             _TypL19 = _Zugtyp3
+            Prog_Lok19.Interval = 200
             Prog_Lok19.Start()
         ElseIf NumericUpDown10.Value = 20 Then
             _Prog20 = Ort
             _GlsL20 = 3
             _TypL20 = _Zugtyp3
+            Prog_Lok20.Interval = 200
             Prog_Lok20.Start()
         ElseIf NumericUpDown10.Value = 21 Then
             _Prog21 = Ort
             _GlsL21 = 3
             _TypL21 = _Zugtyp3
+            Prog_Lok21.Interval = 200
             Prog_Lok21.Start()
         ElseIf NumericUpDown10.Value = 22 Then
             _Prog22 = Ort
             _GlsL22 = 3
             _TypL22 = _Zugtyp3
+            Prog_Lok22.Interval = 200
             Prog_Lok22.Start()
         ElseIf NumericUpDown10.Value = 23 Then
             _Prog23 = Ort
             _GlsL23 = 3
             _TypL23 = _Zugtyp3
+            Prog_Lok23.Interval = 200
             Prog_Lok23.Start()
         ElseIf NumericUpDown10.Value = 24 Then
             _Prog24 = Ort
             _GlsL24 = 3
             _TypL24 = _Zugtyp3
+            Prog_Lok24.Interval = 200
             Prog_Lok24.Start()
         ElseIf NumericUpDown10.Value = 25 Then
             _Prog25 = Ort
             _GlsL25 = 3
             _TypL25 = _Zugtyp3
+            Prog_Lok25.Interval = 200
             Prog_Lok25.Start()
         ElseIf NumericUpDown10.Value = 26 Then
             _Prog26 = Ort
             _GlsL26 = 3
             _TypL26 = _Zugtyp3
+            Prog_Lok26.Interval = 200
             Prog_Lok26.Start()
         ElseIf NumericUpDown10.Value = 27 Then
             _Prog27 = Ort
             _GlsL27 = 3
             _TypL27 = _Zugtyp3
+            Prog_Lok27.Interval = 200
             Prog_Lok27.Start()
         ElseIf NumericUpDown10.Value = 28 Then
             _Prog28 = Ort
             _GlsL28 = 3
             _TypL28 = _Zugtyp3
+            Prog_Lok28.Interval = 200
             Prog_Lok28.Start()
         ElseIf NumericUpDown10.Value = 29 Then
             _Prog29 = Ort
             _GlsL29 = 3
             _TypL29 = _Zugtyp3
+            Prog_Lok29.Interval = 200
             Prog_Lok29.Start()
         ElseIf NumericUpDown10.Value = 30 Then
             _Prog30 = Ort
             _GlsL30 = 3
             _TypL30 = _Zugtyp3
+            Prog_Lok30.Interval = 200
             Prog_Lok30.Start()
         ElseIf NumericUpDown10.Value = 31 Then
             _Prog31 = Ort
             _GlsL31 = 3
             _TypL31 = _Zugtyp3
+            Prog_Lok31.Interval = 200
             Prog_Lok31.Start()
         ElseIf NumericUpDown10.Value = 32 Then
             _Prog32 = Ort
             _GlsL32 = 3
             _TypL32 = _Zugtyp3
+            Prog_Lok32.Interval = 200
             Prog_Lok32.Start()
         ElseIf NumericUpDown10.Value = 33 Then
             _Prog33 = Ort
             _GlsL33 = 3
             _TypL33 = _Zugtyp3
+            Prog_Lok33.Interval = 200
             Prog_Lok33.Start()
         ElseIf NumericUpDown10.Value = 34 Then
             _Prog34 = Ort
             _GlsL34 = 3
             _TypL34 = _Zugtyp3
+            Prog_Lok34.Interval = 200
             Prog_Lok34.Start()
         ElseIf NumericUpDown10.Value = 35 Then
             _Prog35 = Ort
             _GlsL35 = 3
             _TypL35 = _Zugtyp3
+            Prog_Lok35.Interval = 200
             Prog_Lok35.Start()
         ElseIf NumericUpDown10.Value = 36 Then
             _Prog36 = Ort
             _GlsL36 = 3
             _TypL36 = _Zugtyp3
+            Prog_Lok36.Interval = 200
             Prog_Lok36.Start()
         ElseIf NumericUpDown10.Value = 37 Then
             _Prog37 = Ort
             _GlsL37 = 3
             _TypL37 = _Zugtyp3
+            Prog_Lok37.Interval = 200
             Prog_Lok37.Start()
         ElseIf NumericUpDown10.Value = 38 Then
             _Prog38 = Ort
             _GlsL38 = 3
             _TypL38 = _Zugtyp3
+            Prog_Lok38.Interval = 200
             Prog_Lok38.Start()
         ElseIf NumericUpDown10.Value = 39 Then
             _Prog39 = Ort
             _GlsL39 = 3
             _TypL39 = _Zugtyp3
+            Prog_Lok39.Interval = 200
             Prog_Lok39.Start()
         ElseIf NumericUpDown10.Value = 40 Then
             _Prog40 = Ort
             _GlsL40 = 3
             _TypL40 = _Zugtyp3
+            Prog_Lok40.Interval = 200
             Prog_Lok40.Start()
         ElseIf NumericUpDown10.Value = 41 Then
             _Prog41 = Ort
             _GlsL41 = 3
             _TypL41 = _Zugtyp3
+            Prog_Lok41.Interval = 200
             Prog_Lok41.Start()
         ElseIf NumericUpDown10.Value = 42 Then
             _Prog42 = Ort
             _GlsL42 = 3
             _TypL42 = _Zugtyp3
+            Prog_Lok42.Interval = 200
             Prog_Lok42.Start()
         ElseIf NumericUpDown10.Value = 43 Then
             _Prog43 = Ort
             _GlsL43 = 3
             _TypL43 = _Zugtyp3
+            Prog_Lok43.Interval = 200
             Prog_Lok43.Start()
         ElseIf NumericUpDown10.Value = 44 Then
             _Prog44 = Ort
             _GlsL44 = 3
             _TypL44 = _Zugtyp3
+            Prog_Lok44.Interval = 200
             Prog_Lok44.Start()
         ElseIf NumericUpDown10.Value = 45 Then
             _Prog45 = Ort
             _GlsL45 = 3
             _TypL45 = _Zugtyp3
+            Prog_Lok45.Interval = 200
             Prog_Lok45.Start()
         ElseIf NumericUpDown10.Value = 46 Then
             _Prog46 = Ort
             _GlsL46 = 3
             _TypL46 = _Zugtyp3
+            Prog_Lok46.Interval = 200
             Prog_Lok46.Start()
         ElseIf NumericUpDown10.Value = 47 Then
             _Prog47 = Ort
             _GlsL47 = 3
             _TypL47 = _Zugtyp3
+            Prog_Lok47.Interval = 200
             Prog_Lok47.Start()
         ElseIf NumericUpDown10.Value = 48 Then
             _Prog48 = Ort
             _GlsL48 = 3
             _TypL48 = _Zugtyp3
+            Prog_Lok48.Interval = 200
             Prog_Lok48.Start()
         ElseIf NumericUpDown10.Value = 49 Then
             _Prog49 = Ort
             _GlsL49 = 3
             _TypL49 = _Zugtyp3
+            Prog_Lok49.Interval = 200
             Prog_Lok49.Start()
         ElseIf NumericUpDown10.Value = 50 Then
             _Prog50 = Ort
             _GlsL50 = 3
             _TypL50 = _Zugtyp3
+            Prog_Lok50.Interval = 200
             Prog_Lok50.Start()
         ElseIf NumericUpDown10.Value = 51 Then
             _Prog51 = Ort
             _GlsL51 = 3
             _TypL51 = _Zugtyp3
+            Prog_Lok51.Interval = 200
             Prog_Lok51.Start()
         ElseIf NumericUpDown10.Value = 52 Then
             _Prog52 = Ort
             _GlsL52 = 3
             _TypL52 = _Zugtyp3
+            Prog_Lok52.Interval = 200
             Prog_Lok52.Start()
         ElseIf NumericUpDown10.Value = 53 Then
             _Prog53 = Ort
             _GlsL53 = 3
             _TypL53 = _Zugtyp3
+            Prog_Lok53.Interval = 200
             Prog_Lok53.Start()
         ElseIf NumericUpDown10.Value = 54 Then
             _Prog54 = Ort
             _GlsL54 = 3
             _TypL54 = _Zugtyp3
+            Prog_Lok54.Interval = 200
             Prog_Lok54.Start()
         ElseIf NumericUpDown10.Value = 55 Then
             _Prog55 = Ort
             _GlsL55 = 3
             _TypL55 = _Zugtyp3
+            Prog_Lok55.Interval = 200
             Prog_Lok55.Start()
         ElseIf NumericUpDown10.Value = 56 Then
             _Prog56 = Ort
             _GlsL56 = 3
             _TypL56 = _Zugtyp3
+            Prog_Lok56.Interval = 200
             Prog_Lok56.Start()
         ElseIf NumericUpDown10.Value = 57 Then
             _Prog57 = Ort
             _GlsL57 = 3
             _TypL57 = _Zugtyp3
+            Prog_Lok57.Interval = 200
             Prog_Lok57.Start()
         ElseIf NumericUpDown10.Value = 58 Then
             _Prog58 = Ort
             _GlsL58 = 3
             _TypL58 = _Zugtyp3
+            Prog_Lok58.Interval = 200
             Prog_Lok58.Start()
         ElseIf NumericUpDown10.Value = 59 Then
             _Prog59 = Ort
             _GlsL59 = 3
             _TypL59 = _Zugtyp3
+            Prog_Lok59.Interval = 200
             Prog_Lok59.Start()
         ElseIf NumericUpDown10.Value = 60 Then
             _Prog60 = Ort
             _GlsL60 = 3
             _TypL60 = _Zugtyp3
+            Prog_Lok60.Interval = 200
             Prog_Lok60.Start()
         ElseIf NumericUpDown10.Value = 61 Then
             _Prog61 = Ort
             _GlsL61 = 3
             _TypL61 = _Zugtyp3
+            Prog_Lok61.Interval = 200
             Prog_Lok61.Start()
         ElseIf NumericUpDown10.Value = 62 Then
             _Prog62 = Ort
             _GlsL62 = 3
             _TypL62 = _Zugtyp3
+            Prog_Lok62.Interval = 200
             Prog_Lok62.Start()
         ElseIf NumericUpDown10.Value = 63 Then
             _Prog63 = Ort
             _GlsL63 = 3
             _TypL63 = _Zugtyp3
+            Prog_Lok63.Interval = 200
             Prog_Lok63.Start()
         ElseIf NumericUpDown10.Value = 64 Then
             _Prog64 = Ort
             _GlsL64 = 3
             _TypL64 = _Zugtyp3
+            Prog_Lok64.Interval = 200
             Prog_Lok64.Start()
         ElseIf NumericUpDown10.Value = 65 Then
             _Prog65 = Ort
             _GlsL65 = 3
             _TypL65 = _Zugtyp3
+            Prog_Lok65.Interval = 200
             Prog_Lok65.Start()
         ElseIf NumericUpDown10.Value = 66 Then
             _Prog66 = Ort
             _GlsL66 = 3
             _TypL66 = _Zugtyp3
+            Prog_Lok66.Interval = 200
             Prog_Lok66.Start()
         ElseIf NumericUpDown10.Value = 67 Then
             _Prog67 = Ort
             _GlsL67 = 3
             _TypL67 = _Zugtyp3
+            Prog_Lok67.Interval = 200
             Prog_Lok67.Start()
         ElseIf NumericUpDown10.Value = 68 Then
             _Prog68 = Ort
             _GlsL68 = 3
             _TypL68 = _Zugtyp3
+            Prog_Lok68.Interval = 200
             Prog_Lok68.Start()
         ElseIf NumericUpDown10.Value = 69 Then
             _Prog69 = Ort
             _GlsL69 = 3
             _TypL69 = _Zugtyp3
+            Prog_Lok69.Interval = 200
             Prog_Lok69.Start()
         ElseIf NumericUpDown10.Value = 70 Then
             _Prog70 = Ort
             _GlsL70 = 3
             _TypL70 = _Zugtyp3
+            Prog_Lok70.Interval = 200
             Prog_Lok70.Start()
         ElseIf NumericUpDown10.Value = 71 Then
             _Prog71 = Ort
             _GlsL71 = 3
             _TypL71 = _Zugtyp3
+            Prog_Lok71.Interval = 200
             Prog_Lok71.Start()
         ElseIf NumericUpDown10.Value = 72 Then
             _Prog72 = Ort
             _GlsL72 = 3
             _TypL72 = _Zugtyp3
+            Prog_Lok72.Interval = 200
             Prog_Lok72.Start()
         ElseIf NumericUpDown10.Value = 73 Then
             _Prog73 = Ort
             _GlsL73 = 3
             _TypL73 = _Zugtyp3
+            Prog_Lok73.Interval = 200
             Prog_Lok73.Start()
         ElseIf NumericUpDown10.Value = 74 Then
             _Prog74 = Ort
             _GlsL74 = 3
             _TypL74 = _Zugtyp3
+            Prog_Lok74.Interval = 200
             Prog_Lok74.Start()
         ElseIf NumericUpDown10.Value = 75 Then
             _Prog75 = Ort
             _GlsL75 = 3
             _TypL75 = _Zugtyp3
+            Prog_Lok75.Interval = 200
             Prog_Lok75.Start()
         ElseIf NumericUpDown10.Value = 76 Then
             _Prog76 = Ort
             _GlsL76 = 3
             _TypL76 = _Zugtyp3
+            Prog_Lok76.Interval = 200
             Prog_Lok76.Start()
         ElseIf NumericUpDown10.Value = 77 Then
             _Prog77 = Ort
             _GlsL77 = 3
             _TypL77 = _Zugtyp3
+            Prog_Lok77.Interval = 200
             Prog_Lok77.Start()
         ElseIf NumericUpDown10.Value = 78 Then
             _Prog78 = Ort
             _GlsL78 = 3
             _TypL78 = _Zugtyp3
+            Prog_Lok78.Interval = 200
             Prog_Lok78.Start()
         ElseIf NumericUpDown10.Value = 79 Then
             _Prog79 = Ort
             _GlsL79 = 3
             _TypL79 = _Zugtyp3
+            Prog_Lok79.Interval = 200
             Prog_Lok79.Start()
         ElseIf NumericUpDown10.Value = 80 Then
             _Prog80 = Ort
             _GlsL80 = 3
             _TypL80 = _Zugtyp3
+            Prog_Lok80.Interval = 200
             Prog_Lok80.Start()
 
         Else
@@ -29142,359 +30674,430 @@ Public Class Automatikprogramme
             _Prog10 = Ort
             _GlsL10 = 4
             _TypL10 = _Zugtyp4
+            Prog_Lok10.Interval = 200
             Prog_Lok10.Start()
         ElseIf NumericUpDown11.Value = 11 Then
             _Prog11 = Ort
             _GlsL11 = 4
             _TypL11 = _Zugtyp4
+            Prog_Lok11.Interval = 200
             Prog_Lok11.Start()
         ElseIf NumericUpDown11.Value = 12 Then
             _Prog12 = Ort
             _GlsL12 = 4
             _TypL12 = _Zugtyp4
+            Prog_Lok12.Interval = 200
             Prog_Lok12.Start()
         ElseIf NumericUpDown11.Value = 13 Then
             _Prog13 = Ort
             _GlsL13 = 4
             _TypL13 = _Zugtyp4
+            Prog_Lok13.Interval = 200
             Prog_Lok13.Start()
         ElseIf NumericUpDown11.Value = 14 Then
             _Prog14 = Ort
             _GlsL14 = 4
             _TypL14 = _Zugtyp4
+            Prog_Lok14.Interval = 200
             Prog_Lok14.Start()
         ElseIf NumericUpDown11.Value = 15 Then
             _Prog15 = Ort
             _GlsL15 = 4
             _TypL15 = _Zugtyp4
+            Prog_Lok15.Interval = 200
             Prog_Lok15.Start()
         ElseIf NumericUpDown11.Value = 16 Then
             _Prog16 = Ort
             _GlsL16 = 4
             _TypL16 = _Zugtyp4
+            Prog_Lok16.Interval = 200
             Prog_Lok16.Start()
         ElseIf NumericUpDown11.Value = 17 Then
             _Prog17 = Ort
             _GlsL17 = 4
             _TypL17 = _Zugtyp4
+            Prog_Lok17.Interval = 200
             Prog_Lok17.Start()
         ElseIf NumericUpDown11.Value = 18 Then
             _Prog18 = Ort
             _GlsL18 = 4
             _TypL18 = _Zugtyp4
+            Prog_Lok18.Interval = 200
             Prog_Lok18.Start()
         ElseIf NumericUpDown11.Value = 19 Then
             _Prog19 = Ort
             _GlsL19 = 4
             _TypL19 = _Zugtyp4
+            Prog_Lok19.Interval = 200
             Prog_Lok19.Start()
         ElseIf NumericUpDown11.Value = 20 Then
             _Prog20 = Ort
             _GlsL20 = 4
             _TypL20 = _Zugtyp4
+            Prog_Lok20.Interval = 200
             Prog_Lok20.Start()
         ElseIf NumericUpDown11.Value = 21 Then
             _Prog21 = Ort
             _GlsL21 = 4
             _TypL21 = _Zugtyp4
+            Prog_Lok21.Interval = 200
             Prog_Lok21.Start()
         ElseIf NumericUpDown11.Value = 22 Then
             _Prog22 = Ort
             _GlsL22 = 4
             _TypL22 = _Zugtyp4
+            Prog_Lok22.Interval = 200
             Prog_Lok22.Start()
         ElseIf NumericUpDown11.Value = 23 Then
             _Prog23 = Ort
             _GlsL23 = 4
             _TypL23 = _Zugtyp4
+            Prog_Lok23.Interval = 200
             Prog_Lok23.Start()
         ElseIf NumericUpDown11.Value = 24 Then
             _Prog24 = Ort
             _GlsL24 = 4
             _TypL24 = _Zugtyp4
+            Prog_Lok24.Interval = 200
             Prog_Lok24.Start()
         ElseIf NumericUpDown11.Value = 25 Then
             _Prog25 = Ort
             _GlsL25 = 4
             _TypL25 = _Zugtyp4
+            Prog_Lok25.Interval = 200
             Prog_Lok25.Start()
         ElseIf NumericUpDown11.Value = 26 Then
             _Prog26 = Ort
             _GlsL26 = 4
             _TypL26 = _Zugtyp4
+            Prog_Lok26.Interval = 200
             Prog_Lok26.Start()
         ElseIf NumericUpDown11.Value = 27 Then
             _Prog27 = Ort
             _GlsL27 = 4
             _TypL27 = _Zugtyp4
+            Prog_Lok27.Interval = 200
             Prog_Lok27.Start()
         ElseIf NumericUpDown11.Value = 28 Then
             _Prog28 = Ort
             _GlsL28 = 4
             _TypL28 = _Zugtyp4
+            Prog_Lok28.Interval = 200
             Prog_Lok28.Start()
         ElseIf NumericUpDown11.Value = 29 Then
             _Prog29 = Ort
             _GlsL29 = 4
             _TypL29 = _Zugtyp4
+            Prog_Lok29.Interval = 200
             Prog_Lok29.Start()
         ElseIf NumericUpDown11.Value = 30 Then
             _Prog30 = Ort
             _GlsL30 = 4
             _TypL30 = _Zugtyp4
+            Prog_Lok30.Interval = 200
             Prog_Lok30.Start()
         ElseIf NumericUpDown11.Value = 31 Then
             _Prog31 = Ort
             _GlsL31 = 4
             _TypL31 = _Zugtyp4
+            Prog_Lok31.Interval = 200
             Prog_Lok31.Start()
         ElseIf NumericUpDown11.Value = 32 Then
             _Prog32 = Ort
             _GlsL32 = 4
             _TypL32 = _Zugtyp4
+            Prog_Lok32.Interval = 200
             Prog_Lok32.Start()
         ElseIf NumericUpDown11.Value = 33 Then
             _Prog33 = Ort
             _GlsL33 = 4
             _TypL33 = _Zugtyp4
+            Prog_Lok33.Interval = 200
             Prog_Lok33.Start()
         ElseIf NumericUpDown11.Value = 34 Then
             _Prog34 = Ort
             _GlsL34 = 4
             _TypL34 = _Zugtyp4
+            Prog_Lok34.Interval = 200
             Prog_Lok34.Start()
         ElseIf NumericUpDown11.Value = 35 Then
             _Prog35 = Ort
             _GlsL35 = 4
             _TypL35 = _Zugtyp4
+            Prog_Lok35.Interval = 200
             Prog_Lok35.Start()
         ElseIf NumericUpDown11.Value = 36 Then
             _Prog36 = Ort
             _GlsL36 = 4
             _TypL36 = _Zugtyp4
+            Prog_Lok36.Interval = 200
             Prog_Lok36.Start()
         ElseIf NumericUpDown11.Value = 37 Then
             _Prog37 = Ort
             _GlsL37 = 4
             _TypL37 = _Zugtyp4
+            Prog_Lok37.Interval = 200
             Prog_Lok37.Start()
         ElseIf NumericUpDown11.Value = 38 Then
             _Prog38 = Ort
             _GlsL38 = 4
             _TypL38 = _Zugtyp4
+            Prog_Lok38.Interval = 200
             Prog_Lok38.Start()
         ElseIf NumericUpDown11.Value = 39 Then
             _Prog39 = Ort
             _GlsL39 = 4
             _TypL39 = _Zugtyp4
+            Prog_Lok39.Interval = 200
             Prog_Lok39.Start()
         ElseIf NumericUpDown11.Value = 40 Then
             _Prog40 = Ort
             _GlsL40 = 4
             _TypL40 = _Zugtyp4
+            Prog_Lok40.Interval = 200
             Prog_Lok40.Start()
         ElseIf NumericUpDown11.Value = 41 Then
             _Prog41 = Ort
             _GlsL41 = 4
             _TypL41 = _Zugtyp4
+            Prog_Lok41.Interval = 200
             Prog_Lok41.Start()
         ElseIf NumericUpDown11.Value = 42 Then
             _Prog42 = Ort
             _GlsL42 = 4
             _TypL42 = _Zugtyp4
+            Prog_Lok42.Interval = 200
             Prog_Lok42.Start()
         ElseIf NumericUpDown11.Value = 43 Then
             _Prog43 = Ort
             _GlsL43 = 4
             _TypL43 = _Zugtyp4
+            Prog_Lok43.Interval = 200
             Prog_Lok43.Start()
         ElseIf NumericUpDown11.Value = 44 Then
             _Prog44 = Ort
             _GlsL44 = 4
             _TypL44 = _Zugtyp4
+            Prog_Lok44.Interval = 200
             Prog_Lok44.Start()
         ElseIf NumericUpDown11.Value = 45 Then
             _Prog45 = Ort
             _GlsL45 = 4
             _TypL45 = _Zugtyp4
+            Prog_Lok45.Interval = 200
             Prog_Lok45.Start()
         ElseIf NumericUpDown11.Value = 46 Then
             _Prog46 = Ort
             _GlsL46 = 4
             _TypL46 = _Zugtyp4
+            Prog_Lok46.Interval = 200
             Prog_Lok46.Start()
         ElseIf NumericUpDown11.Value = 47 Then
             _Prog47 = Ort
             _GlsL47 = 4
             _TypL47 = _Zugtyp4
+            Prog_Lok47.Interval = 200
             Prog_Lok47.Start()
         ElseIf NumericUpDown11.Value = 48 Then
             _Prog48 = Ort
             _GlsL48 = 4
             _TypL48 = _Zugtyp4
+            Prog_Lok48.Interval = 200
             Prog_Lok48.Start()
         ElseIf NumericUpDown11.Value = 49 Then
             _Prog49 = Ort
             _GlsL49 = 4
             _TypL49 = _Zugtyp4
+            Prog_Lok49.Interval = 200
             Prog_Lok49.Start()
         ElseIf NumericUpDown11.Value = 50 Then
             _Prog50 = Ort
             _GlsL50 = 4
             _TypL50 = _Zugtyp4
+            Prog_Lok50.Interval = 200
             Prog_Lok50.Start()
         ElseIf NumericUpDown11.Value = 51 Then
             _Prog51 = Ort
             _GlsL51 = 4
             _TypL51 = _Zugtyp4
+            Prog_Lok51.Interval = 200
             Prog_Lok51.Start()
         ElseIf NumericUpDown11.Value = 52 Then
             _Prog52 = Ort
             _GlsL52 = 4
             _TypL52 = _Zugtyp4
+            Prog_Lok52.Interval = 200
             Prog_Lok52.Start()
         ElseIf NumericUpDown11.Value = 53 Then
             _Prog53 = Ort
             _GlsL53 = 4
             _TypL53 = _Zugtyp4
+            Prog_Lok53.Interval = 200
             Prog_Lok53.Start()
         ElseIf NumericUpDown11.Value = 54 Then
             _Prog54 = Ort
             _GlsL54 = 4
             _TypL54 = _Zugtyp4
+            Prog_Lok54.Interval = 200
             Prog_Lok54.Start()
         ElseIf NumericUpDown11.Value = 55 Then
             _Prog55 = Ort
             _GlsL55 = 4
             _TypL55 = _Zugtyp4
+            Prog_Lok55.Interval = 200
             Prog_Lok55.Start()
         ElseIf NumericUpDown11.Value = 56 Then
             _Prog56 = Ort
             _GlsL56 = 4
             _TypL56 = _Zugtyp4
+            Prog_Lok56.Interval = 200
             Prog_Lok56.Start()
         ElseIf NumericUpDown11.Value = 57 Then
             _Prog57 = Ort
             _GlsL57 = 4
             _TypL57 = _Zugtyp4
+            Prog_Lok57.Interval = 200
             Prog_Lok57.Start()
         ElseIf NumericUpDown11.Value = 58 Then
             _Prog58 = Ort
             _GlsL58 = 4
             _TypL58 = _Zugtyp4
+            Prog_Lok58.Interval = 200
             Prog_Lok58.Start()
         ElseIf NumericUpDown11.Value = 59 Then
             _Prog59 = Ort
             _GlsL59 = 4
             _TypL59 = _Zugtyp4
+            Prog_Lok59.Interval = 200
             Prog_Lok59.Start()
         ElseIf NumericUpDown11.Value = 60 Then
             _Prog60 = Ort
             _GlsL60 = 4
             _TypL60 = _Zugtyp4
+            Prog_Lok60.Interval = 200
             Prog_Lok60.Start()
         ElseIf NumericUpDown11.Value = 61 Then
             _Prog61 = Ort
             _GlsL61 = 4
             _TypL61 = _Zugtyp4
+            Prog_Lok61.Interval = 200
             Prog_Lok61.Start()
         ElseIf NumericUpDown11.Value = 62 Then
             _Prog62 = Ort
             _GlsL62 = 4
             _TypL62 = _Zugtyp4
+            Prog_Lok62.Interval = 200
             Prog_Lok62.Start()
         ElseIf NumericUpDown11.Value = 63 Then
             _Prog63 = Ort
             _GlsL63 = 4
             _TypL63 = _Zugtyp4
+            Prog_Lok63.Interval = 200
             Prog_Lok63.Start()
         ElseIf NumericUpDown11.Value = 64 Then
             _Prog64 = Ort
             _GlsL64 = 4
             _TypL64 = _Zugtyp4
+            Prog_Lok64.Interval = 200
             Prog_Lok64.Start()
         ElseIf NumericUpDown11.Value = 65 Then
             _Prog65 = Ort
             _GlsL65 = 4
             _TypL65 = _Zugtyp4
+            Prog_Lok65.Interval = 200
             Prog_Lok65.Start()
         ElseIf NumericUpDown11.Value = 66 Then
             _Prog66 = Ort
             _GlsL66 = 4
             _TypL66 = _Zugtyp4
+            Prog_Lok66.Interval = 200
             Prog_Lok66.Start()
         ElseIf NumericUpDown11.Value = 67 Then
             _Prog67 = Ort
             _GlsL67 = 4
             _TypL67 = _Zugtyp4
+            Prog_Lok67.Interval = 200
             Prog_Lok67.Start()
         ElseIf NumericUpDown11.Value = 68 Then
             _Prog68 = Ort
             _GlsL68 = 4
             _TypL68 = _Zugtyp4
+            Prog_Lok68.Interval = 200
             Prog_Lok68.Start()
         ElseIf NumericUpDown11.Value = 69 Then
             _Prog69 = Ort
             _GlsL69 = 4
             _TypL69 = _Zugtyp4
+            Prog_Lok69.Interval = 200
             Prog_Lok69.Start()
         ElseIf NumericUpDown11.Value = 70 Then
             _Prog70 = Ort
             _GlsL70 = 4
             _TypL70 = _Zugtyp4
+            Prog_Lok70.Interval = 200
             Prog_Lok70.Start()
         ElseIf NumericUpDown11.Value = 71 Then
             _Prog71 = Ort
             _GlsL71 = 4
             _TypL71 = _Zugtyp4
+            Prog_Lok71.Interval = 200
             Prog_Lok71.Start()
         ElseIf NumericUpDown11.Value = 72 Then
             _Prog72 = Ort
             _GlsL72 = 4
             _TypL72 = _Zugtyp4
+            Prog_Lok72.Interval = 200
             Prog_Lok72.Start()
         ElseIf NumericUpDown11.Value = 73 Then
             _Prog73 = Ort
             _GlsL73 = 4
             _TypL73 = _Zugtyp4
+            Prog_Lok73.Interval = 200
             Prog_Lok73.Start()
         ElseIf NumericUpDown11.Value = 74 Then
             _Prog74 = Ort
             _GlsL74 = 4
             _TypL74 = _Zugtyp4
+            Prog_Lok74.Interval = 200
             Prog_Lok74.Start()
         ElseIf NumericUpDown11.Value = 75 Then
             _Prog75 = Ort
             _GlsL75 = 4
             _TypL75 = _Zugtyp4
+            Prog_Lok75.Interval = 200
             Prog_Lok75.Start()
         ElseIf NumericUpDown11.Value = 76 Then
             _Prog76 = Ort
             _GlsL76 = 4
             _TypL76 = _Zugtyp4
+            Prog_Lok76.Interval = 200
             Prog_Lok76.Start()
         ElseIf NumericUpDown11.Value = 77 Then
             _Prog77 = Ort
             _GlsL77 = 4
             _TypL77 = _Zugtyp4
+            Prog_Lok77.Interval = 200
             Prog_Lok77.Start()
         ElseIf NumericUpDown11.Value = 78 Then
             _Prog78 = Ort
             _GlsL78 = 4
             _TypL78 = _Zugtyp4
+            Prog_Lok78.Interval = 200
             Prog_Lok78.Start()
         ElseIf NumericUpDown11.Value = 79 Then
             _Prog79 = Ort
             _GlsL79 = 4
             _TypL79 = _Zugtyp4
+            Prog_Lok79.Interval = 200
             Prog_Lok79.Start()
         ElseIf NumericUpDown11.Value = 80 Then
             _Prog80 = Ort
             _GlsL80 = 4
             _TypL80 = _Zugtyp4
+            Prog_Lok80.Interval = 200
             Prog_Lok80.Start()
         Else
-            _LokStufen.EinzelLokSenden(3, 2)
+            _LokStufen.EinzelLokSenden(4, 2)
         End If
     End Sub
 
