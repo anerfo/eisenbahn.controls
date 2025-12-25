@@ -1,13 +1,16 @@
 ﻿'*** Allgemeine Kommentare
 '***
-'***  Story muss noch upgedated werden bezüglich Bergfahrt !
-'***  
 '***
 '***  
 '***
-'*** Datum der letzten Änderung : 15.01.2022
+'*** Datum der letzten Änderung : 25.12.2025
 '***
 '*** Letzte Änderung:
+'***
+'***                 Fahrparameter von Excel-Tabelle in das Programm übernommen
+'***
+'***                 Lokprogramme erweitert (Rückmeldekontakten ein Lokprogramm zugeordnet)
+'***
 '***                 Betriebsarten getestet
 '***                 
 '***                 Kamerasteuerung geändert
@@ -54,6 +57,7 @@ Public Class Automatikprogramme
     Private _HueLight As Hue.Contracts.HueLight
     Private _Webcams As Webcams.IWebcamController
     Private _mediaProvider As MediaProvider.IMediaProvider
+    Private _Betriebsparameter As Betriebsparameter
 
     Private _aktiv As Integer
 
@@ -110,7 +114,7 @@ Public Class Automatikprogramme
     Private _Zugtyp1, _Zugtyp2, _Zugtyp3, _Zugtyp4 As Integer
     Private Forbach, Marxzel, Windeck As Integer
 
-    Private L1_aktuell, L2_aktuell, L3_aktuell, L4_aktuell, L5_aktuell, L6_aktuell, L7_aktuell, L1_soll, L2_soll, L3_soll, L4_soll, L5_soll, L6_soll, L7_soll, S_DMX, Szene, Faktor_Beleuchtung, DMX_Pointer, DMX_Klick As Integer
+    Private L1_aktuell, L2_aktuell, L3_aktuell, L4_aktuell, L5_aktuell, L6_aktuell, L7_aktuell, L1_soll, L2_soll, L3_soll, L4_soll, L5_soll, L6_soll, L7_soll, S_DMX, Szene, DMX_Pointer, DMX_Klick As Integer
 
     Private Bri_aktuell, Sat_aktuell, Col_aktuell, CT_aktuell, CT_M, Bri_soll, Bri_M, Sat_soll, Col_soll, CT_soll, Hue_Control, Hue_Control_aktuell, Hue_Control_M, Hue_Takt, Hue_Aenderung, Hue_Neue_Aenderung As Integer
     Private FilmFortschritt As Integer
@@ -252,11 +256,12 @@ Public Class Automatikprogramme
     Private WithEvents Prog_Lok80 As Timers.Timer
 
     ' *** Initialisierung
-    Public Sub New(ByRef eb As Communication.KernelInterface, 
-                   ByRef daten As Daten.DatenInterface, 
-                   ByRef dmxServer As DMXServer.IDMXServer, 
+    Public Sub New(ByRef eb As Communication.KernelInterface,
+                   ByRef daten As Daten.DatenInterface,
+                   ByRef dmxServer As DMXServer.IDMXServer,
                    ByRef webcams As Webcams.IWebcamController,
-                   ByRef mediaProvider As MediaProvider.IMediaProvider)
+                   ByRef mediaProvider As MediaProvider.IMediaProvider,
+                   ByRef betriebsparameter As Betriebsparameter)
         InitializeComponent()
 
         _eb = eb
@@ -268,10 +273,18 @@ Public Class Automatikprogramme
         _HueLight = _HueBridge.GetLight(HueLightName)
         _Webcams = webcams
         _mediaProvider = mediaProvider
-        Faktor_Beleuchtung = 1000
+        _Betriebsparameter = betriebsparameter
+
+        ' Sync Fahrparameter vom Excel
+        'For i As Integer = 1 To 80
+        '    For Each q As Betriebsparameter.FahrparameterEnum In [Enum].GetValues(GetType(Betriebsparameter.FahrparameterEnum))
+        '        _Betriebsparameter.SetFahrparameter(i, q, Me.Betriebsparameter.GetValue("Fahrparameter", q + 4, i + 4))
+        '    Next
+        'Next
+        '_Betriebsparameter.Save()
 
         Pfad = "H:\EB_Media\Clips\"
-
+        Dim test As Integer = _Betriebsparameter.Fahrparameter(20, Betriebsparameter.FahrparameterEnum.V_100)
         FilmFortschritt = 0
 
         ' *** 3 (Auto) - 0 (Marxzel) - 1 (Forbach) - 2 (Windeck)
@@ -2782,176 +2795,6 @@ Public Class Automatikprogramme
             StoryColor = Drawing.Color.LightBlue
         End If
     End Sub
-    'Private Sub HandleTimerElapsed18(sender As System.Object, e As System.EventArgs) Handles Timer_Story_DMX.Elapsed
-    '    ' ***
-    '    ' *** Datum: 22.02.2022
-    '    ' ***
-    '    ' *** Faktor Faktor_Beleuchtung = 100 gilt für Lok13 mit Fahrstufe 3
-    '    ' *** Zeit für eine Runde "oben kurz" über Gleis 4: 374 Sekunden (Stufe 3)
-    '    ' ***
-    '    ' *** Zeit für eine Runde "oben kurz" über Gleis 4: 177 Sekunden (Stufe 6)
-
-    '    'If Me.InvokeRequired Then
-    '    '    Me.Invoke(Sub() HandleTimerElapsed41(sender, e))
-    '    '    Return
-    '    'End If
-
-    '    Dim Fac As Integer
-
-    '    If Faktor_Beleuchtung < 50 Or Faktor_Beleuchtung > 150 Then
-    '        Faktor_Beleuchtung = 100
-    '    End If
-
-    '    Fac = (Faktor_Beleuchtung * 177) / 374
-    '    Fac = 70
-
-    '    'If ComboBox1.SelectedIndex = 4 Then
-    '    If _Beleuchtung = 10 Then
-
-    '        If DMX_Pointer = 0 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0)
-    '            DMX_Pointer = 90
-
-    '        ElseIf DMX_Pointer = 1 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0)
-    '            Timer_Story_DMX.Interval = 300 * Fac
-    '        ElseIf DMX_Pointer = 2 Then
-    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Tunnelausfahrt
-    '            Timer_Story_DMX.Interval = 65 * Fac
-    '        ElseIf DMX_Pointer = 3 Then
-    '            DMX(9, 4, 0, 0, 80, 128, 0, 0, 0) ' Brücke mitte
-    '            DMX_Pointer = 90
-
-    '        ElseIf DMX_Pointer = 10 Then
-    '            DMX(9, 4, 0, 0, 80, 128, 0, 0, 0) ' Brücke mitte (fest)
-    '            Timer_Story_DMX.Interval = 50 * Fac
-    '        ElseIf DMX_Pointer = 11 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 128, 80, 0) ' Brücke rechts
-    '            Timer_Story_DMX.Interval = 90 * Fac
-    '        ElseIf DMX_Pointer = 12 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 128, 0) ' Mühle
-    '            Timer_Story_DMX.Interval = 80 * Fac
-    '        ElseIf DMX_Pointer = 13 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Mühle
-    '            Timer_Story_DMX.Interval = 110 * Fac
-    '        ElseIf DMX_Pointer = 14 Then
-    '            'DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
-    '            Timer_Story_DMX.Interval = 35 * Fac
-    '        ElseIf DMX_Pointer = 15 Then
-    '            'DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-    '            Timer_Story_DMX.Interval = 75 * Fac
-    '        ElseIf DMX_Pointer = 16 Then
-    '            'DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-    '            Timer_Story_DMX.Interval = 50 * Fac
-    '        ElseIf DMX_Pointer = 17 Then
-    '            DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-    '            Timer_Story_DMX.Interval = 50 * Fac
-    '        ElseIf DMX_Pointer = 18 Then
-    '            DMX(9, 4, 128, 128, 0, 0, 0, 0, 0) ' Kirche
-    '            'DMX(9, 4, 128, 0, 0, 0, 0, 0, 0) ' Schmiede
-    '            Timer_Story_DMX.Interval = 70 * Fac
-    '        ElseIf DMX_Pointer = 19 Then
-    '            'DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-    '            Timer_Story_DMX.Interval = 45 * Fac
-    '        ElseIf DMX_Pointer = 20 Then
-    '            DMX(9, 4, 80, 80, 128, 0, 0, 0, 0) ' Brücke links
-    '            DMX_Pointer = 90
-
-    '        ElseIf DMX_Pointer = 30 Then
-    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links (fest)
-    '            Timer_Story_DMX.Interval = 30 * Fac
-    '        ElseIf DMX_Pointer = 31 Then
-    '            DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-    '            DMX_Pointer = 90
-
-    '        ElseIf DMX_Pointer = 40 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts (fest)
-    '            Timer_Story_DMX.Interval = 70 * Fac
-    '        ElseIf DMX_Pointer = 41 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 128) ' Zindelstein
-    '            Timer_Story_DMX.Interval = 100 * Fac
-    '        ElseIf DMX_Pointer = 42 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' aus
-    '            DMX_Pointer = 90
-
-
-    '        ElseIf DMX_Pointer = 51 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts (fest)
-    '            Timer_Story_DMX.Interval = 100 * Fac
-    '        ElseIf DMX_Pointer = 52 Then
-    '            DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-    '            Timer_Story_DMX.Interval = 70 * Fac
-    '        ElseIf DMX_Pointer = 53 Then
-    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-    '            Timer_Story_DMX.Interval = 50 * Fac
-    '        ElseIf DMX_Pointer = 54 Then
-    '            DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-    '            Timer_Story_DMX.Interval = 75 * Fac
-    '        ElseIf DMX_Pointer = 55 Then
-    '            DMX(9, 4, 128, 128, 0, 0, 0, 0, 0) ' Kirche
-    '            'DMX(9, 4, 128, 0, 0, 0, 0, 0, 0) ' Schmiede
-    '            Timer_Story_DMX.Interval = 75 * Fac
-    '        ElseIf DMX_Pointer = 56 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Kirche
-    '            'DMX(9, 4, 0, 128, 0, 0, 0, 0, 0) ' Kirche
-    '            Timer_Story_DMX.Interval = 50 * Fac
-    '        ElseIf DMX_Pointer = 57 Then
-    '            'DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-    '            Timer_Story_DMX.Interval = 50 * Fac
-    '        ElseIf DMX_Pointer = 58 Then
-    '            'DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte
-    '            Timer_Story_DMX.Interval = 50 * Fac
-    '        ElseIf DMX_Pointer = 59 Then
-    '            'DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
-    '            Timer_Story_DMX.Interval = 80 * Fac
-    '        ElseIf DMX_Pointer = 60 Then
-    '            'DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' aus
-    '            Timer_Story_DMX.Interval = 70 * Fac
-    '        ElseIf DMX_Pointer = 61 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 128, 0) ' Mühle
-    '            Timer_Story_DMX.Interval = 90 * Fac
-    '        ElseIf DMX_Pointer = 62 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 128, 0, 0) ' Brücke rechts
-    '            DMX_Pointer = 90
-
-
-    '        ElseIf DMX_Pointer = 70 Then
-    '            DMX(9, 4, 0, 0, 0, 128, 0, 0, 0) ' Brücke mitte (fest)
-    '            Timer_Story_DMX.Interval = 35 * Fac
-    '        ElseIf DMX_Pointer = 71 Then
-    '            DMX(9, 4, 0, 0, 128, 0, 0, 0, 0) ' Brücke links
-    '            Timer_Story_DMX.Interval = 80 * Fac
-    '        ElseIf DMX_Pointer = 72 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Ende
-    '            DMX_Pointer = 90
-
-
-    '        ElseIf DMX_Pointer = 80 Then
-    '            DMX(9, 4, 0, 0, 0, 0, 0, 0, 0) ' Ende
-    '            DMX_Pointer = 90
-
-    '        Else
-    '            DMX_Pointer = 90
-    '        End If
-    '        DMX_Pointer = DMX_Pointer + 1
-    '        If DMX_Pointer > 90 Then
-    '            DMX_Pointer = 90
-    '            Timer_Story_DMX.Interval = 100
-    '        End If
-
-    '    Else
-    '        Timer_Story_DMX.Stop()
-    '    End If
-    'End Sub
-    'Private Sub HandleTimerElapsed19(sender As System.Object, e As System.EventArgs) Handles Timer_Story_Film.Elapsed
-    '    If Me.InvokeRequired Then
-    '        Me.Invoke(Sub() HandleTimerElapsed19(sender, e))
-    '        Return
-    '    End If
-
-    '    Timer_Story_Film.Interval = 400
-
-    'End Sub
     Private Sub HandleTimerElapsed20(sender As System.Object, e As System.EventArgs) Handles Timer_Story_Auto.Elapsed
         If _StoryAuto = 1 Then
             StoryProgress(DasKalteHerz.ProgressEvent.StepForward)
@@ -3185,21 +3028,20 @@ Public Class Automatikprogramme
         '*** Fahrprogramm TEE VT 11.5
         '*** Datum: 05.01.2023
 
-        SetText(TextBox1, "TEE VT 11.5                                                    IBS: 05.01.2023 - V3 : 8")
+        SetText(TextBox1, "TEE VT 11.5                                                             IBS: 10.12.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_TEE_01.jpg")
         GeschwindikeitenSetzen(10)
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
-        Dim Index, Fun01, Fun11, Fun21, Fun31 As Integer
+        Dim Index As Integer
         Dim G_200 As Integer
-        Dim Abstellen As Integer
         Index = 10 + 4
 
-        Faktor_Beleuchtung = 100
-
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
         T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
         T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
@@ -3209,57 +3051,10 @@ Public Class Automatikprogramme
         V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        Fun01 = Betriebsparameter.GetValue("LokführerAnweisungen", 4, Index)
-        Fun11 = Betriebsparameter.GetValue("LokführerAnweisungen", 9, Index)
-        Fun21 = Betriebsparameter.GetValue("LokführerAnweisungen", 14, Index)
-        Fun31 = Betriebsparameter.GetValue("LokführerAnweisungen", 19, Index)
         G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
 
-        Abstellen = 0
-        If (_GlsL10 = 1 And Ort_Lok1 = 100) Then
-            If Betriebsparameter.GetValue("Fahrplan", 3, 10) = 1 Then
-                Abstellen = 1
-            End If
-        End If
-        If (_GlsL10 = 2 And Ort_Lok2 = 200) Then
-            If Betriebsparameter.GetValue("Fahrplan", 3, 11) = 1 Then
-                Abstellen = 1
-            End If
-        End If
-        If (_GlsL10 = 3 And Ort_Lok3 = 300) Then
-            If Betriebsparameter.GetValue("Fahrplan", 3, 20) = 1 Then
-                Abstellen = 1
-            End If
-        End If
-        If (_GlsL10 = 4 And Ort_Lok4 = 400) Then
-            If Betriebsparameter.GetValue("Fahrplan", 3, 21) = 1 Then
-                Abstellen = 1
-            End If
-        End If
-        If (_GlsL10 = 1 And Ort_Lok1 = 105) Then
-            If Betriebsparameter.GetValue("Fahrplan", 9, 10) = 1 Then
-                Abstellen = 1
-            End If
-        End If
-        If (_GlsL10 = 2 And Ort_Lok2 = 205) Then
-            If Betriebsparameter.GetValue("Fahrplan", 9, 11) = 1 Then
-                Abstellen = 1
-            End If
-        End If
-        If (_GlsL10 = 3 And Ort_Lok3 = 315) Then
-            If Betriebsparameter.GetValue("Fahrplan", 9, 20) = 1 Then
-                Abstellen = 1
-            End If
-        End If
-        If (_GlsL10 = 4 And Ort_Lok4 = 415) Then
-            If Betriebsparameter.GetValue("Fahrplan", 9, 21) = 1 Then
-                Abstellen = 1
-            End If
-        End If
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(10, 1)
@@ -3379,41 +3174,27 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog10 = 10 Then
         ElseIf _Prog10 = 11 Then
-            If _Durchsagen = 1 And (_TypL10 = 1 Or _TypL10 = 3) Then
-                StopMusic()
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog10 = 16
-            End If
-        ElseIf _Prog10 = 12 Then
-        ElseIf _Prog10 = 13 Then
-        ElseIf _Prog10 = 14 Then
-        ElseIf _Prog10 = 15 Then
-        ElseIf _Prog10 = 16 Then
-            If _AkustischeSignale = 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog10 = 17 Then
-        ElseIf _Prog10 = 18 Then
+        ElseIf _Prog10 = 12 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
-        ElseIf _Prog10 = 19 Then
+        ElseIf _Prog10 = 13 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog10 = 20 Then
+        ElseIf _Prog10 = 14 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog10 = 21 Then
+        ElseIf _Prog10 = 15 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog10 = 22 Then
+        ElseIf _Prog10 = 16 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog10 = 23 Then
+        ElseIf _Prog10 = 17 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog10 = 24 Then
+        ElseIf _Prog10 = 18 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
-        ElseIf _Prog10 = 25 Then
-        ElseIf _Prog10 = 26 Then
-            If _Motor < 2 Then
-                If Fun11 = 0 Then
-                    _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
-                End If
+        ElseIf _Prog10 = 19 Then
+        ElseIf _Prog10 = 20 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
             End If
 
             ' Lok abstellen
@@ -3429,10 +3210,8 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
         ElseIf _Prog10 = 53 Then
-            If _Motor < 2 Then
-                If Fun31 = 0 Then
-                    _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
-                End If
+            If _Motor < 3 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
             End If
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
@@ -3468,6 +3247,20 @@ Public Class Automatikprogramme
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog10 = 136 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog10 = 137 Then
+            Prog_Lok10.Interval = 2000
+        ElseIf _Prog10 = 138 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
+            End If
+        ElseIf _Prog10 = 139 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog10 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -3486,6 +3279,20 @@ Public Class Automatikprogramme
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog10 = 166 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog10 = 167 Then
+            Prog_Lok10.Interval = 2000
+        ElseIf _Prog10 = 168 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
+            End If
+        ElseIf _Prog10 = 169 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog10 = 170 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -3502,9 +3309,6 @@ Public Class Automatikprogramme
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 1)
         ElseIf _Prog10 = 182 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, 0)
-            If Abstellen = 1 Then
-                _Prog10 = 50
-            End If
 
             ' Tunnelausfahrt
 
@@ -3524,16 +3328,15 @@ Public Class Automatikprogramme
         ElseIf _Prog10 = 206 Then
         ElseIf _Prog10 = 207 Then
             If _Motor > 1 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 1) ' Motor ein
             End If
         ElseIf _Prog10 = 208 Then
-            Prog_Lok10.Interval = 2000
         ElseIf _Prog10 = 209 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
             End If
         ElseIf _Prog10 = 210 Then
-            _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+            _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
         ElseIf _Prog10 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok10.Interval = 2000
@@ -3545,7 +3348,7 @@ Public Class Automatikprogramme
         ElseIf _Prog10 = 226 Then
         ElseIf _Prog10 = 227 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
             End If
 
         ElseIf _Prog10 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
@@ -3554,9 +3357,6 @@ Public Class Automatikprogramme
         ElseIf _Prog10 = 242 Then
         ElseIf _Prog10 = 243 Then
         ElseIf _Prog10 = 244 Then
-            If _Motor > 1 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
-            End If
         ElseIf _Prog10 = 245 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
@@ -3565,43 +3365,36 @@ Public Class Automatikprogramme
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
         ElseIf _Prog10 = 247 Then
         ElseIf _Prog10 = 248 Then
-        ElseIf _Prog10 = 249 Then
-        ElseIf _Prog10 = 250 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
-            End If
 
         ElseIf _Prog10 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok10.Interval = 2000
         ElseIf _Prog10 = 261 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
-            End If
+        ElseIf _Prog10 = 262 Then
+            _eb.lokSteuern(10, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog10 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok10.Interval = 2000
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
         ElseIf _Prog10 = 601 Then
+            _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
         ElseIf _Prog10 = 602 Then
-            'If _AkustischeSignale > 1 Then
-            '    _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
-            'End If
         ElseIf _Prog10 = 603 Then
-            '_eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
         ElseIf _Prog10 = 604 Then
 
         ElseIf _Prog10 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok10.Interval = 2000
         ElseIf _Prog10 = 621 Then
         ElseIf _Prog10 = 622 Then
-        ElseIf _Prog10 = 623 Then
             If _Motor > 1 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 1) ' Motor ein
             End If
-        ElseIf _Prog10 = 624 Then
+        ElseIf _Prog10 = 623 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
             End If
-        ElseIf _Prog10 = 625 Then
+        ElseIf _Prog10 = 624 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
 
@@ -3611,9 +3404,8 @@ Public Class Automatikprogramme
         ElseIf _Prog10 = 642 Then
         ElseIf _Prog10 = 643 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
             End If
-
 
         ElseIf _Prog10 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok10.Interval = 2000
@@ -3624,7 +3416,7 @@ Public Class Automatikprogramme
         ElseIf _Prog10 = 665 Then
             If _GlsL10 = 1 Or _GlsL10 = 2 Then
                 If _Motor > 0 Then
-                    _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                    _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 1) ' Motor ein
                 End If
             End If
         ElseIf _Prog10 = 666 Then
@@ -3637,14 +3429,14 @@ Public Class Automatikprogramme
         ElseIf _Prog10 = 668 Then
             _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
-        ElseIf _Prog10 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog10 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok10.Interval = 2000
         ElseIf _Prog10 = 701 Then
         ElseIf _Prog10 = 702 Then
         ElseIf _Prog10 = 703 Then
         ElseIf _Prog10 = 704 Then
             If _Motor > 0 Then
-                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 1) ' Motor ein
             End If
         ElseIf _Prog10 = 705 Then
             If _AkustischeSignale > 0 Then
@@ -3688,7 +3480,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für ICE 410 001-2 und 410 002-0
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "ICE 410 001-2 und 410 002-0                                     IBS: 14.02.2021 - V3 : 7")
+        SetText(TextBox1, "ICE 410 001-2 und 410 002-0                                             IBS: 10.12.2025 - V3 : 5")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_ICE_02.jpg")
         GeschwindikeitenSetzen(11)
 
@@ -3699,8 +3491,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 11 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -3716,8 +3506,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 5000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(11, 1)
@@ -3819,31 +3607,24 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(11, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog11 = 1 Then
-            If _Durchsagen = 1 And (_TypL11 = 1 Or _TypL11 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog11 = 6
-            End If
         ElseIf _Prog11 = 2 Then
         ElseIf _Prog11 = 3 Then
-        ElseIf _Prog11 = 4 Then
-        ElseIf _Prog11 = 5 Then
-        ElseIf _Prog11 = 6 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog11 = 7 Then
+        ElseIf _Prog11 = 4 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog11 = 8 Then
+        ElseIf _Prog11 = 5 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog11 = 9 Then
+        ElseIf _Prog11 = 6 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog11 = 10 Then
+        ElseIf _Prog11 = 7 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog11 = 11 Then
+        ElseIf _Prog11 = 8 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog11 = 12 Then
+        ElseIf _Prog11 = 9 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+        ElseIf _Prog11 = 10 Then
 
             ' Lok abstellen
 
@@ -3860,13 +3641,15 @@ Public Class Automatikprogramme
         ElseIf _Prog11 = 100 Then
             Prog_Lok11.Interval = V_100
         ElseIf _Prog11 = 101 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
             Prog_Lok11.Interval = T_100
         ElseIf _Prog11 = 102 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
         ElseIf _Prog11 = 103 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
         ElseIf _Prog11 = 104 Then
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
+        ElseIf _Prog11 = 105 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von links)
@@ -3874,32 +3657,48 @@ Public Class Automatikprogramme
         ElseIf _Prog11 = 130 Then
             Prog_Lok11.Interval = V_130
         ElseIf _Prog11 = 131 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
             Prog_Lok11.Interval = T_130
         ElseIf _Prog11 = 132 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
         ElseIf _Prog11 = 133 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
         ElseIf _Prog11 = 134 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog11 = 135 Then
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+        ElseIf _Prog11 = 136 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog11 = 137 Then
+            Prog_Lok11.Interval = 2000
+        ElseIf _Prog11 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(11, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
         ElseIf _Prog11 = 160 Then
             Prog_Lok11.Interval = V_160
         ElseIf _Prog11 = 161 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe24)
             Prog_Lok11.Interval = T_160
         ElseIf _Prog11 = 162 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe23)
         ElseIf _Prog11 = 163 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe22)
         ElseIf _Prog11 = 164 Then
-            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog11 = 165 Then
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+        ElseIf _Prog11 = 166 Then
             _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog11 = 167 Then
+            Prog_Lok11.Interval = 2000
+        ElseIf _Prog11 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(11, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -3947,6 +3746,7 @@ Public Class Automatikprogramme
             Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 261 Then
         ElseIf _Prog11 = 262 Then
+            _eb.lokSteuern(11, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog11 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok11.Interval = 2000
@@ -3968,7 +3768,7 @@ Public Class Automatikprogramme
         ElseIf _Prog11 = 661 Then
         ElseIf _Prog11 = 662 Then
 
-        ElseIf _Prog11 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog11 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok11.Interval = 2000
         ElseIf _Prog11 = 701 Then
         ElseIf _Prog11 = 702 Then
@@ -4007,7 +3807,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E103 113-7
         '*** Datum: 12.11.2023
 
-        SetText(TextBox1, "E-Lok 103 113-7                                                IBS: 12.11.2025 - V3 : 10")
+        SetText(TextBox1, "E-Lok 103 113-7                                                         IBS: 12.11.2025 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_103_01.jpg")
         GeschwindikeitenSetzen(12)
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
@@ -4017,8 +3817,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 12 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -4034,8 +3832,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 4000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(12, 1)
@@ -4191,6 +3987,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog12 = 105 Then
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+        ElseIf _Prog12 = 137 Then
+            Prog_Lok12.Interval = 2000
+        ElseIf _Prog12 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von links)
 
@@ -4209,6 +4011,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog12 = 136 Then
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog12 = 137 Then
+            Prog_Lok12.Interval = 2000
+        ElseIf _Prog12 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -4227,6 +4035,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog12 = 166 Then
             _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog12 = 167 Then
+            Prog_Lok12.Interval = 2000
+        ElseIf _Prog12 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(12, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -4274,6 +4088,7 @@ Public Class Automatikprogramme
             Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 261 Then
         ElseIf _Prog12 = 262 Then
+            _eb.lokSteuern(12, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog12 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok12.Interval = 2000
@@ -4295,7 +4110,7 @@ Public Class Automatikprogramme
         ElseIf _Prog12 = 661 Then
         ElseIf _Prog12 = 662 Then
 
-        ElseIf _Prog12 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog12 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok12.Interval = 2000
         ElseIf _Prog12 = 701 Then
         ElseIf _Prog12 = 702 Then
@@ -4336,7 +4151,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm E120 002-1
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 120 002-1                                           IBS: 06.01.2022 V1: 3 - V3: 10")
+        SetText(TextBox1, "E-Lok 120 002-1                                                         IBS: 06.01.2022 - V3: 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_120_01.jpg")
         GeschwindikeitenSetzen(13)
 
@@ -4347,8 +4162,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 13 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -4364,8 +4177,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(13, 1)
@@ -4537,7 +4348,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog13 = 136 Then
             _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, 0)
-            _Prog13 = 49
+        ElseIf _Prog13 = 137 Then
+            Prog_Lok13.Interval = 2000
+        ElseIf _Prog13 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(13, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -4554,6 +4370,14 @@ Public Class Automatikprogramme
             _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog13 = 165 Then
             _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
+        ElseIf _Prog13 = 166 Then
+            _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog13 = 167 Then
+            Prog_Lok13.Interval = 2000
+        ElseIf _Prog13 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(13, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -4601,6 +4425,7 @@ Public Class Automatikprogramme
             Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 261 Then
         ElseIf _Prog13 = 262 Then
+            _eb.lokSteuern(13, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog13 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok13.Interval = 2000
@@ -4622,7 +4447,7 @@ Public Class Automatikprogramme
         ElseIf _Prog13 = 661 Then
         ElseIf _Prog13 = 662 Then
 
-        ElseIf _Prog13 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog13 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok13.Interval = 2000
         ElseIf _Prog13 = 701 Then
         ElseIf _Prog13 = 702 Then
@@ -4660,7 +4485,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm SBB Lok2000 460 024-3
         '*** Datum: 08.10.2020
 
-        SetText(TextBox1, "E-Lok SBB 460 024-3                                             IBS: 08.10.2021 - V3 : 9")
+        SetText(TextBox1, "E-Lok SBB 460 024-3                                                     IBS: 08.10.2021 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_460_01.jpg")
         GeschwindikeitenSetzen(14)
 
@@ -4671,8 +4496,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 14 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -4688,8 +4511,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(14, 1)
@@ -4860,6 +4681,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog14 = 136 Then
             _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog14 = 137 Then
+            Prog_Lok14.Interval = 2000
+        ElseIf _Prog14 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(14, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -4878,6 +4705,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog14 = 166 Then
             _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog14 = 167 Then
+            Prog_Lok14.Interval = 2000
+        ElseIf _Prog14 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(14, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -4920,6 +4753,7 @@ Public Class Automatikprogramme
             Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 261 Then
         ElseIf _Prog14 = 262 Then
+            _eb.lokSteuern(14, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog14 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok14.Interval = 2000
@@ -4941,7 +4775,7 @@ Public Class Automatikprogramme
         ElseIf _Prog14 = 661 Then
         ElseIf _Prog14 = 662 Then
 
-        ElseIf _Prog14 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog14 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok14.Interval = 2000
         ElseIf _Prog14 = 701 Then
         ElseIf _Prog14 = 702 Then
@@ -4980,7 +4814,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm E103 165 -7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 103 165-7                                           IBS: 06.01.2022 V1: 2 - V3: 8")
+        SetText(TextBox1, "E-Lok 103 165-7                                                         IBS: 06.01.2022 - V3: 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_103_10.jpg")
         GeschwindikeitenSetzen(15)
 
@@ -4991,8 +4825,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 15 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -5008,8 +4840,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(15, 1)
@@ -5181,6 +5011,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog15 = 136 Then
             _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog15 = 137 Then
+            Prog_Lok15.Interval = 2000
+        ElseIf _Prog15 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(15, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -5199,6 +5035,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog15 = 166 Then
             _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog15 = 167 Then
+            Prog_Lok15.Interval = 2000
+        ElseIf _Prog15 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(15, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
 
             ' Rangierzug
@@ -5242,6 +5084,7 @@ Public Class Automatikprogramme
             Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 261 Then
         ElseIf _Prog15 = 262 Then
+            _eb.lokSteuern(15, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog15 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok15.Interval = 2000
@@ -5263,7 +5106,7 @@ Public Class Automatikprogramme
         ElseIf _Prog15 = 661 Then
         ElseIf _Prog15 = 662 Then
 
-        ElseIf _Prog15 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog15 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok15.Interval = 2000
         ElseIf _Prog15 = 701 Then
         ElseIf _Prog15 = 702 Then
@@ -5301,7 +5144,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm E120 139-1
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 120 139-1                                                 IBS: 02.05.2021 - V3 : 8")
+        SetText(TextBox1, "E-Lok 120 139-1                                                         IBS: 02.05.2021 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_120_20.jpg")
         GeschwindikeitenSetzen(16)
 
@@ -5312,8 +5155,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 16 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -5329,8 +5170,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(16, 1)
@@ -5501,6 +5340,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog16 = 136 Then
             _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog16 = 137 Then
+            Prog_Lok16.Interval = 2000
+        ElseIf _Prog16 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(16, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -5519,6 +5364,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog16 = 166 Then
             _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog16 = 167 Then
+            Prog_Lok16.Interval = 2000
+        ElseIf _Prog16 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(16, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -5561,6 +5412,7 @@ Public Class Automatikprogramme
             Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 261 Then
         ElseIf _Prog16 = 262 Then
+            _eb.lokSteuern(16, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog16 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok16.Interval = 2000
@@ -5582,7 +5434,7 @@ Public Class Automatikprogramme
         ElseIf _Prog16 = 661 Then
         ElseIf _Prog16 = 662 Then
 
-        ElseIf _Prog16 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog16 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok16.Interval = 2000
         ElseIf _Prog16 = 701 Then
         ElseIf _Prog16 = 702 Then
@@ -5620,7 +5472,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 12X 001-5
         '*** Datum: 13.12.2020
 
-        SetText(TextBox1, "E-Lok 12X 001-5                                                  IBS: 03.02.2023 - V3: 9")
+        SetText(TextBox1, "E-Lok 12X 001-5                                                         IBS: 03.02.2023 - V3: 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_12X_01.jpg")
         GeschwindikeitenSetzen(17)
 
@@ -5631,8 +5483,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 17 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -5648,8 +5498,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(17, 1)
@@ -5782,6 +5630,7 @@ Public Class Automatikprogramme
         ElseIf _Prog17 = 50 Then
             Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 51 Then
+        ElseIf _Prog17 = 52 Then
             If _Fernlicht < 2 Then
                 _eb.lokSteuern(17, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -5817,9 +5666,14 @@ Public Class Automatikprogramme
             _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, Stufe21)
         ElseIf _Prog17 = 135 Then
             _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
-            Prog_Lok17.Interval = 1000
         ElseIf _Prog17 = 136 Then
             _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog17 = 137 Then
+            Prog_Lok17.Interval = 2000
+        ElseIf _Prog17 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(17, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -5838,6 +5692,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog17 = 166 Then
             _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog17 = 167 Then
+            Prog_Lok17.Interval = 2000
+        ElseIf _Prog17 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(17, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -5880,6 +5740,7 @@ Public Class Automatikprogramme
             Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 261 Then
         ElseIf _Prog17 = 262 Then
+            _eb.lokSteuern(17, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog17 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok17.Interval = 2000
@@ -5901,7 +5762,7 @@ Public Class Automatikprogramme
         ElseIf _Prog17 = 661 Then
         ElseIf _Prog17 = 662 Then
 
-        ElseIf _Prog17 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog17 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok17.Interval = 2000
         ElseIf _Prog17 = 701 Then
         ElseIf _Prog17 = 702 Then
@@ -5939,7 +5800,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm E118 024-9
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 118 024-9                                                 IBS: 07.02.2021 - V3 : 7")
+        SetText(TextBox1, "E-Lok 118 024-9                                                         IBS: 07.02.2021 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_118_01.jpg")
         GeschwindikeitenSetzen(18)
 
@@ -5950,8 +5811,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 18 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -5967,8 +5826,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 3000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(18, 1)
@@ -6139,6 +5996,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog18 = 136 Then
             _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog18 = 137 Then
+            Prog_Lok18.Interval = 2000
+        ElseIf _Prog18 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(18, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -6157,6 +6020,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog18 = 166 Then
             _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog18 = 167 Then
+            Prog_Lok18.Interval = 2000
+        ElseIf _Prog18 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(18, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -6199,6 +6068,7 @@ Public Class Automatikprogramme
             Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 261 Then
         ElseIf _Prog18 = 262 Then
+            _eb.lokSteuern(18, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog18 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok18.Interval = 2000
@@ -6220,7 +6090,7 @@ Public Class Automatikprogramme
         ElseIf _Prog18 = 661 Then
         ElseIf _Prog18 = 662 Then
 
-        ElseIf _Prog18 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog18 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok18.Interval = 2000
         ElseIf _Prog18 = 701 Then
         ElseIf _Prog18 = 702 Then
@@ -6260,7 +6130,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm E101 003-2
         '*** Datum: 17.07.2020
 
-        SetText(TextBox1, "E-Lok 101 003-2                                           IBS: 06.01.2022 V1: 2 - V3: 7")
+        SetText(TextBox1, "E-Lok 101 003-2                                                         IBS: 06.01.2022 - V3: 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_101_02.jpg")
         GeschwindikeitenSetzen(19)
 
@@ -6271,8 +6141,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 19 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -6288,8 +6156,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(19, 1)
@@ -6468,6 +6334,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog19 = 136 Then
             _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog19 = 137 Then
+            Prog_Lok19.Interval = 2000
+        ElseIf _Prog19 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(19, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -6486,6 +6358,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog19 = 166 Then
             _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog19 = 167 Then
+            Prog_Lok19.Interval = 2000
+        ElseIf _Prog19 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(19, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -6528,6 +6406,7 @@ Public Class Automatikprogramme
             Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 261 Then
         ElseIf _Prog19 = 262 Then
+            _eb.lokSteuern(19, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog19 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok19.Interval = 2000
@@ -6549,7 +6428,7 @@ Public Class Automatikprogramme
         ElseIf _Prog19 = 661 Then
         ElseIf _Prog19 = 662 Then
 
-        ElseIf _Prog19 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog19 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok19.Interval = 2000
         ElseIf _Prog19 = 701 Then
         ElseIf _Prog19 = 702 Then
@@ -6587,7 +6466,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für TEE NS DE 1001
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "TEE NS DE 1001                                           IBS: 06.01.2022 V1: 6 - V3: 10")
+        SetText(TextBox1, "TEE NS DE 1001                                                          IBS: 06.01.2022 V1: 6 - V3: 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_TEE_20.jpg")
         GeschwindikeitenSetzen(20)
 
@@ -6598,8 +6477,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 20 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -6615,8 +6492,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(20, 1)
@@ -6749,7 +6624,7 @@ Public Class Automatikprogramme
         ElseIf _Prog20 = 50 Then
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 51 Then    ' *** Lok hat keine Lichtfunktion
-
+        ElseIf _Prog20 = 52 Then
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
 
@@ -6784,6 +6659,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog20 = 136 Then
             _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog20 = 137 Then
+            Prog_Lok20.Interval = 2000
+        ElseIf _Prog20 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(20, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -6802,6 +6683,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog20 = 166 Then
             _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog20 = 167 Then
+            Prog_Lok20.Interval = 2000
+        ElseIf _Prog20 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(20, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -6838,30 +6725,38 @@ Public Class Automatikprogramme
         ElseIf _Prog20 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 241 Then
+        ElseIf _Prog20 = 242 Then
 
         ElseIf _Prog20 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 261 Then
+        ElseIf _Prog20 = 262 Then
+            _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog20 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 601 Then
+        ElseIf _Prog20 = 602 Then
 
         ElseIf _Prog20 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 621 Then
+        ElseIf _Prog20 = 622 Then
 
         ElseIf _Prog20 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 641 Then
+        ElseIf _Prog20 = 642 Then
 
         ElseIf _Prog20 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 661 Then
+        ElseIf _Prog20 = 662 Then
 
-        ElseIf _Prog20 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog20 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok20.Interval = 2000
         ElseIf _Prog20 = 701 Then
+        ElseIf _Prog20 = 702 Then
 
             ' Zindelstein
 
@@ -6896,7 +6791,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Ae6/6
         '*** Datum: 08.10.2021
 
-        SetText(TextBox1, "E-Lok AE66 11426                                                 IBS: 08.10.2021 - V3 : 8")
+        SetText(TextBox1, "E-Lok AE66 11426                                                        IBS: 08.10.2021 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe AE66_01.jpg")
         GeschwindikeitenSetzen(21)
 
@@ -6907,8 +6802,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 21 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -6924,8 +6817,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(21, 1)
@@ -7096,6 +6987,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog21 = 136 Then
             _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog21 = 137 Then
+            Prog_Lok21.Interval = 2000
+        ElseIf _Prog21 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(21, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -7114,6 +7011,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog21 = 166 Then
             _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog21 = 167 Then
+            Prog_Lok21.Interval = 2000
+        ElseIf _Prog21 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(21, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -7151,30 +7054,38 @@ Public Class Automatikprogramme
         ElseIf _Prog21 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 241 Then
+        ElseIf _Prog21 = 242 Then
 
         ElseIf _Prog21 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 261 Then
+        ElseIf _Prog21 = 262 Then
+            _eb.lokSteuern(21, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog21 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 601 Then
+        ElseIf _Prog21 = 602 Then
 
         ElseIf _Prog21 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 621 Then
+        ElseIf _Prog21 = 622 Then
 
         ElseIf _Prog21 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok21.Interval = 2000
+        ElseIf _Prog21 = 641 Then
         ElseIf _Prog21 = 641 Then
 
         ElseIf _Prog21 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 661 Then
+        ElseIf _Prog21 = 662 Then
 
-        ElseIf _Prog21 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog21 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok21.Interval = 2000
         ElseIf _Prog21 = 701 Then
+        ElseIf _Prog21 = 702 Then
 
             ' Zindelstein
 
@@ -7210,7 +7121,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E110 234-2
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "E-Lok 110 234-2                                                 IBS: 11.10.2025 - V3 : 8")
+        SetText(TextBox1, "E-Lok 110 234-2                                                         IBS: 11.10.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_110_01.jpg")
         GeschwindikeitenSetzen(22)
 
@@ -7221,9 +7132,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 22 + 4
-
-        Faktor_Beleuchtung = 100
-
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -7239,8 +7147,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 5000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(22, 1)
@@ -7411,6 +7317,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog22 = 136 Then
             _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog22 = 137 Then
+            Prog_Lok22.Interval = 2000
+        ElseIf _Prog22 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(22, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -7429,6 +7341,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog22 = 166 Then
             _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog22 = 167 Then
+            Prog_Lok22.Interval = 2000
+        ElseIf _Prog22 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(22, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -7470,30 +7388,38 @@ Public Class Automatikprogramme
         ElseIf _Prog22 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 241 Then
+        ElseIf _Prog22 = 242 Then
 
-        ElseIf _Prog22 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog22 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 261 Then
+        ElseIf _Prog22 = 262 Then
+            _eb.lokSteuern(22, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog22 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 601 Then
+        ElseIf _Prog22 = 602 Then
 
         ElseIf _Prog22 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 621 Then
+        ElseIf _Prog22 = 622 Then
 
         ElseIf _Prog22 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 641 Then
+        ElseIf _Prog22 = 642 Then
 
         ElseIf _Prog22 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 661 Then
+        ElseIf _Prog22 = 662 Then
 
-        ElseIf _Prog22 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog22 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok22.Interval = 2000
         ElseIf _Prog22 = 701 Then
+        ElseIf _Prog22 = 702 Then
 
             ' Zindelstein
 
@@ -7528,7 +7454,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E111
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 111 043-6                                           IBS: 06.01.2022 V1: 2 - V3: 6")
+        SetText(TextBox1, "E-Lok 111 043-6                                                         IBS: 06.01.2022 V1: 2 - V3: 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_111_02.jpg")
         GeschwindikeitenSetzen(23)
 
@@ -7539,8 +7465,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 23 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -7556,8 +7480,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 4000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(23, 1)
@@ -7728,6 +7650,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog23 = 136 Then
             _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog23 = 137 Then
+            Prog_Lok23.Interval = 2000
+        ElseIf _Prog23 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(23, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -7746,6 +7674,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog23 = 166 Then
             _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog23 = 167 Then
+            Prog_Lok23.Interval = 2000
+        ElseIf _Prog23 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(23, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -7782,30 +7716,38 @@ Public Class Automatikprogramme
         ElseIf _Prog23 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 241 Then
+        ElseIf _Prog23 = 242 Then
 
-        ElseIf _Prog23 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog23 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 261 Then
+        ElseIf _Prog23 = 262 Then
+            _eb.lokSteuern(23, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog23 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 601 Then
+        ElseIf _Prog23 = 602 Then
 
         ElseIf _Prog23 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 621 Then
+        ElseIf _Prog23 = 622 Then
 
         ElseIf _Prog23 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 641 Then
+        ElseIf _Prog23 = 642 Then
 
         ElseIf _Prog23 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 661 Then
+        ElseIf _Prog23 = 662 Then
 
-        ElseIf _Prog23 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog23 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok23.Interval = 2000
         ElseIf _Prog23 = 701 Then
+        ElseIf _Prog23 = 702 Then
 
             ' Zindelstein
 
@@ -7841,7 +7783,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E 110 155-9
         '*** Datum: 11.10.2025
 
-        SetText(TextBox1, "E-Lok 110 155-9                                                 IBS: 11.10.2025 - V3 : 6")
+        SetText(TextBox1, "E-Lok 110 155-9                                                         IBS: 11.10.2025 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_110_10.jpg")
         GeschwindikeitenSetzen(24)
 
@@ -7852,9 +7794,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 24 + 4
-
-        Faktor_Beleuchtung = 100
-
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -7870,8 +7809,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(24, 1)
@@ -8043,6 +7980,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog24 = 136 Then
             _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog24 = 137 Then
+            Prog_Lok24.Interval = 2000
+        ElseIf _Prog24 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(24, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -8061,6 +8004,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog24 = 166 Then
             _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog24 = 167 Then
+            Prog_Lok24.Interval = 2000
+        ElseIf _Prog24 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(24, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -8099,10 +8048,11 @@ Public Class Automatikprogramme
         ElseIf _Prog24 = 241 Then
         ElseIf _Prog24 = 242 Then
 
-        ElseIf _Prog24 = 260 Then ' Kontakt 3.3 links der Brücke
+        ElseIf _Prog24 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok24.Interval = 2000
         ElseIf _Prog24 = 261 Then
         ElseIf _Prog24 = 262 Then
+            _eb.lokSteuern(24, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog24 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok24.Interval = 2000
@@ -8124,7 +8074,7 @@ Public Class Automatikprogramme
         ElseIf _Prog24 = 661 Then
         ElseIf _Prog24 = 662 Then
 
-        ElseIf _Prog24 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog24 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok24.Interval = 2000
         ElseIf _Prog24 = 701 Then
         ElseIf _Prog24 = 702 Then
@@ -8164,7 +8114,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok RE 4/4
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "E-Lok RE 4/4                                                IBS: 06.01.2022 V1: 2 - V3: 6")
+        SetText(TextBox1, "E-Lok RE 4/4                                                            IBS: 06.01.2022 - V3: 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_RE44_01.jpg")
         GeschwindikeitenSetzen(25)
 
@@ -8175,8 +8125,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 25 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -8192,8 +8140,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(25, 1)
@@ -8364,6 +8310,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog25 = 136 Then
             _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog25 = 137 Then
+            Prog_Lok25.Interval = 2000
+        ElseIf _Prog25 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(25, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -8382,6 +8334,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog25 = 166 Then
             _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog25 = 167 Then
+            Prog_Lok25.Interval = 2000
+        ElseIf _Prog25 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(25, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -8418,30 +8376,38 @@ Public Class Automatikprogramme
         ElseIf _Prog25 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 241 Then
+        ElseIf _Prog25 = 242 Then
 
-        ElseIf _Prog25 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog25 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 261 Then
+        ElseIf _Prog25 = 262 Then
+            _eb.lokSteuern(25, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog25 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 601 Then
+        ElseIf _Prog25 = 602 Then
 
         ElseIf _Prog25 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 621 Then
+        ElseIf _Prog25 = 622 Then
 
         ElseIf _Prog25 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 641 Then
+        ElseIf _Prog25 = 642 Then
 
         ElseIf _Prog25 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 661 Then
+        ElseIf _Prog25 = 662 Then
 
-        ElseIf _Prog25 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog25 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok25.Interval = 2000
         ElseIf _Prog25 = 701 Then
+        ElseIf _Prog25 = 702 Then
 
             ' Zindelstein
 
@@ -8476,7 +8442,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 120 119-3
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 120 119-3                                                 IBS: 02.05.2021 - V3 : 8")
+        SetText(TextBox1, "E-Lok 120 119-3                                                         IBS: 02.05.2021 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_120_10.jpg")
         GeschwindikeitenSetzen(26)
 
@@ -8487,9 +8453,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 26 + 4
-
-        Faktor_Beleuchtung = 100
-
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -8505,8 +8468,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(26, 1)
@@ -8677,6 +8638,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog26 = 136 Then
             _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog26 = 137 Then
+            Prog_Lok26.Interval = 2000
+        ElseIf _Prog26 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(26, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -8695,6 +8662,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog26 = 166 Then
             _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog26 = 167 Then
+            Prog_Lok26.Interval = 2000
+        ElseIf _Prog26 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(26, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -8731,30 +8704,38 @@ Public Class Automatikprogramme
         ElseIf _Prog26 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 241 Then
+        ElseIf _Prog26 = 242 Then
 
-        ElseIf _Prog26 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog26 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 261 Then
+        ElseIf _Prog26 = 262 Then
+            _eb.lokSteuern(26, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog26 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 601 Then
+        ElseIf _Prog26 = 602 Then
 
         ElseIf _Prog26 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 621 Then
+        ElseIf _Prog26 = 622 Then
 
         ElseIf _Prog26 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 641 Then
+        ElseIf _Prog26 = 642 Then
 
         ElseIf _Prog26 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 661 Then
+        ElseIf _Prog26 = 662 Then
 
-        ElseIf _Prog26 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog26 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 701 Then
+        ElseIf _Prog26 = 702 Then
 
             ' Zindelstein
 
@@ -8789,7 +8770,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "Krokodil braun"
         '*** Datum: 10.10.2023
 
-        SetText(TextBox1, "E-Lok CE 6/8  14253                             IBS: 10.12.2025 V3: 7")
+        SetText(TextBox1, "E-Lok CE 6/8  14253                                                     IBS: 10.12.2025 V3: 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
         GeschwindikeitenSetzen(27)
 
@@ -8800,9 +8781,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 27 + 4
-
-        Faktor_Beleuchtung = 100
-
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -8818,8 +8796,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(27, 1)
@@ -8925,7 +8901,7 @@ Public Class Automatikprogramme
             If _Motor > 0 Then
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             Else
-                _Prog27 = 16
+                _Prog27 = 10
             End If
         ElseIf _Prog27 = 3 Then
         ElseIf _Prog27 = 4 Then
@@ -9124,11 +9100,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog27 = 246 Then
 
-        ElseIf _Prog27 = 260 Then ' Kontakt 3.3 links der Brücke
+        ElseIf _Prog27 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok27.Interval = 2000
         ElseIf _Prog27 = 261 Then
         ElseIf _Prog27 = 262 Then
-        ElseIf _Prog27 = 263 Then
+            _eb.lokSteuern(20, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog27 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok27.Interval = 2000
@@ -9185,7 +9161,7 @@ Public Class Automatikprogramme
             End If
             _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog27 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog27 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok27.Interval = 2000
         ElseIf _Prog27 = 701 Then
         ElseIf _Prog27 = 702 Then
@@ -9236,7 +9212,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 111 095-6
         '*** Datum: 05.10.2025
 
-        SetText(TextBox1, "E-Lok 111 095-6                                                 IBS: 11.10.2025 - V3 : 7")
+        SetText(TextBox1, "E-Lok 111 095-6                                                         IBS: 11.10.2025 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_111_10.jpg")
         GeschwindikeitenSetzen(28)
 
@@ -9247,8 +9223,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 28 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -9264,8 +9238,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(28, 1)
@@ -9453,6 +9425,8 @@ Public Class Automatikprogramme
         ElseIf _Prog28 = 136 Then
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog28 = 137 Then
+            Prog_Lok28.Interval = 2000
+        ElseIf _Prog28 = 138 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -9475,6 +9449,8 @@ Public Class Automatikprogramme
         ElseIf _Prog28 = 166 Then
             _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog28 = 167 Then
+            Prog_Lok28.Interval = 2000
+        ElseIf _Prog28 = 168 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -9517,9 +9493,10 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog28 = 207 Then
 
-        ElseIf _Prog28 = 220 Then ' Kontakt 3.1 -> (bergauf)
+        ElseIf _Prog28 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok28.Interval = 2000
         ElseIf _Prog28 = 221 Then
+        ElseIf _Prog28 = 222 Then
 
         ElseIf _Prog28 = 240 Then ' Kontakt 3.7 <- (bergauf)
             Prog_Lok28.Interval = 2000
@@ -9537,10 +9514,11 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog28 = 244 Then
 
-        ElseIf _Prog28 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog28 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok28.Interval = 2000
         ElseIf _Prog28 = 261 Then
         ElseIf _Prog28 = 262 Then
+            _eb.lokSteuern(28, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog28 = 600 Then ' Kontakt 3.5
             Prog_Lok28.Interval = 1000
@@ -9591,7 +9569,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog28 = 664 Then
 
-        ElseIf _Prog28 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog28 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok28.Interval = 4000
         ElseIf _Prog28 = 701 Then
         ElseIf _Prog28 = 702 Then
@@ -9640,7 +9618,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für 
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Triebwagen ET91                                                  IBS: 10.12.2025 - V3 : 9")
+        SetText(TextBox1, "Triebwagen ET91                                                         IBS: 10.12.2025 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_ET91_01.jpg")
         GeschwindikeitenSetzen(29)
 
@@ -9651,8 +9629,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 29 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -9668,8 +9644,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(29, 1)
@@ -9949,11 +9923,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog29 = 245 Then
 
-        ElseIf _Prog29 = 260 Then ' Kontakt 3.3 links der Brücke
+        ElseIf _Prog29 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok29.Interval = 2000
         ElseIf _Prog29 = 261 Then
         ElseIf _Prog29 = 262 Then
-        ElseIf _Prog29 = 263 Then
+            _eb.lokSteuern(29, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog29 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok29.Interval = 2000
@@ -9996,7 +9970,7 @@ Public Class Automatikprogramme
         ElseIf _Prog29 = 666 Then
             _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog29 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog29 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok29.Interval = 2000
         ElseIf _Prog29 = 701 Then
         ElseIf _Prog29 = 702 Then
@@ -10042,7 +10016,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für den TEE Gottardo 
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "RAe TEE II Gottardo                                        IBS: 15.01.2022 V1: 2 - V3: 7")
+        SetText(TextBox1, "RAe TEE II Gottardo                                                     IBS: 15.01.2022 V1: 2 - V3: 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_TEE_11.jpg")
         GeschwindikeitenSetzen(30)
 
@@ -10053,8 +10027,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 30 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -10070,8 +10042,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(30, 1)
@@ -10191,21 +10161,22 @@ Public Class Automatikprogramme
             ' Bahnhofsausfahrt
 
         ElseIf _Prog30 = 6 Then
-            If _AkustischeSignale = 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
         ElseIf _Prog30 = 7 Then
-            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog30 = 8 Then
-            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
         ElseIf _Prog30 = 9 Then
-            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
         ElseIf _Prog30 = 10 Then
-            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
         ElseIf _Prog30 = 11 Then
-            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
         ElseIf _Prog30 = 12 Then
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
+        ElseIf _Prog30 = 13 Then
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
             ' Lok abstellen
@@ -10336,25 +10307,19 @@ Public Class Automatikprogramme
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 221 Then
         ElseIf _Prog30 = 222 Then
-            If _Dampf < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
         ElseIf _Prog30 = 223 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor aus
             End If
 
         ElseIf _Prog30 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 241 Then
-            If _Dampf > 1 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            End If
         ElseIf _Prog30 = 242 Then
-            Prog_Lok30.Interval = 1000
+            Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 243 Then
             If _Motor > 1 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
         ElseIf _Prog30 = 244 Then
             If _AkustischeSignale > 1 Then
@@ -10364,14 +10329,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog30 = 246 Then
 
-        ElseIf _Prog30 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog30 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 261 Then
         ElseIf _Prog30 = 262 Then
-        ElseIf _Prog30 = 263 Then
-            If _Dampf < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
+            _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog30 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok30.Interval = 1000
@@ -10399,7 +10361,7 @@ Public Class Automatikprogramme
         ElseIf _Prog30 = 641 Then
         ElseIf _Prog30 = 642 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
 
         ElseIf _Prog30 = 660 Then ' Kontakt 1.2 -> Talfahrt
@@ -10421,7 +10383,7 @@ Public Class Automatikprogramme
         ElseIf _Prog30 = 665 Then
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog30 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog30 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 701 Then
         ElseIf _Prog30 = 702 Then
@@ -10474,7 +10436,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E194 091-5
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 194 091-5                                                 IBS: 10.09.2025 - V3 : 9")
+        SetText(TextBox1, "E-Lok 194 091-5                                                         IBS: 10.09.2025 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_194_02.jpg")
         GeschwindikeitenSetzen(31)
 
@@ -10485,8 +10447,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 31 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -10502,8 +10462,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 3000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(31, 1)
@@ -10640,7 +10598,6 @@ Public Class Automatikprogramme
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(31, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
-        ElseIf _Prog31 = 53 Then
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
 
@@ -10675,6 +10632,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog31 = 136 Then
             _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog31 = 137 Then
+            Prog_Lok31.Interval = 2000
+        ElseIf _Prog31 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(31, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -10693,6 +10656,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog31 = 166 Then
             _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog31 = 167 Then
+            Prog_Lok31.Interval = 2000
+        ElseIf _Prog31 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(31, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -10731,10 +10700,11 @@ Public Class Automatikprogramme
         ElseIf _Prog31 = 241 Then
         ElseIf _Prog31 = 242 Then
 
-        ElseIf _Prog31 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog31 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 261 Then
         ElseIf _Prog31 = 262 Then
+            _eb.lokSteuern(31, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog31 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok31.Interval = 2000
@@ -10756,7 +10726,7 @@ Public Class Automatikprogramme
         ElseIf _Prog31 = 661 Then
         ElseIf _Prog31 = 662 Then
 
-        ElseIf _Prog31 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog31 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok31.Interval = 2000
         ElseIf _Prog31 = 701 Then
         ElseIf _Prog31 = 702 Then
@@ -10796,7 +10766,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Krokodil grün
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok CE 6/8  13302   V3: 7")
+        SetText(TextBox1, "E-Lok CE 6/8  13302                                                     IBS: xx.xx.xxxx - V3: 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Krokodil_01.jpg")
         GeschwindikeitenSetzen(32)
 
@@ -10807,8 +10777,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 32 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -10824,8 +10792,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 6000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(32, 1)
@@ -10996,6 +10962,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog32 = 136 Then
             _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog32 = 137 Then
+            Prog_Lok32.Interval = 2000
+        ElseIf _Prog32 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(32, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
@@ -11015,6 +10987,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog32 = 166 Then
             _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog32 = 167 Then
+            Prog_Lok32.Interval = 2000
+        ElseIf _Prog32 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(32, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -11053,30 +11031,36 @@ Public Class Automatikprogramme
         ElseIf _Prog32 = 241 Then
         ElseIf _Prog32 = 242 Then
 
-        ElseIf _Prog32 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog32 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 261 Then
         ElseIf _Prog32 = 262 Then
+            _eb.lokSteuern(32, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog32 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 601 Then
+        ElseIf _Prog32 = 602 Then
 
         ElseIf _Prog32 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 621 Then
+        ElseIf _Prog32 = 622 Then
 
         ElseIf _Prog32 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 641 Then
+        ElseIf _Prog32 = 642 Then
 
         ElseIf _Prog32 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 661 Then
+        ElseIf _Prog32 = 662 Then
 
-        ElseIf _Prog32 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog32 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok32.Interval = 2000
         ElseIf _Prog32 = 701 Then
+        ElseIf _Prog32 = 702 Then
 
             ' Zindelstein
 
@@ -11111,7 +11095,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Krokodil braun
         '*** Datum: 16.10.2023
 
-        SetText(TextBox1, "E-Lok CE 6/8 14301   V3: 8")
+        SetText(TextBox1, "E-Lok CE 6/8 14301                                                      IBS: xx.xx.xxxx - V3: 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Krokodil_12.jpg")
         GeschwindikeitenSetzen(33)
 
@@ -11122,9 +11106,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 33 + 4
-
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -11140,8 +11121,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 6000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(33, 1)
@@ -11312,6 +11291,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog33 = 136 Then
             _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog33 = 137 Then
+            Prog_Lok33.Interval = 2000
+        ElseIf _Prog33 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(33, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -11330,6 +11315,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog33 = 166 Then
             _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog33 = 167 Then
+            Prog_Lok33.Interval = 2000
+        ElseIf _Prog33 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(33, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -11368,29 +11359,36 @@ Public Class Automatikprogramme
         ElseIf _Prog33 = 241 Then
         ElseIf _Prog33 = 242 Then
 
-        ElseIf _Prog33 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog33 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 261 Then
+        ElseIf _Prog33 = 262 Then
+            _eb.lokSteuern(33, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog33 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 601 Then
+        ElseIf _Prog33 = 602 Then
 
         ElseIf _Prog33 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 621 Then
+        ElseIf _Prog33 = 622 Then
 
         ElseIf _Prog33 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 641 Then
+        ElseIf _Prog33 = 642 Then
 
         ElseIf _Prog33 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 661 Then
+        ElseIf _Prog33 = 662 Then
 
-        ElseIf _Prog33 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog33 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok33.Interval = 2000
         ElseIf _Prog33 = 701 Then
+        ElseIf _Prog33 = 702 Then
 
             ' Zindelstein
 
@@ -11426,7 +11424,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 191 099-1
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 191 099-1                                                IBS: 10.09.2025 - V3 : 8")
+        SetText(TextBox1, "E-Lok 191 099-1                                                         IBS: 10.09.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_191_01.jpg")
         GeschwindikeitenSetzen(34)
 
@@ -11437,8 +11435,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 34 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -11454,8 +11450,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(34, 1)
@@ -11557,11 +11551,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(34, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog34 = 1 Then
-            If _Durchsagen = 1 And (_TypL34 = 1 Or _TypL34 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog34 = 6
-            End If
         ElseIf _Prog34 = 2 Then
         ElseIf _Prog34 = 3 Then
         ElseIf _Prog34 = 4 Then
@@ -11626,6 +11615,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog34 = 136 Then
             _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog34 = 137 Then
+            Prog_Lok34.Interval = 2000
+        ElseIf _Prog34 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(34, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -11644,6 +11639,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog34 = 166 Then
             _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog34 = 167 Then
+            Prog_Lok34.Interval = 2000
+        ElseIf _Prog34 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(34, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -11682,29 +11683,36 @@ Public Class Automatikprogramme
         ElseIf _Prog34 = 241 Then
         ElseIf _Prog34 = 242 Then
 
-        ElseIf _Prog34 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog34 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 261 Then
+        ElseIf _Prog34 = 262 Then
+            _eb.lokSteuern(34, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog34 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 601 Then
+        ElseIf _Prog34 = 602 Then
 
         ElseIf _Prog34 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 621 Then
+        ElseIf _Prog34 = 622 Then
 
         ElseIf _Prog34 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 641 Then
+        ElseIf _Prog34 = 642 Then
 
         ElseIf _Prog34 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 661 Then
+        ElseIf _Prog34 = 662 Then
 
-        ElseIf _Prog34 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog34 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok34.Interval = 2000
         ElseIf _Prog34 = 701 Then
+        ElseIf _Prog34 = 702 Then
 
             ' Zindelstein
 
@@ -11739,7 +11747,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 44 039
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 44 039 ( IBS nein)")
+        SetText(TextBox1, "E-Lok 44 039                                                            IBS: xx.xx.xxxx - V3:y ")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_144_11.jpg")
         GeschwindikeitenSetzen(35)
 
@@ -11750,8 +11758,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 35 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -11767,8 +11773,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 6000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(35, 1)
@@ -11939,6 +11943,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog35 = 136 Then
             _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog35 = 137 Then
+            Prog_Lok35.Interval = 2000
+        ElseIf _Prog35 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(35, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -11957,6 +11967,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog35 = 166 Then
             _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog35 = 167 Then
+            Prog_Lok35.Interval = 2000
+        ElseIf _Prog35 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(35, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -11993,30 +12009,38 @@ Public Class Automatikprogramme
         ElseIf _Prog35 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 241 Then
+        ElseIf _Prog35 = 242 Then
 
-        ElseIf _Prog35 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog35 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 261 Then
+        ElseIf _Prog35 = 262 Then
+            _eb.lokSteuern(35, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog35 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 601 Then
+        ElseIf _Prog35 = 602 Then
 
         ElseIf _Prog35 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 621 Then
+        ElseIf _Prog35 = 622 Then
 
         ElseIf _Prog35 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 641 Then
+        ElseIf _Prog35 = 642 Then
 
         ElseIf _Prog35 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 661 Then
+        ElseIf _Prog35 = 662 Then
 
-        ElseIf _Prog35 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog35 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok35.Interval = 2000
         ElseIf _Prog35 = 701 Then
+        ElseIf _Prog35 = 702 Then
 
             ' Zindelstein
 
@@ -12052,7 +12076,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 41 024
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 41 024                                             IBS: 11.10.2025 - V1: 4 - V3: 9")
+        SetText(TextBox1, "E-Lok 41 024                                                            IBS: 11.10.2025 - V3: 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_141_01.jpg")
         GeschwindikeitenSetzen(36)
 
@@ -12063,8 +12087,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 36 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -12080,8 +12102,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 5000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(36, 1)
@@ -12252,6 +12272,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog36 = 136 Then
             _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog36 = 137 Then
+            Prog_Lok36.Interval = 2000
+        ElseIf _Prog36 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(36, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -12270,6 +12296,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog36 = 166 Then
             _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog36 = 167 Then
+            Prog_Lok36.Interval = 2000
+        ElseIf _Prog36 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(36, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -12301,34 +12333,43 @@ Public Class Automatikprogramme
         ElseIf _Prog36 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 221 Then
+        ElseIf _Prog36 = 222 Then
 
         ElseIf _Prog36 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 241 Then
+        ElseIf _Prog36 = 242 Then
 
-        ElseIf _Prog36 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog36 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 261 Then
+        ElseIf _Prog36 = 262 Then
+            _eb.lokSteuern(36, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog36 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 601 Then
+        ElseIf _Prog36 = 602 Then
 
         ElseIf _Prog36 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 621 Then
+        ElseIf _Prog36 = 622 Then
 
         ElseIf _Prog36 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 641 Then
+        ElseIf _Prog36 = 642 Then
 
         ElseIf _Prog36 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 661 Then
+        ElseIf _Prog36 = 662 Then
 
-        ElseIf _Prog36 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog36 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 701 Then
+        ElseIf _Prog36 = 702 Then
 
             ' Zindelstein
 
@@ -12363,7 +12404,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 151 030-4
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "E-Lok 151 030-4                                           IBS: 06.01.2022 V1: 1 - V3 : 7")
+        SetText(TextBox1, "E-Lok 151 030-4                                                          IBS: 06.01.2022 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_151_04.jpg")
         GeschwindikeitenSetzen(37)
 
@@ -12374,8 +12415,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 37 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -12391,8 +12430,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(37, 1)
@@ -12563,6 +12600,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog37 = 136 Then
             _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog37 = 137 Then
+            Prog_Lok37.Interval = 2000
+        ElseIf _Prog37 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(37, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -12581,6 +12624,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog37 = 166 Then
             _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog37 = 167 Then
+            Prog_Lok37.Interval = 2000
+        ElseIf _Prog37 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(37, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -12612,34 +12661,43 @@ Public Class Automatikprogramme
         ElseIf _Prog37 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 221 Then
+        ElseIf _Prog37 = 222 Then
 
         ElseIf _Prog37 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 241 Then
+        ElseIf _Prog37 = 242 Then
 
-        ElseIf _Prog37 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog37 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 261 Then
+        ElseIf _Prog37 = 262 Then
+            _eb.lokSteuern(37, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog37 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 601 Then
+        ElseIf _Prog37 = 602 Then
 
         ElseIf _Prog37 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 621 Then
+        ElseIf _Prog37 = 622 Then
 
         ElseIf _Prog37 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 641 Then
+        ElseIf _Prog37 = 642 Then
 
         ElseIf _Prog37 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 661 Then
+        ElseIf _Prog37 = 662 Then
 
-        ElseIf _Prog37 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog37 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok37.Interval = 2000
         ElseIf _Prog37 = 701 Then
+        ElseIf _Prog37 = 702 Then
 
             ' Zindelstein
 
@@ -12675,7 +12733,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 44 098
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 44 098                                                    IBS: 15.03.2021 - V3 : 6")
+        SetText(TextBox1, "E-Lok 44 098                                                            IBS: 15.03.2021 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_144_02.jpg")
         GeschwindikeitenSetzen(38)
 
@@ -12686,8 +12744,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 38 + 4
-
-        Faktor_Beleuchtung = 128
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -12703,8 +12759,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(38, 1)
@@ -12957,10 +13011,11 @@ Public Class Automatikprogramme
         ElseIf _Prog38 = 245 Then
             _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog38 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog38 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok38.Interval = 2000
         ElseIf _Prog38 = 261 Then
         ElseIf _Prog38 = 262 Then
+            _eb.lokSteuern(38, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog38 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok38.Interval = 1000
@@ -12985,6 +13040,7 @@ Public Class Automatikprogramme
         ElseIf _Prog38 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok38.Interval = 2000
         ElseIf _Prog38 = 641 Then
+        ElseIf _Prog38 = 642 Then
 
         ElseIf _Prog38 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok38.Interval = 2000
@@ -12999,7 +13055,7 @@ Public Class Automatikprogramme
         ElseIf _Prog38 = 664 Then
             _eb.lokSteuern(38, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog38 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog38 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok38.Interval = 2000
         ElseIf _Prog38 = 701 Then
         ElseIf _Prog38 = 702 Then
@@ -13046,7 +13102,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok E60 10
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok E60 10                                                   IBS: 18.02.2023 - V3:7")
+        SetText(TextBox1, "E-Lok E60 10                                                            IBS: 18.02.2023 - V3:7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_60_01.jpg")
         GeschwindikeitenSetzen(39)
 
@@ -13057,8 +13113,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 39 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -13074,8 +13128,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(39, 1)
@@ -13246,6 +13298,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog39 = 136 Then
             _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog39 = 137 Then
+            Prog_Lok39.Interval = 2000
+        ElseIf _Prog39 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(39, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -13264,6 +13322,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog39 = 166 Then
             _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog39 = 167 Then
+            Prog_Lok39.Interval = 2000
+        ElseIf _Prog39 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(39, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -13305,26 +13369,33 @@ Public Class Automatikprogramme
         ElseIf _Prog39 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 261 Then
+        ElseIf _Prog39 = 262 Then
+            _eb.lokSteuern(39, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog39 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 601 Then
+        ElseIf _Prog39 = 602 Then
 
         ElseIf _Prog39 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 621 Then
+        ElseIf _Prog39 = 622 Then
 
         ElseIf _Prog39 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 641 Then
+        ElseIf _Prog39 = 642 Then
 
         ElseIf _Prog39 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 661 Then
+        ElseIf _Prog39 = 662 Then
 
-        ElseIf _Prog39 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog39 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok39.Interval = 2000
         ElseIf _Prog39 = 701 Then
+        ElseIf _Prog39 = 702 Then
 
             ' Zindelstein
 
@@ -13360,7 +13431,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Triebwagen ET 87
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "Triebwagen ET 87                                           IBS: 10.12.2025 V3: 10")
+        SetText(TextBox1, "Triebwagen ET 87                                                        IBS: 10.12.2025 V3: 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_ET87_01.jpg")
         GeschwindikeitenSetzen(40)
 
@@ -13371,8 +13442,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 40 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -13388,8 +13457,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(40, 1)
@@ -13735,11 +13802,11 @@ Public Class Automatikprogramme
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog40 = 248 Then
 
-        ElseIf _Prog40 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog40 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok40.Interval = 2000
         ElseIf _Prog40 = 261 Then
         ElseIf _Prog40 = 262 Then
-        ElseIf _Prog40 = 263 Then
+            _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog40 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok40.Interval = 1000
@@ -13804,7 +13871,7 @@ Public Class Automatikprogramme
         ElseIf _Prog40 = 667 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog40 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog40 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok40.Interval = 2000
         ElseIf _Prog40 = 701 Then
         ElseIf _Prog40 = 702 Then
@@ -13858,7 +13925,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "SBB RCe 2/4 604 Roter Pfeil" 
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Triebwagen RCe 2/4 604 Roter Pfeil                              IBS: 18.02.2023 - V3 : 8")
+        SetText(TextBox1, "Triebwagen RCe 2/4 604 Roter Pfeil                                      IBS: 12.10.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_RCe_01.jpg")
         GeschwindikeitenSetzen(41)
 
@@ -13869,8 +13936,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 41 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -13886,8 +13951,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 4000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(41, 1)
@@ -13991,37 +14054,25 @@ Public Class Automatikprogramme
         ElseIf _Prog41 = 1 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
-            Else
-                _Prog41 = 4
             End If
         ElseIf _Prog41 = 2 Then
         ElseIf _Prog41 = 3 Then
-        ElseIf _Prog41 = 4 Then
-        ElseIf _Prog41 = 5 Then
             If _Innenbeleuchtung2 > 0 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 1) ' Innenbeleuchtung ein
-            Else
-                _Prog41 = 11
             End If
-            If _Durchsagen = 1 And (_TypL41 = 1 Or _TypL41 = 3 Or _TypL41 = 5) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog41 = 6
-            End If
+        ElseIf _Prog41 = 4 Then
+        ElseIf _Prog41 = 5 Then
         ElseIf _Prog41 = 6 Then
 
             ' Bahnhofsausfahrt
 
         ElseIf _Prog41 = 7 Then
-            If _AkustischeSignale = 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
         ElseIf _Prog41 = 8 Then
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog41 = 9 Then
-            If _Motor > 0 Then
-                Prog_Lok41.Interval = 7000
-            End If
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, 1)
         ElseIf _Prog41 = 10 Then
             Prog_Lok41.Interval = 2000
@@ -14034,13 +14085,27 @@ Public Class Automatikprogramme
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
         ElseIf _Prog41 = 14 Then
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+        ElseIf _Prog41 = 15 Then
+        ElseIf _Prog41 = 16 Then
+        ElseIf _Prog41 = 17 Then
+        ElseIf _Prog41 = 18 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
 
             ' Lok abstellen
 
         ElseIf _Prog41 = 50 Then
             Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 51 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
         ElseIf _Prog41 = 52 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog41 = 53 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -14078,6 +14143,23 @@ Public Class Automatikprogramme
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog41 = 136 Then
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog41 = 137 Then
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 138 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog41 = 139 Then
+        ElseIf _Prog41 = 140 Then
+        ElseIf _Prog41 = 141 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog41 = 142 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
+
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -14096,6 +14178,22 @@ Public Class Automatikprogramme
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog41 = 166 Then
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog41 = 167 Then
+            Prog_Lok41.Interval = 2000
+        ElseIf _Prog41 = 168 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
+        ElseIf _Prog41 = 169 Then
+        ElseIf _Prog41 = 170 Then
+        ElseIf _Prog41 = 171 Then
+            If _Innenbeleuchtung2 < 2 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 0) ' Innenbeleuchtung aus
+            End If
+        ElseIf _Prog41 = 172 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -14129,7 +14227,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
         ElseIf _Prog41 = 208 Then
-            Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 209 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
@@ -14141,26 +14238,21 @@ Public Class Automatikprogramme
             Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 221 Then
         ElseIf _Prog41 = 222 Then
-            If _Dampf < 3 Then
-                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
         ElseIf _Prog41 = 223 Then
+        ElseIf _Prog41 = 224 Then
+        ElseIf _Prog41 = 225 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
 
         ElseIf _Prog41 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 241 Then
-            If _Dampf > 1 Then
-                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            End If
         ElseIf _Prog41 = 242 Then
-            Prog_Lok41.Interval = 1000
         ElseIf _Prog41 = 243 Then
-            If _Motor > 1 Then
-                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
-            End If
+            'If _Motor > 1 Then
+            '    _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            'End If
         ElseIf _Prog41 = 244 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
@@ -14169,17 +14261,14 @@ Public Class Automatikprogramme
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog41 = 246 Then
 
-        ElseIf _Prog41 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog41 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 261 Then
         ElseIf _Prog41 = 262 Then
-        ElseIf _Prog41 = 263 Then
-            If _Dampf < 3 Then
-                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
+            _eb.lokSteuern(41, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog41 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok41.Interval = 1000
+            Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 601 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
@@ -14189,14 +14278,17 @@ Public Class Automatikprogramme
         ElseIf _Prog41 = 603 Then
 
         ElseIf _Prog41 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
-            Prog_Lok41.Interval = 3000
+            Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 621 Then
-            Prog_Lok41.Interval = 1000
         ElseIf _Prog41 = 622 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+            End If
+        ElseIf _Prog41 = 623 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog41 = 623 Then
+        ElseIf _Prog41 = 624 Then
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
         ElseIf _Prog41 = 640 Then ' Kontakt 3.1 <- Talfahrt
@@ -14204,11 +14296,11 @@ Public Class Automatikprogramme
         ElseIf _Prog41 = 641 Then
         ElseIf _Prog41 = 642 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+                _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
 
         ElseIf _Prog41 = 660 Then ' Kontakt 1.2 -> Talfahrt
-            Prog_Lok41.Interval = 4000
+            Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 661 Then
         ElseIf _Prog41 = 662 Then
         ElseIf _Prog41 = 663 Then
@@ -14227,7 +14319,7 @@ Public Class Automatikprogramme
         ElseIf _Prog41 = 666 Then
             _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog41 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog41 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok41.Interval = 2000
         ElseIf _Prog41 = 701 Then
         ElseIf _Prog41 = 702 Then
@@ -14278,7 +14370,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok V160 028
         '*** Datum: 15.10.2023
 
-        SetText(TextBox1, "Diesel-Lok V160 028                                             IBS: 10.12.2025 - V3 : 8")
+        SetText(TextBox1, "Diesel-Lok V160 028                                                     IBS: 10.12.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_160_02.jpg")
         GeschwindikeitenSetzen(42)
 
@@ -14289,8 +14381,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 42 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -14306,8 +14396,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(42, 1)
@@ -14451,7 +14539,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
 
-            'Lok abstellen
+            ' Lok abstellen
 
         ElseIf _Prog42 = 50 Then
             Prog_Lok42.Interval = 2000
@@ -14509,10 +14597,16 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 136 Then
             _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog42 = 137 Then
+            Prog_Lok42.Interval = 2000
+        ElseIf _Prog42 = 138 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
-        ElseIf _Prog42 = 138 Then
+        ElseIf _Prog42 = 139 Then
+        ElseIf _Prog42 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(42, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -14612,11 +14706,11 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
 
-        ElseIf _Prog42 = 260 Then ' Kontakt 3.3 links der Brücke
+        ElseIf _Prog42 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok42.Interval = 2000
         ElseIf _Prog42 = 261 Then
         ElseIf _Prog42 = 262 Then
-        ElseIf _Prog42 = 263 Then
+            _eb.lokSteuern(42, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog42 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok42.Interval = 1000
@@ -14675,7 +14769,7 @@ Public Class Automatikprogramme
         ElseIf _Prog42 = 666 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Funktion1, 0) ' Hupe aus
 
-        ElseIf _Prog42 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog42 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok42.Interval = 3000
         ElseIf _Prog42 = 701 Then
         ElseIf _Prog42 = 702 Then
@@ -14722,11 +14816,11 @@ Public Class Automatikprogramme
     End Sub
     Private Sub HandleTimerElapsed55(sender As System.Object, e As System.EventArgs) Handles Prog_Lok43.Elapsed
 
-        '*** Fahrprogramm für "nicht verwendet"
+        '*** Fahrprogramm für "zweite Adresse für Lok 42"
         '*** Datum: 23.02.2020
 
-        'SetText(TextBox1, "E-Lok CE 6/8 ( IBS nein)")
-        'LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
+        SetText(TextBox1, "Diesel-Lok V160 028                                             zweite Adresse für Lok 42")
+        LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_160_02.jpg")
         GeschwindikeitenSetzen(43)
 
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
@@ -14736,8 +14830,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 43 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -14753,8 +14845,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(43, 1)
@@ -14922,6 +15012,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog43 = 136 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog43 = 137 Then
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -14940,6 +15036,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog43 = 166 Then
             _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog43 = 167 Then
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(43, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -14967,6 +15069,47 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
+
+        ElseIf _Prog43 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 221 Then
+        ElseIf _Prog43 = 222 Then
+
+        ElseIf _Prog43 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 241 Then
+        ElseIf _Prog43 = 242 Then
+
+        ElseIf _Prog43 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 261 Then
+        ElseIf _Prog43 = 262 Then
+            _eb.lokSteuern(43, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+
+        ElseIf _Prog43 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 601 Then
+        ElseIf _Prog43 = 602 Then
+
+        ElseIf _Prog43 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 621 Then
+        ElseIf _Prog43 = 622 Then
+
+        ElseIf _Prog43 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 641 Then
+        ElseIf _Prog43 = 642 Then
+
+        ElseIf _Prog43 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 661 Then
+        ElseIf _Prog43 = 662 Then
+
+        ElseIf _Prog43 = 700 Then ' Kontakt 0.4 <- Diagonale
+            Prog_Lok43.Interval = 2000
+        ElseIf _Prog43 = 701 Then
+        ElseIf _Prog43 = 702 Then
 
             ' Zindelstein
 
@@ -15001,7 +15144,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok 216 090-1
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesel-Lok 216 090-1                                                IBS: 24.11.2023 - V3 : 8")
+        SetText(TextBox1, "Diesel-Lok 216 090-1                                                    IBS: 24.11.2023 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_216_03.jpg")
         GeschwindikeitenSetzen(44)
 
@@ -15012,8 +15155,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 44 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -15029,8 +15170,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(44, 1)
@@ -15201,6 +15340,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog44 = 136 Then
             _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog44 = 137 Then
+            Prog_Lok44.Interval = 2000
+        ElseIf _Prog44 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(44, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -15219,6 +15364,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog44 = 166 Then
             _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog44 = 167 Then
+            Prog_Lok44.Interval = 2000
+        ElseIf _Prog44 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(44, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -15261,26 +15412,32 @@ Public Class Automatikprogramme
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 261 Then
         ElseIf _Prog44 = 262 Then
+            _eb.lokSteuern(44, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog44 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 601 Then
+        ElseIf _Prog44 = 602 Then
 
         ElseIf _Prog44 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 621 Then
+        ElseIf _Prog44 = 622 Then
 
         ElseIf _Prog44 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 641 Then
+        ElseIf _Prog44 = 642 Then
 
         ElseIf _Prog44 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 661 Then
+        ElseIf _Prog44 = 662 Then
 
-        ElseIf _Prog44 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog44 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok44.Interval = 2000
         ElseIf _Prog44 = 701 Then
+        ElseIf _Prog44 = 702 Then
 
             ' Zindelstein
 
@@ -15315,7 +15472,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok 212 215-8
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesel-Lok 212 215-8                                            IBS: 02.04.2021 - V3 : 10")
+        SetText(TextBox1, "Diesel-Lok 212 215-8                                                    IBS: 02.04.2021 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_212_10.jpg")
         GeschwindikeitenSetzen(45)
 
@@ -15326,8 +15483,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 45 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -15343,8 +15498,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(45, 1)
@@ -15515,6 +15668,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog45 = 136 Then
             _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog45 = 137 Then
+            Prog_Lok45.Interval = 2000
+        ElseIf _Prog45 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(45, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -15533,6 +15692,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog45 = 166 Then
             _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog45 = 167 Then
+            Prog_Lok45.Interval = 2000
+        ElseIf _Prog45 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(45, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -15569,30 +15734,38 @@ Public Class Automatikprogramme
         ElseIf _Prog45 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 241 Then
+        ElseIf _Prog45 = 242 Then
 
         ElseIf _Prog45 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 261 Then
+        ElseIf _Prog45 = 262 Then
+            _eb.lokSteuern(45, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog45 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 601 Then
+        ElseIf _Prog45 = 602 Then
 
         ElseIf _Prog45 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 621 Then
+        ElseIf _Prog45 = 622 Then
 
         ElseIf _Prog45 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 641 Then
+        ElseIf _Prog45 = 642 Then
 
         ElseIf _Prog45 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 661 Then
+        ElseIf _Prog45 = 662 Then
 
-        ElseIf _Prog45 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog45 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok45.Interval = 2000
         ElseIf _Prog45 = 701 Then
+        ElseIf _Prog45 = 702 Then
 
             ' Zindelstein
 
@@ -15627,7 +15800,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok V200 056
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesel-Lok V200 056                                        IBS: 25.01.2022 V1: 6 - V3: 9")
+        SetText(TextBox1, "Diesel-Lok V200 056                                                     IBS: 25.01.2022 V1: 6 - V3: 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_V200_01.jpg")
         GeschwindikeitenSetzen(46)
 
@@ -15638,8 +15811,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 46 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -15655,8 +15826,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(46, 1)
@@ -15793,7 +15962,6 @@ Public Class Automatikprogramme
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(46, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
-            Prog_Lok46.Interval = 200
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
 
@@ -15828,6 +15996,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog46 = 136 Then
             _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog46 = 137 Then
+            Prog_Lok46.Interval = 2000
+        ElseIf _Prog46 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(46, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -15846,6 +16020,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog46 = 166 Then
             _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog46 = 167 Then
+            Prog_Lok46.Interval = 2000
+        ElseIf _Prog46 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(46, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -15877,34 +16057,43 @@ Public Class Automatikprogramme
         ElseIf _Prog46 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 221 Then
+        ElseIf _Prog46 = 222 Then
 
         ElseIf _Prog46 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 241 Then
+        ElseIf _Prog46 = 242 Then
 
         ElseIf _Prog46 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 261 Then
+        ElseIf _Prog46 = 262 Then
+            _eb.lokSteuern(46, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog46 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 601 Then
+        ElseIf _Prog46 = 602 Then
 
         ElseIf _Prog46 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 621 Then
+        ElseIf _Prog46 = 622 Then
 
         ElseIf _Prog46 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 641 Then
+        ElseIf _Prog46 = 642 Then
 
         ElseIf _Prog46 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 661 Then
+        ElseIf _Prog46 = 662 Then
 
-        ElseIf _Prog46 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog46 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok46.Interval = 2000
         ElseIf _Prog46 = 701 Then
+        ElseIf _Prog46 = 702 Then
 
             ' Zindelstein
 
@@ -15939,7 +16128,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesellok 220 007-9
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesellok 220 007-9                                                   04.02.2021 - V3 : 8")
+        SetText(TextBox1, "Diesellok 220 007-9                                                     IBS: 04.02.2021 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_V200_02.jpg")
         GeschwindikeitenSetzen(47)
 
@@ -15950,8 +16139,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 47 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -15967,8 +16154,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(47, 1)
@@ -16139,6 +16324,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog47 = 136 Then
             _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog47 = 137 Then
+            Prog_Lok47.Interval = 2000
+        ElseIf _Prog47 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(47, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -16157,6 +16348,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog47 = 166 Then
             _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog47 = 167 Then
+            Prog_Lok47.Interval = 2000
+        ElseIf _Prog47 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(47, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -16188,34 +16385,43 @@ Public Class Automatikprogramme
         ElseIf _Prog47 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 221 Then
+        ElseIf _Prog47 = 222 Then
 
         ElseIf _Prog47 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 241 Then
+        ElseIf _Prog47 = 242 Then
 
         ElseIf _Prog47 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 261 Then
+        ElseIf _Prog47 = 262 Then
+            _eb.lokSteuern(47, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog47 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 601 Then
+        ElseIf _Prog47 = 602 Then
 
         ElseIf _Prog47 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 621 Then
+        ElseIf _Prog47 = 622 Then
 
         ElseIf _Prog47 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 641 Then
+        ElseIf _Prog47 = 642 Then
 
         ElseIf _Prog47 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 661 Then
+        ElseIf _Prog47 = 662 Then
 
-        ElseIf _Prog47 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog47 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok47.Interval = 2000
         ElseIf _Prog47 = 701 Then
+        ElseIf _Prog47 = 702 Then
 
             ' Zindelstein
 
@@ -16252,7 +16458,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok F7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesel-Lok F7                                                  IBS: 15.05.2021 - V3 : 7")
+        SetText(TextBox1, "Diesel-Lok F7                                                           IBS: 15.05.2021 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_F7_01.jpg")
         GeschwindikeitenSetzen(48)
 
@@ -16263,8 +16469,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 48 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -16280,8 +16484,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(48, 1)
@@ -16391,11 +16593,6 @@ Public Class Automatikprogramme
         ElseIf _Prog48 = 4 Then
 
         ElseIf _Prog48 = 5 Then
-            If _Durchsagen = 1 And (_TypL48 = 1 Or _TypL48 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog48 = 9
-            End If
         ElseIf _Prog48 = 6 Then
         ElseIf _Prog48 = 7 Then
         ElseIf _Prog48 = 8 Then
@@ -16404,7 +16601,7 @@ Public Class Automatikprogramme
             ' Bahnhofsausfahrt
 
         ElseIf _Prog48 = 10 Then
-            If _AkustischeSignale = 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 1) ' Hupen ein
             End If
         ElseIf _Prog48 = 11 Then
@@ -16437,6 +16634,9 @@ Public Class Automatikprogramme
         ElseIf _Prog48 = 51 Then
             Prog_Lok48.Interval = 2000
         ElseIf _Prog48 = 52 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion1, 0) ' Motor aus
+            End If
         ElseIf _Prog48 = 53 Then
         ElseIf _Prog48 = 54 Then
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion4, 0) ' AnfahrBremsbeschleunigung aus
@@ -16477,6 +16677,17 @@ Public Class Automatikprogramme
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog48 = 136 Then
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog48 = 137 Then
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 138 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
+        ElseIf _Prog48 = 139 Then
+        ElseIf _Prog48 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -16495,6 +16706,17 @@ Public Class Automatikprogramme
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog48 = 166 Then
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog48 = 167 Then
+            Prog_Lok48.Interval = 2000
+        ElseIf _Prog48 = 168 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
+            End If
+        ElseIf _Prog48 = 169 Then
+        ElseIf _Prog48 = 170 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -16540,25 +16762,19 @@ Public Class Automatikprogramme
             Prog_Lok48.Interval = 2000
         ElseIf _Prog48 = 221 Then
         ElseIf _Prog48 = 222 Then
-            If _Dampf < 3 Then
-                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
         ElseIf _Prog48 = 223 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Motor aus
             End If
 
         ElseIf _Prog48 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok48.Interval = 2000
         ElseIf _Prog48 = 241 Then
-            If _Dampf > 1 Then
-                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            End If
         ElseIf _Prog48 = 242 Then
             Prog_Lok48.Interval = 1000
         ElseIf _Prog48 = 243 Then
             If _Motor > 1 Then
-                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
         ElseIf _Prog48 = 244 Then
             If _AkustischeSignale > 1 Then
@@ -16567,13 +16783,17 @@ Public Class Automatikprogramme
         ElseIf _Prog48 = 245 Then
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog48 = 246 Then
+        ElseIf _Prog48 = 247 Then
+        ElseIf _Prog48 = 248 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
+            End If
 
         ElseIf _Prog48 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok48.Interval = 2000
         ElseIf _Prog48 = 261 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
-            End If
+        ElseIf _Prog48 = 262 Then
+            _eb.lokSteuern(48, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog48 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok48.Interval = 2000
@@ -16636,7 +16856,7 @@ Public Class Automatikprogramme
         ElseIf _Prog48 = 671 Then
             _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
-        ElseIf _Prog48 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog48 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok48.Interval = 2000
         ElseIf _Prog48 = 701 Then
         ElseIf _Prog48 = 702 Then
@@ -16686,7 +16906,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok 212 276-0
         '*** Datum: 20.12.2020
 
-        SetText(TextBox1, "Diesel-Lok 212 276-0                                            IBS: 10.09.2025 - V3 : 9")
+        SetText(TextBox1, "Diesel-Lok 212 276-0                                                    IBS: 10.09.2025 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_212_01.jpg")
         GeschwindikeitenSetzen(49)
 
@@ -16697,8 +16917,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 49 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -16714,8 +16932,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(49, 1)
@@ -16846,7 +17062,6 @@ Public Class Automatikprogramme
 
             ' Lok abstellen
 
-        ElseIf _Prog49 = 49 Then
         ElseIf _Prog49 = 50 Then
             Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 51 Then
@@ -16888,6 +17103,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog49 = 136 Then
             _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog49 = 137 Then
+            Prog_Lok49.Interval = 2000
+        ElseIf _Prog49 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(49, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -16906,6 +17127,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog49 = 166 Then
             _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog49 = 167 Then
+            Prog_Lok49.Interval = 2000
+        ElseIf _Prog49 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(49, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -16944,10 +17171,11 @@ Public Class Automatikprogramme
         ElseIf _Prog49 = 241 Then
         ElseIf _Prog49 = 242 Then
 
-        ElseIf _Prog49 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog49 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 261 Then
         ElseIf _Prog49 = 262 Then
+            _eb.lokSteuern(49, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog49 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok49.Interval = 2000
@@ -16969,7 +17197,7 @@ Public Class Automatikprogramme
         ElseIf _Prog49 = 661 Then
         ElseIf _Prog49 = 662 Then
 
-        ElseIf _Prog49 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog49 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok49.Interval = 2000
         ElseIf _Prog49 = 701 Then
         ElseIf _Prog49 = 702 Then
@@ -17008,7 +17236,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "nicht verwendet"
         '*** Datum: 23.02.2020
 
-        'SetText(TextBox1, "E-Lok CE 6/8 ( IBS nein)")
+        'SetText(TextBox1, "E-Lok CE 6/8                                                           IBS: nein")
         'LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
         GeschwindikeitenSetzen(50)
 
@@ -17019,8 +17247,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 50 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -17036,8 +17262,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(50, 1)
@@ -17206,6 +17430,12 @@ Public Class Automatikprogramme
             Prog_Lok50.Interval = 1000
         ElseIf _Prog50 = 136 Then
             _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog50 = 137 Then
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(50, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -17224,6 +17454,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog50 = 166 Then
             _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog50 = 167 Then
+            Prog_Lok50.Interval = 2000
+        ElseIf _Prog50 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(50, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -17262,10 +17498,11 @@ Public Class Automatikprogramme
         ElseIf _Prog50 = 241 Then
         ElseIf _Prog50 = 242 Then
 
-        ElseIf _Prog50 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog50 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok50.Interval = 2000
         ElseIf _Prog50 = 261 Then
         ElseIf _Prog50 = 262 Then
+            _eb.lokSteuern(50, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog50 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok50.Interval = 2000
@@ -17287,7 +17524,7 @@ Public Class Automatikprogramme
         ElseIf _Prog50 = 661 Then
         ElseIf _Prog50 = 662 Then
 
-        ElseIf _Prog50 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog50 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok50.Interval = 2000
         ElseIf _Prog50 = 701 Then
         ElseIf _Prog50 = 702 Then
@@ -17325,7 +17562,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "nicht verwendet"
         '*** Datum: 23.02.2020
 
-        'SetText(TextBox1, "E-Lok CE 6/8 ( IBS nein)")
+        'SetText(TextBox1, "E-Lok CE 6/8                                                                  IBS: nein")
         'LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
         GeschwindikeitenSetzen(50)
 
@@ -17336,8 +17573,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 50 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -17353,8 +17588,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(51, 1)
@@ -17522,6 +17755,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog51 = 136 Then
             _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog51 = 137 Then
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(51, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -17540,6 +17779,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog51 = 166 Then
             _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog51 = 167 Then
+            Prog_Lok51.Interval = 2000
+        ElseIf _Prog51 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(51, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -17578,10 +17823,11 @@ Public Class Automatikprogramme
         ElseIf _Prog51 = 241 Then
         ElseIf _Prog51 = 242 Then
 
-        ElseIf _Prog51 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog51 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok51.Interval = 2000
         ElseIf _Prog51 = 261 Then
         ElseIf _Prog51 = 262 Then
+            _eb.lokSteuern(51, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog51 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok51.Interval = 2000
@@ -17603,7 +17849,7 @@ Public Class Automatikprogramme
         ElseIf _Prog51 = 661 Then
         ElseIf _Prog51 = 662 Then
 
-        ElseIf _Prog51 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog51 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok51.Interval = 2000
         ElseIf _Prog51 = 701 Then
         ElseIf _Prog51 = 702 Then
@@ -17641,7 +17887,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "nicht verwendet"
         '*** Datum: 23.02.2020
 
-        'SetText(TextBox1, "E-Lok CE 6/8 ( IBS nein)")
+        'SetText(TextBox1, "E-Lok CE 6/8                                                               IBS: nein")
         'LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
         GeschwindikeitenSetzen(52)
 
@@ -17652,8 +17898,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 52 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -17669,8 +17913,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(52, 1)
@@ -17838,6 +18080,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog52 = 136 Then
             _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog52 = 137 Then
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(52, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -17856,6 +18104,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog52 = 166 Then
             _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog52 = 167 Then
+            Prog_Lok52.Interval = 2000
+        ElseIf _Prog52 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(52, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -17894,7 +18148,7 @@ Public Class Automatikprogramme
         ElseIf _Prog52 = 241 Then
         ElseIf _Prog52 = 242 Then
 
-        ElseIf _Prog52 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog52 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok52.Interval = 2000
         ElseIf _Prog52 = 261 Then
         ElseIf _Prog52 = 262 Then
@@ -17903,6 +18157,7 @@ Public Class Automatikprogramme
             Prog_Lok52.Interval = 2000
         ElseIf _Prog52 = 601 Then
         ElseIf _Prog52 = 602 Then
+            _eb.lokSteuern(52, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog52 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok52.Interval = 2000
@@ -17919,7 +18174,7 @@ Public Class Automatikprogramme
         ElseIf _Prog52 = 661 Then
         ElseIf _Prog52 = 662 Then
 
-        ElseIf _Prog52 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog52 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok52.Interval = 2000
         ElseIf _Prog52 = 701 Then
         ElseIf _Prog52 = 702 Then
@@ -17957,7 +18212,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm "nicht verwendet"
         '*** Datum: 23.02.2020
 
-        'SetText(TextBox1, "E-Lok CE 6/8 ( IBS nein)")
+        'SetText(TextBox1, "E-Lok CE 6/8                                                         IBS: nein")
         'LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
         GeschwindikeitenSetzen(53)
 
@@ -17968,8 +18223,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 53 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -17985,8 +18238,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(53, 1)
@@ -18154,6 +18405,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog53 = 136 Then
             _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog53 = 137 Then
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(53, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -18172,6 +18429,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog53 = 166 Then
             _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog53 = 167 Then
+            Prog_Lok53.Interval = 2000
+        ElseIf _Prog53 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(53, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -18210,10 +18473,11 @@ Public Class Automatikprogramme
         ElseIf _Prog53 = 241 Then
         ElseIf _Prog53 = 242 Then
 
-        ElseIf _Prog53 = 260 Then ' Kontakt 3.3
+        ElseIf _Prog53 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok53.Interval = 2000
         ElseIf _Prog53 = 261 Then
         ElseIf _Prog53 = 262 Then
+            _eb.lokSteuern(53, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog53 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok53.Interval = 2000
@@ -18235,7 +18499,7 @@ Public Class Automatikprogramme
         ElseIf _Prog53 = 661 Then
         ElseIf _Prog53 = 662 Then
 
-        ElseIf _Prog53 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog53 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok53.Interval = 2000
         ElseIf _Prog53 = 701 Then
         ElseIf _Prog53 = 702 Then
@@ -18273,7 +18537,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm Triebwagen 133 009
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Triebwagen 133 009 ( IBS nein)")
+        SetText(TextBox1, "Triebwagen 133 009                                                      IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_133_04.jpg")
         GeschwindikeitenSetzen(54)
 
@@ -18284,8 +18548,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 54 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -18301,8 +18563,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(54, 1)
@@ -18431,7 +18691,7 @@ Public Class Automatikprogramme
 
         ElseIf _Prog54 = 50 Then
             Prog_Lok54.Interval = 2000
-        ElseIf _Prog54 = 51 Then
+        ElseIf _Prog54 = 51 Then ' *** Lok hat keine Lichtfunktion
         ElseIf _Prog54 = 52 Then
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
@@ -18467,6 +18727,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog54 = 136 Then
             _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog54 = 137 Then
+            Prog_Lok54.Interval = 2000
+        ElseIf _Prog54 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(54, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -18485,6 +18751,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog54 = 166 Then
             _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog54 = 167 Then
+            Prog_Lok54.Interval = 2000
+        ElseIf _Prog54 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(54, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -18526,26 +18798,33 @@ Public Class Automatikprogramme
         ElseIf _Prog54 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 261 Then
+        ElseIf _Prog54 = 262 Then
+            _eb.lokSteuern(54, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog54 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 601 Then
+        ElseIf _Prog54 = 602 Then
 
         ElseIf _Prog54 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 621 Then
+        ElseIf _Prog54 = 622 Then
 
         ElseIf _Prog54 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 641 Then
+        ElseIf _Prog54 = 642 Then
 
         ElseIf _Prog54 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 661 Then
+        ElseIf _Prog54 = 662 Then
 
-        ElseIf _Prog54 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog54 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 701 Then
+        ElseIf _Prog54 = 702 Then
 
             ' Zindelstein
 
@@ -18580,7 +18859,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Diesel-Lok 260 787-7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Diesel-Lok 260 787-7                                           IBS: 24.05.2021 - V3 : 12")
+        SetText(TextBox1, "Diesel-Lok 260 787-7                                                    IBS: 24.05.2021 - V3 : 12")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_260_01.jpg")
         GeschwindikeitenSetzen(55)
 
@@ -18591,8 +18870,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 55 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -18608,8 +18885,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(55, 1)
@@ -18708,11 +18983,6 @@ Public Class Automatikprogramme
         If _Prog55 = 0 Then
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 1 Then
-            If _Durchsagen = 1 And (_TypL55 = 1 Or _TypL55 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog55 = 6
-            End If
         ElseIf _Prog55 = 2 Then
         ElseIf _Prog55 = 3 Then
         ElseIf _Prog55 = 4 Then
@@ -18738,11 +19008,8 @@ Public Class Automatikprogramme
 
         ElseIf _Prog55 = 50 Then
             Prog_Lok55.Interval = 2000
-        ElseIf _Prog55 = 51 Then
+        ElseIf _Prog55 = 51 Then ' *** Lok hat keine Lichtfunktion
         ElseIf _Prog55 = 52 Then
-            'If _Fahrzeugbeleuchtung2 < 2 Then
-            '    _eb.lokSteuern(55, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
-            'End If
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
 
@@ -18777,6 +19044,9 @@ Public Class Automatikprogramme
             _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog55 = 136 Then
             _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog55 = 137 Then
+            Prog_Lok55.Interval = 2000
+        ElseIf _Prog55 = 138 Then
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -18795,6 +19065,9 @@ Public Class Automatikprogramme
             _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog55 = 166 Then
             _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog55 = 167 Then
+            Prog_Lok55.Interval = 2000
+        ElseIf _Prog55 = 168 Then
 
             ' Rangierzug
 
@@ -18836,26 +19109,33 @@ Public Class Automatikprogramme
         ElseIf _Prog55 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 261 Then
+        ElseIf _Prog55 = 262 Then
+            _eb.lokSteuern(55, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog55 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 601 Then
+        ElseIf _Prog55 = 602 Then
 
         ElseIf _Prog55 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 621 Then
+        ElseIf _Prog55 = 622 Then
 
         ElseIf _Prog55 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 641 Then
+        ElseIf _Prog55 = 642 Then
 
         ElseIf _Prog55 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 661 Then
+        ElseIf _Prog55 = 662 Then
 
-        ElseIf _Prog55 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog55 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 701 Then
+        ElseIf _Prog55 = 702 Then
 
             ' Zindelstein
 
@@ -18892,7 +19172,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok Limmat
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflokomotive Limmat ( IBS nein)")
+        SetText(TextBox1, "Dampflokomotive Limmat                                                  IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Limmat_01.jpg")
         GeschwindikeitenSetzen(56)
 
@@ -18903,8 +19183,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 56 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -18920,8 +19198,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(56, 1)
@@ -19050,7 +19326,7 @@ Public Class Automatikprogramme
 
         ElseIf _Prog56 = 50 Then
             Prog_Lok56.Interval = 2000
-        ElseIf _Prog56 = 51 Then
+        ElseIf _Prog56 = 51 Then ' *** Lok hat keine Lichtfunktion
         ElseIf _Prog56 = 52 Then
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
@@ -19086,6 +19362,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog56 = 136 Then
             _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog56 = 137 Then
+            Prog_Lok56.Interval = 2000
+        ElseIf _Prog56 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(56, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -19104,6 +19386,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog56 = 166 Then
             _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog56 = 167 Then
+            Prog_Lok56.Interval = 2000
+        ElseIf _Prog56 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(56, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -19135,34 +19423,43 @@ Public Class Automatikprogramme
         ElseIf _Prog56 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 221 Then
+        ElseIf _Prog56 = 222 Then
 
         ElseIf _Prog56 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 241 Then
+        ElseIf _Prog56 = 242 Then
 
         ElseIf _Prog56 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 261 Then
+        ElseIf _Prog56 = 262 Then
+            _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog56 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 601 Then
+        ElseIf _Prog56 = 602 Then
 
         ElseIf _Prog56 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 621 Then
+        ElseIf _Prog56 = 622 Then
 
         ElseIf _Prog56 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 641 Then
+        ElseIf _Prog56 = 642 Then
 
         ElseIf _Prog56 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 661 Then
+        ElseIf _Prog56 = 662 Then
 
-        ElseIf _Prog56 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog56 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 701 Then
+        ElseIf _Prog56 = 702 Then
 
             ' Zindelstein
 
@@ -19197,7 +19494,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für bayerische Gattung B VI
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "bayerische B VI ( IBS 16.09.2025)")
+        SetText(TextBox1, "bayerische B VI                                                         IBS: 16.09.2025")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_BVI_10.jpg")
         GeschwindikeitenSetzen(57)
 
@@ -19208,8 +19505,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 57 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -19225,8 +19520,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(57, 1)
@@ -19398,6 +19691,7 @@ Public Class Automatikprogramme
         ElseIf _Prog57 = 136 Then
             _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog57 = 137 Then
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 138 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(57, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
@@ -19421,6 +19715,7 @@ Public Class Automatikprogramme
         ElseIf _Prog57 = 166 Then
             _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog57 = 167 Then
+            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 168 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(57, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
@@ -19456,34 +19751,43 @@ Public Class Automatikprogramme
         ElseIf _Prog57 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 221 Then
+        ElseIf _Prog57 = 222 Then
 
         ElseIf _Prog57 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 241 Then
+        ElseIf _Prog57 = 242 Then
 
         ElseIf _Prog57 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 261 Then
+        ElseIf _Prog57 = 262 Then
+            _eb.lokSteuern(57, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog57 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 601 Then
+        ElseIf _Prog57 = 602 Then
 
         ElseIf _Prog57 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 621 Then
+        ElseIf _Prog57 = 622 Then
 
         ElseIf _Prog57 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 641 Then
+        ElseIf _Prog57 = 642 Then
 
         ElseIf _Prog57 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 661 Then
+        ElseIf _Prog57 = 662 Then
 
-        ElseIf _Prog57 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog57 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 701 Then
+        ElseIf _Prog57 = 702 Then
 
             ' Zindelstein
 
@@ -19518,7 +19822,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für bayerische Gattung B VI
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "bayerische B VI ( IBS 16.09.2025)")
+        SetText(TextBox1, "bayerische B VI                                                         IBS: 16.09.2025")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_BVI_01.jpg")
         GeschwindikeitenSetzen(58)
 
@@ -19529,8 +19833,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 58 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -19546,8 +19848,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(58, 1)
@@ -19805,34 +20105,43 @@ Public Class Automatikprogramme
         ElseIf _Prog58 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 221 Then
+        ElseIf _Prog58 = 222 Then
 
         ElseIf _Prog58 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 241 Then
+        ElseIf _Prog58 = 242 Then
 
         ElseIf _Prog58 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 261 Then
+        ElseIf _Prog58 = 262 Then
+            _eb.lokSteuern(58, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog58 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 601 Then
+        ElseIf _Prog58 = 602 Then
 
         ElseIf _Prog58 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 621 Then
+        ElseIf _Prog58 = 622 Then
 
         ElseIf _Prog58 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 641 Then
+        ElseIf _Prog58 = 642 Then
 
         ElseIf _Prog58 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 661 Then
+        ElseIf _Prog58 = 662 Then
 
-        ElseIf _Prog58 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog58 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok58.Interval = 2000
         ElseIf _Prog58 = 701 Then
+        ElseIf _Prog58 = 702 Then
 
             ' Zindelstein
 
@@ -19867,7 +20176,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für "Glaskasten" 4541
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok Glaskasten 4541 ( IBS 20.09.2025)")
+        SetText(TextBox1, "Dampflok Glaskasten 4541                                                IBS: 20.09.2025 V3: ")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Glas_01.jpg")
         GeschwindikeitenSetzen(59)
 
@@ -19878,10 +20187,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 59 + 4
-
-        '*** Fahrstufe 3: x
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -19897,8 +20202,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(59, 1)
@@ -20000,11 +20303,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(59, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog59 = 1 Then
-            If _Durchsagen = 1 And (_TypL59 = 1 Or _TypL59 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog59 = 5
-            End If
         ElseIf _Prog59 = 2 Then
         ElseIf _Prog59 = 3 Then
         ElseIf _Prog59 = 4 Then
@@ -20069,6 +20367,7 @@ Public Class Automatikprogramme
         ElseIf _Prog59 = 136 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog59 = 137 Then
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 138 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(59, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
@@ -20092,6 +20391,7 @@ Public Class Automatikprogramme
         ElseIf _Prog59 = 166 Then
             _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog59 = 167 Then
+            Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 168 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(59, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
@@ -20127,34 +20427,43 @@ Public Class Automatikprogramme
         ElseIf _Prog59 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 221 Then
+        ElseIf _Prog59 = 222 Then
 
         ElseIf _Prog59 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 241 Then
+        ElseIf _Prog59 = 242 Then
 
         ElseIf _Prog59 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 261 Then
+        ElseIf _Prog59 = 262 Then
+            _eb.lokSteuern(59, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog59 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 601 Then
+        ElseIf _Prog59 = 602 Then
 
         ElseIf _Prog59 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 621 Then
+        ElseIf _Prog59 = 622 Then
 
         ElseIf _Prog59 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 641 Then
+        ElseIf _Prog59 = 642 Then
 
         ElseIf _Prog59 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 661 Then
+        ElseIf _Prog59 = 662 Then
 
-        ElseIf _Prog59 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog59 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok59.Interval = 2000
         ElseIf _Prog59 = 701 Then
+        ElseIf _Prog59 = 702 Then
 
             ' Zindelstein
 
@@ -20189,7 +20498,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Schienenbus 798 716-7
         '*** Datum: 17.07.2020
 
-        SetText(TextBox1, "Schienenbus 798 716-7                                          IBS: 11.10.2021 - V3 : 9")
+        SetText(TextBox1, "Schienenbus 798 716-7                                                   IBS: 11.10.2021 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_798_02.jpg")
         GeschwindikeitenSetzen(60)
 
@@ -20200,8 +20509,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 60 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -20217,8 +20524,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(60, 1)
@@ -20543,9 +20848,8 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok60.Interval = 2000
         ElseIf _Prog60 = 261 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
-            End If
+        ElseIf _Prog60 = 262 Then
+            _eb.lokSteuern(60, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog60 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok60.Interval = 2000
@@ -20609,7 +20913,7 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 671 Then
             _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
-        ElseIf _Prog60 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog60 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok60.Interval = 2000
         ElseIf _Prog60 = 701 Then
         ElseIf _Prog60 = 702 Then
@@ -20663,7 +20967,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Schienenbus 795 299-7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Schienenbus 795 299-7 ( IBS nein)")
+        SetText(TextBox1, "Schienenbus 795 299-7                                                   IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_798_12.jpg")
         GeschwindikeitenSetzen(61)
 
@@ -20674,8 +20978,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 61 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -20691,8 +20993,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(61, 1)
@@ -20860,6 +21160,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog61 = 136 Then
             _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog61 = 137 Then
+            Prog_Lok61.Interval = 2000
+        ElseIf _Prog61 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(61, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -20878,6 +21184,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog61 = 166 Then
             _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog61 = 167 Then
+            Prog_Lok61.Interval = 2000
+        ElseIf _Prog61 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(61, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -20909,34 +21221,43 @@ Public Class Automatikprogramme
         ElseIf _Prog61 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 221 Then
+        ElseIf _Prog61 = 222 Then
 
         ElseIf _Prog61 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 241 Then
+        ElseIf _Prog61 = 242 Then
 
         ElseIf _Prog61 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 261 Then
+        ElseIf _Prog61 = 262 Then
+            _eb.lokSteuern(61, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog61 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 601 Then
+        ElseIf _Prog61 = 602 Then
 
         ElseIf _Prog61 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 621 Then
+        ElseIf _Prog61 = 622 Then
 
         ElseIf _Prog61 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 641 Then
+        ElseIf _Prog61 = 642 Then
 
         ElseIf _Prog61 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 661 Then
+        ElseIf _Prog61 = 662 Then
 
-        ElseIf _Prog61 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog61 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 701 Then
+        ElseIf _Prog61 = 702 Then
 
             ' Zindelstein
 
@@ -20971,7 +21292,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Schienenzeppelin
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Schienenzeppelin ( IBS nein)")
+        SetText(TextBox1, "Schienenzeppelin                                                        IBS: nein)")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Schienenzeppelin_01.jpg")
         GeschwindikeitenSetzen(62)
 
@@ -20982,8 +21303,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 62 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -20999,8 +21318,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(62, 1)
@@ -21168,6 +21485,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog62 = 136 Then
             _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog62 = 137 Then
+            Prog_Lok62.Interval = 2000
+        ElseIf _Prog62 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(62, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -21186,6 +21509,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog62 = 166 Then
             _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog62 = 167 Then
+            Prog_Lok62.Interval = 2000
+        ElseIf _Prog62 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(62, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -21217,34 +21546,43 @@ Public Class Automatikprogramme
         ElseIf _Prog62 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 221 Then
+        ElseIf _Prog62 = 222 Then
 
         ElseIf _Prog62 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 241 Then
+        ElseIf _Prog62 = 242 Then
 
         ElseIf _Prog62 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 261 Then
+        ElseIf _Prog62 = 262 Then
+            _eb.lokSteuern(62, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog62 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 601 Then
+        ElseIf _Prog62 = 602 Then
 
         ElseIf _Prog62 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 621 Then
+        ElseIf _Prog62 = 622 Then
 
         ElseIf _Prog62 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 641 Then
+        ElseIf _Prog62 = 642 Then
 
         ElseIf _Prog62 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 661 Then
+        ElseIf _Prog62 = 662 Then
 
-        ElseIf _Prog62 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog62 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 701 Then
+        ElseIf _Prog62 = 702 Then
 
             ' Zindelstein
 
@@ -21279,7 +21617,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm Fahrprogramm für Dampflok 80 030
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Damf-Lok 80 030                                               IBS: 30.04.2021 - V3 : 7")
+        SetText(TextBox1, "Damf-Lok 80 030                                                         IBS: 30.04.2021 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_80_02.jpg")
         GeschwindikeitenSetzen(63)
 
@@ -21290,8 +21628,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 63 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -21307,8 +21643,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(63, 1)
@@ -21480,6 +21814,8 @@ Public Class Automatikprogramme
         ElseIf _Prog63 = 136 Then
             _eb.lokSteuern(63, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog63 = 137 Then
+            Prog_Lok63.Interval = 2000
+        ElseIf _Prog63 = 138 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(63, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -21502,6 +21838,8 @@ Public Class Automatikprogramme
         ElseIf _Prog63 = 166 Then
             _eb.lokSteuern(63, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog63 = 167 Then
+            Prog_Lok63.Interval = 2000
+        ElseIf _Prog63 = 168 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
                 _eb.lokSteuern(63, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
@@ -21536,34 +21874,43 @@ Public Class Automatikprogramme
         ElseIf _Prog63 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 221 Then
+        ElseIf _Prog63 = 222 Then
 
         ElseIf _Prog63 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 241 Then
+        ElseIf _Prog63 = 242 Then
 
         ElseIf _Prog63 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 261 Then
+        ElseIf _Prog63 = 262 Then
+            _eb.lokSteuern(63, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog63 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 601 Then
+        ElseIf _Prog63 = 602 Then
 
         ElseIf _Prog63 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 621 Then
+        ElseIf _Prog63 = 622 Then
 
         ElseIf _Prog63 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 641 Then
+        ElseIf _Prog63 = 642 Then
 
         ElseIf _Prog63 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 661 Then
+        ElseIf _Prog63 = 662 Then
 
-        ElseIf _Prog63 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog63 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok63.Interval = 2000
         ElseIf _Prog63 = 701 Then
+        ElseIf _Prog63 = 702 Then
 
             ' Zindelstein
 
@@ -21598,7 +21945,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Triebwagen 628 203-2
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Triebwagen 628 203-2 ( IBS nein)")
+        SetText(TextBox1, "Triebwagen 628 203-2                                                    IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_628_01.jpg")
         GeschwindikeitenSetzen(64)
 
@@ -21609,8 +21956,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 64 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -21626,8 +21971,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(64, 1)
@@ -21758,7 +22101,6 @@ Public Class Automatikprogramme
 
             ' Lok abstellen
 
-        ElseIf _Prog64 = 49 Then
         ElseIf _Prog64 = 50 Then
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 51 Then
@@ -21801,6 +22143,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog64 = 136 Then
             _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog64 = 137 Then
+            Prog_Lok64.Interval = 2000
+        ElseIf _Prog64 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(64, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -21819,6 +22167,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog64 = 166 Then
             _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog64 = 167 Then
+            Prog_Lok64.Interval = 2000
+        ElseIf _Prog64 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(64, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -21850,34 +22204,43 @@ Public Class Automatikprogramme
         ElseIf _Prog64 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 221 Then
+        ElseIf _Prog64 = 222 Then
 
         ElseIf _Prog64 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 241 Then
+        ElseIf _Prog64 = 242 Then
 
         ElseIf _Prog64 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 261 Then
+        ElseIf _Prog64 = 262 Then
+            _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog64 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 601 Then
+        ElseIf _Prog64 = 602 Then
 
         ElseIf _Prog64 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 621 Then
+        ElseIf _Prog64 = 622 Then
 
         ElseIf _Prog64 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 641 Then
+        ElseIf _Prog64 = 642 Then
 
         ElseIf _Prog64 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 661 Then
+        ElseIf _Prog64 = 662 Then
 
-        ElseIf _Prog64 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog64 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok64.Interval = 2000
         ElseIf _Prog64 = 701 Then
+        ElseIf _Prog64 = 702 Then
 
             ' Zindelstein
 
@@ -21912,7 +22275,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Baureihe 89 7314
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "Dampflok 89 7314 ( IBS nein)")
+        SetText(TextBox1, "Dampflok 89 7314                                                        IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_89_01.jpg")
         GeschwindikeitenSetzen(65)
 
@@ -21923,8 +22286,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 65 + 4
-
-        Faktor_Beleuchtung = 110
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -21940,8 +22301,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(65, 1)
@@ -22109,6 +22468,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog65 = 136 Then
             _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog65 = 137 Then
+            Prog_Lok65.Interval = 2000
+        ElseIf _Prog65 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(65, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -22127,6 +22492,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog65 = 166 Then
             _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog65 = 167 Then
+            Prog_Lok65.Interval = 2000
+        ElseIf _Prog65 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(65, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -22168,34 +22539,43 @@ Public Class Automatikprogramme
         ElseIf _Prog65 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 221 Then
+        ElseIf _Prog65 = 222 Then
 
         ElseIf _Prog65 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 241 Then
+        ElseIf _Prog65 = 242 Then
 
         ElseIf _Prog65 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 261 Then
+        ElseIf _Prog65 = 262 Then
+            _eb.lokSteuern(65, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog65 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 601 Then
+        ElseIf _Prog65 = 602 Then
 
         ElseIf _Prog65 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 621 Then
+        ElseIf _Prog65 = 622 Then
 
         ElseIf _Prog65 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 641 Then
+        ElseIf _Prog65 = 642 Then
 
         ElseIf _Prog65 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 661 Then
+        ElseIf _Prog65 = 662 Then
 
-        ElseIf _Prog65 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog65 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 701 Then
+        ElseIf _Prog65 = 702 Then
 
             ' Zindelstein
 
@@ -22230,7 +22610,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 23 003
         '*** Datum: 17.07.2020
 
-        SetText(TextBox1, "Dampf-Lok 23 003                                                IBS: 11.10.2025 - V3 : 8")
+        SetText(TextBox1, "Dampf-Lok 23 003                                                        IBS: 11.10.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_023_03.jpg")
         GeschwindikeitenSetzen(66)
 
@@ -22241,8 +22621,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 66 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -22258,8 +22636,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(66, 1)
@@ -22472,7 +22848,7 @@ Public Class Automatikprogramme
         ElseIf _Prog66 = 136 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog66 = 137 Then
-            Prog_Lok66.Interval = 1000
+            Prog_Lok66.Interval = 2000
             If _Dampf < 3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
@@ -22503,7 +22879,7 @@ Public Class Automatikprogramme
         ElseIf _Prog66 = 166 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog66 = 167 Then
-            Prog_Lok66.Interval = 1000
+            Prog_Lok66.Interval = 2000
             If _Dampf < 3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
@@ -22588,15 +22964,20 @@ Public Class Automatikprogramme
         ElseIf _Prog66 = 245 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog66 = 246 Then
-
-        ElseIf _Prog66 = 260 Then ' Kontakt 3.3
-            Prog_Lok66.Interval = 2000
-        ElseIf _Prog66 = 261 Then
-        ElseIf _Prog66 = 262 Then
-        ElseIf _Prog66 = 263 Then
+        ElseIf _Prog66 = 247 Then
             If _Dampf < 3 Then
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
+        ElseIf _Prog66 = 248 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog66 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
+            Prog_Lok66.Interval = 2000
+        ElseIf _Prog66 = 261 Then
+        ElseIf _Prog66 = 262 Then
+            _eb.lokSteuern(66, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog66 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok66.Interval = 1000
@@ -22639,7 +23020,7 @@ Public Class Automatikprogramme
         ElseIf _Prog66 = 664 Then
             _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog66 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog66 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok66.Interval = 3000
         ElseIf _Prog66 = 701 Then
         ElseIf _Prog66 = 702 Then
@@ -22692,7 +23073,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm Baureihe 38 (382581)
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 38 2581                                                IBS: 10.01.2024 - V3 : 6")
+        SetText(TextBox1, "Dampflok 38 2581                                                        IBS: 10.01.2024 - V3 : 6")
         'PictureBox1.Visible = True
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_38_01.jpg")
         GeschwindikeitenSetzen(67)
@@ -22704,8 +23085,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 67 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -22721,8 +23100,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(67, 1)
@@ -22904,6 +23281,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog67 = 136 Then
             _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog67 = 137 Then
+            Prog_Lok67.Interval = 2000
+        ElseIf _Prog67 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(67, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -22922,6 +23305,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog67 = 166 Then
             _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog67 = 167 Then
+            Prog_Lok67.Interval = 2000
+        ElseIf _Prog67 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(67, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -22966,34 +23355,44 @@ Public Class Automatikprogramme
         ElseIf _Prog67 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 221 Then
+        ElseIf _Prog67 = 222 Then
 
         ElseIf _Prog67 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 241 Then
+        ElseIf _Prog67 = 242 Then
 
         ElseIf _Prog67 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 261 Then
+        ElseIf _Prog67 = 262 Then
+            _eb.lokSteuern(67, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+
 
         ElseIf _Prog67 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 601 Then
+        ElseIf _Prog67 = 602 Then
 
         ElseIf _Prog67 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 621 Then
+        ElseIf _Prog67 = 622 Then
 
         ElseIf _Prog67 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 641 Then
+        ElseIf _Prog67 = 642 Then
 
         ElseIf _Prog67 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 661 Then
+        ElseIf _Prog67 = 662 Then
 
-        ElseIf _Prog67 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog67 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok67.Interval = 2000
         ElseIf _Prog67 = 701 Then
+        ElseIf _Prog67 = 702 Then
 
             ' Zindelstein
 
@@ -23028,7 +23427,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 01 1057
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 01 1057                                          IBS: 06.01.2022 V1: 2 - V3: 8")
+        SetText(TextBox1, "Dampflok 01 1057                                                        IBS: 10.12.2025 - V3: 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_01_01.jpg")
         GeschwindikeitenSetzen(68)
 
@@ -23039,8 +23438,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 68 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -23056,8 +23453,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(68, 1)
@@ -23161,28 +23556,23 @@ Public Class Automatikprogramme
                 End If
             End If
         ElseIf _Prog68 = 1 Then
-            If _Dampf > 0 Then
-                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            End If
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 0) ' Fahrwerkbeleuchtung aus
+        ElseIf _Prog68 = 2 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 1) ' Dampfgeräusch ein
             End If
-        ElseIf _Prog68 = 2 Then
-            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 0) ' Fahrwerkbeleuchtung aus
         ElseIf _Prog68 = 3 Then
-        ElseIf _Prog68 = 4 Then
-            If _Durchsagen = 1 And (_TypL68 = 1 Or _TypL68 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog68 = 6
+            If _Dampf > 0 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
+        ElseIf _Prog68 = 4 Then
         ElseIf _Prog68 = 5 Then
         ElseIf _Prog68 = 6 Then
 
             ' Bahnhofsausfahrt
 
         ElseIf _Prog68 = 7 Then
-            If _AkustischeSignale = 1 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
         ElseIf _Prog68 = 8 Then
@@ -23200,8 +23590,14 @@ Public Class Automatikprogramme
         ElseIf _Prog68 = 14 Then
             _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
         ElseIf _Prog68 = 15 Then
-            If _Dampf = 2 Then
+            If _Dampf < 3 Then
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog68 = 16 Then
+        ElseIf _Prog68 = 17 Then
+        ElseIf _Prog68 = 18 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 0) ' Dampfgeräusch aus
             End If
 
             ' Lok abstellen
@@ -23210,7 +23606,7 @@ Public Class Automatikprogramme
             Prog_Lok68.Interval = 2000
             _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
         ElseIf _Prog68 = 51 Then
-            If _Motor < 2 Then
+            If _Motor < 3 Then
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 0) ' Dampfgeräusch aus
             End If
         ElseIf _Prog68 = 52 Then
@@ -23218,13 +23614,10 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
         ElseIf _Prog68 = 53 Then
-            If _Dampf < 2 Then
-                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
-        ElseIf _Prog68 = 54 Then
-            If _Innenbeleuchtung2 > 0 Then
+            If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 1) ' Fahrwerkbeleuchtung ein
             End If
+        ElseIf _Prog68 = 54 Then
         ElseIf _Prog68 = 55 Then
 
 
@@ -23262,6 +23655,26 @@ Public Class Automatikprogramme
             _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog68 = 136 Then
             _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog68 = 137 Then
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 138 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog68 = 139 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 0) ' Dampfgeräusch aus
+            End If
+        ElseIf _Prog68 = 140 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
+        ElseIf _Prog68 = 141 Then
+            If _Fahrzeugbeleuchtung2 > 0 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 1) ' Fahrwerkbeleuchtung ein
+            End If
+        ElseIf _Prog68 = 142 Then
+
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -23280,6 +23693,25 @@ Public Class Automatikprogramme
             _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog68 = 166 Then
             _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog68 = 167 Then
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 168 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog68 = 169 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 0) ' Dampfgeräusch aus
+            End If
+        ElseIf _Prog68 = 170 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
+        ElseIf _Prog68 = 171 Then
+            If _Fahrzeugbeleuchtung2 > 0 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 1) ' Fahrwerkbeleuchtung ein
+            End If
+        ElseIf _Prog68 = 172 Then
 
             ' Rangierzug
 
@@ -23310,28 +23742,141 @@ Public Class Automatikprogramme
         ElseIf _Prog68 = 206 Then
         ElseIf _Prog68 = 207 Then
             If _Motor > 1 Then
-                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 1) ' Dampfgeräusch ein
             End If
         ElseIf _Prog68 = 208 Then
-            Prog_Lok68.Interval = 2000
+            If _Dampf > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
         ElseIf _Prog68 = 209 Then
             If _AkustischeSignale > 1 Then
-                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
         ElseIf _Prog68 = 210 Then
-            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
         ElseIf _Prog68 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok68.Interval = 2000
         ElseIf _Prog68 = 221 Then
         ElseIf _Prog68 = 222 Then
+        ElseIf _Prog68 = 223 Then
+        ElseIf _Prog68 = 224 Then
+        ElseIf _Prog68 = 225 Then
             If _Dampf < 3 Then
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
-        ElseIf _Prog68 = 223 Then
+        ElseIf _Prog68 = 226 Then
+        ElseIf _Prog68 = 227 Then
+        ElseIf _Prog68 = 228 Then
+        ElseIf _Prog68 = 229 Then
             If _Motor < 3 Then
-                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 0) ' Dampfgeräusch aus
             End If
+
+        ElseIf _Prog68 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 241 Then
+        ElseIf _Prog68 = 242 Then
+        ElseIf _Prog68 = 243 Then
+            If _Dampf > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog68 = 244 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog68 = 245 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog68 = 246 Then
+        ElseIf _Prog68 = 247 Then
+        ElseIf _Prog68 = 248 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+
+        ElseIf _Prog68 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 261 Then
+        ElseIf _Prog68 = 262 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+
+        ElseIf _Prog68 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok68.Interval = 2000
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog68 = 601 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog68 = 602 Then
+        ElseIf _Prog68 = 603 Then
+        ElseIf _Prog68 = 604 Then
+
+        ElseIf _Prog68 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 621 Then
+        ElseIf _Prog68 = 622 Then
+            If _Motor > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog68 = 623 Then
+        ElseIf _Prog68 = 624 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
+            End If
+        ElseIf _Prog68 = 625 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
+
+        ElseIf _Prog68 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 641 Then
+        ElseIf _Prog68 = 642 Then
+        ElseIf _Prog68 = 643 Then
+        ElseIf _Prog68 = 644 Then
+        ElseIf _Prog68 = 645 Then
+        ElseIf _Prog68 = 646 Then
+        ElseIf _Prog68 = 647 Then
+        ElseIf _Prog68 = 648 Then
+            If _Motor < 3 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 0) ' Dampfgeräusch aus
+            End If
+
+        ElseIf _Prog68 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok68.Interval = 2000
+        ElseIf _Prog68 = 661 Then
+        ElseIf _Prog68 = 662 Then
+            If _GlsL68 = 1 Or _GlsL68 = 2 Then
+                If _Motor > 0 Then
+                    _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Dampfgeräusch ein
+                End If
+            End If
+        ElseIf _Prog68 = 663 Then
+            If _GlsL68 = 1 Or _GlsL68 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog68 = 664 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog68 = 700 Then ' Kontakt 0.4 <- Diagonale
+            Prog_Lok68.Interval = 3000
+        ElseIf _Prog68 = 701 Then
+        ElseIf _Prog68 = 702 Then
+            If _Motor > 0 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion4, 1) ' Dampfgeräusch ein
+            End If
+        ElseIf _Prog68 = 703 Then
+            If _Dampf > 0 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog68 = 704 Then
+            Prog_Lok68.Interval = 1000
+        ElseIf _Prog68 = 705 Then
+            If _AkustischeSignale > 0 Then
+                _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog68 = 706 Then
+            _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
 
             ' Zindelstein
@@ -23367,7 +23912,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm Dampflok 55 5555
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 55 5555                                          IBS: 06.01.2022 V1: 2 - V3: 6")
+        SetText(TextBox1, "Dampflok 55 5555                                                        IBS: 06.01.2022 - V3: 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_55_01.jpg")
         GeschwindikeitenSetzen(69)
 
@@ -23378,8 +23923,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 69 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -23395,8 +23938,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(69, 1)
@@ -23504,11 +24045,6 @@ Public Class Automatikprogramme
         ElseIf _Prog69 = 2 Then
         ElseIf _Prog69 = 3 Then
         ElseIf _Prog69 = 4 Then
-            If _Durchsagen = 1 And (_TypL69 = 1 Or _TypL69 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog69 = 7
-            End If
         ElseIf _Prog69 = 5 Then
         ElseIf _Prog69 = 6 Then
         ElseIf _Prog69 = 7 Then
@@ -23578,6 +24114,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog69 = 136 Then
             _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog69 = 137 Then
+            Prog_Lok69.Interval = 2000
+        ElseIf _Prog69 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(69, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -23596,6 +24138,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog69 = 166 Then
             _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog69 = 167 Then
+            Prog_Lok69.Interval = 2000
+        ElseIf _Prog69 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(69, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -23627,34 +24175,43 @@ Public Class Automatikprogramme
         ElseIf _Prog69 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 221 Then
+        ElseIf _Prog69 = 222 Then
 
         ElseIf _Prog69 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 241 Then
+        ElseIf _Prog69 = 242 Then
 
         ElseIf _Prog69 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 261 Then
+        ElseIf _Prog69 = 262 Then
+            _eb.lokSteuern(69, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog69 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 601 Then
+        ElseIf _Prog69 = 602 Then
 
         ElseIf _Prog69 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 621 Then
+        ElseIf _Prog69 = 622 Then
 
         ElseIf _Prog69 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 641 Then
+        ElseIf _Prog69 = 642 Then
 
         ElseIf _Prog69 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 661 Then
+        ElseIf _Prog69 = 662 Then
 
-        ElseIf _Prog69 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog69 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok69.Interval = 2000
         ElseIf _Prog69 = 701 Then
+        ElseIf _Prog69 = 702 Then
 
             ' Zindelstein
 
@@ -23689,7 +24246,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 18 427
         '*** Datum: 11.01.2023
 
-        SetText(TextBox1, "Dampflok 18 427                                                IBS: 11.01.2023 - V3 : 8")
+        SetText(TextBox1, "Dampflok 18 427                                                         IBS: 11.01.2023 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_18_02.jpg")
         GeschwindikeitenSetzen(70)
 
@@ -23697,11 +24254,9 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
-        Dim Index, Fun01, Fun11, Fun21, Fun31 As Integer
+        Dim Index As Integer
         Dim G_200 As Integer
         Index = 70 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -23714,15 +24269,9 @@ Public Class Automatikprogramme
         V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
         V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
         G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
-        Fun01 = Betriebsparameter.GetValue("LokführerAnweisungen", 4, Index)
-        Fun11 = Betriebsparameter.GetValue("LokführerAnweisungen", 9, Index)
-        Fun21 = Betriebsparameter.GetValue("LokführerAnweisungen", 14, Index)
-        Fun31 = Betriebsparameter.GetValue("LokführerAnweisungen", 19, Index)
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(70, 1)
@@ -23820,68 +24369,55 @@ Public Class Automatikprogramme
 
         If _Prog70 = 0 Then
             Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 1 Then
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
+        ElseIf _Prog70 = 2 Then
             If _Dampf > 0 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
-            Else
-                _Prog70 = 6
             End If
-            If _Dampf = 0 Then
-                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            Else
-                _Prog70 = 6
-            End If
-        ElseIf _Prog70 = 1 Then
-        ElseIf _Prog70 = 2 Then
         ElseIf _Prog70 = 3 Then
         ElseIf _Prog70 = 4 Then
         ElseIf _Prog70 = 5 Then
         ElseIf _Prog70 = 6 Then
         ElseIf _Prog70 = 7 Then
-            If _Durchsagen = 1 And (_TypL70 = 1 Or _TypL70 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog70 = 11
-            End If
         ElseIf _Prog70 = 8 Then
-        ElseIf _Prog70 = 9 Then
-        ElseIf _Prog70 = 10 Then
-        ElseIf _Prog70 = 11 Then
 
             ' Bahnhofsausfahrt
 
-        ElseIf _Prog70 = 12 Then
-            If _AkustischeSignale = 1 Then
+        ElseIf _Prog70 = 9 Then
+            If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog70 = 13 Then
+        ElseIf _Prog70 = 10 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
-        ElseIf _Prog70 = 14 Then
+        ElseIf _Prog70 = 11 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1)
-        ElseIf _Prog70 = 15 Then
+        ElseIf _Prog70 = 12 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe11)
-        ElseIf _Prog70 = 16 Then
+        ElseIf _Prog70 = 13 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe12)
-        ElseIf _Prog70 = 17 Then
+        ElseIf _Prog70 = 14 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe13)
-        ElseIf _Prog70 = 18 Then
+        ElseIf _Prog70 = 15 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe14)
-        ElseIf _Prog70 = 19 Then
+        ElseIf _Prog70 = 16 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
-        ElseIf _Prog70 = 20 Then
+        ElseIf _Prog70 = 17 Then
             If _Dampf < 2 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
-
-        ElseIf _Prog70 = 21 Then
+        ElseIf _Prog70 = 18 Then
 
             ' Lok abstellen
 
         ElseIf _Prog70 = 50 Then
             Prog_Lok70.Interval = 2000
         ElseIf _Prog70 = 51 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
         ElseIf _Prog70 = 52 Then
             If _Fahrzeugbeleuchtung2 = 2 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
@@ -23920,6 +24456,16 @@ Public Class Automatikprogramme
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog70 = 136 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog70 = 137 Then
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 138 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog70 = 139 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -23938,6 +24484,16 @@ Public Class Automatikprogramme
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog70 = 166 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog70 = 167 Then
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 168 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+        ElseIf _Prog70 = 169 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -23961,7 +24517,7 @@ Public Class Automatikprogramme
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, G_200)
             Prog_Lok70.Interval = 2000
         ElseIf _Prog70 = 201 Then
-            If _Dampf > 0 Then
+            If _Dampf > 1 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
         ElseIf _Prog70 = 202 Then
@@ -23973,15 +24529,14 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
-        ElseIf _Prog70 = 205 Then
-            If _AkustischeSignale = 1 Then
-                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
-            End If
         ElseIf _Prog70 = 206 Then
         ElseIf _Prog70 = 207 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
+            End If
         ElseIf _Prog70 = 208 Then
-            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 0) ' Läuten aus
         ElseIf _Prog70 = 209 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 0) ' Läuten aus
         ElseIf _Prog70 = 210 Then
 
         ElseIf _Prog70 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
@@ -23992,9 +24547,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
         ElseIf _Prog70 = 223 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
-            End If
 
         ElseIf _Prog70 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok70.Interval = 2000
@@ -24003,11 +24555,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
         ElseIf _Prog70 = 242 Then
-            Prog_Lok70.Interval = 1000
         ElseIf _Prog70 = 243 Then
-            If _Motor > 1 Then
-                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch ein
-            End If
         ElseIf _Prog70 = 244 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
@@ -24015,6 +24563,76 @@ Public Class Automatikprogramme
         ElseIf _Prog70 = 245 Then
             _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog70 = 246 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+            End If
+
+        ElseIf _Prog70 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 261 Then
+        ElseIf _Prog70 = 262 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+
+        ElseIf _Prog70 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
+            Prog_Lok70.Interval = 2000
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog70 = 601 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+        ElseIf _Prog70 = 602 Then
+        ElseIf _Prog70 = 603 Then
+
+        ElseIf _Prog70 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 621 Then
+        ElseIf _Prog70 = 622 Then
+        ElseIf _Prog70 = 623 Then
+        ElseIf _Prog70 = 624 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 1) ' Läuten ein
+            End If
+
+        ElseIf _Prog70 = 640 Then ' Kontakt 3.1 <- Talfahrt
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 641 Then
+        ElseIf _Prog70 = 642 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion4, 0) ' Läuten aus
+
+        ElseIf _Prog70 = 660 Then ' Kontakt 1.2 -> Talfahrt
+            Prog_Lok70.Interval = 2000
+        ElseIf _Prog70 = 661 Then
+        ElseIf _Prog70 = 662 Then
+        ElseIf _Prog70 = 663 Then
+            If _GlsL70 = 1 Or _GlsL70 = 2 Then
+                If _Dampf > 0 Then
+                    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+                End If
+            End If
+        ElseIf _Prog70 = 663 Then
+            If _GlsL70 = 1 Or _GlsL70 = 2 Then
+                If _AkustischeSignale > 0 Then
+                    _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+                End If
+            End If
+        ElseIf _Prog70 = 664 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
+
+        ElseIf _Prog70 = 700 Then ' Kontakt 0.4 <- Diagonale
+            Prog_Lok70.Interval = 3000
+        ElseIf _Prog70 = 701 Then
+        ElseIf _Prog70 = 702 Then
+        ElseIf _Prog70 = 703 Then
+            If _Dampf > 0 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
+            End If
+        ElseIf _Prog70 = 704 Then
+        ElseIf _Prog70 = 705 Then
+            If _AkustischeSignale > 1 Then
+                _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
+            End If
+        ElseIf _Prog70 = 706 Then
+            _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
             ' Zindelstein
 
@@ -24049,7 +24667,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 85 007
         '*** Datum: 08.10.2021
 
-        SetText(TextBox1, "Dampf-Lok 85 007                                               IBS: 10.12.2025 - V3 : 8")
+        SetText(TextBox1, "Dampf-Lok 85 007                                                        IBS: 10.12.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_85_01.jpg")
         GeschwindikeitenSetzen(71)
 
@@ -24060,8 +24678,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 71 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -24077,8 +24693,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(71, 1)
@@ -24198,11 +24812,8 @@ Public Class Automatikprogramme
 
         ElseIf _Prog71 = 50 Then
             Prog_Lok71.Interval = 2000
-        ElseIf _Prog71 = 51 Then
+        ElseIf _Prog71 = 51 Then ' *** Lok hat keine Lichtfunktion
         ElseIf _Prog71 = 52 Then
-            'If _Fahrzeugbeleuchtung2 < 2 Then
-            '    _eb.lokSteuern(71, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
-            'End If
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
 
@@ -24237,6 +24848,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog71 = 136 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog71 = 137 Then
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(71, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -24255,6 +24872,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog71 = 166 Then
             _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog71 = 167 Then
+            Prog_Lok71.Interval = 2000
+        ElseIf _Prog71 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(71, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -24293,10 +24916,11 @@ Public Class Automatikprogramme
         ElseIf _Prog71 = 241 Then
         ElseIf _Prog71 = 242 Then
 
-        ElseIf _Prog71 = 260 Then ' Kontakt 3.3 links der Brücke
+        ElseIf _Prog71 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok71.Interval = 2000
         ElseIf _Prog71 = 261 Then
         ElseIf _Prog71 = 262 Then
+            _eb.lokSteuern(71, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog71 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok71.Interval = 2000
@@ -24318,7 +24942,7 @@ Public Class Automatikprogramme
         ElseIf _Prog71 = 661 Then
         ElseIf _Prog71 = 662 Then
 
-        ElseIf _Prog71 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog71 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok71.Interval = 2000
         ElseIf _Prog71 = 701 Then
         ElseIf _Prog71 = 702 Then
@@ -24357,7 +24981,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok KLVM 3087
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok KLVM 3087 ( IBS nein)")
+        SetText(TextBox1, "Dampflok KLVM 3087                                                      IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_KLVM_01.jpg")
         GeschwindikeitenSetzen(72)
 
@@ -24368,8 +24992,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 72 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -24385,8 +25007,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(72, 1)
@@ -24554,6 +25174,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog72 = 136 Then
             _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog72 = 137 Then
+            Prog_Lok72.Interval = 2000
+        ElseIf _Prog72 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(72, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -24572,6 +25198,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog72 = 166 Then
             _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog72 = 167 Then
+            Prog_Lok72.Interval = 2000
+        ElseIf _Prog72 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(72, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -24603,34 +25235,43 @@ Public Class Automatikprogramme
         ElseIf _Prog72 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 221 Then
+        ElseIf _Prog72 = 222 Then
 
         ElseIf _Prog72 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 241 Then
+        ElseIf _Prog72 = 242 Then
 
         ElseIf _Prog72 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 261 Then
+        ElseIf _Prog72 = 262 Then
+            _eb.lokSteuern(72, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog72 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 601 Then
+        ElseIf _Prog72 = 602 Then
 
         ElseIf _Prog72 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 621 Then
+        ElseIf _Prog72 = 622 Then
 
         ElseIf _Prog72 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 641 Then
+        ElseIf _Prog72 = 642 Then
 
         ElseIf _Prog72 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 661 Then
+        ElseIf _Prog72 = 662 Then
 
-        ElseIf _Prog72 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog72 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 701 Then
+        ElseIf _Prog72 = 702 Then
 
             ' Zindelstein
 
@@ -24666,7 +25307,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok AC/DC
         '*** Datum: 08.11.2025
 
-        SetText(TextBox1, "Damf-Lok Black Ice                                          IBS: 06.11.2025 - V3 : 7")
+        SetText(TextBox1, "Damf-Lok Black Ice                                                      IBS: 06.11.2025 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\BlackIce.jpeg")
         GeschwindikeitenSetzen(73)
 
@@ -24677,8 +25318,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 73 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -24694,8 +25333,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(73, 1)
@@ -24916,7 +25553,7 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 137 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog73 = 138 Then
-            Prog_Lok73.Interval = 1000
+            Prog_Lok73.Interval = 2000
             If _Dampf < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
@@ -24948,7 +25585,7 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 167 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog73 = 168 Then
-            Prog_Lok73.Interval = 1000
+            Prog_Lok73.Interval = 2000
             If _Dampf < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
@@ -25037,18 +25674,20 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 245 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
         ElseIf _Prog73 = 246 Then
-
-        ElseIf _Prog73 = 260 Then ' Kontakt 3.3 links der Brücke
-            Prog_Lok73.Interval = 2000
-        ElseIf _Prog73 = 261 Then
+        ElseIf _Prog73 = 247 Then
             If _Motor < 3 Then
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
+            ElseIf _Prog73 = 248 Then
+                If _Dampf < 3 Then
+                    _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
+                End If
             End If
+
+        ElseIf _Prog73 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
+            Prog_Lok73.Interval = 2000
+        ElseIf _Prog73 = 261 Then
         ElseIf _Prog73 = 262 Then
-        ElseIf _Prog73 = 263 Then
-            If _Dampf < 3 Then
-                _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
-            End If
+            _eb.lokSteuern(73, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog73 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok73.Interval = 1000
@@ -25097,7 +25736,7 @@ Public Class Automatikprogramme
         ElseIf _Prog73 = 667 Then
             _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
 
-        ElseIf _Prog73 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog73 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok73.Interval = 2000
         ElseIf _Prog73 = 701 Then
         ElseIf _Prog73 = 702 Then
@@ -25152,7 +25791,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok Baureihe 23
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok Baureihe 23 ( IBS nein)")
+        SetText(TextBox1, "Dampflok Baureihe 23                                                    IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_023_01.jpg")
         GeschwindikeitenSetzen(74)
 
@@ -25163,8 +25802,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 74 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -25180,8 +25817,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(74, 1)
@@ -25349,6 +25984,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(64, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog74 = 136 Then
             _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog74 = 137 Then
+            Prog_Lok74.Interval = 2000
+        ElseIf _Prog74 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(74, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -25367,6 +26008,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog74 = 166 Then
             _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog74 = 167 Then
+            Prog_Lok74.Interval = 2000
+        ElseIf _Prog74 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(74, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -25398,34 +26045,44 @@ Public Class Automatikprogramme
         ElseIf _Prog74 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 221 Then
+        ElseIf _Prog74 = 222 Then
 
         ElseIf _Prog74 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 241 Then
+        ElseIf _Prog74 = 242 Then
 
         ElseIf _Prog74 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 261 Then
+        ElseIf _Prog74 = 262 Then
+            _eb.lokSteuern(74, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+
 
         ElseIf _Prog74 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 601 Then
+        ElseIf _Prog74 = 602 Then
 
         ElseIf _Prog74 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 621 Then
+        ElseIf _Prog74 = 622 Then
 
         ElseIf _Prog74 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 641 Then
+        ElseIf _Prog74 = 642 Then
 
         ElseIf _Prog74 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 661 Then
+        ElseIf _Prog74 = 662 Then
 
-        ElseIf _Prog74 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog74 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 701 Then
+        ElseIf _Prog74 = 702 Then
 
             ' Zindelstein
 
@@ -25461,7 +26118,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 24 058
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 24 058                                               IBS: 08.10.2025 - V3 : 10")
+        SetText(TextBox1, "Dampflok 24 058                                                         IBS: 08.10.2025 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_24_01.jpg")
         GeschwindikeitenSetzen(75)
 
@@ -25472,8 +26129,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 75 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -25489,8 +26144,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(75, 1)
@@ -25658,6 +26311,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog75 = 136 Then
             _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog75 = 137 Then
+            Prog_Lok75.Interval = 2000
+        ElseIf _Prog75 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(75, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -25676,6 +26335,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog75 = 166 Then
             _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog75 = 167 Then
+            Prog_Lok75.Interval = 2000
+        ElseIf _Prog75 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(75, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -25718,6 +26383,7 @@ Public Class Automatikprogramme
             Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 261 Then
         ElseIf _Prog75 = 262 Then
+            _eb.lokSteuern(75, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog75 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok75.Interval = 2000
@@ -25739,7 +26405,7 @@ Public Class Automatikprogramme
         ElseIf _Prog75 = 661 Then
         ElseIf _Prog75 = 662 Then
 
-        ElseIf _Prog75 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog75 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 701 Then
         ElseIf _Prog75 = 702 Then
@@ -25777,7 +26443,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok S3/6
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok S3/6                                              IBS: 06.01.2022 V1: 2 - V3: 8")
+        SetText(TextBox1, "Dampflok S3/6                                                           IBS: 06.01.2022 V3: 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_S36_01.jpg")
         GeschwindikeitenSetzen(76)
 
@@ -25788,8 +26454,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 76 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -25805,8 +26469,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(76, 1)
@@ -25916,11 +26578,6 @@ Public Class Automatikprogramme
         ElseIf _Prog76 = 2 Then
         ElseIf _Prog76 = 3 Then
         ElseIf _Prog76 = 4 Then
-            If _Durchsagen = 1 And (_TypL76 = 1 Or _TypL76 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog76 = 8
-            End If
         ElseIf _Prog76 = 5 Then
         ElseIf _Prog76 = 6 Then
         ElseIf _Prog76 = 7 Then
@@ -25988,6 +26645,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog76 = 136 Then
             _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog76 = 137 Then
+            Prog_Lok76.Interval = 2000
+        ElseIf _Prog76 = 138 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(76, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -26006,6 +26669,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog76 = 166 Then
             _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog76 = 167 Then
+            Prog_Lok76.Interval = 2000
+        ElseIf _Prog76 = 168 Then
+            If _Fahrzeugbeleuchtung2 < 2 Then
+                _eb.lokSteuern(76, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
+            End If
 
             ' Rangierzug
 
@@ -26059,37 +26728,41 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(76, Klassen.LokEigenschaften.Funktion2, 1) ' Dampfgeräusch aus
             End If
 
-        ElseIf _Prog76 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
-            Prog_Lok76.Interval = 2000
-        ElseIf _Prog76 = 221 Then
-
         ElseIf _Prog76 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 241 Then
+        ElseIf _Prog76 = 242 Then
 
         ElseIf _Prog76 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 261 Then
+        ElseIf _Prog76 = 262 Then
+            _eb.lokSteuern(76, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog76 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 601 Then
+        ElseIf _Prog76 = 602 Then
 
         ElseIf _Prog76 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 621 Then
+        ElseIf _Prog76 = 622 Then
 
         ElseIf _Prog76 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 641 Then
+        ElseIf _Prog76 = 642 Then
 
         ElseIf _Prog76 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 661 Then
+        ElseIf _Prog76 = 662 Then
 
-        ElseIf _Prog76 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog76 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok76.Interval = 2000
         ElseIf _Prog76 = 701 Then
+        ElseIf _Prog76 = 702 Then
 
             ' Zindelstein
 
@@ -26124,7 +26797,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm Baureihe 12 (012 081-6)
         '*** Datum: 20.06.2020
 
-        SetText(TextBox1, "Dampflok 012 081-6                                             IBS: 11.10.2025 - V3 : 9")
+        SetText(TextBox1, "Dampflok 012 081-6                                                      IBS: 11.10.2025 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_12_01.jpg")
         GeschwindikeitenSetzen(77)
 
@@ -26135,8 +26808,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 77 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -26152,8 +26823,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(77, 1)
@@ -26260,11 +26929,6 @@ Public Class Automatikprogramme
         ElseIf _Prog77 = 2 Then
         ElseIf _Prog77 = 3 Then
         ElseIf _Prog77 = 4 Then
-            If _Durchsagen = 1 And (_TypL77 = 1 Or _TypL77 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog77 = 8
-            End If
         ElseIf _Prog77 = 5 Then
         ElseIf _Prog77 = 6 Then
         ElseIf _Prog77 = 7 Then
@@ -26336,10 +27000,12 @@ Public Class Automatikprogramme
         ElseIf _Prog77 = 136 Then
             _eb.lokSteuern(77, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog77 = 137 Then
-            Prog_Lok77.Interval = 1000
+            Prog_Lok77.Interval = 2000
+        ElseIf _Prog77 = 138 Then
             If _Dampf < 3 Then
                 _eb.lokSteuern(77, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
             End If
+
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -26359,7 +27025,8 @@ Public Class Automatikprogramme
         ElseIf _Prog77 = 166 Then
             _eb.lokSteuern(77, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog77 = 167 Then
-            Prog_Lok77.Interval = 1000
+            Prog_Lok77.Interval = 2000
+        ElseIf _Prog77 = 168 Then
             If _Dampf < 3 Then
                 _eb.lokSteuern(77, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
             End If
@@ -26406,38 +27073,44 @@ Public Class Automatikprogramme
             Prog_Lok77.Interval = 3000
         ElseIf _Prog77 = 241 Then
             If _Dampf > 1 Then
-                _eb.lokSteuern(66, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Dampf ein
+                _eb.lokSteuern(77, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Dampf ein
             End If
         ElseIf _Prog77 = 242 Then
-
-        ElseIf _Prog77 = 260 Then ' Kontakt 3.3
-            Prog_Lok77.Interval = 2000
-        ElseIf _Prog77 = 261 Then
-        ElseIf _Prog77 = 262 Then
-        ElseIf _Prog77 = 263 Then
+        ElseIf _Prog77 = 243 Then
             If _Dampf < 3 Then
                 _eb.lokSteuern(77, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
             End If
 
+        ElseIf _Prog77 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
+            Prog_Lok77.Interval = 2000
+        ElseIf _Prog77 = 261 Then
+        ElseIf _Prog77 = 262 Then
+            _eb.lokSteuern(77, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+
         ElseIf _Prog77 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 601 Then
+        ElseIf _Prog77 = 602 Then
 
         ElseIf _Prog77 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 621 Then
+        ElseIf _Prog77 = 622 Then
 
         ElseIf _Prog77 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 641 Then
+        ElseIf _Prog77 = 642 Then
 
         ElseIf _Prog77 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 661 Then
+        ElseIf _Prog77 = 662 Then
 
-        ElseIf _Prog77 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog77 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok77.Interval = 2000
         ElseIf _Prog77 = 701 Then
+        ElseIf _Prog77 = 702 Then
 
             ' Zindelstein
 
@@ -26473,7 +27146,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok Rheinheim
         '*** Datum: 21.02.2023
 
-        SetText(TextBox1, "Dampflok Rheinheim                                              IBS: 21.02.2023 - V3 : 6")
+        SetText(TextBox1, "Dampflok Rheinheim                                                      IBS: 21.02.2023 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Rheinheim_03.jpg")
         GeschwindikeitenSetzen(78)
 
@@ -26484,8 +27157,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 78 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -26501,8 +27172,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(78, 1)
@@ -26601,11 +27270,6 @@ Public Class Automatikprogramme
         If _Prog78 = 0 Then
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 1 Then
-            If _Durchsagen = 1 And (_TypL78 = 1 Or _TypL78 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog78 = 6
-            End If
         ElseIf _Prog78 = 2 Then
         ElseIf _Prog78 = 3 Then
         ElseIf _Prog78 = 4 Then
@@ -26719,34 +27383,44 @@ Public Class Automatikprogramme
         ElseIf _Prog78 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 221 Then
+        ElseIf _Prog78 = 222 Then
 
         ElseIf _Prog78 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 241 Then
+        ElseIf _Prog78 = 242 Then
 
         ElseIf _Prog78 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 261 Then
+        ElseIf _Prog78 = 262 Then
+            _eb.lokSteuern(78, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
+
 
         ElseIf _Prog78 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 601 Then
+        ElseIf _Prog78 = 602 Then
 
         ElseIf _Prog78 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 621 Then
+        ElseIf _Prog78 = 622 Then
 
         ElseIf _Prog78 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 641 Then
+        ElseIf _Prog78 = 642 Then
 
         ElseIf _Prog78 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 661 Then
+        ElseIf _Prog78 = 662 Then
 
-        ElseIf _Prog78 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog78 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 701 Then
+        ElseIf _Prog78 = 702 Then
 
             ' Zindelstein
 
@@ -26781,7 +27455,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 50 082-7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflok 50 082-7                                                IBS: 12.11.2023 - V3 : 6")
+        SetText(TextBox1, "Dampflok 50 082-7                                                       IBS: 12.11.2023 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_50_01.jpg")
         GeschwindikeitenSetzen(79)
 
@@ -26792,8 +27466,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 79 + 4
-
-        Faktor_Beleuchtung = 100
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -26810,8 +27482,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(79, 1)
@@ -26922,11 +27592,6 @@ Public Class Automatikprogramme
         ElseIf _Prog79 = 5 Then
         ElseIf _Prog79 = 6 Then
         ElseIf _Prog79 = 7 Then
-            If _Durchsagen = 1 And (_TypL79 = 1 Or _TypL79 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog79 = 11
-            End If
         ElseIf _Prog79 = 8 Then
         ElseIf _Prog79 = 9 Then
         ElseIf _Prog79 = 10 Then
@@ -26956,7 +27621,7 @@ Public Class Automatikprogramme
 
         ElseIf _Prog79 = 50 Then
             Prog_Lok79.Interval = 2000
-        ElseIf _Prog79 = 51 Then
+        ElseIf _Prog79 = 51 Then ' *** Lok hat keine Lichtfunktion
         ElseIf _Prog79 = 52 Then
         ElseIf _Prog79 = 53 Then
 
@@ -26993,6 +27658,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog79 = 136 Then
             _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog79 = 137 Then
+            Prog_Lok79.Interval = 2000
+        ElseIf _Prog79 = 138 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
+            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -27011,6 +27682,12 @@ Public Class Automatikprogramme
             _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe2)
         ElseIf _Prog79 = 166 Then
             _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, 0)
+        ElseIf _Prog79 = 167 Then
+            Prog_Lok79.Interval = 2000
+        ElseIf _Prog79 = 168 Then
+            If _Dampf < 3 Then
+                _eb.lokSteuern(79, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Dampf aus
+            End If
 
             ' Rangierzug
 
@@ -27070,30 +27747,38 @@ Public Class Automatikprogramme
         ElseIf _Prog79 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 241 Then
+        ElseIf _Prog79 = 242 Then
 
         ElseIf _Prog79 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 261 Then
+        ElseIf _Prog79 = 262 Then
+            _eb.lokSteuern(79, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog79 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 601 Then
+        ElseIf _Prog79 = 602 Then
 
         ElseIf _Prog79 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 621 Then
+        ElseIf _Prog79 = 622 Then
 
         ElseIf _Prog79 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 641 Then
+        ElseIf _Prog79 = 642 Then
 
         ElseIf _Prog79 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 661 Then
+        ElseIf _Prog79 = 662 Then
 
-        ElseIf _Prog79 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog79 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok79.Interval = 2000
         ElseIf _Prog79 = 701 Then
+        ElseIf _Prog79 = 702 Then
 
 
             ' Zindelstein
@@ -27130,7 +27815,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok 3029
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "Dampflok 3029 ( IBS nein)")
+        SetText(TextBox1, "Dampflok 3029                                                           IBS: nein")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_3029_01.jpg")
         GeschwindikeitenSetzen(80)
 
@@ -27141,8 +27826,6 @@ Public Class Automatikprogramme
         Dim G_200 As Integer
         Dim Index As Integer
         Index = 80 + 4
-
-        Faktor_Beleuchtung = 80
 
         T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
         T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
@@ -27158,8 +27841,6 @@ Public Class Automatikprogramme
 
         If A_StopB = 1 Then
             V_100 = 8000
-        Else
-            V_100 = 100
         End If
 
         Stufe1 = _LokStufen.Holen(80, 1)
@@ -27258,11 +27939,6 @@ Public Class Automatikprogramme
         If _Prog80 = 0 Then
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 1 Then
-            If _Durchsagen = 1 And (_TypL80 = 1 Or _TypL80 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog80 = 6
-            End If
         ElseIf _Prog80 = 2 Then
         ElseIf _Prog80 = 3 Then
         ElseIf _Prog80 = 4 Then
@@ -27288,7 +27964,7 @@ Public Class Automatikprogramme
 
         ElseIf _Prog80 = 50 Then
             Prog_Lok80.Interval = 2000
-        ElseIf _Prog80 = 51 Then
+        ElseIf _Prog80 = 51 Then ' *** Lok hat keine Lichtfunktion
         ElseIf _Prog80 = 52 Then
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
@@ -27373,34 +28049,43 @@ Public Class Automatikprogramme
         ElseIf _Prog80 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 221 Then
+        ElseIf _Prog80 = 222 Then
 
         ElseIf _Prog80 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 241 Then
+        ElseIf _Prog80 = 242 Then
 
         ElseIf _Prog80 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 261 Then
+        ElseIf _Prog80 = 262 Then
+            _eb.lokSteuern(80, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog80 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 601 Then
+        ElseIf _Prog80 = 602 Then
 
         ElseIf _Prog80 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 621 Then
+        ElseIf _Prog80 = 622 Then
 
         ElseIf _Prog80 = 640 Then ' Kontakt 3.1 <- Talfahrt
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 641 Then
+        ElseIf _Prog80 = 642 Then
 
         ElseIf _Prog80 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 661 Then
+        ElseIf _Prog80 = 662 Then
 
-        ElseIf _Prog80 = 700 Then ' Kontakt 0.4 Diagonale
+        ElseIf _Prog80 = 700 Then ' Kontakt 0.4 <- Diagonale
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 701 Then
+        ElseIf _Prog80 = 702 Then
 
             ' Zindelstein
 
@@ -32547,11 +33232,6 @@ Public Class Automatikprogramme
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 110 Then
             Bergfahrt110Lok1()
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 1
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 111 Then
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
@@ -32560,30 +33240,15 @@ Public Class Automatikprogramme
                 _aktuelleKamera = Windeck
             End If
             Zug1(220)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 10
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 112
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 112 Then
             Zug1(240)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 14
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 112
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 112 Then
-            _LokStufen.EinzelLokSenden(1, 3)
+            '_LokStufen.EinzelLokSenden(1, 3)
             Zug1(260)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 30
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 113
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 113 Then
@@ -32603,11 +33268,6 @@ Public Class Automatikprogramme
                 Timer_EinzelLok1.Interval = Warte1BA
                 Timer_EinzelLok1.Start()
             End If
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 40
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 114 Then
             If _StopZug1 = 1 Then
@@ -32620,11 +33280,6 @@ Public Class Automatikprogramme
                 StopZug1()
             Else
                 Zug1(600)
-            End If
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 51
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 115 And _StopZug1 = 0 Then
@@ -32657,8 +33312,6 @@ Public Class Automatikprogramme
             Zug1(640)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 70
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
             End If
             AutomatikParameter = 116
         End If
@@ -32667,8 +33320,6 @@ Public Class Automatikprogramme
             Zug1(660)
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 80
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
             End If
         End If
     End Sub
@@ -32681,11 +33332,6 @@ Public Class Automatikprogramme
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 210 Then
             Bergfahrt110Lok2()
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 1
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 211 Then
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
@@ -32694,30 +33340,15 @@ Public Class Automatikprogramme
                 _aktuelleKamera = Windeck
             End If
             Zug2(220)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 10
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 212
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 212 Then
             Zug2(240)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 14
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 212
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 212 Then
-            _LokStufen.EinzelLokSenden(2, 3)
+            '_LokStufen.EinzelLokSenden(2, 3)
             Zug2(260)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 30
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 213
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 213 Then
@@ -32737,11 +33368,6 @@ Public Class Automatikprogramme
                 'Timer_EinzelLok2.Interval = NumericUpDown2.Value * 1000
                 Timer_EinzelLok2.Start()
             End If
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 40
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 214 Then
             If _StopZug2 = 1 Then
@@ -32757,8 +33383,6 @@ Public Class Automatikprogramme
             End If
             If ComboBox1.SelectedIndex = 4 Then
                 _StoryPointer = 51
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 215 And _StopZug2 = 0 Then
@@ -32815,43 +33439,23 @@ Public Class Automatikprogramme
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 301 Then
             Bergfahrt110Lok3()
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 1
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 311 Then
-            Zug3(220)
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
                 _Webcams.SetWebcam(0, Windeck)
                 SetText(Button13, "Titisee")
                 _aktuelleKamera = Windeck
             End If
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 10
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
+            Zug3(220)
             AutomatikParameter = 312
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 312 Then
             Zug3(240)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 14
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 312
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 312 Then
-            _LokStufen.EinzelLokSenden(3, 3)
+            '_LokStufen.EinzelLokSenden(3, 3)
             Zug3(260)
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 30
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
             AutomatikParameter = 313
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 313 Then
@@ -32871,11 +33475,6 @@ Public Class Automatikprogramme
                 Timer_EinzelLok3.Interval = Warte3BA
                 Timer_EinzelLok3.Start()
             End If
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 40
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
-            End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 314 Then
             If _StopZug3 = 1 Then
@@ -32888,11 +33487,6 @@ Public Class Automatikprogramme
                 StopZug3()
             Else
                 Zug3(600)
-            End If
-            If ComboBox1.SelectedIndex = 4 Then
-                _StoryPointer = 51
-                'Timer_Story_DMX.Interval() = 100
-                'Timer_Story_DMX.Start()
             End If
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 315 And _StopZug3 = 0 Then
@@ -32949,28 +33543,24 @@ Public Class Automatikprogramme
 
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 401 Then
             Bergfahrt110Lok4()
-            DMX_Pointer = 1
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 411 Then
-            Zug4(220)
             If _Kamera = 3 And _aktuelleKamera <> Windeck Then
                 _Webcams.SetWebcam(0, Windeck)
                 SetText(Button13, "Titisee")
                 _aktuelleKamera = Windeck
             End If
+            Zug4(220)
             AutomatikParameter = 412
-            DMX_Pointer = 10
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 412 Then
             Zug4(240)
             AutomatikParameter = 412
-            DMX_Pointer = 14
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 412 Then
-            _LokStufen.EinzelLokSenden(4, 3)
+            '_LokStufen.EinzelLokSenden(4, 3)
             Zug4(260)
             AutomatikParameter = 413
-            DMX_Pointer = 30
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 413 Then
             Ort_Lok4 = 412
@@ -32989,7 +33579,6 @@ Public Class Automatikprogramme
                 Timer_EinzelLok4.Interval = Warte4BA
                 Timer_EinzelLok4.Start()
             End If
-            DMX_Pointer = 40
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 4 And Kontakt.status = False And AutomatikParameter = 414 Then
             If _StopZug4 = 1 Then
@@ -33003,11 +33592,9 @@ Public Class Automatikprogramme
             Else
                 Zug4(600)
             End If
-            DMX_Pointer = 51
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 415 And _StopZug4 = 0 Then
             AutomatikParameter = 415
-
             Stufe1 = _LokStufen.Holen(NumericUpDown11.Value, 1)
             Stufe3 = _LokStufen.Holen(NumericUpDown11.Value, 3)
             Stufe4 = _LokStufen.Holen(NumericUpDown11.Value, 4)
@@ -33027,12 +33614,12 @@ Public Class Automatikprogramme
             If Talstrecke_Gleis4 > 0 Then
                 _eb.weicheSchalten(12, Klassen.WeichenRichtung.rechts)
             End If
-            Zug4(640)
             If _Kamera = 3 And _aktuelleKamera <> Marxzel Then
                 _Webcams.SetWebcam(0, Marxzel)
                 SetText(Button13, "Wiehre")
                 _aktuelleKamera = Marxzel
             End If
+            Zug4(640)
             AutomatikParameter = 416
             DMX_Pointer = 70
         End If
@@ -38162,6 +38749,9 @@ Public Class Automatikprogramme
             _LokStufen.AktiveSetzten(NumericUpDown8.Value, NumericUpDown9.Value, NumericUpDown10.Value, NumericUpDown11.Value)
             Dim numericUpDown As System.Windows.Forms.NumericUpDown = sender
             GeschwindikeitenSetzen(numericUpDown.Value)
+        End If
+        If Not _Betriebsparameter Is Nothing Then
+            _Betriebsparameter.UpdateContent({NumericUpDown8.Value, NumericUpDown9.Value, NumericUpDown10.Value, NumericUpDown11.Value})
         End If
     End Sub
 

@@ -150,6 +150,12 @@
     <Compile Include="Automatikprogramme.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Betriebsparameter.Designer.vb">
+      <DependentUpon>Betriebsparameter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Betriebsparameter.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="DasKalteHerz.Designer.vb">
       <DependentUpon>DasKalteHerz.vb</DependentUpon>
     </Compile>
@@ -185,6 +191,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Automatikprogramme.resx">
       <DependentUpon>Automatikprogramme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Betriebsparameter.resx">
+      <DependentUpon>Betriebsparameter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DasKalteHerz.resx">
       <DependentUpon>DasKalteHerz.vb</DependentUpon>

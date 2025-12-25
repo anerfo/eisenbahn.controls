@@ -5,6 +5,7 @@ Public Class KlausEBspecificPlugin
 
     Private startpos As New WeichenStartposition
     Private automatiken As Automatikprogramme = Nothing
+    Private betriebsparameter As Betriebsparameter = Nothing
 
     Public ReadOnly Property beschreibung As String Implements PluginManagerLibrary.PluginInterface.beschreibung
         Get
@@ -29,10 +30,12 @@ Public Class KlausEBspecificPlugin
         Dim webcams As Webcams.IWebcamController = Referenz.getReferenceToObject("Webcams.IWebcamController", Me)
         Dim mediaProvider As MediaProvider.IMediaProvider = Referenz.getReferenceToObject("MediaProvider.IMediaProvider", Me)
 
-        automatiken = New Automatikprogramme(ebRef, dataStorage, dmxServer, webcams, mediaProvider)
+        betriebsparameter = New Betriebsparameter(dataStorage)
+        automatiken = New Automatikprogramme(ebRef, dataStorage, dmxServer, webcams, mediaProvider, betriebsparameter)
 
         Referenz.registerGUIControl(automatiken)
         Referenz.registerGUIControl(automatiken._kalteHerz)
+        Referenz.registerGUIControl(betriebsparameter)
 
         'startpos.init(ebRef)
         REM lokFolgen.init(ebRef)
