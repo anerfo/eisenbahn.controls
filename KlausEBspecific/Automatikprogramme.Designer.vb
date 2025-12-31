@@ -25,6 +25,8 @@ Partial Class Automatikprogramme
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.AutoParaLabel = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.Button40 = New System.Windows.Forms.Button()
         Me.Button39 = New System.Windows.Forms.Button()
         Me.Button22 = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
@@ -33,7 +35,6 @@ Partial Class Automatikprogramme
         Me.Button24 = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
         Me.Button38 = New System.Windows.Forms.Button()
-        Me.Button19 = New System.Windows.Forms.Button()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Button35 = New System.Windows.Forms.Button()
         Me.Button37 = New System.Windows.Forms.Button()
@@ -142,7 +143,6 @@ Partial Class Automatikprogramme
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
-        Me.Button40 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -284,6 +284,24 @@ Partial Class Automatikprogramme
         Me.GroupBox1.TabIndex = 19
         Me.GroupBox1.TabStop = False
         '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(242, 278)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(29, 48)
+        Me.Button19.TabIndex = 108
+        Me.Button19.Text = "V1"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
+        'Button40
+        '
+        Me.Button40.Location = New System.Drawing.Point(241, 278)
+        Me.Button40.Name = "Button40"
+        Me.Button40.Size = New System.Drawing.Size(29, 23)
+        Me.Button40.TabIndex = 123
+        Me.Button40.Text = "V1"
+        Me.Button40.UseVisualStyleBackColor = True
+        '
         'Button39
         '
         Me.Button39.Location = New System.Drawing.Point(6, 220)
@@ -355,15 +373,6 @@ Partial Class Automatikprogramme
         Me.Button38.TabIndex = 121
         Me.Button38.Text = "V1"
         Me.Button38.UseVisualStyleBackColor = True
-        '
-        'Button19
-        '
-        Me.Button19.Location = New System.Drawing.Point(242, 278)
-        Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(29, 48)
-        Me.Button19.TabIndex = 108
-        Me.Button19.Text = "V1"
-        Me.Button19.UseVisualStyleBackColor = True
         '
         'Button30
         '
@@ -1375,15 +1384,6 @@ Partial Class Automatikprogramme
         Me.LinkLabel2.TabIndex = 111
         Me.LinkLabel2.TabStop = True
         Me.LinkLabel2.Text = "statische Kamera"
-        '
-        'Button40
-        '
-        Me.Button40.Location = New System.Drawing.Point(241, 278)
-        Me.Button40.Name = "Button40"
-        Me.Button40.Size = New System.Drawing.Size(29, 23)
-        Me.Button40.TabIndex = 123
-        Me.Button40.Text = "V1"
-        Me.Button40.UseVisualStyleBackColor = True
         '
         'Automatikprogramme
         '

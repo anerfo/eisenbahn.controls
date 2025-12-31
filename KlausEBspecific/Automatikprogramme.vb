@@ -7,6 +7,9 @@
 '***
 '*** Letzte Änderung:
 '***
+'***                 Kontakt 0.0 false und Kontakt 0.2 false - Bahnhofsausfahrt - auskommentierte Zeilen reaktiviert
+'***                 (Signal 11 schalten)
+'***
 '***                 Fahrparameter von Excel-Tabelle in das Programm übernommen
 '***
 '***                 Lokprogramme erweitert (Rückmeldekontakten ein Lokprogramm zugeordnet)
@@ -115,7 +118,6 @@ Public Class Automatikprogramme
     Private Forbach, Marxzel, Windeck As Integer
 
     Private L1_aktuell, L2_aktuell, L3_aktuell, L4_aktuell, L5_aktuell, L6_aktuell, L7_aktuell, L1_soll, L2_soll, L3_soll, L4_soll, L5_soll, L6_soll, L7_soll, S_DMX, Szene, DMX_Pointer, DMX_Klick As Integer
-
     Private Bri_aktuell, Sat_aktuell, Col_aktuell, CT_aktuell, CT_M, Bri_soll, Bri_M, Sat_soll, Col_soll, CT_soll, Hue_Control, Hue_Control_aktuell, Hue_Control_M, Hue_Takt, Hue_Aenderung, Hue_Neue_Aenderung As Integer
     Private FilmFortschritt As Integer
     Private Fahrplan, Warte1A1, Warte1A2, Warte1SB, Warte1BA, Warte1TA, Warte1DI, Warte2A1, Warte2A2, Warte2SB, Warte2BA, Warte2TA, Warte2DI, Warte3A1, Warte3A2, Warte3SB, Warte3BA, Warte3TA, Warte3DI, Warte4A1, Warte4A2, Warte4SB, Warte4BA, Warte4TA, Warte4DI As Integer
@@ -3028,30 +3030,40 @@ Public Class Automatikprogramme
         '*** Fahrprogramm TEE VT 11.5
         '*** Datum: 05.01.2023
 
-        SetText(TextBox1, "TEE VT 11.5                                                             IBS: 10.12.2025 - V3 : 8")
+        SetText(TextBox1, "TEE VT 11.5                                                             IBS: 29.12.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_TEE_01.jpg")
         GeschwindikeitenSetzen(10)
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
-        Dim Index As Integer
         Dim G_200 As Integer
-        Index = 10 + 4
+        'Dim Index As Integer
+        'Index = 10 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
+        'T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
+        'T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
+        'T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
+        'T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
+        'T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
+        'V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
+        'V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
+        'V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
+        'V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
+        'V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
+        'G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+
         T_100 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
-
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_130 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(10, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -3480,7 +3492,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für ICE 410 001-2 und 410 002-0
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "ICE 410 001-2 und 410 002-0                                             IBS: 10.12.2025 - V3 : 5")
+        SetText(TextBox1, "ICE 410 001-2 und 410 002-0                                             IBS: 29.12.2025 - V3 : 5")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_ICE_02.jpg")
         GeschwindikeitenSetzen(11)
 
@@ -3489,20 +3501,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 11 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(11, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 5000
@@ -3807,7 +3817,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E103 113-7
         '*** Datum: 12.11.2023
 
-        SetText(TextBox1, "E-Lok 103 113-7                                                         IBS: 12.11.2025 - V3 : 10")
+        SetText(TextBox1, "E-Lok 103 113-7                                                         IBS: 29.12.2025 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_103_01.jpg")
         GeschwindikeitenSetzen(12)
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
@@ -3815,20 +3825,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 12 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(12, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 4000
@@ -3845,35 +3853,35 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 100
+            T_130 = T_130 + 100
+            T_160 = T_160 + 100
+            V_180 = V_180 + 100
+        ElseIf Stufe2 = 3 Then
+            T_100 = T_100 + 200
+            T_130 = T_130 + 200
+            T_160 = T_160 + 200
+            V_180 = V_180 + 300
+        ElseIf Stufe2 = 4 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
+            V_180 = V_180 + 1000
+        ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 400
+            T_130 = T_130 + 400
+            T_160 = T_160 + 400
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
             T_100 = T_100 + 500
             T_130 = T_130 + 500
             T_160 = T_160 + 500
-            V_180 = V_180 + 1000
-        ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
-            V_180 = V_180 + 1500
-        ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 900
-            T_130 = T_130 + 900
-            T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
+            V_180 = V_180 + 3000
         Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 4000
         End If
 
         Stufe2 = Stufe1
@@ -3935,12 +3943,6 @@ Public Class Automatikprogramme
         ElseIf _Prog12 = 1 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog12 = 2 Then
-
-            If _Durchsagen = 1 And (_TypL12 = 1 Or _TypL12 = 3) Then
-                PlayMusic("H:\\Eisenbahn\\EisenbahnV4\\Plugins\\KlausEBspecific\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog12 = 6
-            End If
         ElseIf _Prog12 = 3 Then
         ElseIf _Prog12 = 4 Then
         ElseIf _Prog12 = 5 Then
@@ -4151,7 +4153,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm E120 002-1
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 120 002-1                                                         IBS: 06.01.2022 - V3: 10")
+        SetText(TextBox1, "E-Lok 120 002-1                                                         IBS: 29.12.2025 - V3: 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_120_01.jpg")
         GeschwindikeitenSetzen(13)
 
@@ -4160,20 +4162,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 13 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(13, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -4278,12 +4278,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(13, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog13 = 1 Then
-            If _Durchsagen = 1 And (_TypL13 = 1 Or _TypL13 = 3) Then
-                StopMusic()
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog13 = 6
-            End If
         ElseIf _Prog13 = 2 Then
         ElseIf _Prog13 = 3 Then
         ElseIf _Prog13 = 4 Then
@@ -4494,20 +4488,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 14 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(14, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -4612,11 +4604,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(14, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog14 = 1 Then
-            If _Durchsagen = 1 And (_TypL14 = 1 Or _TypL14 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog14 = 6
-            End If
         ElseIf _Prog14 = 2 Then
         ElseIf _Prog14 = 3 Then
         ElseIf _Prog14 = 4 Then
@@ -4823,20 +4810,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 15 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(15, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -4941,12 +4926,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(15, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog15 = 1 Then
-            If _Durchsagen = 1 And (_TypL15 = 1 Or _TypL15 = 3) Then
-                StopMusic()
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog15 = 6
-            End If
         ElseIf _Prog15 = 2 Then
         ElseIf _Prog15 = 3 Then
         ElseIf _Prog15 = 4 Then
@@ -5153,20 +5132,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 16 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(16, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -5271,11 +5248,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(16, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog16 = 1 Then
-            If _Durchsagen = 1 And (_TypL16 = 1 Or _TypL16 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog16 = 6
-            End If
         ElseIf _Prog16 = 2 Then
         ElseIf _Prog16 = 3 Then
         ElseIf _Prog16 = 4 Then
@@ -5481,20 +5453,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 17 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(17, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -5599,11 +5569,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(17, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog17 = 1 Then
-            If _Durchsagen = 1 And (_TypL17 = 1 Or _TypL17 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog17 = 6
-            End If
         ElseIf _Prog17 = 2 Then
         ElseIf _Prog17 = 3 Then
         ElseIf _Prog17 = 4 Then
@@ -5809,20 +5774,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 18 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(18, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 3000
@@ -5927,11 +5890,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(18, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog18 = 1 Then
-            If _Durchsagen = 1 And (_TypL18 = 1 Or _TypL18 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog18 = 6
-            End If
         ElseIf _Prog18 = 2 Then
         ElseIf _Prog18 = 3 Then
         ElseIf _Prog18 = 4 Then
@@ -6139,20 +6097,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 19 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(19, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -6257,12 +6213,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(19, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog19 = 1 Then
-            If _Durchsagen = 1 And (_TypL19 = 1 Or _TypL19 = 3) Then
-                StopMusic()
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog19 = 6
-            End If
         ElseIf _Prog19 = 2 Then
             If _Innenbeleuchtung2 > 0 Then
                 _eb.lokSteuern(19, Klassen.LokEigenschaften.Funktion2, 1) ' Fernlicht ein
@@ -6475,20 +6425,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 20 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(20, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -6593,11 +6541,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(20, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog20 = 1 Then
-            If _Durchsagen = 1 And (_TypL20 = 1 Or _TypL20 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog20 = 6
-            End If
         ElseIf _Prog20 = 2 Then
         ElseIf _Prog20 = 3 Then
         ElseIf _Prog20 = 4 Then
@@ -6800,20 +6743,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 21 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(21, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -6918,11 +6859,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(21, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog21 = 1 Then
-            If _Durchsagen = 1 And (_TypL21 = 1 Or _TypL21 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog21 = 6
-            End If
         ElseIf _Prog21 = 2 Then
         ElseIf _Prog21 = 3 Then
         ElseIf _Prog21 = 4 Then
@@ -7131,19 +7067,18 @@ Public Class Automatikprogramme
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
         Dim Index As Integer
-        Index = 22 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(22, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 5000
@@ -7248,11 +7183,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(22, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog22 = 1 Then
-            If _Durchsagen = 1 And (_TypL22 = 1 Or _TypL22 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog22 = 6
-            End If
         ElseIf _Prog22 = 2 Then
         ElseIf _Prog22 = 3 Then
         ElseIf _Prog22 = 4 Then
@@ -7463,20 +7393,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 23 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(23, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 4000
@@ -7581,11 +7509,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(23, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog23 = 1 Then
-            If _Durchsagen = 1 And (_TypL23 = 1 Or _TypL23 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog23 = 6
-            End If
         ElseIf _Prog23 = 2 Then
         ElseIf _Prog23 = 3 Then
         ElseIf _Prog23 = 4 Then
@@ -7792,20 +7715,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 24 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(24, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -7911,11 +7832,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(24, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog24 = 1 Then
-            If _Durchsagen = 1 And (_TypL24 = 1 Or _TypL24 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog24 = 6
-            End If
         ElseIf _Prog24 = 2 Then
         ElseIf _Prog24 = 3 Then
         ElseIf _Prog24 = 4 Then
@@ -8123,20 +8039,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 25 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(25, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -8241,11 +8155,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(25, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog25 = 1 Then
-            If _Durchsagen = 1 And (_TypL25 = 1 Or _TypL25 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog25 = 6
-            End If
         ElseIf _Prog25 = 2 Then
         ElseIf _Prog25 = 3 Then
         ElseIf _Prog25 = 4 Then
@@ -8451,20 +8360,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 26 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(26, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -8569,11 +8476,6 @@ Public Class Automatikprogramme
             End If
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 1 Then
-            If _Durchsagen = 1 And (_TypL26 = 1 Or _TypL26 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog26 = 6
-            End If
         ElseIf _Prog26 = 2 Then
         ElseIf _Prog26 = 3 Then
         ElseIf _Prog26 = 4 Then
@@ -8779,20 +8681,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 27 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(27, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -8898,11 +8798,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(27, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog27 = 2 Then
-            If _Motor > 0 Then
-                _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
-            Else
-                _Prog27 = 10
-            End If
         ElseIf _Prog27 = 3 Then
         ElseIf _Prog27 = 4 Then
         ElseIf _Prog27 = 5 Then
@@ -9221,20 +9116,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 28 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(28, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -9343,11 +9236,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
         ElseIf _Prog28 = 2 Then
-            If _Durchsagen = 1 And (_TypL28 = 1 Or _TypL28 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog28 = 7
-            End If
         ElseIf _Prog28 = 3 Then
         ElseIf _Prog28 = 4 Then
         ElseIf _Prog28 = 5 Then
@@ -9627,20 +9515,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 29 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(29, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -10025,20 +9911,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 30 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(30, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -10445,20 +10329,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 31 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(31, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 3000
@@ -10563,11 +10445,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(31, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog31 = 1 Then
-            If _Durchsagen = 1 And (_TypL31 = 1 Or _TypL31 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog31 = 6
-            End If
         ElseIf _Prog31 = 2 Then
         ElseIf _Prog31 = 3 Then
         ElseIf _Prog31 = 4 Then
@@ -10775,20 +10652,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 32 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(32, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 6000
@@ -10893,11 +10768,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(32, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog32 = 1 Then
-            If _Durchsagen = 1 And (_TypL32 = 1 Or _TypL32 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog32 = 6
-            End If
         ElseIf _Prog32 = 2 Then
         ElseIf _Prog32 = 3 Then
         ElseIf _Prog32 = 4 Then
@@ -11104,20 +10974,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 33 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(33, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 6000
@@ -11222,11 +11090,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(33, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog33 = 1 Then
-            If _Durchsagen = 1 And (_TypL33 = 1 Or _TypL33 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog33 = 6
-            End If
         ElseIf _Prog33 = 2 Then
         ElseIf _Prog33 = 3 Then
         ElseIf _Prog33 = 4 Then
@@ -11433,20 +11296,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 34 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(34, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -11756,20 +11617,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 35 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(35, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 6000
@@ -11874,11 +11733,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(35, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog35 = 1 Then
-            If _Durchsagen = 1 And (_TypL35 = 1 Or _TypL35 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog35 = 6
-            End If
         ElseIf _Prog35 = 2 Then
         ElseIf _Prog35 = 3 Then
         ElseIf _Prog35 = 4 Then
@@ -12085,20 +11939,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 36 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(36, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 5000
@@ -12198,16 +12050,11 @@ Public Class Automatikprogramme
         ' Lok starten - Bahnhofsausfahrt
 
         If _Prog36 = 0 Then
+            Prog_Lok36.Interval = 2000
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(36, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
-            Prog_Lok36.Interval = 2000
         ElseIf _Prog36 = 1 Then
-            If _Durchsagen = 1 And (_TypL36 = 1 Or _TypL36 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog36 = 6
-            End If
         ElseIf _Prog36 = 2 Then
         ElseIf _Prog36 = 3 Then
         ElseIf _Prog36 = 4 Then
@@ -12413,20 +12260,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 37 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(37, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -12531,11 +12376,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(37, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog37 = 1 Then
-            If _Durchsagen = 1 And (_TypL37 = 1 Or _TypL37 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog37 = 6
-            End If
         ElseIf _Prog37 = 2 Then
         ElseIf _Prog37 = 3 Then
         ElseIf _Prog37 = 4 Then
@@ -12742,20 +12582,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 38 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(38, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -13111,20 +12949,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 39 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(39, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -13230,11 +13066,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(39, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog39 = 2 Then
-            If _Durchsagen = 1 And (_TypL39 = 1 Or _TypL39 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog39 = 6
-            End If
         ElseIf _Prog39 = 3 Then
         ElseIf _Prog39 = 4 Then
         ElseIf _Prog39 = 5 Then
@@ -13440,20 +13271,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 40 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(40, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -13934,20 +13763,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 41 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(41, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 4000
@@ -14379,20 +14206,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 42 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(42, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -14828,20 +14653,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 43 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(43, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -14943,11 +14766,6 @@ Public Class Automatikprogramme
         If _Prog43 = 0 Then
             Prog_Lok43.Interval = 2000
         ElseIf _Prog43 = 1 Then
-            If _Durchsagen = 1 And (_TypL43 = 1 Or _TypL43 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog43 = 6
-            End If
         ElseIf _Prog43 = 2 Then
         ElseIf _Prog43 = 3 Then
         ElseIf _Prog43 = 4 Then
@@ -15153,20 +14971,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 44 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(44, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -15271,11 +15087,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(44, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog44 = 1 Then
-            If _Durchsagen = 1 And (_TypL44 = 1 Or _TypL44 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog44 = 6
-            End If
         ElseIf _Prog44 = 2 Then
         ElseIf _Prog44 = 3 Then
         ElseIf _Prog44 = 4 Then
@@ -15481,20 +15292,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 45 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(45, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -15599,11 +15408,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(45, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog45 = 1 Then
-            If _Durchsagen = 1 And (_TypL45 = 1 Or _TypL45 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog45 = 6
-            End If
         ElseIf _Prog45 = 2 Then
         ElseIf _Prog45 = 3 Then
         ElseIf _Prog45 = 4 Then
@@ -15809,20 +15613,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 46 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(46, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -15927,11 +15729,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(46, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog46 = 1 Then
-            If _Durchsagen = 1 And (_TypL46 = 1 Or _TypL46 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog46 = 6
-            End If
         ElseIf _Prog46 = 2 Then
         ElseIf _Prog46 = 3 Then
         ElseIf _Prog46 = 4 Then
@@ -16137,20 +15934,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 47 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(47, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -16256,11 +16051,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(47, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog47 = 2 Then
-            If _Durchsagen = 1 And (_TypL47 = 1 Or _TypL47 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog47 = 6
-            End If
         ElseIf _Prog47 = 3 Then
         ElseIf _Prog47 = 4 Then
         ElseIf _Prog47 = 5 Then
@@ -16467,20 +16257,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 48 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(48, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -16591,7 +16379,6 @@ Public Class Automatikprogramme
         ElseIf _Prog48 = 2 Then
         ElseIf _Prog48 = 3 Then
         ElseIf _Prog48 = 4 Then
-
         ElseIf _Prog48 = 5 Then
         ElseIf _Prog48 = 6 Then
         ElseIf _Prog48 = 7 Then
@@ -16915,20 +16702,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 49 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(49, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -17034,11 +16819,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(49, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog49 = 2 Then
-            If _Durchsagen = 1 And (_TypL49 = 1 Or _TypL49 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog49 = 7
-            End If
         ElseIf _Prog49 = 3 Then
         ElseIf _Prog49 = 4 Then
         ElseIf _Prog49 = 5 Then
@@ -17245,20 +17025,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 50 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(50, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -17360,11 +17138,6 @@ Public Class Automatikprogramme
         If _Prog50 = 0 Then
             Prog_Lok50.Interval = 2000
         ElseIf _Prog50 = 1 Then
-            If _Durchsagen = 1 And (_TypL50 = 1 Or _TypL50 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog50 = 6
-            End If
         ElseIf _Prog50 = 2 Then
         ElseIf _Prog50 = 3 Then
         ElseIf _Prog50 = 4 Then
@@ -17564,27 +17337,25 @@ Public Class Automatikprogramme
 
         'SetText(TextBox1, "E-Lok CE 6/8                                                                  IBS: nein")
         'LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_CE68b_01.jpg")
-        GeschwindikeitenSetzen(50)
+        GeschwindikeitenSetzen(51)
 
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 50 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(51, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -17686,11 +17457,6 @@ Public Class Automatikprogramme
         If _Prog51 = 0 Then
             Prog_Lok51.Interval = 2000
         ElseIf _Prog51 = 1 Then
-            If _Durchsagen = 1 And (_TypL51 = 1 Or _TypL51 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog51 = 6
-            End If
         ElseIf _Prog51 = 2 Then
         ElseIf _Prog51 = 3 Then
         ElseIf _Prog51 = 4 Then
@@ -17896,20 +17662,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 52 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(52, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -18011,11 +17775,6 @@ Public Class Automatikprogramme
         If _Prog52 = 0 Then
             Prog_Lok52.Interval = 2000
         ElseIf _Prog52 = 1 Then
-            If _Durchsagen = 1 And (_TypL52 = 1 Or _TypL52 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog52 = 6
-            End If
         ElseIf _Prog52 = 2 Then
         ElseIf _Prog52 = 3 Then
         ElseIf _Prog52 = 4 Then
@@ -18221,20 +17980,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 53 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(53, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -18336,11 +18093,6 @@ Public Class Automatikprogramme
         If _Prog53 = 0 Then
             Prog_Lok53.Interval = 2000
         ElseIf _Prog53 = 1 Then
-            If _Durchsagen = 1 And (_TypL53 = 1 Or _TypL53 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog53 = 6
-            End If
         ElseIf _Prog53 = 2 Then
         ElseIf _Prog53 = 3 Then
         ElseIf _Prog53 = 4 Then
@@ -18546,20 +18298,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 54 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(54, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -18659,13 +18409,8 @@ Public Class Automatikprogramme
         ' Lok starten - Bahnhofsausfahrt
 
         If _Prog54 = 0 Then
-        ElseIf _Prog54 = 1 Then
             Prog_Lok54.Interval = 2000
-            If _Durchsagen = 1 And (_TypL54 = 1 Or _TypL54 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog54 = 6
-            End If
+        ElseIf _Prog54 = 1 Then
         ElseIf _Prog54 = 2 Then
         ElseIf _Prog54 = 3 Then
         ElseIf _Prog54 = 4 Then
@@ -18868,20 +18613,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 55 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(55, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19181,20 +18924,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 56 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(56, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19296,11 +19037,6 @@ Public Class Automatikprogramme
         If _Prog56 = 0 Then
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 1 Then
-            If _Durchsagen = 1 And (_TypL56 = 1 Or _TypL56 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog56 = 6
-            End If
         ElseIf _Prog56 = 2 Then
         ElseIf _Prog56 = 3 Then
         ElseIf _Prog56 = 4 Then
@@ -19503,20 +19239,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 57 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(57, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19616,16 +19350,11 @@ Public Class Automatikprogramme
         ' Lok starten - Bahnhofsausfahrt
 
         If _Prog57 = 0 Then
+            Prog_Lok57.Interval = 2000
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(57, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
-            Prog_Lok57.Interval = 2000
         ElseIf _Prog57 = 1 Then
-            If _Durchsagen = 1 And (_TypL57 = 1 Or _TypL57 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog57 = 6
-            End If
         ElseIf _Prog57 = 2 Then
         ElseIf _Prog57 = 3 Then
         ElseIf _Prog57 = 4 Then
@@ -19831,20 +19560,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 58 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(58, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -19954,11 +19681,6 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog58 = 2 Then
         ElseIf _Prog58 = 3 Then
-            If _Durchsagen = 1 And (_TypL58 = 1 Or _TypL58 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog58 = 6
-            End If
         ElseIf _Prog58 = 4 Then
         ElseIf _Prog58 = 5 Then
         ElseIf _Prog58 = 6 Then
@@ -20185,20 +19907,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 59 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(59, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -20507,20 +20227,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 60 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(60, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -20638,11 +20356,6 @@ Public Class Automatikprogramme
         ElseIf _Prog60 = 5 Then
         ElseIf _Prog60 = 6 Then
         ElseIf _Prog60 = 7 Then
-            If _Durchsagen = 1 And (_TypL60 = 1 Or _TypL60 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog60 = 10
-            End If
         ElseIf _Prog60 = 8 Then
         ElseIf _Prog60 = 9 Then
         ElseIf _Prog60 = 10 Then
@@ -20967,8 +20680,8 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Schienenbus 795 299-7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Schienenbus 795 299-7                                                   IBS: nein")
-        LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_798_12.jpg")
+        SetText(TextBox1, "Schienenbus 795 299-7                                                   IBS: 29.12.2025 - V3 : 8")
+        LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_795_01.jpg")
         GeschwindikeitenSetzen(61)
 
         Dim Stufe1, Stufe2, Stufe3, Stufe4 As Integer
@@ -20976,20 +20689,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 61 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(61, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -21006,34 +20717,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 7500
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -21091,11 +20802,7 @@ Public Class Automatikprogramme
         If _Prog61 = 0 Then
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 1 Then
-            If _Durchsagen = 1 And (_TypL61 = 1 Or _TypL61 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog61 = 6
-            End If
+            _Betriebsparameter.RundenErhoehen(61)
         ElseIf _Prog61 = 2 Then
         ElseIf _Prog61 = 3 Then
         ElseIf _Prog61 = 4 Then
@@ -21123,9 +20830,6 @@ Public Class Automatikprogramme
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 51 Then
         ElseIf _Prog61 = 52 Then
-            If _Fahrzeugbeleuchtung2 < 2 Then
-                _eb.lokSteuern(61, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
-            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Normalzug von links und von rechts)
 
@@ -21163,9 +20867,6 @@ Public Class Automatikprogramme
         ElseIf _Prog61 = 137 Then
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 138 Then
-            If _Fahrzeugbeleuchtung2 < 2 Then
-                _eb.lokSteuern(61, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
-            End If
 
             ' Lok bremsen (Bahnhofseinfahrt Kurzzug von rechts)
 
@@ -21187,9 +20888,6 @@ Public Class Automatikprogramme
         ElseIf _Prog61 = 167 Then
             Prog_Lok61.Interval = 2000
         ElseIf _Prog61 = 168 Then
-            If _Fahrzeugbeleuchtung2 < 2 Then
-                _eb.lokSteuern(61, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
-            End If
 
             ' Rangierzug
 
@@ -21301,20 +20999,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 62 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(62, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -21416,11 +21112,6 @@ Public Class Automatikprogramme
         If _Prog62 = 0 Then
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 1 Then
-            If _Durchsagen = 1 And (_TypL62 = 1 Or _TypL62 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog62 = 6
-            End If
         ElseIf _Prog62 = 2 Then
         ElseIf _Prog62 = 3 Then
         ElseIf _Prog62 = 4 Then
@@ -21626,20 +21317,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 63 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(63, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -21744,11 +21433,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(63, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog63 = 1 Then
-            If _Durchsagen = 1 And (_TypL63 = 1 Or _TypL63 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog63 = 6
-            End If
         ElseIf _Prog63 = 2 Then
         ElseIf _Prog63 = 3 Then
         ElseIf _Prog63 = 4 Then
@@ -21954,20 +21638,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 64 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(64, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -22073,11 +21755,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(64, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog64 = 2 Then
-            If _Durchsagen = 1 And (_TypL64 = 1 Or _TypL64 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog64 = 6
-            End If
         ElseIf _Prog64 = 3 Then
         ElseIf _Prog64 = 4 Then
         ElseIf _Prog64 = 5 Then
@@ -22284,20 +21961,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 65 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(65, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -22399,11 +22074,6 @@ Public Class Automatikprogramme
         If _Prog65 = 0 Then
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 1 Then
-            If _Durchsagen = 1 And (_TypL65 = 1 Or _TypL65 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog65 = 6
-            End If
         ElseIf _Prog65 = 2 Then
         ElseIf _Prog65 = 3 Then
         ElseIf _Prog65 = 4 Then
@@ -22619,20 +22289,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 66 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(66, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -22756,11 +22424,6 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion1, 0) ' Dampf aus
             End If
         ElseIf _Prog66 = 7 Then
-            If _Durchsagen = 1 And (_TypL66 = 1 Or _TypL66 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog66 = 9
-            End If
         ElseIf _Prog66 = 8 Then
         ElseIf _Prog66 = 9 Then
         ElseIf _Prog66 = 10 Then
@@ -23083,20 +22746,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 67 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(67, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -23207,11 +22868,6 @@ Public Class Automatikprogramme
         ElseIf _Prog67 = 2 Then
         ElseIf _Prog67 = 3 Then
         ElseIf _Prog67 = 4 Then
-            If _Durchsagen = 1 And (_TypL67 = 1 Or _TypL67 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Mann.wav")
-            Else
-                _Prog67 = 7
-            End If
         ElseIf _Prog67 = 5 Then
         ElseIf _Prog67 = 6 Then
 
@@ -23436,20 +23092,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 68 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(68, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -23921,20 +23575,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 69 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(69, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -24254,21 +23906,19 @@ Public Class Automatikprogramme
         Dim Stufe11, Stufe12, Stufe13, Stufe14, Stufe21, Stufe22, Stufe23, Stufe24 As Integer
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
-        Dim Index As Integer
         Dim G_200 As Integer
-        Index = 70 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(70, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -24676,20 +24326,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 71 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(71, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -24990,20 +24638,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 72 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(72, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -25105,11 +24751,6 @@ Public Class Automatikprogramme
         If _Prog72 = 0 Then
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 1 Then
-            If _Durchsagen = 1 And (_TypL72 = 1 Or _TypL72 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog72 = 6
-            End If
         ElseIf _Prog72 = 2 Then
         ElseIf _Prog72 = 3 Then
         ElseIf _Prog72 = 4 Then
@@ -25316,20 +24957,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 73 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(73, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -25800,20 +25439,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 74 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(74, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -25915,11 +25552,6 @@ Public Class Automatikprogramme
         If _Prog74 = 0 Then
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 1 Then
-            If _Durchsagen = 1 And (_TypL74 = 1 Or _TypL74 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog74 = 6
-            End If
         ElseIf _Prog74 = 2 Then
         ElseIf _Prog74 = 3 Then
         ElseIf _Prog74 = 4 Then
@@ -26127,20 +25759,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 75 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(75, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -26242,11 +25872,6 @@ Public Class Automatikprogramme
         If _Prog75 = 0 Then
             Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 1 Then
-            If _Durchsagen = 1 And (_TypL75 = 1 Or _TypL75 = 3) Then
-                PlayMusic("H:\\EB_Media\\Durchsagen\\Ansage Türen Frau.wav")
-            Else
-                _Prog75 = 6
-            End If
         ElseIf _Prog75 = 2 Then
         ElseIf _Prog75 = 3 Then
         ElseIf _Prog75 = 4 Then
@@ -26452,20 +26077,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 76 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(76, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -26806,20 +26429,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 77 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(77, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -27155,20 +26776,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 78 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(78, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -27464,20 +27083,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 79 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(79, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
 
         If A_StopB = 1 Then
@@ -27824,20 +27441,18 @@ Public Class Automatikprogramme
         Dim V_100, V_130, V_160, V_180, V_500 As Integer
         Dim T_100, T_130, T_160, T_180, T_500 As Integer
         Dim G_200 As Integer
-        Dim Index As Integer
-        Index = 80 + 4
 
-        T_100 = Betriebsparameter.GetValue("Fahrparameter", 4, Index)
-        T_130 = Betriebsparameter.GetValue("Fahrparameter", 5, Index)
-        T_160 = Betriebsparameter.GetValue("Fahrparameter", 6, Index)
-        T_180 = Betriebsparameter.GetValue("Fahrparameter", 7, Index)
-        T_500 = Betriebsparameter.GetValue("Fahrparameter", 8, Index)
-        V_100 = Betriebsparameter.GetValue("Fahrparameter", 9, Index)
-        V_130 = Betriebsparameter.GetValue("Fahrparameter", 10, Index)
-        V_160 = Betriebsparameter.GetValue("Fahrparameter", 11, Index)
-        V_180 = Betriebsparameter.GetValue("Fahrparameter", 12, Index)
-        V_500 = Betriebsparameter.GetValue("Fahrparameter", 13, Index)
-        G_200 = Betriebsparameter.GetValue("Fahrparameter", 14, Index)
+        T_100 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_100)
+        T_130 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_130)
+        T_160 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_160)
+        T_180 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_180)
+        T_500 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.T_500)
+        V_100 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_100)
+        V_130 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_130)
+        V_160 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_160)
+        V_180 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_180)
+        V_500 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.V_500)
+        G_200 = _Betriebsparameter.Fahrparameter(80, KlausEBspecific.Betriebsparameter.FahrparameterEnum.G_200)
 
         If A_StopB = 1 Then
             V_100 = 8000
@@ -28159,26 +27774,26 @@ Public Class Automatikprogramme
     ' *** Kontakt 0.0 false - Bahnhofsausfahrt
     Private Sub BahnhofsausfahrtLok1(Kontakt)
         If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = False And AutomatikParameter = 100 Then
-            'If _Route_Gleis1 = 0 Or _Route_Gleis1 = 2 Then
-            '    If _SBhf_Gleis1 > 0 Then
-            '        _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
-            '    Else
-            '        _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
-            '    End If
-            'End If
+            If _Route_Gleis1 = 0 Or _Route_Gleis1 = 2 Then
+                If _SBhf_Gleis1 > 0 Then
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                Else
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
+                End If
+            End If
             AutomatikParameter = 101
         End If
     End Sub
     ' *** Kontakt 0.2 false
     Private Sub BahnhofsausfahrtLok2(Kontakt)
         If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = False And AutomatikParameter = 200 Then
-            'If _Route_Gleis2 = 0 Or _Route_Gleis2 = 2 Then
-            '    If _SBhf_Gleis2 > 0 Then
-            '        _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
-            '    Else
-            '        _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
-            '    End If
-            'End If
+            If _Route_Gleis2 = 0 Or _Route_Gleis2 = 2 Then
+                If _SBhf_Gleis2 > 0 Then
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                Else
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
+                End If
+            End If
             AutomatikParameter = 201
         End If
     End Sub
@@ -28339,6 +27954,7 @@ Public Class Automatikprogramme
                 Timer_EinzelLok2.Start()
                 ' *** Zug 2 wechselt auf Zug 3
             ElseIf _SBhf_Gleis2 = 3 Then
+                _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
                 If Ort_Lok3 = 0 Or Ort_Lok3 = 300 Then
                     Button33.BackColor = Drawing.Color.Red
                 ElseIf Ort_Lok3 = 310 Then
@@ -28406,6 +28022,7 @@ Public Class Automatikprogramme
                 Timer_EinzelLok1.Start()
                 ' *** Zug 3 wechselt auf Zug 2
             ElseIf _SBhf_Gleis3 = 2 Then
+                _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
                 If Ort_Lok2 = 0 Or Ort_Lok2 = 200 Then
                     Button32.BackColor = Drawing.Color.Red
                 ElseIf Ort_Lok2 = 202 Then
