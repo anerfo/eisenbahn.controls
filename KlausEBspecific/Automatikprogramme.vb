@@ -7,6 +7,12 @@
 '***
 '*** Letzte Änderung:
 '***
+'***                 Betriebsartenvarianten werden gespeichert
+'***
+'***                 Betriebsart 2-0 Variante 1 eingebaut
+'***
+'***                 Rundenzähler eingebaut
+'***
 '***                 Kontakt 0.0 false und Kontakt 0.2 false - Bahnhofsausfahrt - auskommentierte Zeilen reaktiviert
 '***                 (Signal 11 schalten)
 '***
@@ -118,6 +124,7 @@ Public Class Automatikprogramme
     Private Forbach, Marxzel, Windeck As Integer
 
     Private L1_aktuell, L2_aktuell, L3_aktuell, L4_aktuell, L5_aktuell, L6_aktuell, L7_aktuell, L1_soll, L2_soll, L3_soll, L4_soll, L5_soll, L6_soll, L7_soll, S_DMX, Szene, DMX_Pointer, DMX_Klick As Integer
+
     Private Bri_aktuell, Sat_aktuell, Col_aktuell, CT_aktuell, CT_M, Bri_soll, Bri_M, Sat_soll, Col_soll, CT_soll, Hue_Control, Hue_Control_aktuell, Hue_Control_M, Hue_Takt, Hue_Aenderung, Hue_Neue_Aenderung As Integer
     Private FilmFortschritt As Integer
     Private Fahrplan, Warte1A1, Warte1A2, Warte1SB, Warte1BA, Warte1TA, Warte1DI, Warte2A1, Warte2A2, Warte2SB, Warte2BA, Warte2TA, Warte2DI, Warte3A1, Warte3A2, Warte3SB, Warte3BA, Warte3TA, Warte3DI, Warte4A1, Warte4A2, Warte4SB, Warte4BA, Warte4TA, Warte4DI As Integer
@@ -295,27 +302,6 @@ Public Class Automatikprogramme
         Marxzel = 1
         Windeck = 0
 
-        _Betriebsart0_3Var = 0
-        _Betriebsart0_4Var = 0
-        _Betriebsart0_5Var = 0
-        _Betriebsart1_0Var = 0
-        _Betriebsart1_3Var = 0
-        _Betriebsart1_4Var = 0
-        _Betriebsart1_5Var = 0
-        _Betriebsart2_0Var = 0
-        _Betriebsart2_3Var = 0
-        _Betriebsart2_4Var = 0
-        _Betriebsart2_5Var = 0
-        _Betriebsart3_0Var = 0
-        _Betriebsart3_3Var = 0
-        _Betriebsart3_4Var = 0
-        _Betriebsart3_5Var = 0
-
-        Button19.Text = "V0"
-        Button38.Text = "V0"
-        Button30.Text = "V0"
-        Button35.Text = "V0"
-        Button40.Text = "V0"
 
         AutomatikParameter = 0
         AutomatikParameter1 = 0
@@ -384,12 +370,53 @@ Public Class Automatikprogramme
         _Zugtyp3 = _daten.read_from_table(AutomatikParameterTableName, 48)
         _Zugtyp4 = _daten.read_from_table(AutomatikParameterTableName, 49)
         _Hue = _daten.read_from_table(AutomatikParameterTableName, 50)
-        Hue_Control = _daten.read_from_table(AutomatikParameterTableName, 53)
-
 
         'FilmZeile = _daten.read_from_table(AutomatikParameterTableName, 51)
 
         ComboBox1.SelectedIndex = _daten.read_from_table(AutomatikParameterTableName, 52)
+        Hue_Control = _daten.read_from_table(AutomatikParameterTableName, 53)
+
+        _Betriebsart0_3Var = _daten.read_from_table(AutomatikParameterTableName, 54)
+        _Betriebsart0_4Var = _daten.read_from_table(AutomatikParameterTableName, 55)
+        _Betriebsart0_5Var = _daten.read_from_table(AutomatikParameterTableName, 56)
+        _Betriebsart1_0Var = _daten.read_from_table(AutomatikParameterTableName, 57)
+        _Betriebsart1_3Var = _daten.read_from_table(AutomatikParameterTableName, 58)
+        _Betriebsart1_4Var = _daten.read_from_table(AutomatikParameterTableName, 59)
+        _Betriebsart1_5Var = _daten.read_from_table(AutomatikParameterTableName, 60)
+        _Betriebsart2_0Var = _daten.read_from_table(AutomatikParameterTableName, 61)
+        _Betriebsart2_3Var = _daten.read_from_table(AutomatikParameterTableName, 62)
+        _Betriebsart2_4Var = _daten.read_from_table(AutomatikParameterTableName, 63)
+        _Betriebsart2_5Var = _daten.read_from_table(AutomatikParameterTableName, 64)
+        _Betriebsart3_0Var = _daten.read_from_table(AutomatikParameterTableName, 65)
+        _Betriebsart3_3Var = _daten.read_from_table(AutomatikParameterTableName, 66)
+        _Betriebsart3_4Var = _daten.read_from_table(AutomatikParameterTableName, 67)
+        _Betriebsart3_5Var = _daten.read_from_table(AutomatikParameterTableName, 68)
+
+        Button19.Text = "V0"    ' Gleis1/Gleis2
+        Button38.Text = "V0"    ' Gleis3/Gleis4
+        Button30.Text = "V0"    ' Gleis3
+        Button35.Text = "V0"    ' Gleis4
+        Button40.Text = "V0"    ' Gleis1
+        Button44.Text = "V0"    ' Gleis2
+
+        If _Betriebsart1_0Var = 1 Then
+            Button40.Text = "V1"
+        End If
+        If _Betriebsart2_0Var = 1 Then
+            Button44.Text = "V1"
+        End If
+        If _Betriebsart0_3Var = 1 Then
+            Button30.Text = "V1"
+        End If
+        If _Betriebsart0_4Var = 1 Then
+            Button35.Text = "V1"
+        End If
+        If _Betriebsart3_0Var = 1 Then
+            Button19.Text = "V1"
+        End If
+        If _Betriebsart0_5Var = 1 Then
+            Button38.Text = "V1"
+        End If
 
         ARoute_Lok1 = _Route_Gleis1
         ARoute_Lok2 = _Route_Gleis2
@@ -1666,6 +1693,7 @@ Public Class Automatikprogramme
         Button30.Enabled = aktiv
         Button35.Enabled = aktiv
         Button40.Enabled = aktiv
+        Button44.Enabled = aktiv
 
     End Sub
 
@@ -3168,6 +3196,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog10 = 1 Then
+            _Betriebsparameter.RundenErhoehen(10)
         ElseIf _Prog10 = 2 Then
             If _Motor > 0 Then
                 _eb.lokSteuern(10, Klassen.LokEigenschaften.Funktion1, 1) ' Motor ein
@@ -3617,6 +3646,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(11, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog11 = 1 Then
+            _Betriebsparameter.RundenErhoehen(11)
         ElseIf _Prog11 = 2 Then
         ElseIf _Prog11 = 3 Then
 
@@ -3943,6 +3973,7 @@ Public Class Automatikprogramme
         ElseIf _Prog12 = 1 Then
             _eb.lokSteuern(40, Klassen.LokEigenschaften.Geschwindigkeit, 0)
         ElseIf _Prog12 = 2 Then
+            _Betriebsparameter.RundenErhoehen(12)
         ElseIf _Prog12 = 3 Then
         ElseIf _Prog12 = 4 Then
         ElseIf _Prog12 = 5 Then
@@ -4279,6 +4310,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog13 = 1 Then
         ElseIf _Prog13 = 2 Then
+            _Betriebsparameter.RundenErhoehen(13)
         ElseIf _Prog13 = 3 Then
         ElseIf _Prog13 = 4 Then
         ElseIf _Prog13 = 5 Then
@@ -4479,7 +4511,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm SBB Lok2000 460 024-3
         '*** Datum: 08.10.2020
 
-        SetText(TextBox1, "E-Lok SBB 460 024-3                                                     IBS: 08.10.2021 - V3 : 9")
+        SetText(TextBox1, "E-Lok SBB 460 024-3                                                     IBS: 29.12.2025 - V3 : 9")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_460_01.jpg")
         GeschwindikeitenSetzen(14)
 
@@ -4605,6 +4637,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog14 = 1 Then
         ElseIf _Prog14 = 2 Then
+            _Betriebsparameter.RundenErhoehen(14)
         ElseIf _Prog14 = 3 Then
         ElseIf _Prog14 = 4 Then
         ElseIf _Prog14 = 5 Then
@@ -4927,6 +4960,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog15 = 1 Then
         ElseIf _Prog15 = 2 Then
+            _Betriebsparameter.RundenErhoehen(15)
         ElseIf _Prog15 = 3 Then
         ElseIf _Prog15 = 4 Then
         ElseIf _Prog15 = 5 Then
@@ -5249,6 +5283,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog16 = 1 Then
         ElseIf _Prog16 = 2 Then
+            _Betriebsparameter.RundenErhoehen(16)
         ElseIf _Prog16 = 3 Then
         ElseIf _Prog16 = 4 Then
         ElseIf _Prog16 = 5 Then
@@ -5570,6 +5605,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog17 = 1 Then
         ElseIf _Prog17 = 2 Then
+            _Betriebsparameter.RundenErhoehen(17)
         ElseIf _Prog17 = 3 Then
         ElseIf _Prog17 = 4 Then
         ElseIf _Prog17 = 5 Then
@@ -5891,6 +5927,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog18 = 1 Then
         ElseIf _Prog18 = 2 Then
+            _Betriebsparameter.RundenErhoehen(18)
         ElseIf _Prog18 = 3 Then
         ElseIf _Prog18 = 4 Then
         ElseIf _Prog18 = 5 Then
@@ -6213,6 +6250,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(19, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog19 = 1 Then
+            _Betriebsparameter.RundenErhoehen(19)
         ElseIf _Prog19 = 2 Then
             If _Innenbeleuchtung2 > 0 Then
                 _eb.lokSteuern(19, Klassen.LokEigenschaften.Funktion2, 1) ' Fernlicht ein
@@ -6542,6 +6580,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog20 = 1 Then
         ElseIf _Prog20 = 2 Then
+            _Betriebsparameter.RundenErhoehen(20)
         ElseIf _Prog20 = 3 Then
         ElseIf _Prog20 = 4 Then
         ElseIf _Prog20 = 5 Then
@@ -6860,6 +6899,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog21 = 1 Then
         ElseIf _Prog21 = 2 Then
+            _Betriebsparameter.RundenErhoehen(21)
         ElseIf _Prog21 = 3 Then
         ElseIf _Prog21 = 4 Then
         ElseIf _Prog21 = 5 Then
@@ -7184,6 +7224,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog22 = 1 Then
         ElseIf _Prog22 = 2 Then
+            _Betriebsparameter.RundenErhoehen(22)
         ElseIf _Prog22 = 3 Then
         ElseIf _Prog22 = 4 Then
         ElseIf _Prog22 = 5 Then
@@ -7510,6 +7551,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog23 = 1 Then
         ElseIf _Prog23 = 2 Then
+            _Betriebsparameter.RundenErhoehen(23)
         ElseIf _Prog23 = 3 Then
         ElseIf _Prog23 = 4 Then
         ElseIf _Prog23 = 5 Then
@@ -7833,6 +7875,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog24 = 1 Then
         ElseIf _Prog24 = 2 Then
+            _Betriebsparameter.RundenErhoehen(24)
         ElseIf _Prog24 = 3 Then
         ElseIf _Prog24 = 4 Then
         ElseIf _Prog24 = 5 Then
@@ -8156,6 +8199,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog25 = 1 Then
         ElseIf _Prog25 = 2 Then
+            _Betriebsparameter.RundenErhoehen(25)
         ElseIf _Prog25 = 3 Then
         ElseIf _Prog25 = 4 Then
         ElseIf _Prog25 = 5 Then
@@ -8477,6 +8521,7 @@ Public Class Automatikprogramme
             Prog_Lok26.Interval = 2000
         ElseIf _Prog26 = 1 Then
         ElseIf _Prog26 = 2 Then
+            _Betriebsparameter.RundenErhoehen(26)
         ElseIf _Prog26 = 3 Then
         ElseIf _Prog26 = 4 Then
         ElseIf _Prog26 = 5 Then
@@ -8799,6 +8844,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog27 = 2 Then
         ElseIf _Prog27 = 3 Then
+            _Betriebsparameter.RundenErhoehen(27)
         ElseIf _Prog27 = 4 Then
         ElseIf _Prog27 = 5 Then
         ElseIf _Prog27 = 6 Then
@@ -9236,6 +9282,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(28, Klassen.LokEigenschaften.Hauptfunktion, 0) ' Licht aus
             End If
         ElseIf _Prog28 = 2 Then
+            _Betriebsparameter.RundenErhoehen(28)
         ElseIf _Prog28 = 3 Then
         ElseIf _Prog28 = 4 Then
         ElseIf _Prog28 = 5 Then
@@ -9641,6 +9688,7 @@ Public Class Automatikprogramme
                 _Prog29 = 6
             End If
         ElseIf _Prog29 = 3 Then
+            _Betriebsparameter.RundenErhoehen(29)
         ElseIf _Prog29 = 4 Then
         ElseIf _Prog29 = 5 Then
         ElseIf _Prog29 = 6 Then
@@ -10037,6 +10085,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Durchsage ein
             End If
         ElseIf _Prog30 = 2 Then
+            _Betriebsparameter.RundenErhoehen(30)
         ElseIf _Prog30 = 3 Then
         ElseIf _Prog30 = 4 Then
         ElseIf _Prog30 = 5 Then
@@ -10446,6 +10495,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog31 = 1 Then
         ElseIf _Prog31 = 2 Then
+            _Betriebsparameter.RundenErhoehen(31)
         ElseIf _Prog31 = 3 Then
         ElseIf _Prog31 = 4 Then
         ElseIf _Prog31 = 5 Then
@@ -10769,6 +10819,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog32 = 1 Then
         ElseIf _Prog32 = 2 Then
+            _Betriebsparameter.RundenErhoehen(32)
         ElseIf _Prog32 = 3 Then
         ElseIf _Prog32 = 4 Then
         ElseIf _Prog32 = 5 Then
@@ -11091,6 +11142,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog33 = 1 Then
         ElseIf _Prog33 = 2 Then
+            _Betriebsparameter.RundenErhoehen(33)
         ElseIf _Prog33 = 3 Then
         ElseIf _Prog33 = 4 Then
         ElseIf _Prog33 = 5 Then
@@ -11413,6 +11465,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog34 = 1 Then
         ElseIf _Prog34 = 2 Then
+            _Betriebsparameter.RundenErhoehen(34)
         ElseIf _Prog34 = 3 Then
         ElseIf _Prog34 = 4 Then
         ElseIf _Prog34 = 5 Then
@@ -11734,6 +11787,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog35 = 1 Then
         ElseIf _Prog35 = 2 Then
+            _Betriebsparameter.RundenErhoehen(35)
         ElseIf _Prog35 = 3 Then
         ElseIf _Prog35 = 4 Then
         ElseIf _Prog35 = 5 Then
@@ -12056,6 +12110,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog36 = 1 Then
         ElseIf _Prog36 = 2 Then
+            _Betriebsparameter.RundenErhoehen(36)
         ElseIf _Prog36 = 3 Then
         ElseIf _Prog36 = 4 Then
         ElseIf _Prog36 = 5 Then
@@ -12377,6 +12432,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog37 = 1 Then
         ElseIf _Prog37 = 2 Then
+            _Betriebsparameter.RundenErhoehen(37)
         ElseIf _Prog37 = 3 Then
         ElseIf _Prog37 = 4 Then
         ElseIf _Prog37 = 5 Then
@@ -12699,6 +12755,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog38 = 1 Then
         ElseIf _Prog38 = 2 Then
+            _Betriebsparameter.RundenErhoehen(38)
         ElseIf _Prog38 = 3 Then
         ElseIf _Prog38 = 4 Then
         ElseIf _Prog38 = 5 Then
@@ -13066,6 +13123,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(39, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog39 = 2 Then
+            _Betriebsparameter.RundenErhoehen(39)
         ElseIf _Prog39 = 3 Then
         ElseIf _Prog39 = 4 Then
         ElseIf _Prog39 = 5 Then
@@ -13404,6 +13462,7 @@ Public Class Automatikprogramme
                 _Prog40 = 7
             End If
         ElseIf _Prog40 = 6 Then
+            _Betriebsparameter.RundenErhoehen(40)
         ElseIf _Prog40 = 7 Then
         ElseIf _Prog40 = 8 Then
         ElseIf _Prog40 = 9 Then
@@ -13883,6 +13942,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
         ElseIf _Prog41 = 2 Then
+            _Betriebsparameter.RundenErhoehen(41)
         ElseIf _Prog41 = 3 Then
             If _Innenbeleuchtung2 > 0 Then
                 _eb.lokSteuern(41, Klassen.LokEigenschaften.Funktion1, 1) ' Innenbeleuchtung ein
@@ -14333,8 +14393,8 @@ Public Class Automatikprogramme
             Else
                 _eb.lokSteuern(42, Klassen.LokEigenschaften.Funktion3, 0) ' Motor aus
             End If
-        ElseIf _Prog42 = 3 Then
         ElseIf _Prog42 = 4 Then
+            _Betriebsparameter.RundenErhoehen(42)
         ElseIf _Prog42 = 5 Then
         ElseIf _Prog42 = 6 Then
 
@@ -14767,6 +14827,7 @@ Public Class Automatikprogramme
             Prog_Lok43.Interval = 2000
         ElseIf _Prog43 = 1 Then
         ElseIf _Prog43 = 2 Then
+            _Betriebsparameter.RundenErhoehen(43)
         ElseIf _Prog43 = 3 Then
         ElseIf _Prog43 = 4 Then
         ElseIf _Prog43 = 5 Then
@@ -15088,6 +15149,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog44 = 1 Then
         ElseIf _Prog44 = 2 Then
+            _Betriebsparameter.RundenErhoehen(44)
         ElseIf _Prog44 = 3 Then
         ElseIf _Prog44 = 4 Then
         ElseIf _Prog44 = 5 Then
@@ -15409,6 +15471,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog45 = 1 Then
         ElseIf _Prog45 = 2 Then
+            _Betriebsparameter.RundenErhoehen(45)
         ElseIf _Prog45 = 3 Then
         ElseIf _Prog45 = 4 Then
         ElseIf _Prog45 = 5 Then
@@ -15730,6 +15793,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog46 = 1 Then
         ElseIf _Prog46 = 2 Then
+            _Betriebsparameter.RundenErhoehen(46)
         ElseIf _Prog46 = 3 Then
         ElseIf _Prog46 = 4 Then
         ElseIf _Prog46 = 5 Then
@@ -16052,6 +16116,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog47 = 2 Then
         ElseIf _Prog47 = 3 Then
+            _Betriebsparameter.RundenErhoehen(47)
         ElseIf _Prog47 = 4 Then
         ElseIf _Prog47 = 5 Then
         ElseIf _Prog47 = 6 Then
@@ -16377,6 +16442,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(48, Klassen.LokEigenschaften.Funktion1, 1) ' Motor ein
             End If
         ElseIf _Prog48 = 2 Then
+            _Betriebsparameter.RundenErhoehen(48)
         ElseIf _Prog48 = 3 Then
         ElseIf _Prog48 = 4 Then
         ElseIf _Prog48 = 5 Then
@@ -16819,6 +16885,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(49, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog49 = 2 Then
+            _Betriebsparameter.RundenErhoehen(49)
         ElseIf _Prog49 = 3 Then
         ElseIf _Prog49 = 4 Then
         ElseIf _Prog49 = 5 Then
@@ -17139,6 +17206,7 @@ Public Class Automatikprogramme
             Prog_Lok50.Interval = 2000
         ElseIf _Prog50 = 1 Then
         ElseIf _Prog50 = 2 Then
+            _Betriebsparameter.RundenErhoehen(50)
         ElseIf _Prog50 = 3 Then
         ElseIf _Prog50 = 4 Then
         ElseIf _Prog50 = 5 Then
@@ -17458,6 +17526,7 @@ Public Class Automatikprogramme
             Prog_Lok51.Interval = 2000
         ElseIf _Prog51 = 1 Then
         ElseIf _Prog51 = 2 Then
+            _Betriebsparameter.RundenErhoehen(51)
         ElseIf _Prog51 = 3 Then
         ElseIf _Prog51 = 4 Then
         ElseIf _Prog51 = 5 Then
@@ -17776,6 +17845,7 @@ Public Class Automatikprogramme
             Prog_Lok52.Interval = 2000
         ElseIf _Prog52 = 1 Then
         ElseIf _Prog52 = 2 Then
+            _Betriebsparameter.RundenErhoehen(52)
         ElseIf _Prog52 = 3 Then
         ElseIf _Prog52 = 4 Then
         ElseIf _Prog52 = 5 Then
@@ -18094,6 +18164,7 @@ Public Class Automatikprogramme
             Prog_Lok53.Interval = 2000
         ElseIf _Prog53 = 1 Then
         ElseIf _Prog53 = 2 Then
+            _Betriebsparameter.RundenErhoehen(53)
         ElseIf _Prog53 = 3 Then
         ElseIf _Prog53 = 4 Then
         ElseIf _Prog53 = 5 Then
@@ -18412,6 +18483,7 @@ Public Class Automatikprogramme
             Prog_Lok54.Interval = 2000
         ElseIf _Prog54 = 1 Then
         ElseIf _Prog54 = 2 Then
+            _Betriebsparameter.RundenErhoehen(54)
         ElseIf _Prog54 = 3 Then
         ElseIf _Prog54 = 4 Then
         ElseIf _Prog54 = 5 Then
@@ -18727,6 +18799,7 @@ Public Class Automatikprogramme
             Prog_Lok55.Interval = 2000
         ElseIf _Prog55 = 1 Then
         ElseIf _Prog55 = 2 Then
+            _Betriebsparameter.RundenErhoehen(55)
         ElseIf _Prog55 = 3 Then
         ElseIf _Prog55 = 4 Then
         ElseIf _Prog55 = 5 Then
@@ -19038,6 +19111,7 @@ Public Class Automatikprogramme
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 1 Then
         ElseIf _Prog56 = 2 Then
+            _Betriebsparameter.RundenErhoehen(56)
         ElseIf _Prog56 = 3 Then
         ElseIf _Prog56 = 4 Then
         ElseIf _Prog56 = 5 Then
@@ -19356,6 +19430,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog57 = 1 Then
         ElseIf _Prog57 = 2 Then
+            _Betriebsparameter.RundenErhoehen(57)
         ElseIf _Prog57 = 3 Then
         ElseIf _Prog57 = 4 Then
         ElseIf _Prog57 = 5 Then
@@ -19680,6 +19755,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(58, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
             End If
         ElseIf _Prog58 = 2 Then
+            _Betriebsparameter.RundenErhoehen(58)
         ElseIf _Prog58 = 3 Then
         ElseIf _Prog58 = 4 Then
         ElseIf _Prog58 = 5 Then
@@ -20024,6 +20100,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog59 = 1 Then
         ElseIf _Prog59 = 2 Then
+            _Betriebsparameter.RundenErhoehen(59)
         ElseIf _Prog59 = 3 Then
         ElseIf _Prog59 = 4 Then
         ElseIf _Prog59 = 5 Then
@@ -20354,6 +20431,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(60, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
             End If
         ElseIf _Prog60 = 5 Then
+            _Betriebsparameter.RundenErhoehen(60)
         ElseIf _Prog60 = 6 Then
         ElseIf _Prog60 = 7 Then
         ElseIf _Prog60 = 8 Then
@@ -21113,6 +21191,7 @@ Public Class Automatikprogramme
             Prog_Lok62.Interval = 2000
         ElseIf _Prog62 = 1 Then
         ElseIf _Prog62 = 2 Then
+            _Betriebsparameter.RundenErhoehen(62)
         ElseIf _Prog62 = 3 Then
         ElseIf _Prog62 = 4 Then
         ElseIf _Prog62 = 5 Then
@@ -21434,6 +21513,7 @@ Public Class Automatikprogramme
             End If
         ElseIf _Prog63 = 1 Then
         ElseIf _Prog63 = 2 Then
+            _Betriebsparameter.RundenErhoehen(63)
         ElseIf _Prog63 = 3 Then
         ElseIf _Prog63 = 4 Then
         ElseIf _Prog63 = 5 Then
@@ -21755,6 +21835,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(64, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
         ElseIf _Prog64 = 2 Then
+            _Betriebsparameter.RundenErhoehen(64)
         ElseIf _Prog64 = 3 Then
         ElseIf _Prog64 = 4 Then
         ElseIf _Prog64 = 5 Then
@@ -22075,6 +22156,7 @@ Public Class Automatikprogramme
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 1 Then
         ElseIf _Prog65 = 2 Then
+            _Betriebsparameter.RundenErhoehen(65)
         ElseIf _Prog65 = 3 Then
         ElseIf _Prog65 = 4 Then
         ElseIf _Prog65 = 5 Then
@@ -22415,6 +22497,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(66, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
         ElseIf _Prog66 = 3 Then
+            _Betriebsparameter.RundenErhoehen(66)
         ElseIf _Prog66 = 4 Then
         ElseIf _Prog66 = 5 Then
         ElseIf _Prog66 = 6 Then
@@ -22866,6 +22949,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(67, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
         ElseIf _Prog67 = 2 Then
+            _Betriebsparameter.RundenErhoehen(67)
         ElseIf _Prog67 = 3 Then
         ElseIf _Prog67 = 4 Then
         ElseIf _Prog67 = 5 Then
@@ -23220,6 +23304,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(68, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
         ElseIf _Prog68 = 4 Then
+            _Betriebsparameter.RundenErhoehen(68)
         ElseIf _Prog68 = 5 Then
         ElseIf _Prog68 = 6 Then
 
@@ -23695,6 +23780,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(69, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
         ElseIf _Prog69 = 2 Then
+            _Betriebsparameter.RundenErhoehen(69)
         ElseIf _Prog69 = 3 Then
         ElseIf _Prog69 = 4 Then
         ElseIf _Prog69 = 5 Then
@@ -24028,6 +24114,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(70, Klassen.LokEigenschaften.Funktion1, 1) ' Dampf ein
             End If
         ElseIf _Prog70 = 3 Then
+            _Betriebsparameter.RundenErhoehen(70)
         ElseIf _Prog70 = 4 Then
         ElseIf _Prog70 = 5 Then
         ElseIf _Prog70 = 6 Then
@@ -24439,6 +24526,7 @@ Public Class Automatikprogramme
         If _Prog71 = 0 Then
             Prog_Lok71.Interval = 2000
         ElseIf _Prog71 = 1 Then
+            _Betriebsparameter.RundenErhoehen(71)
         ElseIf _Prog71 = 2 Then
 
             ' Bahnhofsausfahrt
@@ -24752,6 +24840,7 @@ Public Class Automatikprogramme
             Prog_Lok72.Interval = 2000
         ElseIf _Prog72 = 1 Then
         ElseIf _Prog72 = 2 Then
+            _Betriebsparameter.RundenErhoehen(72)
         ElseIf _Prog72 = 3 Then
         ElseIf _Prog72 = 4 Then
         ElseIf _Prog72 = 5 Then
@@ -25083,6 +25172,7 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(73, Klassen.LokEigenschaften.Funktion2, 0) ' Dampfgeräusch aus
             End If
         ElseIf _Prog73 = 3 Then
+            _Betriebsparameter.RundenErhoehen(73)
         ElseIf _Prog73 = 4 Then
         ElseIf _Prog73 = 5 Then
         ElseIf _Prog73 = 6 Then
@@ -25553,6 +25643,7 @@ Public Class Automatikprogramme
             Prog_Lok74.Interval = 2000
         ElseIf _Prog74 = 1 Then
         ElseIf _Prog74 = 2 Then
+            _Betriebsparameter.RundenErhoehen(74)
         ElseIf _Prog74 = 3 Then
         ElseIf _Prog74 = 4 Then
         ElseIf _Prog74 = 5 Then
@@ -25873,6 +25964,7 @@ Public Class Automatikprogramme
             Prog_Lok75.Interval = 2000
         ElseIf _Prog75 = 1 Then
         ElseIf _Prog75 = 2 Then
+            _Betriebsparameter.RundenErhoehen(75)
         ElseIf _Prog75 = 3 Then
         ElseIf _Prog75 = 4 Then
         ElseIf _Prog75 = 5 Then
@@ -26199,6 +26291,7 @@ Public Class Automatikprogramme
                 _Prog76 = 6
             End If
         ElseIf _Prog76 = 2 Then
+            _Betriebsparameter.RundenErhoehen(76)
         ElseIf _Prog76 = 3 Then
         ElseIf _Prog76 = 4 Then
         ElseIf _Prog76 = 5 Then
@@ -26548,6 +26641,7 @@ Public Class Automatikprogramme
                 _Prog77 = 6
             End If
         ElseIf _Prog77 = 2 Then
+            _Betriebsparameter.RundenErhoehen(77)
         ElseIf _Prog77 = 3 Then
         ElseIf _Prog77 = 4 Then
         ElseIf _Prog77 = 5 Then
@@ -26890,6 +26984,7 @@ Public Class Automatikprogramme
             Prog_Lok78.Interval = 2000
         ElseIf _Prog78 = 1 Then
         ElseIf _Prog78 = 2 Then
+            _Betriebsparameter.RundenErhoehen(78)
         ElseIf _Prog78 = 3 Then
         ElseIf _Prog78 = 4 Then
         ElseIf _Prog78 = 5 Then
@@ -27204,6 +27299,7 @@ Public Class Automatikprogramme
                 _Prog79 = 6
             End If
         ElseIf _Prog79 = 2 Then
+            _Betriebsparameter.RundenErhoehen(79)
         ElseIf _Prog79 = 3 Then
         ElseIf _Prog79 = 4 Then
         ElseIf _Prog79 = 5 Then
@@ -27555,6 +27651,7 @@ Public Class Automatikprogramme
             Prog_Lok80.Interval = 2000
         ElseIf _Prog80 = 1 Then
         ElseIf _Prog80 = 2 Then
+            _Betriebsparameter.RundenErhoehen(80)
         ElseIf _Prog80 = 3 Then
         ElseIf _Prog80 = 4 Then
         ElseIf _Prog80 = 5 Then
@@ -35311,6 +35408,73 @@ Public Class Automatikprogramme
             _AutomatikParameterH = 0
         End If
     End Sub
+    Private Sub Betriebsart2_0Var1(ByVal Kontakt As Klassen.Kontakt)
+        ' *** Betriebsart 1/2=2 und ' *** Betriebsart 3/4=0
+        ' ***
+        ' *** Datum:          01.01.2026
+        ' ***
+        ' *** Kommentar allgemein            : kein
+        ' ***       
+        ' *** getestet:       Route Gleis 2  : oben kurz
+        ' ***                 Kurzug         :  nein()
+        ' ***                 
+        ' ***
+        ' ***                 
+        ' ***
+        ' ***
+        ' *** Bahnhofsausfahrt Zug auf Gleis 2
+        ' ***
+
+        'BahnhofsausfahrtLok2(Kontakt)
+
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = False And (AutomatikParameter = 200 Or AutomatikParameter = 206) Then
+            AutomatikParameter = 210
+        End If
+
+        BergfahrtLok2(Kontakt)
+
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 220 Then
+            AutomatikParameter = 202
+            Ort_Lok2 = 202
+            Zug2(700)
+        End If
+
+        ' ***
+        ' *** Ankunft im Bahnhof
+        ' ***
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 202 Then
+            Ort_Lok2 = 205
+            _AutomatikParameterH = 221
+            If A_Stop = 0 Then
+                A_StopH = 0
+                If _Bhf2_Gleis2 = 0 Then
+                    _StopZug2 = 0
+                    AutomatikParameter = 221
+                Else
+                    _StopZug2 = 2
+                    StopStart120Lok(2, 2)
+                End If
+            Else
+                A_StopH = 1
+                _StopZug2 = 2
+                StopStart120Lok(2, 2)
+            End If
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = True And _AutomatikParameterH = 221 Then
+            If _StopZug2 = 0 And A_StopH = 0 Then
+                AutomatikParameter = 200
+            Else
+                'Zug2(nachlauf)
+                If _NachlaufZug2 = False Then
+                    StopZug2()
+                    Zug2(abstellen)
+                Else
+                    Zug2(nachlauf)
+                End If
+            End If
+            _AutomatikParameterH = 0
+        End If
+    End Sub
     Private Sub Betriebsart2_3(ByVal Kontakt As Klassen.Kontakt)
         ' *** Betriebsart 1/2=2 und ' *** Betriebsart 3/4=3
         ' ***
@@ -37326,7 +37490,12 @@ Public Class Automatikprogramme
                 End If
 
                 If Betriebsart12 = 2 And Betriebsart34 = 0 Then
-                    Betriebsart2_0(Kontakt)
+                    'Betriebsart2_0(Kontakt)
+                    If _Betriebsart2_0Var = 1 Then
+                        Betriebsart2_0Var1(Kontakt)
+                    Else
+                        Betriebsart2_0(Kontakt)
+                    End If
                 End If
 
                 If Betriebsart12 = 2 And Betriebsart34 = 3 Then
@@ -39386,6 +39555,7 @@ Public Class Automatikprogramme
         Button30.Visible = False
         Button35.Visible = False
         Button40.Visible = False
+        Button44.Visible = False
 
         Button15.Visible = False
         Button16.Visible = False
@@ -39407,6 +39577,7 @@ Public Class Automatikprogramme
             Button30.Visible = False
             Button35.Visible = False
             Button40.Visible = False
+            Button44.Visible = False
 
             Button21.Visible = False
             Button22.Visible = False
@@ -40343,19 +40514,21 @@ Public Class Automatikprogramme
                 Button23.Visible = False
                 Button24.Visible = False
 
-                Button31.Visible = False
+                Button31.Visible = False ' Altenstein <-
                 Button33.Visible = False
                 Button34.Visible = False
 
-                Button51.Visible = False
+                Button44.Visible = True
+
+                Button51.Visible = False ' Schattenbahnhof
                 Button53.Visible = False
                 Button54.Visible = False
 
-                Button61.Visible = False
+                Button61.Visible = False ' Bärental
                 Button63.Visible = False
                 Button64.Visible = False
 
-                Button71.Visible = False
+                Button71.Visible = False ' Altenstein ->
                 Button73.Visible = False
                 Button74.Visible = False
 
@@ -40367,31 +40540,59 @@ Public Class Automatikprogramme
                 Button93.Visible = False
                 Button94.Visible = False
 
+                If _Betriebsart2_0Var = 0 Then
 
-                If _Route_Gleis2 = 0 Then
-                    Button32.Visible = True
-                    Button52.Visible = True
-                    Button62.Visible = False
-                    Button72.Visible = False
-                    Button82.Visible = False
-                    Button92.Visible = False
+                    If _Route_Gleis2 = 0 Then
+                        Button32.Visible = True     ' Altenstein <-
+                        Button52.Visible = True     ' Schattenbahnhof
+                        Button62.Visible = False    ' Bärental
+                        Button72.Visible = False    ' Altenstein ->
+                        Button82.Visible = False
+                        Button92.Visible = False
 
-                ElseIf _Route_Gleis2 = 1 Then
-                    Button32.Visible = True
-                    Button52.Visible = False
-                    Button62.Visible = True
-                    Button72.Visible = False
-                    Button82.Visible = False
-                    Button92.Visible = True
+                    ElseIf _Route_Gleis2 = 1 Then
+                        Button32.Visible = True     ' Altenstein <-
+                        Button52.Visible = False    ' Schattenbahnhof
+                        Button62.Visible = True     ' Bärental
+                        Button72.Visible = False    ' Altenstein ->
+                        Button82.Visible = False
+                        Button92.Visible = True
 
-                ElseIf _Route_Gleis2 = 2 Then
-                    Button32.Visible = True
-                    Button52.Visible = True
-                    Button62.Visible = True
-                    Button72.Visible = True
-                    Button82.Visible = True
-                    Button92.Visible = True
+                    ElseIf _Route_Gleis2 = 2 Then
+                        Button32.Visible = True     ' Altenstein <-
+                        Button52.Visible = True     ' Schattenbahnhof
+                        Button62.Visible = True     ' Bärental
+                        Button72.Visible = True     ' Altenstein ->
+                        Button82.Visible = True
+                        Button92.Visible = True
 
+                    End If
+                Else
+                    If _Route_Gleis2 = 0 Then
+                        Button32.Visible = True     ' Altenstein <-
+                        Button52.Visible = True     ' Schattenbahnhof
+                        Button62.Visible = False    ' Bärental
+                        Button72.Visible = False    ' Altenstein ->
+                        Button82.Visible = False
+                        Button92.Visible = False
+
+                    ElseIf _Route_Gleis2 = 1 Then
+                        Button32.Visible = False    ' Altenstein <-
+                        Button52.Visible = False    ' Schattenbahnhof
+                        Button62.Visible = True     ' Bärental
+                        Button72.Visible = True     ' Altenstein ->
+                        Button82.Visible = False
+                        Button92.Visible = True
+
+                    ElseIf _Route_Gleis2 = 2 Then
+                        Button32.Visible = True     ' Altenstein <-
+                        Button52.Visible = True     ' Schattenbahnhof
+                        Button62.Visible = True     ' Bärental
+                        Button72.Visible = True     ' Altenstein ->
+                        Button82.Visible = True
+                        Button92.Visible = True
+
+                    End If
                 End If
 
             End If
@@ -41656,6 +41857,7 @@ Public Class Automatikprogramme
     End Sub
     ' *** Betriebsart Varianten
     Private Sub Button19_Click(sender As System.Object, e As System.EventArgs) Handles Button19.Click
+        '*** Betriebsartvarianten für Gleise 1 und 2
         If _Betriebsart3_0Var = 0 Then
             _Betriebsart3_0Var = 1
             Button19.Text = "V1"
@@ -41704,10 +41906,12 @@ Public Class Automatikprogramme
             TextBox1.Text = "Züge 1 und 2 fahren über die gewählten Routen (Standard)"
             ButtonsVisible(999)
         End If
+        _daten.write_to_table(AutomatikParameterTableName, 65, _Betriebsart3_0Var)
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
     End Sub
     Private Sub Button30_Click(sender As System.Object, e As System.EventArgs) Handles Button30.Click
+        '*** Betriebsartvarianten für Gleise 3
         If _Betriebsart0_3Var = 0 Then
             _Betriebsart0_3Var = 1
             Button30.Text = "V1"
@@ -41721,10 +41925,12 @@ Public Class Automatikprogramme
             Button30.Text = "V0"
             TextBox1.Text = "Züge fahren über den äußeren Kreis"
         End If
+        _daten.write_to_table(AutomatikParameterTableName, 54, _Betriebsart0_3Var)
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
     End Sub
     Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles Button35.Click
+        '*** Betriebsartvarianten für Gleis 4
         If _Betriebsart0_4Var = 0 Then
             _Betriebsart0_4Var = 1
             Button35.Text = "V1"
@@ -41738,10 +41944,12 @@ Public Class Automatikprogramme
             Button35.Text = "V0"
             TextBox1.Text = "Züge fahren über den äußeren Kreis"
         End If
+        _daten.write_to_table(AutomatikParameterTableName, 55, _Betriebsart0_4Var)
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
     End Sub
     Private Sub Button38_Click(sender As System.Object, e As System.EventArgs) Handles Button38.Click
+        '*** Betriebsartvarianten für Gleise 3 und 4
         If _Betriebsart0_5Var = 0 Then
             _Betriebsart0_5Var = 1
             Button38.Text = "V1"
@@ -41791,10 +41999,12 @@ Public Class Automatikprogramme
 
             ButtonsVisible(999)
         End If
+        _daten.write_to_table(AutomatikParameterTableName, 56, _Betriebsart0_5Var)
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
     End Sub
     Private Sub Button40_Click(sender As Object, e As EventArgs) Handles Button40.Click
+        '*** Betriebsartvarianten für Gleis 1
         If _Betriebsart1_0Var = 0 Then
             _Betriebsart1_0Var = 1
             Button40.Text = "V1"
@@ -41805,13 +42015,31 @@ Public Class Automatikprogramme
             _GleisFrei3 = 1
             Button17.Text = "frei / benutzt"
             Button17.BackColor = Drawing.Color.LightGreen
-            'ButtonsVisible(999)
         Else
             _Betriebsart1_0Var = 0
             Button40.Text = "V0"
             TextBox1.Text = "Züge fahren vorwärts über den inneren Kreis"
-            'ButtonsVisible(999)
         End If
+        _daten.write_to_table(AutomatikParameterTableName, 57, _Betriebsart1_0Var)
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        ButtonsVisible(999)
+    End Sub
+    Private Sub Button44_Click(sender As Object, e As EventArgs) Handles Button44.Click
+        '*** Betriebsartvarianten für Gleis 2
+        If _Betriebsart2_0Var = 0 Then
+            _Betriebsart2_0Var = 1
+            Button44.Text = "V1"
+            TextBox1.Text = "Züge fahren Route 'oben kurz' und rückwärts über Gleis 2"
+            _Route_Gleis2 = 1
+            _daten.write_to_table(AutomatikParameterTableName, 4, _Route_Gleis2)
+            ARoute_Lok2 = _Route_Gleis2
+        Else
+            _Betriebsart2_0Var = 0
+            Button44.Text = "V0"
+            TextBox1.Text = "Züge fahren vorwärts über Gleis 2"
+        End If
+        _daten.write_to_table(AutomatikParameterTableName, 61, _Betriebsart2_0Var)
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
         ButtonsVisible(999)
@@ -41971,10 +42199,15 @@ Public Class Automatikprogramme
         ButtonsVisible(999)
     End Sub
     Private Sub Button22_Click(sender As System.Object, e As System.EventArgs) Handles Button22.Click
-        _Route_Gleis2 = _Route_Gleis2 + 1
-        If _Route_Gleis2 = 3 Then
-            _Route_Gleis2 = 0
+        If _Betriebsart2_0Var = 0 Then
+            _Route_Gleis2 = _Route_Gleis2 + 1
+            If _Route_Gleis2 = 3 Then
+                _Route_Gleis2 = 0
+            End If
+        Else
+            _Route_Gleis2 = 1
         End If
+
         Routen(Button22, _Route_Gleis2)
         _daten.write_to_table(AutomatikParameterTableName, 4, _Route_Gleis2)
         ARoute_Lok2 = _Route_Gleis2
@@ -44588,8 +44821,12 @@ Public Class Automatikprogramme
             ' *** Betriebsart 2 - 0
             ' ***
             If Betriebsart12 = 2 And Betriebsart34 = 0 Then
-                Startpunkt = 101
-                Zeile = Startpunkt + _Route_Gleis2
+                If _Betriebsart2_0Var = 0 Then
+                    Startpunkt = 101
+                    Zeile = Startpunkt + _Route_Gleis2
+                Else
+                    Zeile = 356
+                End If
 
                 NumericUpDown8.BackColor = Drawing.Color.White
                 NumericUpDown9.BackColor = Drawing.Color.LightBlue
@@ -45894,6 +46131,7 @@ Public Class Automatikprogramme
         Button19.Enabled = False
         Button38.Enabled = False
         Button40.Enabled = False
+        Button44.Enabled = False
 
         If Start_Betaetigt = False And _Weichen_in_Startposition = True And _Signale_in_Startposition = True Then
 

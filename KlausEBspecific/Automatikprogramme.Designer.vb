@@ -25,11 +25,23 @@ Partial Class Automatikprogramme
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.AutoParaLabel = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button19 = New System.Windows.Forms.Button()
+        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
+        Me.LineShape4 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Button73 = New System.Windows.Forms.Button()
+        Me.Button74 = New System.Windows.Forms.Button()
+        Me.Button62 = New System.Windows.Forms.Button()
+        Me.Button61 = New System.Windows.Forms.Button()
+        Me.Button44 = New System.Windows.Forms.Button()
         Me.Button40 = New System.Windows.Forms.Button()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.Button39 = New System.Windows.Forms.Button()
         Me.Button22 = New System.Windows.Forms.Button()
-        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button24 = New System.Windows.Forms.Button()
@@ -75,20 +87,14 @@ Partial Class Automatikprogramme
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button63 = New System.Windows.Forms.Button()
         Me.Button64 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button73 = New System.Windows.Forms.Button()
-        Me.Button74 = New System.Windows.Forms.Button()
         Me.Button71 = New System.Windows.Forms.Button()
-        Me.Button62 = New System.Windows.Forms.Button()
-        Me.Button61 = New System.Windows.Forms.Button()
         Me.Button54 = New System.Windows.Forms.Button()
         Me.Button53 = New System.Windows.Forms.Button()
         Me.Button52 = New System.Windows.Forms.Button()
@@ -128,11 +134,6 @@ Partial Class Automatikprogramme
         Me.Label8 = New System.Windows.Forms.Label()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.LineShape4 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.AutoParaLabel1 = New System.Windows.Forms.Label()
         Me.ProgramCounterLabel = New System.Windows.Forms.Label()
@@ -183,10 +184,18 @@ Partial Class Automatikprogramme
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button19)
+        Me.GroupBox1.Controls.Add(Me.ShapeContainer1)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.Button73)
+        Me.GroupBox1.Controls.Add(Me.Button74)
+        Me.GroupBox1.Controls.Add(Me.Button62)
+        Me.GroupBox1.Controls.Add(Me.Button61)
+        Me.GroupBox1.Controls.Add(Me.Button44)
         Me.GroupBox1.Controls.Add(Me.Button40)
+        Me.GroupBox1.Controls.Add(Me.Button19)
         Me.GroupBox1.Controls.Add(Me.Button39)
         Me.GroupBox1.Controls.Add(Me.Button22)
+        Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.Button21)
         Me.GroupBox1.Controls.Add(Me.Label26)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -233,20 +242,14 @@ Partial Class Automatikprogramme
         Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.Button13)
         Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.Label24)
-        Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Button63)
         Me.GroupBox1.Controls.Add(Me.Button64)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.Button73)
-        Me.GroupBox1.Controls.Add(Me.Button74)
         Me.GroupBox1.Controls.Add(Me.Button71)
-        Me.GroupBox1.Controls.Add(Me.Button62)
-        Me.GroupBox1.Controls.Add(Me.Button61)
         Me.GroupBox1.Controls.Add(Me.Button54)
         Me.GroupBox1.Controls.Add(Me.Button53)
         Me.GroupBox1.Controls.Add(Me.Button52)
@@ -277,12 +280,125 @@ Partial Class Automatikprogramme
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown2)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown1)
-        Me.GroupBox1.Controls.Add(Me.ShapeContainer1)
         Me.GroupBox1.Location = New System.Drawing.Point(40, 56)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(980, 480)
         Me.GroupBox1.TabIndex = 19
         Me.GroupBox1.TabStop = False
+        '
+        'ShapeContainer1
+        '
+        Me.ShapeContainer1.Location = New System.Drawing.Point(3, 16)
+        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
+        Me.ShapeContainer1.Name = "ShapeContainer1"
+        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape4, Me.LineShape3, Me.LineShape2, Me.LineShape1})
+        Me.ShapeContainer1.Size = New System.Drawing.Size(974, 461)
+        Me.ShapeContainer1.TabIndex = 66
+        Me.ShapeContainer1.TabStop = False
+        '
+        'LineShape4
+        '
+        Me.LineShape4.Name = "LineShape4"
+        Me.LineShape4.X1 = 361
+        Me.LineShape4.X2 = 953
+        Me.LineShape4.Y1 = 373
+        Me.LineShape4.Y2 = 373
+        '
+        'LineShape3
+        '
+        Me.LineShape3.Name = "LineShape3"
+        Me.LineShape3.X1 = 361
+        Me.LineShape3.X2 = 953
+        Me.LineShape3.Y1 = 349
+        Me.LineShape3.Y2 = 349
+        '
+        'LineShape2
+        '
+        Me.LineShape2.Name = "LineShape2"
+        Me.LineShape2.X1 = 361
+        Me.LineShape2.X2 = 953
+        Me.LineShape2.Y1 = 297
+        Me.LineShape2.Y2 = 297
+        '
+        'LineShape1
+        '
+        Me.LineShape1.Name = "LineShape1"
+        Me.LineShape1.X1 = 361
+        Me.LineShape1.X2 = 953
+        Me.LineShape1.Y1 = 273
+        Me.LineShape1.Y2 = 273
+        '
+        'Button21
+        '
+        Me.Button21.Location = New System.Drawing.Point(270, 278)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(70, 23)
+        Me.Button21.TabIndex = 16
+        Me.Button21.Text = "Unten"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(791, 262)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(46, 13)
+        Me.Label6.TabIndex = 54
+        Me.Label6.Text = "Bärental"
+        '
+        'Button73
+        '
+        Me.Button73.Location = New System.Drawing.Point(778, 354)
+        Me.Button73.Name = "Button73"
+        Me.Button73.Size = New System.Drawing.Size(75, 23)
+        Me.Button73.TabIndex = 49
+        Me.Button73.Text = "Bhf2"
+        Me.Button73.UseVisualStyleBackColor = True
+        '
+        'Button74
+        '
+        Me.Button74.Location = New System.Drawing.Point(778, 379)
+        Me.Button74.Name = "Button74"
+        Me.Button74.Size = New System.Drawing.Size(75, 23)
+        Me.Button74.TabIndex = 47
+        Me.Button74.Text = "Bhf2"
+        Me.Button74.UseVisualStyleBackColor = True
+        '
+        'Button62
+        '
+        Me.Button62.Location = New System.Drawing.Point(778, 303)
+        Me.Button62.Name = "Button62"
+        Me.Button62.Size = New System.Drawing.Size(75, 23)
+        Me.Button62.TabIndex = 43
+        Me.Button62.Text = "Berg"
+        Me.Button62.UseVisualStyleBackColor = True
+        '
+        'Button61
+        '
+        Me.Button61.Location = New System.Drawing.Point(778, 278)
+        Me.Button61.Name = "Button61"
+        Me.Button61.Size = New System.Drawing.Size(75, 23)
+        Me.Button61.TabIndex = 42
+        Me.Button61.Text = "Berg"
+        Me.Button61.UseVisualStyleBackColor = True
+        '
+        'Button44
+        '
+        Me.Button44.Location = New System.Drawing.Point(242, 303)
+        Me.Button44.Name = "Button44"
+        Me.Button44.Size = New System.Drawing.Size(29, 23)
+        Me.Button44.TabIndex = 124
+        Me.Button44.Text = "V1"
+        Me.Button44.UseVisualStyleBackColor = True
+        '
+        'Button40
+        '
+        Me.Button40.Location = New System.Drawing.Point(242, 278)
+        Me.Button40.Name = "Button40"
+        Me.Button40.Size = New System.Drawing.Size(29, 23)
+        Me.Button40.TabIndex = 123
+        Me.Button40.Text = "V1"
+        Me.Button40.UseVisualStyleBackColor = True
         '
         'Button19
         '
@@ -292,15 +408,6 @@ Partial Class Automatikprogramme
         Me.Button19.TabIndex = 108
         Me.Button19.Text = "V1"
         Me.Button19.UseVisualStyleBackColor = True
-        '
-        'Button40
-        '
-        Me.Button40.Location = New System.Drawing.Point(241, 278)
-        Me.Button40.Name = "Button40"
-        Me.Button40.Size = New System.Drawing.Size(29, 23)
-        Me.Button40.TabIndex = 123
-        Me.Button40.Text = "V1"
-        Me.Button40.UseVisualStyleBackColor = True
         '
         'Button39
         '
@@ -320,14 +427,14 @@ Partial Class Automatikprogramme
         Me.Button22.Text = "Unten"
         Me.Button22.UseVisualStyleBackColor = True
         '
-        'Button21
+        'Label12
         '
-        Me.Button21.Location = New System.Drawing.Point(270, 278)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(70, 23)
-        Me.Button21.TabIndex = 16
-        Me.Button21.Text = "Unten"
-        Me.Button21.UseVisualStyleBackColor = True
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(786, 339)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(65, 13)
+        Me.Label12.TabIndex = 62
+        Me.Label12.Text = "Altenstein <-"
         '
         'Label26
         '
@@ -751,15 +858,6 @@ Partial Class Automatikprogramme
         Me.Label7.TabIndex = 63
         Me.Label7.Text = "Bärental"
         '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(783, 339)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(65, 13)
-        Me.Label12.TabIndex = 62
-        Me.Label12.Text = "Altenstein <-"
-        '
         'Label15
         '
         Me.Label15.AutoSize = True
@@ -777,15 +875,6 @@ Partial Class Automatikprogramme
         Me.Label24.Size = New System.Drawing.Size(65, 13)
         Me.Label24.TabIndex = 60
         Me.Label24.Text = "Altenstein ->"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(791, 262)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(46, 13)
-        Me.Label6.TabIndex = 54
-        Me.Label6.Text = "Bärental"
         '
         'Label5
         '
@@ -832,24 +921,6 @@ Partial Class Automatikprogramme
         Me.Label2.TabIndex = 51
         Me.Label2.Text = "Altenstein <-"
         '
-        'Button73
-        '
-        Me.Button73.Location = New System.Drawing.Point(778, 354)
-        Me.Button73.Name = "Button73"
-        Me.Button73.Size = New System.Drawing.Size(75, 23)
-        Me.Button73.TabIndex = 49
-        Me.Button73.Text = "Bhf2"
-        Me.Button73.UseVisualStyleBackColor = True
-        '
-        'Button74
-        '
-        Me.Button74.Location = New System.Drawing.Point(778, 379)
-        Me.Button74.Name = "Button74"
-        Me.Button74.Size = New System.Drawing.Size(75, 23)
-        Me.Button74.TabIndex = 47
-        Me.Button74.Text = "Bhf2"
-        Me.Button74.UseVisualStyleBackColor = True
-        '
         'Button71
         '
         Me.Button71.Location = New System.Drawing.Point(678, 278)
@@ -858,24 +929,6 @@ Partial Class Automatikprogramme
         Me.Button71.TabIndex = 46
         Me.Button71.Text = "Bhf2"
         Me.Button71.UseVisualStyleBackColor = True
-        '
-        'Button62
-        '
-        Me.Button62.Location = New System.Drawing.Point(778, 303)
-        Me.Button62.Name = "Button62"
-        Me.Button62.Size = New System.Drawing.Size(75, 23)
-        Me.Button62.TabIndex = 43
-        Me.Button62.Text = "Berg"
-        Me.Button62.UseVisualStyleBackColor = True
-        '
-        'Button61
-        '
-        Me.Button61.Location = New System.Drawing.Point(778, 278)
-        Me.Button61.Name = "Button61"
-        Me.Button61.Size = New System.Drawing.Size(75, 23)
-        Me.Button61.TabIndex = 42
-        Me.Button61.Text = "Berg"
-        Me.Button61.UseVisualStyleBackColor = True
         '
         'Button54
         '
@@ -1244,48 +1297,6 @@ Partial Class Automatikprogramme
         Me.NumericUpDown1.TabIndex = 0
         Me.NumericUpDown1.Value = New Decimal(New Integer() {30, 0, 0, 0})
         '
-        'ShapeContainer1
-        '
-        Me.ShapeContainer1.Location = New System.Drawing.Point(3, 16)
-        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ShapeContainer1.Name = "ShapeContainer1"
-        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape4, Me.LineShape3, Me.LineShape2, Me.LineShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(974, 461)
-        Me.ShapeContainer1.TabIndex = 66
-        Me.ShapeContainer1.TabStop = False
-        '
-        'LineShape4
-        '
-        Me.LineShape4.Name = "LineShape4"
-        Me.LineShape4.X1 = 361
-        Me.LineShape4.X2 = 953
-        Me.LineShape4.Y1 = 373
-        Me.LineShape4.Y2 = 373
-        '
-        'LineShape3
-        '
-        Me.LineShape3.Name = "LineShape3"
-        Me.LineShape3.X1 = 361
-        Me.LineShape3.X2 = 953
-        Me.LineShape3.Y1 = 349
-        Me.LineShape3.Y2 = 349
-        '
-        'LineShape2
-        '
-        Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 361
-        Me.LineShape2.X2 = 953
-        Me.LineShape2.Y1 = 297
-        Me.LineShape2.Y2 = 297
-        '
-        'LineShape1
-        '
-        Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 361
-        Me.LineShape1.X2 = 953
-        Me.LineShape1.Y1 = 273
-        Me.LineShape1.Y2 = 273
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -1354,7 +1365,7 @@ Partial Class Automatikprogramme
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(92, 13)
         Me.Label10.TabIndex = 87
-        Me.Label10.Text = "Stand 13.01.2022"
+        Me.Label10.Text = "Stand 02.01.2025"
         '
         'ComboBox1
         '
@@ -1443,7 +1454,6 @@ Partial Class Automatikprogramme
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Button24 As System.Windows.Forms.Button
     Friend WithEvents Button22 As System.Windows.Forms.Button
-    Friend WithEvents Button21 As System.Windows.Forms.Button
     Friend WithEvents Button23 As System.Windows.Forms.Button
     Friend WithEvents Button41 As System.Windows.Forms.Button
     Friend WithEvents Button42 As System.Windows.Forms.Button
@@ -1547,4 +1557,6 @@ Partial Class Automatikprogramme
     Friend WithEvents Button39 As System.Windows.Forms.Button
     Friend WithEvents LinkLabel2 As Windows.Forms.LinkLabel
     Friend WithEvents Button40 As Windows.Forms.Button
+    Friend WithEvents Button44 As Windows.Forms.Button
+    Friend WithEvents Button21 As Windows.Forms.Button
 End Class
