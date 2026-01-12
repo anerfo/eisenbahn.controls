@@ -1,49 +1,52 @@
 ﻿'*** Allgemeine Kommentare
 '***
-'***
-'***  
-'***
-'*** Datum der letzten Änderung : 25.12.2025
+'*** Datum der letzten Änderung : 12.01.2026
 '***
 '*** Letzte Änderung:
 '***
-'***                 Betriebsartenvarianten werden gespeichert
+'***                !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = x12 !!!!!
+'***                in den Programmen für Bergfahrt geändert, da Kontakt 1.2 wackelt (geändert in x99) 
 '***
-'***                 Betriebsart 2-0 Variante 1 eingebaut
+'***                Betriebsart 0-4 Variante 2 eingebaut
 '***
-'***                 Rundenzähler eingebaut
+'***                GUID korrigiert (die vier Linien für die Darstellung der Routen lagen im Vordergrund)
 '***
-'***                 Kontakt 0.0 false und Kontakt 0.2 false - Bahnhofsausfahrt - auskommentierte Zeilen reaktiviert
-'***                 (Signal 11 schalten)
+'***                Betriebsartenvarianten werden gespeichert
 '***
-'***                 Fahrparameter von Excel-Tabelle in das Programm übernommen
+'***                Betriebsart 2-0 Variante 2 eingebaut
 '***
-'***                 Lokprogramme erweitert (Rückmeldekontakten ein Lokprogramm zugeordnet)
+'***                Betriebsart 2-0 Variante 1 eingebaut
 '***
-'***                 Betriebsarten getestet
+'***                Rundenzähler eingebaut
+'***
+'***                Kontakt 0.0 false und Kontakt 0.2 false - Bahnhofsausfahrt - auskommentierte Zeilen reaktiviert
+'***                (Signal 11 schalten)
+'***
+'***                Fahrparameter von Excel-Tabelle in das Programm übernommen
+'***
+'***                Lokprogramme erweitert (Rückmeldekontakten ein Lokprogramm zugeordnet)
 '***                 
-'***                 Kamerasteuerung geändert
-'***                 Neue Rückmeldungen eingebaut:
-'***                 3.6 für Stopp in Bärental (10.12.2019)
-'***                 ButtonVisible korrigiert (26.02.2019)
-'***                 Korrekturen
-'***                 Halt bei Talfahrt und in der Diagonalen
-'***                 Bedienoberfläche modifiziert (28.01.2019)
-'***                 Anfahr-Bergfahrt und Anhalteprogramm als Unterprogramm
-'***                 Lokprogramme ergänzt (03.01.2018)
-'***                 verzögerter Start bei Lokprogrammen _T_StartEinzelLokx (30.12.2018)
-'***                 EinzelLokStopElapsed: Zyklusende entfernt
-'***                 Betriebsart 1/0 oben lang: Weiche 17 nicht mit Kontakt 0.5 sondern erst mit 0.4 rechts schalten   (102)
-'***                                            Weiche 17 nicht mit Kontakt 0.1 sondern mit Kontakt 0.0 links schalten (103)
-'***                 Programm für Lok40 eingebaut Betriebsart 1/0 (24.12.2018)
-'***                 Lokfunktionen gespeichert
-'***                 Timer für Kurzzug auf Gleis 1 umgebaut und mit Lok29 getestet (23.12.2018)
-'***                 Programm für Lok29 eingebaut Betriebsart 1/0 (23.12.2018)
-'***                 Programm für Lok68 eingebaut Betriebsart 1/0 (23.12.2018)
-'***                 Stopp im SBHF geändert - Timer 9 und 11 - Gleis 1,2,3,4 Route unten (20.11.2018)
+'***                Kamerasteuerung geändert
+'***                Neue Rückmeldungen eingebaut:
+'***                3.6 für Stopp in Bärental (10.12.2019)
+'***                ButtonVisible korrigiert (26.02.2019)
+'***                 
+'***                Halt bei Talfahrt und in der Diagonalen
+'***                Bedienoberfläche modifiziert (28.01.2019)
+'***                Anfahr-Bergfahrt und Anhalteprogramm als Unterprogramm
+'***                Lokprogramme ergänzt (03.01.2018)
+'***                verzögerter Start bei Lokprogrammen _T_StartEinzelLokx (30.12.2018)
+'***                EinzelLokStopElapsed: Zyklusende entfernt
+'***                Betriebsart 1/0 oben lang: Weiche 17 nicht mit Kontakt 0.5 sondern erst mit 0.4 rechts schalten   (102)
+'***                                           Weiche 17 nicht mit Kontakt 0.1 sondern mit Kontakt 0.0 links schalten (103)
+'***                Programm für Lok40 eingebaut Betriebsart 1/0 (24.12.2018)
+'***                Lokfunktionen gespeichert
+'***                Timer für Kurzzug auf Gleis 1 umgebaut und mit Lok29 getestet (23.12.2018)
+'***                Programm für Lok29 eingebaut Betriebsart 1/0 (23.12.2018)
+'***                Programm für Lok68 eingebaut Betriebsart 1/0 (23.12.2018)
+'***                Stopp im SBHF geändert - Timer 9 und 11 - Gleis 1,2,3,4 Route unten (20.11.2018)
 '***
-'***
-'***    Unterprogramm BergfahrtLokx geändert (Rückmeldung 1.2 ODER eingefügt). Zug soll bei der Mühle links fahren können.
+'***                Unterprogramm BergfahrtLokx geändert (Rückmeldung 1.2 ODER eingefügt). Zug soll bei der Mühle links fahren können.
 '***
 
 Public Class Automatikprogramme
@@ -80,6 +83,7 @@ Public Class Automatikprogramme
     Private _Betriebsart0_3Var, _Betriebsart0_4Var, _Betriebsart0_5Var, _Betriebsart1_0Var, _Betriebsart1_3Var, _Betriebsart1_4Var, _Betriebsart1_5Var As Integer
     Private _Betriebsart2_0Var, _Betriebsart2_3Var, _Betriebsart2_4Var, _Betriebsart2_5Var, _Betriebsart3_0Var, _Betriebsart3_3Var, _Betriebsart3_4Var, _Betriebsart3_5Var As Integer
     Private anfahren, abstellen, bremsen, bremsen_kurz_von_links, bremsen_kurz_von_rechts, bergfahrt, nachlauf As Integer
+    Private _Loknummer_4A, _Loknummer_4B As Integer
 
     Private Betriebsparameter As ExcelDocument = New ExcelDocument("H:\\EB_Media\\Betriebsparameter\\Betriebsparameter.xlsx")
     '*** Fahrprogramm für Züge erstellen FPZ
@@ -392,6 +396,15 @@ Public Class Automatikprogramme
         _Betriebsart3_4Var = _daten.read_from_table(AutomatikParameterTableName, 67)
         _Betriebsart3_5Var = _daten.read_from_table(AutomatikParameterTableName, 68)
 
+        _Loknummer_4A = _daten.read_from_table(AutomatikParameterTableName, 69)
+        If _Loknummer_4A = 0 Then
+            _Loknummer_4A = 10
+        End If
+        _Loknummer_4B = _daten.read_from_table(AutomatikParameterTableName, 70)
+        If _Loknummer_4B = 0 Then
+            _Loknummer_4B = 10
+        End If
+
         Button19.Text = "V0"    ' Gleis1/Gleis2
         Button38.Text = "V0"    ' Gleis3/Gleis4
         Button30.Text = "V0"    ' Gleis3
@@ -411,8 +424,14 @@ Public Class Automatikprogramme
         If _Betriebsart0_4Var = 1 Then
             Button35.Text = "V1"
         End If
+        If _Betriebsart0_4Var = 2 Then
+            Button35.Text = "V2"
+        End If
         If _Betriebsart3_0Var = 1 Then
             Button19.Text = "V1"
+        End If
+        If _Betriebsart3_0Var = 2 Then
+            Button19.Text = "V2"
         End If
         If _Betriebsart0_5Var = 1 Then
             Button38.Text = "V1"
@@ -745,10 +764,16 @@ Public Class Automatikprogramme
         ElseIf Diagonale_Gleis1 = 1 Then
             Button81.Text = "Halt"
             Button81.BackColor = Drawing.Color.LightYellow
+        ElseIf Diagonale_Gleis1 = 2 Then
+            Button81.Text = "Wechsel -> 2"
+            Button81.BackColor = Drawing.Color.LightYellow
         End If
         If Diagonale_Gleis2 = 0 Then
             Button82.BackColor = Drawing.Color.LightGreen
             Button82.Text = "kein Halt"
+        ElseIf Diagonale_Gleis2 = 1 Then
+            Button82.Text = "Wechsel -> 1"
+            Button82.BackColor = Drawing.Color.LightYellow
         ElseIf Diagonale_Gleis2 = 2 Then
             Button82.Text = "Halt"
             Button82.BackColor = Drawing.Color.LightYellow
@@ -830,10 +855,10 @@ Public Class Automatikprogramme
                 L5_aktuell = 0
                 L6_aktuell = 0
                 L7_aktuell = 0
-                Button1.Text = "DMX"
-                Button1.BackColor = Drawing.Color.LightGray
-                Button36.BackColor = Drawing.Color.LightYellow
-                Button37.BackColor = Drawing.Color.LightGray
+                'Button1.Text = "DMX"
+                'Button1.BackColor = Drawing.Color.LightGray
+                'Button36.BackColor = Drawing.Color.LightYellow
+                'Button37.BackColor = Drawing.Color.LightGray
             ElseIf _Beleuchtung = 1 Then
                 _dmxServer.SetData(1, 200)
                 _dmxServer.SetData(2, 200)
@@ -849,10 +874,10 @@ Public Class Automatikprogramme
                 L5_aktuell = 200
                 L6_aktuell = 200
                 L7_aktuell = 200
-                Button1.Text = "DMX"
-                Button1.BackColor = Drawing.Color.LightGray
-                Button36.BackColor = Drawing.Color.LightGray
-                Button37.BackColor = Drawing.Color.LightYellow
+                'Button1.Text = "DMX"
+                'Button1.BackColor = Drawing.Color.LightGray
+                'Button36.BackColor = Drawing.Color.LightGray
+                'Button37.BackColor = Drawing.Color.LightYellow
             Else
                 _dmxServer.SetData(1, 64)
                 _dmxServer.SetData(2, 64)
@@ -868,10 +893,10 @@ Public Class Automatikprogramme
                 L5_aktuell = 100
                 L6_aktuell = 64
                 L7_aktuell = 64
-                Button1.Text = "mittig"
-                Button1.BackColor = Drawing.Color.LightYellow
-                Button36.BackColor = Drawing.Color.LightGray
-                Button37.BackColor = Drawing.Color.LightGray
+                'Button1.Text = "mittig"
+                'Button1.BackColor = Drawing.Color.LightYellow
+                'Button36.BackColor = Drawing.Color.LightGray
+                'Button37.BackColor = Drawing.Color.LightGray
                 _Beleuchtung = 2
                 _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
             End If
@@ -1670,6 +1695,7 @@ Public Class Automatikprogramme
         ElseIf _Berg_Gleis4 = 2 Then
             Button64.BackColor = Drawing.Color.LightYellow
         End If
+
 
     End Sub
 
@@ -2672,6 +2698,13 @@ Public Class Automatikprogramme
                     End If
                     Zug4(anfahren)
                     AutomatikParameter = 400
+                ElseIf Ort_Lok4 = 402 Then    'Zug 4 steht im Schattenbahnhof vor Signal 11 (Betriebsart 0-4 Variante 2)
+
+                    Button54.BackColor = Drawing.Color.LightYellow
+                    AutomatikParameter = 420
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
+                    _LokStufen.EinzelLokSenden(4, 3)
+
                 ElseIf Ort_Lok4 = 420 Or Ort_Lok4 = 401 Then    'Zug 4 steht im Schattenbahnhof
                     Button54.BackColor = Drawing.Color.LightYellow
                     If Weiche20schalten = True Then
@@ -4834,7 +4867,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm E103 165 -7
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 103 165-7                                                         IBS: 06.01.2022 - V3: 8")
+        SetText(TextBox1, "E-Lok 103 165-7                                                         IBS: 05.01.2026 - V3: 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_103_10.jpg")
         GeschwindikeitenSetzen(15)
 
@@ -4871,35 +4904,35 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 150
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
             V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
-            V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
-            V_180 = V_180 + 1500
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
+            V_180 = V_180 + 1000
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 1000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 7500
+            V_180 = V_180 + 1500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
             V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
         End If
 
         Stufe2 = Stufe1
@@ -7748,7 +7781,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E 110 155-9
         '*** Datum: 11.10.2025
 
-        SetText(TextBox1, "E-Lok 110 155-9                                                         IBS: 11.10.2025 - V3 : 6")
+        SetText(TextBox1, "E-Lok 110 155-9                                                         IBS: 05.01.2026 - V3 : 6")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_110_10.jpg")
         GeschwindikeitenSetzen(24)
 
@@ -29506,13 +29539,7 @@ Public Class Automatikprogramme
     Private Sub Bergfahrt112Lok1()
         _LokStufen.EinzelLokSenden(1, 3)
         Ort_Lok1 = 120
-        If _Betriebsart3_0Var = 1 Then
-            AutomatikParameter = 202
-            _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
-            Button52.BackColor = Drawing.Color.Red
-            Timer_11.Interval = 3000
-            Timer_11.Start()
-        Else
+        If _Betriebsart3_0Var = 0 Then
             AutomatikParameter = 120
             If Weiche26schalten = True Then
                 WeicheSchalten(26, Klassen.WeichenRichtung.rechts)
@@ -29526,7 +29553,6 @@ Public Class Automatikprogramme
             If Talstrecke_Gleis1 = 1 Then
                 WeicheSchalten(12, Klassen.WeichenRichtung.rechts)
                 Button91.BackColor = Drawing.Color.Red
-                'Timer_EinzelLok1.Interval = NumericUpDown1.Value * 1000
                 Timer_EinzelLok1.Interval = Warte1TA
                 Timer_EinzelLok1.Start()
             End If
@@ -29534,25 +29560,41 @@ Public Class Automatikprogramme
                 Timer_Kamera0.Interval = 1000
                 Timer_Kamera0.Start()
             End If
+        ElseIf _Betriebsart3_0Var = 1 Then
+            AutomatikParameter = 202
+            _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
+            Button52.BackColor = Drawing.Color.Red
+            Timer_11.Interval = 3000
+            Timer_11.Start()
+        ElseIf _Betriebsart3_0Var = 2 Then
+            AutomatikParameter = 120
+            If Weiche26schalten = True Then
+                WeicheSchalten(26, Klassen.WeichenRichtung.rechts)
+            End If
+            If Weiche21schalten = True Then
+                WeicheSchalten(21, Klassen.WeichenRichtung.rechts)
+            End If
+            If Weiche23schalten = True Then
+                WeicheSchalten(23, Klassen.WeichenRichtung.links)
+            End If
+            If Talstrecke_Gleis1 = 1 Then
+                WeicheSchalten(12, Klassen.WeichenRichtung.rechts)
+                Button91.BackColor = Drawing.Color.Red
+                Timer_EinzelLok1.Interval = Warte1TA
+                Timer_EinzelLok1.Start()
+            End If
+            If _Kamera = 3 And _aktuelleKamera <> Forbach Then
+                Timer_Kamera0.Interval = 1000
+                Timer_Kamera0.Start()
+            End If
+        Else
+            WeicheSchalten(12, Klassen.WeichenRichtung.rechts)
         End If
     End Sub
     Private Sub Bergfahrt112Lok2()
         _LokStufen.EinzelLokSenden(2, 3)
         Ort_Lok2 = 220
-        If _Betriebsart3_0Var = 1 Then
-            _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
-            If Ort_Lok1 = 102 Then
-                AutomatikParameter = 102
-                Button51.BackColor = Drawing.Color.Red
-                Timer_11.Interval = 3000
-                Timer_11.Start()
-            ElseIf Ort_Lok1 = 103 Then
-                AutomatikParameter = 220
-                Button92.BackColor = Drawing.Color.Red
-                Timer_12.Interval = 3000
-                Timer_12.Start()
-            End If
-        Else
+        If _Betriebsart3_0Var = 0 Then
             AutomatikParameter = 220
             If Weiche26schalten = True Then
                 WeicheSchalten(26, Klassen.WeichenRichtung.rechts)
@@ -29566,7 +29608,6 @@ Public Class Automatikprogramme
             If Talstrecke_Gleis2 = 2 Then
                 WeicheSchalten(12, Klassen.WeichenRichtung.rechts)
                 Button92.BackColor = Drawing.Color.Red
-                'Timer_EinzelLok2.Interval = NumericUpDown2.Value * 1000
                 Timer_EinzelLok2.Interval = Warte2TA
                 Timer_EinzelLok2.Start()
             End If
@@ -29574,6 +29615,42 @@ Public Class Automatikprogramme
                 Timer_Kamera0.Interval = 1000
                 Timer_Kamera0.Start()
             End If
+        ElseIf _Betriebsart3_0Var = 1 Then
+            _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
+            If Ort_Lok1 = 102 Then
+                AutomatikParameter = 102
+                Button51.BackColor = Drawing.Color.Red
+                Timer_11.Interval = 3000
+                Timer_11.Start()
+            ElseIf Ort_Lok1 = 103 Then
+                AutomatikParameter = 220
+                Button92.BackColor = Drawing.Color.Red
+                Timer_12.Interval = 3000
+                Timer_12.Start()
+            End If
+        ElseIf _Betriebsart3_0Var = 2 Then
+            AutomatikParameter = 220
+            If Weiche26schalten = True Then
+                WeicheSchalten(26, Klassen.WeichenRichtung.rechts)
+            End If
+            If Weiche21schalten = True Then
+                WeicheSchalten(21, Klassen.WeichenRichtung.links)
+            End If
+            If Weiche23schalten = True Then
+                WeicheSchalten(23, Klassen.WeichenRichtung.rechts)
+            End If
+            If Talstrecke_Gleis2 = 2 Then
+                WeicheSchalten(12, Klassen.WeichenRichtung.rechts)
+                Button92.BackColor = Drawing.Color.Red
+                Timer_EinzelLok2.Interval = Warte2TA
+                Timer_EinzelLok2.Start()
+            End If
+            If _Kamera = 3 And _aktuelleKamera <> Forbach Then
+                Timer_Kamera0.Interval = 1000
+                Timer_Kamera0.Start()
+            End If
+        Else
+            WeicheSchalten(12, Klassen.WeichenRichtung.rechts)
         End If
         Zug2(660)
     End Sub
@@ -33029,6 +33106,7 @@ Public Class Automatikprogramme
             End If
             AutomatikParameter = 116
         End If
+        ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = 112 !!!!!
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 116 Or AutomatikParameter = 112) Then
             Bergfahrt112Lok1()
             Zug1(660)
@@ -33134,6 +33212,7 @@ Public Class Automatikprogramme
             End If
             AutomatikParameter = 216
         End If
+        ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = 212 !!!!!
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 216 Or AutomatikParameter = 212) Then
             Bergfahrt112Lok2()
             Zug2(660)
@@ -33168,7 +33247,6 @@ Public Class Automatikprogramme
             AutomatikParameter = 312
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 312 Then
-            '_LokStufen.EinzelLokSenden(3, 3)
             Zug3(260)
             AutomatikParameter = 313
         End If
@@ -33238,6 +33316,7 @@ Public Class Automatikprogramme
             End If
             AutomatikParameter = 316
         End If
+        ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = 312 !!!!!
         If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 316 Or AutomatikParameter = 312) Then
             Bergfahrt112Lok3()
             Zug3(660)
@@ -33272,7 +33351,6 @@ Public Class Automatikprogramme
             AutomatikParameter = 412
         End If
         If Kontakt.Modul = 3 And Kontakt.Adresse = 3 And Kontakt.status = True And AutomatikParameter = 412 Then
-            '_LokStufen.EinzelLokSenden(4, 3)
             Zug4(260)
             AutomatikParameter = 413
         End If
@@ -33289,7 +33367,6 @@ Public Class Automatikprogramme
                     Zug4(bremsen)
                 End If
                 Button64.BackColor = Drawing.Color.Red
-                'Timer_EinzelLok4.Interval = NumericUpDown4.Value * 1000
                 Timer_EinzelLok4.Interval = Warte4BA
                 Timer_EinzelLok4.Start()
             End If
@@ -33337,7 +33414,8 @@ Public Class Automatikprogramme
             AutomatikParameter = 416
             DMX_Pointer = 70
         End If
-        If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 416 Or AutomatikParameter = 412) Then
+        ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = 412 !!!!!
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 2 And Kontakt.status = True And (AutomatikParameter = 416 Or AutomatikParameter = 499) Then
             Bergfahrt112Lok4()
             Zug4(660)
             DMX_Pointer = 80
@@ -34239,7 +34317,6 @@ Public Class Automatikprogramme
         ' ***     
         ' ***
         ' ***
-
         ' ***
         ' *** Bahnhofsausfahrt Zug auf Gleis 4
         ' ***
@@ -34306,6 +34383,164 @@ Public Class Automatikprogramme
             End If
             _AutomatikParameterH = 0
         End If
+    End Sub
+    Private Sub Betriebsart0_4Var2(ByVal Kontakt As Klassen.Kontakt)
+        ' ***
+        ' *** Betriebsart 1/2=0 und ' *** Betriebsart 3/4=4
+        ' ***
+        ' *** Datum:          07.02.2021
+        ' ***
+        ' *** steuert die Fahrt des Zuges auf Gleis 4
+        ' ***     
+        ' ***
+        ' ***
+        ' ***
+        ' *** Bahnhofsausfahrt Zug auf Gleis 4
+        ' ***
+
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 400 Then
+            AutomatikParameter = 90
+            Ort_Lok4 = 417
+            If _Kamera = 3 And _aktuelleKamera <> Forbach Then
+                Timer_Kamera0.Interval = 9000
+                Timer_Kamera0.Start()
+            End If
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = False And AutomatikParameter = 400 Then
+            AutomatikParameter = 90
+            Ort_Lok4 = 417
+            If _Kamera = 3 And _aktuelleKamera <> Forbach Then
+                Timer_Kamera0.Interval = 9000
+                Timer_Kamera0.Start()
+            End If
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 5 And Kontakt.status = True And AutomatikParameter = 406 Then
+            AutomatikParameter = 407
+            Ort_Lok4 = 417
+            If _SBhf_Gleis1 = 0 Then
+                _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                Button54.BackColor = Drawing.Color.Red
+                Ort_Lok4 = 402
+                AutomatikParameter = 420
+                Timer_EinzelLok4.Interval = Warte4SB
+                Timer_EinzelLok4.Start()
+            End If
+
+            If _Kamera = 3 And _aktuelleKamera <> Forbach Then
+                Timer_Kamera0.Interval = 9000
+                Timer_Kamera0.Start()
+            End If
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 407 Or AutomatikParameter = 90 Then
+            AutomatikParameter = 420
+            Ort_Lok4 = 420
+        End If
+
+        ' ***
+        ' ***   Anhalten im Bahnhof
+        ' ***
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = True And AutomatikParameter = 420 Then
+            Ort_Lok4 = 400
+            _AutomatikParameterH = 421
+            If A_Stop = 0 Then
+                A_StopH = 0
+                If _Bhf_Gleis4 = 0 Then
+                    _StopZug4 = 0
+                    AutomatikParameter = 421
+                Else
+                    _StopZug4 = 4
+                    StopStart120Lok(4, 4)
+                End If
+            Else
+                A_StopH = 1
+                _StopZug3 = 3
+                StopStart120Lok(4, 4)
+            End If
+        End If
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And _AutomatikParameterH = 421 Then
+            If _StopZug4 = 0 And A_StopH = 0 Then
+                If _Route_Gleis4 = 0 Then
+                    If _SBhf_Gleis4 > 0 Then
+                        _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
+                    End If
+                End If
+                If Weiche27schalten = True Then
+                    _eb.weicheSchalten(27, Klassen.WeichenRichtung.rechts)
+                End If
+                AutomatikParameter = 400
+            Else
+                If _NachlaufZug3 = False Then
+                    StopZug4()
+                    Zug4(abstellen)
+                Else
+                    Zug4(nachlauf)
+                End If
+            End If
+            _AutomatikParameterH = 0
+        End If
+
+        ' Bahnhofsausfahrt
+
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = False And AutomatikParameter = 400 Then
+            AutomatikParameter = 401
+        End If
+
+        BergfahrtLok4(Kontakt)
+
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 6 And Kontakt.status = True And AutomatikParameter = 417 And _AutomatikParameterH <> 418 Then
+            Ort_Lok4 = 415
+            A_StopH = 0
+            If _Bhf2_Gleis4 = 0 Then       ' *** kein Halt
+                If _SBhf_Gleis4 > 0 Then
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                Else
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
+                End If
+                _LokStufen.EinzelLokSenden(4, 3)
+                _StopZug4 = 0
+                AutomatikParameter = 405
+                _AutomatikParameterH = 418
+            ElseIf _Bhf2_Gleis4 = 4 Then    ' *** Halt
+                _StopZug4 = 4
+                _AutomatikParameterH = 418
+                If _Kurzzug4 = True Then
+                    Zug4(bremsen_kurz_von_rechts)
+                Else
+                    Zug4(bremsen)
+                End If
+                Timer_EinzelLok4.Interval = NumericUpDown4.Value * 1000
+                Timer_EinzelLok4.Start()
+                Button74.BackColor = Drawing.Color.Red
+
+            End If
+        End If
+
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = True And _AutomatikParameterH = 418 Then
+            _AutomatikParameterH = 0
+            AutomatikParameter = 405
+            Ort_Lok4 = 415
+            A_StopH = 0
+            If _StopZug4 = 0 Then
+                ' ***
+                ' *** kein Halt
+                ' ***
+                If _SBhf_Gleis4 > 0 Then
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                Else
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
+                End If
+                AutomatikParameter = 405
+            ElseIf _StopZug4 = 4 Then    ' *** Halt
+                If _SBhf_Gleis4 = 1 Or _SBhf_Gleis4 = 2 Then
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                End If
+            End If
+        End If
+
+        If Kontakt.Modul = 1 And Kontakt.Adresse = 7 And Kontakt.status = False And AutomatikParameter = 405 Then
+            ObenLang103Lok4()
+        End If
+
     End Sub
     Private Sub Betriebsart0_5(ByVal Kontakt As Klassen.Kontakt)
         ' *** Betriebsart 1/2=0 und ' *** Betriebsart 3/4=5
@@ -36172,6 +36407,147 @@ Public Class Automatikprogramme
             _AutomatikParameterH = 0
         End If
     End Sub
+    Private Sub Betriebsart3_0Var2(ByVal Kontakt As Klassen.Kontakt)
+        ' *** Betriebsart 1/2=3 und ' *** Betriebsart 3/4=0
+        ' ***
+        ' *** Datum:          03.01.2025
+        ' ***
+        ' *** steuert die Fahrt des Zuges auf Gleis 1 und 2
+        ' ***                
+        ' ***
+
+        ' ***
+        ' *** Bahnhofsausfahrt Zug auf Gleis 1
+        ' ***
+
+        BahnhofsausfahrtLok1(Kontakt)
+
+
+        If _Route_Gleis1 = 0 Then     ' *** Route "nur unten"
+
+            NurUntenLok1(Kontakt)
+
+        ElseIf _Route_Gleis1 = 1 Then ' *** Route "oben kurz"
+
+            BergfahrtLok1(Kontakt)
+            ObenKurzLok1(Kontakt)
+
+        ElseIf _Route_Gleis1 = 2 Then ' *** Route "oben lang"
+
+            BergfahrtLok1(Kontakt)
+            ObenLangLok1(Kontakt)
+
+        End If
+        ' ***
+        ' ***   Anhalten Lok1 im Bahnhof
+        ' ***
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 1 And Kontakt.status = True And AutomatikParameter = 120 Then
+            Ort_Lok1 = 100
+            _AutomatikParameterH = 121
+            If A_Stop = 0 Then
+                A_StopH = 0
+                If _Bhf_Gleis1 = 0 Then
+                    _StopZug1 = 0
+                    AutomatikParameter = 121
+                ElseIf _Bhf_Gleis1 = 2 Then
+                    _StopZug1 = 2
+                    _Route_Gleis2 = ARoute_Lok2
+                    ButtonsVisible(999)
+                    StopStart120Lok(1, 2)
+                Else
+                    _StopZug1 = 1
+                    StopStart120Lok(1, 1)
+                End If
+            Else
+                A_StopH = 1
+                _StopZug1 = 1
+                StopStart120Lok(1, 1)
+            End If
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 0 And Kontakt.status = True And _AutomatikParameterH = 121 Then
+            If _StopZug1 = 0 And A_StopH = 0 Then
+                If _Route_Gleis1 = 0 And _Route_Gleis2 = 0 Then
+                    ' *** keine Aktion wenn beide Züge unten fahren
+                ElseIf _Route_Gleis1 = 1 And _Route_Gleis2 = 1 Then
+                    ' *** keine Aktion wenn beide Züge oben kurz fahren
+                Else
+                    If _Route_Gleis1 = 0 Then
+                        _eb.weicheSchalten(17, Klassen.WeichenRichtung.links)
+                    ElseIf _Route_Gleis1 = 1 Then
+                        _eb.weicheSchalten(17, Klassen.WeichenRichtung.rechts)
+                        _eb.weicheSchalten(27, Klassen.WeichenRichtung.rechts)
+                    ElseIf _Route_Gleis1 = 2 Then
+                        _eb.weicheSchalten(17, Klassen.WeichenRichtung.links)
+                    End If
+                End If
+                AutomatikParameter = 100
+            Else
+                If _NachlaufZug1 = False Then
+                    StopZug1()
+                    Zug1(abstellen)
+                Else
+                    Zug1(nachlauf)
+                End If
+            End If
+            _AutomatikParameterH = 0
+        End If
+
+
+        'BahnhofsausfahrtLok2(Kontakt)
+
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = False And (AutomatikParameter = 200 Or AutomatikParameter = 206) Then
+            AutomatikParameter = 210
+        End If
+
+        BergfahrtLok2(Kontakt)
+
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 4 And Kontakt.status = True And AutomatikParameter = 220 Then
+            AutomatikParameter = 202
+            Ort_Lok2 = 202
+            Zug2(700)
+        End If
+
+        ' ***
+        ' *** Ankunft im Bahnhof
+        ' ***
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 2 And Kontakt.status = True And AutomatikParameter = 202 Then
+            Ort_Lok2 = 205
+            _AutomatikParameterH = 221
+            If A_Stop = 0 Then
+                A_StopH = 0
+                If _Bhf2_Gleis2 = 0 Then
+                    _StopZug2 = 0
+                    AutomatikParameter = 221
+                ElseIf _Bhf2_Gleis2 = 1 Then
+                    _StopZug2 = 2
+                    _Route_Gleis1 = ARoute_Lok1
+                    ButtonsVisible(999)
+                    StopStart120Lok(2, 1)
+                Else
+                    _StopZug2 = 2
+                    StopStart120Lok(2, 2)
+                End If
+            Else
+                A_StopH = 1
+                _StopZug2 = 2
+                StopStart120Lok(2, 2)
+            End If
+        End If
+        If Kontakt.Modul = 0 And Kontakt.Adresse = 3 And Kontakt.status = True And _AutomatikParameterH = 221 Then
+            If _StopZug2 = 0 And A_StopH = 0 Then
+                AutomatikParameter = 200
+            Else
+                'Zug2(nachlauf)
+                If _NachlaufZug2 = False Then
+                    StopZug2()
+                    Zug2(abstellen)
+                Else
+                    Zug2(nachlauf)
+                End If
+            End If
+            _AutomatikParameterH = 0
+        End If
+    End Sub
     Private Sub Betriebsart3_0Var1(ByVal Kontakt As Klassen.Kontakt)
         ' ***
         ' *** Betriebsart 1/2=3 und ' *** Betriebsart 3/4=0 Variante 1
@@ -37454,6 +37830,8 @@ Public Class Automatikprogramme
                 If Betriebsart12 = 0 And Betriebsart34 = 4 Then
                     If _Betriebsart0_4Var = 1 Then
                         Betriebsart0_4Var1(Kontakt)
+                    ElseIf _Betriebsart0_4Var = 2 Then
+                        Betriebsart0_4Var2(Kontakt)
                     Else
                         Betriebsart0_4(Kontakt)
                     End If
@@ -37511,10 +37889,12 @@ Public Class Automatikprogramme
                 End If
 
                 If Betriebsart12 = 3 And Betriebsart34 = 0 Then
-                    If _Betriebsart3_0Var = 1 Then
-                        Betriebsart3_0Var1(Kontakt)
-                    Else
+                    If _Betriebsart3_0Var = 0 Then
                         Betriebsart3_0(Kontakt)
+                    ElseIf _Betriebsart3_0Var = 1 Then
+                        Betriebsart3_0Var1(Kontakt)
+                    ElseIf _Betriebsart3_0Var = 2 Then
+                        Betriebsart3_0Var2(Kontakt)
                     End If
                 End If
 
@@ -37571,10 +37951,20 @@ Public Class Automatikprogramme
 
     Dim LastHoveredSpeedControlAddress As Integer = 1
     Dim LadeLoknummern As Boolean = False
-
+    ' *** Loknummern wählen
     Private Sub NumericUpDown8_Enter(sender As System.Object, e As System.EventArgs) Handles NumericUpDown8.Enter, NumericUpDown9.Enter, NumericUpDown10.Enter, NumericUpDown11.Enter
         Dim numericUpDown As System.Windows.Forms.NumericUpDown = sender
         GeschwindikeitenSetzen(numericUpDown.Value)
+    End Sub
+    Private Sub NumericUpDown8_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NumericUpDown8.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown11.ValueChanged
+        If LadeLoknummern = False And _LokStufen Is Nothing = False Then
+            _LokStufen.AktiveSetzten(NumericUpDown8.Value, NumericUpDown9.Value, NumericUpDown10.Value, NumericUpDown11.Value)
+            Dim numericUpDown As System.Windows.Forms.NumericUpDown = sender
+            GeschwindikeitenSetzen(numericUpDown.Value)
+        End If
+        If Not _Betriebsparameter Is Nothing Then
+            _Betriebsparameter.UpdateContent({NumericUpDown8.Value, NumericUpDown9.Value, NumericUpDown10.Value, NumericUpDown11.Value})
+        End If
     End Sub
     Private Sub NumericUPDown8_Click(sender As System.Object, e As System.EventArgs) Handles NumericUpDown8.Click
 
@@ -38516,29 +38906,10 @@ Public Class Automatikprogramme
 
         Startzug = 4
         _daten.write_to_table(AutomatikParameterTableName, 43, Startzug)
-        'If _Weichen_initialisiert = True Then
-        '    Button41.BackColor = Drawing.Color.Yellow
-        'Else
-        '    Button41.BackColor = Drawing.Color.Red
-        'End If
-        'If _Signale_initialisiert = True Then
-        '    Button42.BackColor = Drawing.Color.Yellow
-        'Else
-        '    Button42.BackColor = Drawing.Color.Red
-        'End If
+
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
         ButtonsVisible(999)
-    End Sub
-    Private Sub NumericUpDown8_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NumericUpDown8.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown11.ValueChanged
-        If LadeLoknummern = False And _LokStufen Is Nothing = False Then
-            _LokStufen.AktiveSetzten(NumericUpDown8.Value, NumericUpDown9.Value, NumericUpDown10.Value, NumericUpDown11.Value)
-            Dim numericUpDown As System.Windows.Forms.NumericUpDown = sender
-            GeschwindikeitenSetzen(numericUpDown.Value)
-        End If
-        If Not _Betriebsparameter Is Nothing Then
-            _Betriebsparameter.UpdateContent({NumericUpDown8.Value, NumericUpDown9.Value, NumericUpDown10.Value, NumericUpDown11.Value})
-        End If
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As System.Object, e As System.EventArgs) Handles TrackBar3.Scroll, TrackBar4.Scroll
@@ -38763,7 +39134,7 @@ Public Class Automatikprogramme
         FMod11 = Betriebsparameter.GetValue("Beleuchtungsparameter", 24, IndexLicht)
         FMod12 = Betriebsparameter.GetValue("Beleuchtungsparameter", 25, IndexLicht)
 
-        Button1.Text = "DMX " + Betriebsparameter.GetValue("Beleuchtungsparameter", 1, IndexLicht)
+        'Button1.Text = "DMX " + Betriebsparameter.GetValue("Beleuchtungsparameter", 1, IndexLicht)
         DMX(8, 20, DMX1, DMX2, DMX3, DMX4, DMX5, DMX6, DMX7)
 
         If _Funktionsmodelle = 2 Then
@@ -38830,9 +39201,9 @@ Public Class Automatikprogramme
         End If
 
         If _Beleuchtung = 0 Then
-            Button1.BackColor = Drawing.Color.LightGray
+            'Button1.BackColor = Drawing.Color.LightGray
         Else
-            Button1.BackColor = Drawing.Color.LightYellow
+            'Button1.BackColor = Drawing.Color.LightYellow
         End If
         _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
     End Sub
@@ -40077,16 +40448,7 @@ Public Class Automatikprogramme
             '*** Betriebsart12 = 1 und Betriebsart34 = 0
             If _Betriebsart12 = 1 And _Betriebsart34 = 0 Then
                 If _Betriebsart1_0Var = 0 Then
-                    Button15.Visible = False
-                    Button16.Visible = True
-                    Button17.Visible = True
-                    Button18.Visible = True
                     Button40.Visible = True
-
-                    LineShape1.Visible = True
-                    LineShape2.Visible = True
-                    LineShape3.Visible = True
-                    LineShape4.Visible = True
 
                     NumericUpDown1.Visible = True
                     NumericUpDown2.Visible = False
@@ -40124,6 +40486,14 @@ Public Class Automatikprogramme
 
 
                     If _Route_Gleis1 = 0 Then
+                        Button15.Visible = False
+                        Button16.Visible = False
+                        Button17.Visible = False
+                        Button18.Visible = False
+                        LineShape1.Visible = True
+                        LineShape2.Visible = False
+                        LineShape3.Visible = False
+                        LineShape4.Visible = False
                         Button31.Visible = True
                         Button51.Visible = True
                         Button61.Visible = False
@@ -40132,6 +40502,14 @@ Public Class Automatikprogramme
                         Button91.Visible = False
 
                     ElseIf _Route_Gleis1 = 1 Then
+                        Button15.Visible = False
+                        Button16.Visible = False
+                        Button17.Visible = False
+                        Button18.Visible = False
+                        LineShape1.Visible = True
+                        LineShape2.Visible = False
+                        LineShape3.Visible = False
+                        LineShape4.Visible = False
                         Button31.Visible = True
                         Button51.Visible = False
                         Button61.Visible = True
@@ -40140,6 +40518,14 @@ Public Class Automatikprogramme
                         Button91.Visible = True
 
                     ElseIf _Route_Gleis1 = 2 Then
+                        Button15.Visible = False
+                        Button16.Visible = True
+                        Button17.Visible = True
+                        Button18.Visible = True
+                        LineShape1.Visible = True
+                        LineShape2.Visible = True
+                        LineShape3.Visible = True
+                        LineShape4.Visible = True
                         Button31.Visible = True
                         Button51.Visible = True
                         Button61.Visible = True
@@ -40885,7 +41271,6 @@ Public Class Automatikprogramme
             End If
             '*** Betriebsart12 = 3 und Betriebsart34 = 0
             If _Betriebsart12 = 3 And _Betriebsart34 = 0 Then
-
                 Button19.Visible = True
                 Button38.Visible = False
 
@@ -40926,58 +41311,76 @@ Public Class Automatikprogramme
                 Button93.Visible = False
                 Button94.Visible = False
 
-
-
-                If _Route_Gleis1 = 0 Then
-                    Button31.Visible = True
-                    Button51.Visible = True
-                    Button61.Visible = False
-                    Button71.Visible = False
-                    Button81.Visible = False
-                    Button91.Visible = False
-
-                ElseIf _Route_Gleis1 = 1 Then
-                    Button31.Visible = True
-                    Button51.Visible = False
-                    Button61.Visible = True
-                    Button71.Visible = False
+                If _Betriebsart3_0Var = 2 Then
+                    Button31.Visible = True     ' Altenstein <-
+                    Button51.Visible = False    ' Schattenbahnhof
+                    Button61.Visible = True     ' Bärental
+                    Button71.Visible = False    ' Altenstein ->
                     Button81.Visible = False
                     Button91.Visible = True
 
-                ElseIf _Route_Gleis1 = 2 Then
-                    Button31.Visible = True
-                    Button51.Visible = True
-                    Button61.Visible = True
-                    Button71.Visible = True
-                    Button81.Visible = True
-                    Button91.Visible = True
-
-                End If
-                If _Route_Gleis2 = 0 Then
-                    Button32.Visible = True
-                    Button52.Visible = True
-                    Button62.Visible = False
-                    Button72.Visible = False
-                    Button82.Visible = False
-                    Button92.Visible = False
-
-                ElseIf _Route_Gleis2 = 1 Then
-                    Button32.Visible = True
-                    Button52.Visible = False
-                    Button62.Visible = True
-                    Button72.Visible = False
+                    Button32.Visible = False    ' Altenstein <-
+                    Button52.Visible = False    ' Schattenbahnhof
+                    Button62.Visible = True     ' Bärental
+                    Button72.Visible = True     ' Altenstein ->
                     Button82.Visible = False
                     Button92.Visible = True
 
-                ElseIf _Route_Gleis2 = 2 Then
-                    Button32.Visible = True
-                    Button52.Visible = True
-                    Button62.Visible = True
-                    Button72.Visible = True
-                    Button82.Visible = True
-                    Button92.Visible = True
+                Else
 
+                    If _Route_Gleis1 = 0 Then
+                        Button31.Visible = True
+                        Button51.Visible = True
+                        Button61.Visible = False
+                        Button71.Visible = False
+                        Button81.Visible = False
+                        Button91.Visible = False
+
+                    ElseIf _Route_Gleis1 = 1 Then
+                        Button31.Visible = True
+                        Button51.Visible = False
+                        Button61.Visible = True
+                        Button71.Visible = False
+                        Button81.Visible = False
+                        Button91.Visible = True
+
+                    ElseIf _Route_Gleis1 = 2 Then
+                        Button31.Visible = True
+                        Button51.Visible = True
+                        Button61.Visible = True
+                        Button71.Visible = True
+                        Button81.Visible = True
+                        Button91.Visible = True
+
+                    End If
+                    If _Route_Gleis2 = 0 Then
+                        Button32.Visible = True
+                        Button52.Visible = True
+                        Button62.Visible = False
+                        Button72.Visible = False
+                        Button82.Visible = False
+                        Button92.Visible = False
+
+                    ElseIf _Route_Gleis2 = 1 Then
+                        Button32.Visible = True
+                        Button52.Visible = False
+                        Button62.Visible = True
+                        Button72.Visible = False
+                        Button82.Visible = False
+                        Button92.Visible = True
+
+                    ElseIf _Route_Gleis2 = 2 Then
+                        Button32.Visible = True
+                        Button52.Visible = True
+                        Button62.Visible = True
+                        Button72.Visible = True
+                        Button82.Visible = True
+                        Button92.Visible = True
+
+                    End If
                 End If
+
+
 
             End If
             '*** Betriebsart12 = 3 und Betriebsart34 = 3
@@ -41900,6 +42303,48 @@ Public Class Automatikprogramme
             Button92.BackColor = Drawing.Color.LightYellow
 
             ButtonsVisible(999)
+        ElseIf _Betriebsart3_0Var = 1 Then
+            _Betriebsart3_0Var = 2
+            Button19.Text = "V2"
+            TextBox1.Text = "Züge 1 und 2 fahren im Gegemverkehr"
+            _Route_Gleis1 = 1
+            _daten.write_to_table(AutomatikParameterTableName, 3, _Route_Gleis1)
+            ARoute_Lok1 = _Route_Gleis1
+            _Route_Gleis2 = 1
+            _daten.write_to_table(AutomatikParameterTableName, 4, _Route_Gleis2)
+            ARoute_Lok2 = _Route_Gleis2
+            '_Bhf_Gleis1 = 1
+            '_Bhf_Gleis2 = 2
+            '_Bhf2_Gleis1 = 1
+            '_Bhf2_Gleis2 = 2
+            '_SBhf_Gleis1 = 2
+            '_SBhf_Gleis2 = 1
+            Diagonale_Gleis1 = 0
+            Diagonale_Gleis2 = 0
+            Talstrecke_Gleis1 = 0
+            Talstrecke_Gleis2 = 0
+            'Button31.Text = "Halt"
+            'Button31.BackColor = Drawing.Color.LightYellow
+            'Button32.Text = "Halt"
+            'Button32.BackColor = Drawing.Color.LightYellow
+            'Button71.Text = "Halt"
+            'Button71.BackColor = Drawing.Color.LightYellow
+            'Button72.Text = "Halt"
+            'Button72.BackColor = Drawing.Color.LightYellow
+            'Button51.Text = "Wechsel > 2"
+            'Button51.BackColor = Drawing.Color.LightYellow
+            'Button52.Text = "Wechsel > 1"
+            'Button52.BackColor = Drawing.Color.LightYellow
+            'Button81.Text = "Wechsel > 2"
+            'Button81.BackColor = Drawing.Color.LightYellow
+            'Button82.Text = "Wechsel > 1"
+            'Button82.BackColor = Drawing.Color.LightYellow
+            Button91.Text = "kein Halt"
+            Button91.BackColor = Drawing.Color.LightGreen
+            Button92.Text = "kein Halt"
+            Button92.BackColor = Drawing.Color.LightGreen
+
+            ButtonsVisible(999)
         Else
             _Betriebsart3_0Var = 0
             Button19.Text = "V0"
@@ -41938,11 +42383,29 @@ Public Class Automatikprogramme
             _Route_Gleis4 = 2
             _daten.write_to_table(AutomatikParameterTableName, 6, _Route_Gleis4)
             ARoute_Lok4 = _Route_Gleis4
+            _Loknummer_4A = NumericUpDown11.Value
+            _daten.write_to_table(AutomatikParameterTableName, 69, _Loknummer_4A)
+            NumericUpDown11.Value = _Loknummer_4B
+            ButtonsVisible(999)
+        ElseIf _Betriebsart0_4Var = 1 Then
+            _Betriebsart0_4Var = 2
+            Button35.Text = "V2"
+            TextBox1.Text = "Zug4 fährt über Gleis 3 und den inneren Kreis (wie die Züge von Gleis 1 und 2)"
+            _Route_Gleis4 = 2
+            _daten.write_to_table(AutomatikParameterTableName, 6, _Route_Gleis4)
+            ARoute_Lok4 = _Route_Gleis4
             ButtonsVisible(999)
         Else
             _Betriebsart0_4Var = 0
             Button35.Text = "V0"
-            TextBox1.Text = "Züge fahren über den äußeren Kreis"
+            TextBox1.Text = "Züge fahren über den äußeren Kreis - bei Umschaltung ser Variante wird 'oben kurz' vorbesetzt"
+            _Route_Gleis4 = 1
+            _daten.write_to_table(AutomatikParameterTableName, 6, _Route_Gleis4)
+            ARoute_Lok4 = _Route_Gleis4
+            _Loknummer_4B = NumericUpDown11.Value
+            _daten.write_to_table(AutomatikParameterTableName, 70, _Loknummer_4B)
+            NumericUpDown11.Value = _Loknummer_4A
+            ButtonsVisible(999)
         End If
         _daten.write_to_table(AutomatikParameterTableName, 55, _Betriebsart0_4Var)
         _Weichen_in_Startposition = False
@@ -42019,6 +42482,11 @@ Public Class Automatikprogramme
             _Betriebsart1_0Var = 0
             Button40.Text = "V0"
             TextBox1.Text = "Züge fahren vorwärts über den inneren Kreis"
+            Diagonale_Gleis1 = 0
+            Diagonale_Gleis2 = 0
+            _GleisFrei3 = 0
+            Button17.Text = "belegt / nicht benutzt"
+            Button17.BackColor = Drawing.Color.LightYellow
         End If
         _daten.write_to_table(AutomatikParameterTableName, 57, _Betriebsart1_0Var)
         _Weichen_in_Startposition = False
@@ -42322,7 +42790,7 @@ Public Class Automatikprogramme
             'ElseIf Betriebsart12 = 2 And Betriebsart34 = 4 Then
             'ElseIf Betriebsart12 = 2 And Betriebsart34 = 5 Then
         ElseIf Betriebsart12 = 3 And Betriebsart34 = 0 Then
-            If _Betriebsart3_0Var = 0 Then
+            If _Betriebsart3_0Var = 0 Or _Betriebsart3_0Var = 2 Then
                 If _Bhf_Gleis1 = 0 Or _Bhf_Gleis1 = 3 Or _Bhf_Gleis1 = 4 Then
                     _Bhf_Gleis1 = 1
                     Button31.Text = "Halt"
@@ -43933,12 +44401,28 @@ Public Class Automatikprogramme
                 Else
                     _Bhf2_Gleis2 = 0
                 End If
+            ElseIf _Betriebsart3_0Var = 1 Then
+                If _Bhf2_Gleis2 = 0 Or _Bhf2_Gleis2 = 3 Or _Bhf2_Gleis2 = 4 Then
+                    _Bhf2_Gleis2 = 2
+                    Button72.Text = "Halt"
+                    Button72.BackColor = Drawing.Color.LightYellow
+                ElseIf _Bhf2_Gleis2 = 2 Then
+                    _Bhf2_Gleis2 = 0
+                    Button72.Text = "kein Halt"
+                    Button72.BackColor = Drawing.Color.LightGreen
+                Else
+                    _Bhf2_Gleis2 = 0
+                End If
             Else
                 If _Bhf2_Gleis2 = 0 Or _Bhf2_Gleis2 = 3 Or _Bhf2_Gleis2 = 4 Then
                     _Bhf2_Gleis2 = 2
                     Button72.Text = "Halt"
                     Button72.BackColor = Drawing.Color.LightYellow
                 ElseIf _Bhf2_Gleis2 = 2 Then
+                    _Bhf2_Gleis2 = 1
+                    Button72.Text = "Wechsel > 1"
+                    Button72.BackColor = Drawing.Color.LightYellow
+                ElseIf _Bhf2_Gleis2 = 1 Then
                     _Bhf2_Gleis2 = 0
                     Button72.Text = "kein Halt"
                     Button72.BackColor = Drawing.Color.LightGreen
@@ -44414,7 +44898,7 @@ Public Class Automatikprogramme
     End Sub
     ' *** Talstrecke
     Private Sub Button91_Click(sender As System.Object, e As System.EventArgs) Handles Button91.Click
-        If _Betriebsart3_0Var = 0 Then
+        If _Betriebsart3_0Var = 0 Or _Betriebsart3_0Var = 2 Then
             If Talstrecke_Gleis1 = 0 Then
                 Talstrecke_Gleis1 = 1
                 Button91.Text = "Halt"
@@ -44435,7 +44919,7 @@ Public Class Automatikprogramme
         _daten.write_to_table(AutomatikParameterTableName, 39, Talstrecke_Gleis1)
     End Sub
     Private Sub Button92_Click(sender As System.Object, e As System.EventArgs) Handles Button92.Click
-        If _Betriebsart3_0Var = 0 Then
+        If _Betriebsart3_0Var = 0 Or _Betriebsart3_0Var = 2 Then
             If Talstrecke_Gleis2 = 0 Then
                 Talstrecke_Gleis2 = 2
                 Button92.Text = "Halt"
@@ -44625,6 +45109,9 @@ Public Class Automatikprogramme
                 GeschwindikeitenSetzen(NumericUpDown11.Value)
                 If _Betriebsart0_4Var = 1 Then
                     Zeile = 362
+                End If
+                If _Betriebsart0_4Var = 2 Then
+                    Zeile = 368
                 End If
             End If
             ' ***
@@ -44974,8 +45461,7 @@ Public Class Automatikprogramme
                         _eb.weicheSchalten(19, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(21, Klassen.WeichenRichtung.rechts)
                     End If
-
-                Else
+                ElseIf _Betriebsart3_0Var = 1 Then
                     Zeile = 361
                     NumericUpDown8.BackColor = Drawing.Color.LightBlue
                     NumericUpDown9.BackColor = Drawing.Color.White
@@ -44989,6 +45475,13 @@ Public Class Automatikprogramme
                         _eb.weicheSchalten(17, Klassen.WeichenRichtung.rechts)
                     Else
                         _eb.weicheSchalten(17, Klassen.WeichenRichtung.links)
+                    End If
+                Else
+                    Zeile = 357
+                    If Startzug = 1 Then
+                        _eb.weicheSchalten(23, Klassen.WeichenRichtung.links)
+                    Else
+                        _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
                     End If
                 End If
             End If
@@ -45409,11 +45902,24 @@ Public Class Automatikprogramme
                         _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
                         _eb.weicheSchalten(12, Klassen.WeichenRichtung.links)
                     End If
-                Else
+                ElseIf _Betriebsart0_4Var = 1 Then
                     _eb.weicheSchalten(1, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(2, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(3, Klassen.WeichenRichtung.links)
                     _eb.weicheSchalten(4, Klassen.WeichenRichtung.links)
+                    _eb.weicheSchalten(5, Klassen.WeichenRichtung.rechts)
+                    _eb.weicheSchalten(6, Klassen.WeichenRichtung.rechts)
+                    _eb.weicheSchalten(7, Klassen.WeichenRichtung.rechts)
+                    _eb.weicheSchalten(8, Klassen.WeichenRichtung.rechts)
+                    _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
+                    _eb.weicheSchalten(10, Klassen.WeichenRichtung.links)
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
+                    _eb.weicheSchalten(12, Klassen.WeichenRichtung.links)
+                Else
+                    _eb.weicheSchalten(1, Klassen.WeichenRichtung.links)
+                    _eb.weicheSchalten(2, Klassen.WeichenRichtung.links)
+                    _eb.weicheSchalten(3, Klassen.WeichenRichtung.rechts)
+                    _eb.weicheSchalten(4, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(5, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(6, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(7, Klassen.WeichenRichtung.rechts)
@@ -45917,7 +46423,7 @@ Public Class Automatikprogramme
                     Button52.Text = "Halt"
                     _daten.write_to_table(AutomatikParameterTableName, 23, _SBhf_Gleis2)
                 End If
-                If _Betriebsart3_0Var = 0 Then
+                If _Betriebsart3_0Var = 0 Or _Betriebsart3_0Var = 2 Then
                     _eb.weicheSchalten(1, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(2, Klassen.WeichenRichtung.rechts)
                     _eb.weicheSchalten(3, Klassen.WeichenRichtung.rechts)
@@ -46177,9 +46683,20 @@ Public Class Automatikprogramme
                     AutomatikParameter = 300
                 End If
                 If Betriebsart12 = 0 And Betriebsart34 = 4 Then
-                    Startzug = 4
-                    Zug4(anfahren)
-                    AutomatikParameter = 400
+                    If _Betriebsart0_4Var = 0 Then
+                        Startzug = 4
+                        Zug4(anfahren)
+                        AutomatikParameter = 400
+                    ElseIf _Betriebsart0_4Var = 1 Then
+                        Startzug = 4
+                        Zug4(anfahren)
+                        AutomatikParameter = 90
+                    Else
+                        Startzug = 4
+                        Zug4(anfahren)
+                        AutomatikParameter = 90
+                    End If
+
                 End If
                 If Betriebsart12 = 0 And Betriebsart34 = 5 Then
                     If Startzug = 4 Then
@@ -46285,6 +46802,15 @@ Public Class Automatikprogramme
                         Startzug = 1
                         Zug1(anfahren)
                         AutomatikParameter = 90
+                    ElseIf _Betriebsart3_0Var = 2 Then
+                        If Startzug = 2 Then
+                            Zug2(anfahren)
+                            AutomatikParameter = 200
+                        Else
+                            Startzug = 1
+                            Zug1(anfahren)
+                            AutomatikParameter = 100
+                        End If
                     End If
 
                 End If
@@ -46502,134 +47028,134 @@ Public Class Automatikprogramme
         ButtonsVisible(999)
     End Sub
     ' *** DMX
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-        Dim IndexLicht, DMX1, DMX2, DMX3, DMX4, DMX5, DMX6, DMX7, FMod1, FMod2, FMod3, FMod4, FMod5, FMod6, FMod7, FMod8, FMod9, FMod10, FMod11, FMod12 As Integer
-        _Beleuchtung = _Beleuchtung + 1
-        If _Beleuchtung > 9 Then
-            _Beleuchtung = 2
-        End If
-        IndexLicht = _Beleuchtung + 4
-        DMX1 = Betriebsparameter.GetValue("Beleuchtungsparameter", 2, IndexLicht)
-        DMX2 = Betriebsparameter.GetValue("Beleuchtungsparameter", 3, IndexLicht)
-        DMX3 = Betriebsparameter.GetValue("Beleuchtungsparameter", 4, IndexLicht)
-        DMX4 = Betriebsparameter.GetValue("Beleuchtungsparameter", 5, IndexLicht)
-        DMX5 = Betriebsparameter.GetValue("Beleuchtungsparameter", 6, IndexLicht)
-        DMX6 = Betriebsparameter.GetValue("Beleuchtungsparameter", 7, IndexLicht)
-        DMX7 = Betriebsparameter.GetValue("Beleuchtungsparameter", 8, IndexLicht)
+    'Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+    '    Dim IndexLicht, DMX1, DMX2, DMX3, DMX4, DMX5, DMX6, DMX7, FMod1, FMod2, FMod3, FMod4, FMod5, FMod6, FMod7, FMod8, FMod9, FMod10, FMod11, FMod12 As Integer
+    '    _Beleuchtung = _Beleuchtung + 1
+    '    If _Beleuchtung > 9 Then
+    '        _Beleuchtung = 2
+    '    End If
+    '    IndexLicht = _Beleuchtung + 4
+    '    DMX1 = Betriebsparameter.GetValue("Beleuchtungsparameter", 2, IndexLicht)
+    '    DMX2 = Betriebsparameter.GetValue("Beleuchtungsparameter", 3, IndexLicht)
+    '    DMX3 = Betriebsparameter.GetValue("Beleuchtungsparameter", 4, IndexLicht)
+    '    DMX4 = Betriebsparameter.GetValue("Beleuchtungsparameter", 5, IndexLicht)
+    '    DMX5 = Betriebsparameter.GetValue("Beleuchtungsparameter", 6, IndexLicht)
+    '    DMX6 = Betriebsparameter.GetValue("Beleuchtungsparameter", 7, IndexLicht)
+    '    DMX7 = Betriebsparameter.GetValue("Beleuchtungsparameter", 8, IndexLicht)
 
-        If _Hue = 3 Then
-            Hue_Control = Betriebsparameter.GetValue("Beleuchtungsparameter", 9, IndexLicht)
-            Col_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 10, IndexLicht)
-            Sat_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 11, IndexLicht)
-            Bri_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 12, IndexLicht)
-            CT_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 13, IndexLicht)
-            Timer_HUE.Start()
-        End If
+    '    If _Hue = 3 Then
+    '        Hue_Control = Betriebsparameter.GetValue("Beleuchtungsparameter", 9, IndexLicht)
+    '        Col_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 10, IndexLicht)
+    '        Sat_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 11, IndexLicht)
+    '        Bri_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 12, IndexLicht)
+    '        CT_soll = Betriebsparameter.GetValue("Beleuchtungsparameter", 13, IndexLicht)
+    '        Timer_HUE.Start()
+    '    End If
 
-        FMod1 = Betriebsparameter.GetValue("Beleuchtungsparameter", 14, IndexLicht)
-        FMod2 = Betriebsparameter.GetValue("Beleuchtungsparameter", 15, IndexLicht)
-        FMod3 = Betriebsparameter.GetValue("Beleuchtungsparameter", 16, IndexLicht)
-        FMod4 = Betriebsparameter.GetValue("Beleuchtungsparameter", 17, IndexLicht)
-        FMod5 = Betriebsparameter.GetValue("Beleuchtungsparameter", 18, IndexLicht)
-        FMod6 = Betriebsparameter.GetValue("Beleuchtungsparameter", 19, IndexLicht)
-        FMod7 = Betriebsparameter.GetValue("Beleuchtungsparameter", 20, IndexLicht)
-        FMod8 = Betriebsparameter.GetValue("Beleuchtungsparameter", 21, IndexLicht)
-        FMod9 = Betriebsparameter.GetValue("Beleuchtungsparameter", 22, IndexLicht)
-        FMod10 = Betriebsparameter.GetValue("Beleuchtungsparameter", 23, IndexLicht)
-        FMod11 = Betriebsparameter.GetValue("Beleuchtungsparameter", 24, IndexLicht)
-        FMod12 = Betriebsparameter.GetValue("Beleuchtungsparameter", 25, IndexLicht)
+    '    FMod1 = Betriebsparameter.GetValue("Beleuchtungsparameter", 14, IndexLicht)
+    '    FMod2 = Betriebsparameter.GetValue("Beleuchtungsparameter", 15, IndexLicht)
+    '    FMod3 = Betriebsparameter.GetValue("Beleuchtungsparameter", 16, IndexLicht)
+    '    FMod4 = Betriebsparameter.GetValue("Beleuchtungsparameter", 17, IndexLicht)
+    '    FMod5 = Betriebsparameter.GetValue("Beleuchtungsparameter", 18, IndexLicht)
+    '    FMod6 = Betriebsparameter.GetValue("Beleuchtungsparameter", 19, IndexLicht)
+    '    FMod7 = Betriebsparameter.GetValue("Beleuchtungsparameter", 20, IndexLicht)
+    '    FMod8 = Betriebsparameter.GetValue("Beleuchtungsparameter", 21, IndexLicht)
+    '    FMod9 = Betriebsparameter.GetValue("Beleuchtungsparameter", 22, IndexLicht)
+    '    FMod10 = Betriebsparameter.GetValue("Beleuchtungsparameter", 23, IndexLicht)
+    '    FMod11 = Betriebsparameter.GetValue("Beleuchtungsparameter", 24, IndexLicht)
+    '    FMod12 = Betriebsparameter.GetValue("Beleuchtungsparameter", 25, IndexLicht)
 
-        'Button1.Text = "DMX " + Betriebsparameter.GetValue("Beleuchtungsparameter", 1, IndexLicht)
-        Button1.Text = Betriebsparameter.GetValue("Beleuchtungsparameter", 1, IndexLicht)
-        DMX(8, 20, DMX1, DMX2, DMX3, DMX4, DMX5, DMX6, DMX7)
+    '    'Button1.Text = "DMX " + Betriebsparameter.GetValue("Beleuchtungsparameter", 1, IndexLicht)
+    '    'Button1.Text = Betriebsparameter.GetValue("Beleuchtungsparameter", 1, IndexLicht)
+    '    DMX(8, 20, DMX1, DMX2, DMX3, DMX4, DMX5, DMX6, DMX7)
 
-        If _Funktionsmodelle = 2 Then
-            If FMod1 = 1 Then
-                _eb.weicheSchalten(29, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(29, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod2 = 1 Then
-                _eb.weicheSchalten(30, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(30, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod3 = 1 Then
-                _eb.weicheSchalten(31, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(31, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod4 = 1 Then
-                _eb.weicheSchalten(32, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(32, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod5 = 1 Then
-                _eb.weicheSchalten(33, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(33, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod6 = 1 Then
-                _eb.weicheSchalten(34, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(34, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod7 = 1 Then
-                _eb.weicheSchalten(35, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(35, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod8 = 1 Then
-                _eb.weicheSchalten(36, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(36, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod9 = 1 Then
-                _eb.weicheSchalten(37, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(37, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod10 = 1 Then
-                _eb.weicheSchalten(38, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(38, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod11 = 1 Then
-                _eb.weicheSchalten(39, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(39, Klassen.WeichenRichtung.rechts)
-            End If
-            If FMod12 = 1 Then
-                _eb.weicheSchalten(40, Klassen.WeichenRichtung.links)
-            Else
-                _eb.weicheSchalten(40, Klassen.WeichenRichtung.rechts)
-            End If
-        End If
+    '    If _Funktionsmodelle = 2 Then
+    '        If FMod1 = 1 Then
+    '            _eb.weicheSchalten(29, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(29, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod2 = 1 Then
+    '            _eb.weicheSchalten(30, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(30, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod3 = 1 Then
+    '            _eb.weicheSchalten(31, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(31, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod4 = 1 Then
+    '            _eb.weicheSchalten(32, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(32, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod5 = 1 Then
+    '            _eb.weicheSchalten(33, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(33, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod6 = 1 Then
+    '            _eb.weicheSchalten(34, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(34, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod7 = 1 Then
+    '            _eb.weicheSchalten(35, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(35, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod8 = 1 Then
+    '            _eb.weicheSchalten(36, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(36, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod9 = 1 Then
+    '            _eb.weicheSchalten(37, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(37, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod10 = 1 Then
+    '            _eb.weicheSchalten(38, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(38, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod11 = 1 Then
+    '            _eb.weicheSchalten(39, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(39, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '        If FMod12 = 1 Then
+    '            _eb.weicheSchalten(40, Klassen.WeichenRichtung.links)
+    '        Else
+    '            _eb.weicheSchalten(40, Klassen.WeichenRichtung.rechts)
+    '        End If
+    '    End If
 
-        Button1.BackColor = Drawing.Color.LightYellow
-        Button36.BackColor = Drawing.Color.LightGray
-        Button37.BackColor = Drawing.Color.LightGray
+    '    Button1.BackColor = Drawing.Color.LightYellow
+    '    Button36.BackColor = Drawing.Color.LightGray
+    '    Button37.BackColor = Drawing.Color.LightGray
 
-        _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
-    End Sub
-    Private Sub Button36_Click(sender As System.Object, e As System.EventArgs) Handles Button36.Click
-        _Beleuchtung = 0
-        DMX(8, 20, 0, 0, 0, 0, 0, 0, 0)
-        Button1.BackColor = Drawing.Color.LightGray
-        Button36.BackColor = Drawing.Color.LightYellow
-        Button37.BackColor = Drawing.Color.LightGray
-        Button1.Text = "DMX"
-        _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
-    End Sub
-    Private Sub Button37_Click(sender As System.Object, e As System.EventArgs) Handles Button37.Click
-        _Beleuchtung = 1
-        DMX(8, 20, 200, 200, 200, 200, 200, 200, 200)
-        Button1.BackColor = Drawing.Color.LightGray
-        Button36.BackColor = Drawing.Color.LightGray
-        Button37.BackColor = Drawing.Color.LightYellow
-        Button1.Text = "DMX"
-        _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
-    End Sub
+    '    _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
+    'End Sub
+    'Private Sub Button36_Click(sender As System.Object, e As System.EventArgs) Handles Button36.Click
+    '    _Beleuchtung = 0
+    '    DMX(8, 20, 0, 0, 0, 0, 0, 0, 0)
+    '    Button1.BackColor = Drawing.Color.LightGray
+    '    Button36.BackColor = Drawing.Color.LightYellow
+    '    Button37.BackColor = Drawing.Color.LightGray
+    '    Button1.Text = "DMX"
+    '    _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
+    'End Sub
+    'Private Sub Button37_Click(sender As System.Object, e As System.EventArgs) Handles Button37.Click
+    '    _Beleuchtung = 1
+    '    DMX(8, 20, 200, 200, 200, 200, 200, 200, 200)
+    '    Button1.BackColor = Drawing.Color.LightGray
+    '    Button36.BackColor = Drawing.Color.LightGray
+    '    Button37.BackColor = Drawing.Color.LightYellow
+    '    Button1.Text = "DMX"
+    '    _daten.write_to_table(AutomatikParameterTableName, 44, _Beleuchtung)
+    'End Sub
     ' *** Hue
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
         _Hue_Reset = 1
