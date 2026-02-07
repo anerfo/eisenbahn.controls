@@ -74,6 +74,8 @@ Partial Class Automatikprogramme
         Me.NumericUpDown4 = New System.Windows.Forms.NumericUpDown()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button36 = New System.Windows.Forms.Button()
+        Me.Button37 = New System.Windows.Forms.Button()
         Me.Button40 = New System.Windows.Forms.Button()
         Me.Button44 = New System.Windows.Forms.Button()
         Me.Button19 = New System.Windows.Forms.Button()
@@ -145,8 +147,6 @@ Partial Class Automatikprogramme
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
-        Me.Button36 = New System.Windows.Forms.Button()
-        Me.Button37 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         CType(Me.NumericUpDown6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -331,9 +331,9 @@ Partial Class Automatikprogramme
         Me.Label17.AutoSize = True
         Me.Label17.Location = New System.Drawing.Point(20, 21)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(50, 13)
+        Me.Label17.Size = New System.Drawing.Size(36, 13)
         Me.Label17.TabIndex = 0
-        Me.Label17.Text = "Anfahren"
+        Me.Label17.Text = "V_min"
         '
         'Label20
         '
@@ -655,7 +655,7 @@ Partial Class Automatikprogramme
         '
         Me.Button25.Location = New System.Drawing.Point(58, 279)
         Me.Button25.Name = "Button25"
-        Me.Button25.Size = New System.Drawing.Size(57, 20)
+        Me.Button25.Size = New System.Drawing.Size(60, 20)
         Me.Button25.TabIndex = 109
         Me.Button25.Text = "P"
         Me.Button25.UseVisualStyleBackColor = True
@@ -664,7 +664,7 @@ Partial Class Automatikprogramme
         '
         Me.Button26.Location = New System.Drawing.Point(58, 302)
         Me.Button26.Name = "Button26"
-        Me.Button26.Size = New System.Drawing.Size(57, 20)
+        Me.Button26.Size = New System.Drawing.Size(60, 20)
         Me.Button26.TabIndex = 110
         Me.Button26.Text = "P"
         Me.Button26.UseVisualStyleBackColor = True
@@ -683,7 +683,7 @@ Partial Class Automatikprogramme
         '
         Me.Button27.Location = New System.Drawing.Point(58, 354)
         Me.Button27.Name = "Button27"
-        Me.Button27.Size = New System.Drawing.Size(57, 20)
+        Me.Button27.Size = New System.Drawing.Size(60, 20)
         Me.Button27.TabIndex = 111
         Me.Button27.Text = "P"
         Me.Button27.UseVisualStyleBackColor = True
@@ -692,7 +692,7 @@ Partial Class Automatikprogramme
         '
         Me.Button28.Location = New System.Drawing.Point(58, 379)
         Me.Button28.Name = "Button28"
-        Me.Button28.Size = New System.Drawing.Size(57, 20)
+        Me.Button28.Size = New System.Drawing.Size(60, 20)
         Me.Button28.TabIndex = 112
         Me.Button28.Text = "P"
         Me.Button28.UseVisualStyleBackColor = True
@@ -708,7 +708,7 @@ Partial Class Automatikprogramme
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(121, 279)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(125, 279)
         Me.NumericUpDown1.Maximum = New Decimal(New Integer() {240, 0, 0, 0})
         Me.NumericUpDown1.Minimum = New Decimal(New Integer() {30, 0, 0, 0})
         Me.NumericUpDown1.Name = "NumericUpDown1"
@@ -718,7 +718,7 @@ Partial Class Automatikprogramme
         '
         'NumericUpDown2
         '
-        Me.NumericUpDown2.Location = New System.Drawing.Point(121, 301)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(125, 301)
         Me.NumericUpDown2.Maximum = New Decimal(New Integer() {240, 0, 0, 0})
         Me.NumericUpDown2.Minimum = New Decimal(New Integer() {30, 0, 0, 0})
         Me.NumericUpDown2.Name = "NumericUpDown2"
@@ -737,7 +737,7 @@ Partial Class Automatikprogramme
         '
         'NumericUpDown3
         '
-        Me.NumericUpDown3.Location = New System.Drawing.Point(121, 354)
+        Me.NumericUpDown3.Location = New System.Drawing.Point(125, 354)
         Me.NumericUpDown3.Maximum = New Decimal(New Integer() {240, 0, 0, 0})
         Me.NumericUpDown3.Minimum = New Decimal(New Integer() {30, 0, 0, 0})
         Me.NumericUpDown3.Name = "NumericUpDown3"
@@ -747,7 +747,7 @@ Partial Class Automatikprogramme
         '
         'NumericUpDown4
         '
-        Me.NumericUpDown4.Location = New System.Drawing.Point(121, 379)
+        Me.NumericUpDown4.Location = New System.Drawing.Point(125, 379)
         Me.NumericUpDown4.Maximum = New Decimal(New Integer() {240, 0, 0, 0})
         Me.NumericUpDown4.Minimum = New Decimal(New Integer() {30, 0, 0, 0})
         Me.NumericUpDown4.Name = "NumericUpDown4"
@@ -772,6 +772,24 @@ Partial Class Automatikprogramme
         Me.Button12.TabIndex = 25
         Me.Button12.Text = "Gleis 3/4"
         Me.Button12.UseVisualStyleBackColor = True
+        '
+        'Button36
+        '
+        Me.Button36.Location = New System.Drawing.Point(338, 354)
+        Me.Button36.Name = "Button36"
+        Me.Button36.Size = New System.Drawing.Size(20, 12)
+        Me.Button36.TabIndex = 130
+        Me.Button36.Text = "V1"
+        Me.Button36.UseVisualStyleBackColor = True
+        '
+        'Button37
+        '
+        Me.Button37.Location = New System.Drawing.Point(338, 366)
+        Me.Button37.Name = "Button37"
+        Me.Button37.Size = New System.Drawing.Size(20, 12)
+        Me.Button37.TabIndex = 131
+        Me.Button37.Text = "V1"
+        Me.Button37.UseVisualStyleBackColor = True
         '
         'Button40
         '
@@ -1390,7 +1408,7 @@ Partial Class Automatikprogramme
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(92, 13)
         Me.Label10.TabIndex = 87
-        Me.Label10.Text = "Stand 02.01.2025"
+        Me.Label10.Text = "Stand 01.02.2026"
         '
         'ComboBox1
         '
@@ -1420,24 +1438,6 @@ Partial Class Automatikprogramme
         Me.LinkLabel2.TabIndex = 111
         Me.LinkLabel2.TabStop = True
         Me.LinkLabel2.Text = "statische Kamera"
-        '
-        'Button36
-        '
-        Me.Button36.Location = New System.Drawing.Point(338, 354)
-        Me.Button36.Name = "Button36"
-        Me.Button36.Size = New System.Drawing.Size(20, 12)
-        Me.Button36.TabIndex = 130
-        Me.Button36.Text = "V1"
-        Me.Button36.UseVisualStyleBackColor = True
-        '
-        'Button37
-        '
-        Me.Button37.Location = New System.Drawing.Point(338, 366)
-        Me.Button37.Name = "Button37"
-        Me.Button37.Size = New System.Drawing.Size(20, 12)
-        Me.Button37.TabIndex = 131
-        Me.Button37.Text = "V1"
-        Me.Button37.UseVisualStyleBackColor = True
         '
         'Automatikprogramme
         '
