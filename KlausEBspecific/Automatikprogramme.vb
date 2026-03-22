@@ -1,6 +1,6 @@
 ﻿'*** Allgemeine Kommentare
 '***
-'*** Datum der letzten Änderung : 31.01.2026
+'*** Datum der letzten Änderung : 22.03.2026
 '***
 '*** Letzte Änderung:
 '***
@@ -83,17 +83,21 @@ Public Class Automatikprogramme
 
     Private _aktiv As Integer
 
-    Private _AutomatikParameter, _AutomatikParameter1, _AutomatikParameterH, _Betriebsart, _Betriebsart12, _Betriebsart34, A_Stop, A_StopH, A_StopB, _Route_Gleis1, _Route_Gleis2, _Route_Gleis3, _Route_Gleis4, _StopZug1, _StopZug2, _StopZug3, _StopZug4 As Integer
-    Private _Bhf_Gleis1, _Bhf_Gleis2, _Bhf_Gleis3, _Bhf_Gleis4, _Bhf2_Gleis1, _Bhf2_Gleis2, _Bhf2_Gleis3, _Bhf2_Gleis4, _SBhf_Gleis1, _SBhf_Gleis2, _SBhf_Gleis3, _SBhf_Gleis3a, _SBhf_Gleis3b, _SBhf_Gleis4, _Berg_Gleis1, _Berg_Gleis2, _Berg_Gleis3, _Berg_Gleis4, Diagonale_Gleis1, Diagonale_Gleis2, Diagonale_Gleis3, Diagonale_Gleis4, Talstrecke_Gleis1, Talstrecke_Gleis2, Talstrecke_Gleis3, Talstrecke_Gleis4 As Integer
-    Private _Kurzzug1, _Kurzzug2, _Kurzzug3, _Kurzzug4, _NachlaufZug1, _NachlaufZug2, _NachlaufZug3, _NachlaufZug4, _Weichen_in_Startposition, _Weichen_initialisiert, _Signale_in_Startposition, _Signale_initialisiert, Start_Betaetigt, Stop_Betaetigt,
-            _TimerStory_laeuft, _Innenbeleuchtung As Boolean
-    Private _Beleuchtung, _Funktionsmodelle, _Hue, _HueHell, _Hue_Reset, _HueAus, _StoryPointer, _StoryControl, _StoryAuto, _StoryZeit, _Music_laeuft, _Zug_laeuft, _Motor, _Innenbeleuchtung2, _Fahrzeugbeleuchtung2, _Dampf, _AkustischeSignale, _Durchsagen, _Fernlicht As Integer
+    Private _AutomatikParameter, _AutomatikParameter1, _AutomatikParameterH, _Betriebsart, _Betriebsart12, _Betriebsart34, A_Stop, A_StopH, A_StopB As Integer
+    Private _Route_Gleis1, _Route_Gleis2, _Route_Gleis3, _Route_Gleis4, _StopZug1, _StopZug2, _StopZug3, _StopZug4 As Integer
+    Private _Bhf_Gleis1, _Bhf_Gleis2, _Bhf_Gleis3, _Bhf_Gleis4, _Bhf2_Gleis1, _Bhf2_Gleis2, _Bhf2_Gleis3, _Bhf2_Gleis4, _SBhf_Gleis1, _SBhf_Gleis2 As Integer
+    Private _SBhf_Gleis3, _SBhf_Gleis3a, _SBhf_Gleis3b, _SBhf_Gleis4, _Berg_Gleis1, _Berg_Gleis2, _Berg_Gleis3, _Berg_Gleis4 As Integer
+    Private Diagonale_Gleis1, Diagonale_Gleis2, Diagonale_Gleis3, Diagonale_Gleis4, Talstrecke_Gleis1, Talstrecke_Gleis2, Talstrecke_Gleis3, Talstrecke_Gleis4 As Integer
+    Private _Kurzzug1, _Kurzzug2, _Kurzzug3, _Kurzzug4, _NachlaufZug1, _NachlaufZug2, _NachlaufZug3, _NachlaufZug4 As Boolean
+    Private _Weichen_in_Startposition, _Weichen_initialisiert, _Signale_in_Startposition, _Signale_initialisiert, Start_Betaetigt, Stop_Betaetigt, _TimerStory_laeuft As Boolean
+    Private _Beleuchtung, _Funktionsmodelle, _Hue, _HueHell, _Hue_Reset, _HueAus, _StoryPointer, _StoryControl, _StoryAuto, _StoryZeit, _Music_laeuft As Integer
+    Private _Motor, _Innenbeleuchtung2, _Fahrzeugbeleuchtung2, _Dampf, _AkustischeSignale, _Durchsagen, _Fernlicht As Integer
     Private Ort_Lok1, Ort_Lok2, Ort_Lok3, Ort_Lok4, ARoute_Lok1, ARoute_Lok2, ARoute_Lok3, ARoute_Lok4, _Kamera, _aktuelleKamera, Startzug As Integer
     Private _GleisFrei1, _GleisFrei2, _GleisFrei3, _GleisFrei4 As Integer
     Private _Betriebsart0_3Var, _Betriebsart0_4Var, _Betriebsart0_5Var, _Betriebsart1_0Var, _Betriebsart1_3Var, _Betriebsart1_4Var, _Betriebsart1_5Var As Integer
     Private _Betriebsart2_0Var, _Betriebsart2_3Var, _Betriebsart2_4Var, _Betriebsart2_5Var, _Betriebsart3_0Var, _Betriebsart3_3Var, _Betriebsart3_4Var, _Betriebsart3_5Var As Integer
     Private anfahren, abstellen, bremsen, bremsen_kurz_von_links, bremsen_kurz_von_rechts, bergfahrt, nachlauf As Integer
-    Private _Loknummer_3A, _Loknummer_3B, _Vorwahl_Lok3, _Zugwechsel As Integer
+    Private _Loknummer_3A, _Loknummer_3B, _Vorwahl_Lok3, _Zugwechsel, _Loknummer_4A, _Loknummer_4B, _Vorwahl_Lok4 As Integer
 
     Private Betriebsparameter As ExcelDocument = New ExcelDocument("H:\\EB_Media\\Betriebsparameter\\Betriebsparameter.xlsx")
     '*** Fahrprogramm für Züge erstellen FPZ
@@ -137,9 +141,10 @@ Public Class Automatikprogramme
     Private _Zugtyp1, _Zugtyp2, _Zugtyp3, _Zugtyp4 As Integer
     Private _Hinterzarten, _Wiehre, _Titisee As Integer
 
-    Private L1_aktuell, L2_aktuell, L3_aktuell, L4_aktuell, L5_aktuell, L6_aktuell, L7_aktuell, L1_soll, L2_soll, L3_soll, L4_soll, L5_soll, L6_soll, L7_soll, S_DMX, Szene As Integer
+    Private L1_soll, L2_soll, L3_soll, L4_soll, L5_soll, L6_soll, L7_soll, S_DMX, Szene As Integer
 
     Private Bri_aktuell, Sat_aktuell, Col_aktuell, CT_aktuell, CT_M, Bri_soll, Bri_M, Sat_soll, Col_soll, CT_soll, Hue_Control, Hue_Control_aktuell, Hue_Control_M, Hue_Takt, Hue_Aenderung, Hue_Neue_Aenderung As Integer
+
     Private FilmFortschritt As Integer
     Private Fahrplan, Warte1A1, Warte1A2, Warte1SB, Warte1BA, Warte1TA, Warte1DI, Warte2A1, Warte2A2, Warte2SB, Warte2BA, Warte2TA, Warte2DI, Warte3A1, Warte3A2, Warte3SB, Warte3BA, Warte3TA, Warte3DI, Warte4A1, Warte4A2, Warte4SB, Warte4BA, Warte4TA, Warte4DI As Integer
 
@@ -416,7 +421,7 @@ Public Class Automatikprogramme
         _Zugwechsel = 0
         _Vorwahl_Lok3 = _daten.read_from_table(AutomatikParameterTableName, 71)
         If _Vorwahl_Lok3 = 0 Then
-            NumericUpDown11.Value = _Loknummer_3A
+            NumericUpDown10.Value = _Loknummer_3A
             Button36.BackColor = Drawing.Color.LightGreen
             Button37.BackColor = Drawing.Color.LightYellow
             _Bhf_Gleis3 = _daten.read_from_table(AutomatikParameterTableName, 9)
@@ -427,7 +432,7 @@ Public Class Automatikprogramme
             Talstrecke_Gleis3 = _daten.read_from_table(AutomatikParameterTableName, 41)
             _Zugtyp3 = _daten.read_from_table(AutomatikParameterTableName, 49)
         Else
-            NumericUpDown11.Value = _Loknummer_3B
+            NumericUpDown10.Value = _Loknummer_3B
             Button37.BackColor = Drawing.Color.LightGreen
             Button36.BackColor = Drawing.Color.LightYellow
             _Bhf_Gleis3 = _daten.read_from_table(AutomatikParameterTableName, 72)
@@ -441,6 +446,25 @@ Public Class Automatikprogramme
         End If
         _SBhf_Gleis3a = _daten.read_from_table(AutomatikParameterTableName, 24)
         _SBhf_Gleis3b = _daten.read_from_table(AutomatikParameterTableName, 73)
+
+        _Loknummer_4A = _daten.read_from_table(AutomatikParameterTableName, 79)
+        If _Loknummer_4A = 0 Then
+            _Loknummer_4A = 10
+        End If
+        _Loknummer_4B = _daten.read_from_table(AutomatikParameterTableName, 80)
+        If _Loknummer_4B = 0 Then
+            _Loknummer_4B = 10
+        End If
+        _Vorwahl_Lok4 = _daten.read_from_table(AutomatikParameterTableName, 81)
+        If _Vorwahl_Lok4 = 0 Then
+            NumericUpDown11.Value = _Loknummer_4A
+            Button46.BackColor = Drawing.Color.LightYellow
+            Button45.BackColor = Drawing.Color.LightGreen
+        Else
+            NumericUpDown11.Value = _Loknummer_4B
+            Button46.BackColor = Drawing.Color.LightGreen
+            Button45.BackColor = Drawing.Color.LightYellow
+        End If
 
         Button19.Text = "V0"    ' Gleis1/Gleis2
         Button38.Text = "V0"    ' Gleis3/Gleis4
@@ -496,11 +520,91 @@ Public Class Automatikprogramme
         _StopZug3 = 0
         _StopZug4 = 0
 
-        TextBox2.Text = "Anlage Altenstein"
-        TextBox3.Text = ""
-        TextBox4.Text = ""
-        TextBox5.Text = ""
-
+        If _Betriebsart3_5Var = 0 Then
+            TextBox2.Text = "Zug1 im Bahnhof:  <---"
+            TextBox3.Text = "Zug2 im Bahnhof:  <---"
+            TextBox4.Text = "Zug3 im Bahnhof:  --->"
+            TextBox5.Text = "Zug4 im Bahnhof:  --->"
+            TextBox6.Text = "kein Zug im Schattenbahnhof"
+            TextBox7.Text = ""
+            LoadImage(PictureBox2, GetEngineImagePath(NumericUpDown8.Value))
+            LoadImage(PictureBox3, GetEngineImagePath(NumericUpDown9.Value))
+            LoadImage(PictureBox4, GetEngineImagePath(_Loknummer_3A))
+            LoadImage(PictureBox5, GetEngineImagePath(_Loknummer_4A))
+            If Betriebsart12 = 0 Then
+                TextBox2.Visible = 0
+                TextBox3.Visible = 0
+                PictureBox2.Visible = 0
+                PictureBox3.Visible = 0
+            End If
+            If Betriebsart12 = 1 Then
+                TextBox2.Visible = 1
+                TextBox3.Visible = 0
+                PictureBox2.Visible = 1
+                PictureBox3.Visible = 0
+            End If
+            If Betriebsart12 = 2 Then
+                TextBox2.Visible = 0
+                TextBox3.Visible = 1
+                PictureBox2.Visible = 0
+                PictureBox3.Visible = 1
+            End If
+            If Betriebsart12 = 3 Then
+                TextBox2.Visible = 1
+                TextBox3.Visible = 1
+                PictureBox2.Visible = 1
+                PictureBox3.Visible = 1
+            End If
+            If Betriebsart34 = 0 Then
+                TextBox4.Visible = 0
+                TextBox5.Visible = 0
+                PictureBox4.Visible = 0
+                PictureBox5.Visible = 0
+            End If
+            If Betriebsart34 = 3 Then
+                TextBox4.Visible = 1
+                TextBox5.Visible = 0
+                PictureBox4.Visible = 1
+                PictureBox5.Visible = 0
+            End If
+            If Betriebsart34 = 4 Then
+                TextBox4.Visible = 0
+                TextBox5.Visible = 1
+                PictureBox4.Visible = 0
+                PictureBox5.Visible = 1
+            End If
+            If Betriebsart34 = 5 Then
+                TextBox4.Visible = 1
+                TextBox5.Visible = 1
+                PictureBox4.Visible = 1
+                PictureBox5.Visible = 1
+            End If
+            'PictureBox2.Visible = 1
+            'PictureBox3.Visible = 1
+            'PictureBox4.Visible = 1
+            'PictureBox5.Visible = 1
+            'PictureBox6.Visible = 0
+            'PictureBox7.Visible = 0
+        Else
+            TextBox2.Text = "Zug1 im Bahnhof:  <---"
+            TextBox3.Text = "Zug2 im Bahnhof:  --->"
+            TextBox4.Text = "Zug3 im Schattenbahnhof:   <---"
+            TextBox5.Text = "Zug4 im Schattenbahnhof:   --->"
+            TextBox6.Text = "Zug5 im Bahnhof:  --->"
+            TextBox7.Text = "Zug6 im Bahnhof Titisee:   <---"
+            LoadImage(PictureBox2, GetEngineImagePath(NumericUpDown8.Value))
+            LoadImage(PictureBox3, GetEngineImagePath(NumericUpDown9.Value))
+            LoadImage(PictureBox4, GetEngineImagePath(_Loknummer_3A))
+            LoadImage(PictureBox5, GetEngineImagePath(_Loknummer_3B))
+            LoadImage(PictureBox6, GetEngineImagePath(_Loknummer_4A))
+            LoadImage(PictureBox7, GetEngineImagePath(_Loknummer_4B))
+            PictureBox2.Visible = 1
+            PictureBox3.Visible = 1
+            PictureBox4.Visible = 1
+            PictureBox5.Visible = 1
+            PictureBox6.Visible = 1
+            PictureBox7.Visible = 1
+        End If
 
         ' *** Erster Integer=Display, zweiter Integer= Kamera
 
@@ -1287,7 +1391,6 @@ Public Class Automatikprogramme
         _StoryAuto = 0
         _StoryZeit = 8000
         _Music_laeuft = 0
-        _Zug_laeuft = 0
         CheckBox1.Enabled = False
         Fahrplan = 0
 
@@ -1882,6 +1985,7 @@ Public Class Automatikprogramme
                     If _Zugwechsel = 51 Then
                         _eb.weicheSchalten(14, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(23, Klassen.WeichenRichtung.links)
+                        _eb.weicheSchalten(20, Klassen.WeichenRichtung.links)
                     End If
 
                     Zug1(anfahren)
@@ -2107,6 +2211,7 @@ Public Class Automatikprogramme
                     If _Zugwechsel = 52 Then
                         _eb.weicheSchalten(14, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
+                        _eb.weicheSchalten(20, Klassen.WeichenRichtung.links)
                     End If
 
                     Zug2(anfahren)
@@ -2537,7 +2642,9 @@ Public Class Automatikprogramme
                         End If
                         _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
                         AutomatikParameter = 302
-                        Zug3(anfahren)
+                        _LokStufen.EinzelLokSenden(3, 3)
+                        _Betriebsparameter.RundenErhoehen(NumericUpDown10.Value)
+                        'Zug3(anfahren)
                         If _Kamera = 3 And _aktuelleKamera <> _Hinterzarten Then
                             _Webcams.SetWebcam(0, _Hinterzarten)
                             SetText(Button13, "Hinterzarten")
@@ -2566,7 +2673,9 @@ Public Class Automatikprogramme
                         End If
                         _eb.weicheSchalten(9, Klassen.WeichenRichtung.links)
                         AutomatikParameter = 320
-                        Zug3(anfahren)
+                        _LokStufen.EinzelLokSenden(3, 3)
+                        _Betriebsparameter.RundenErhoehen(NumericUpDown10.Value)
+                        'Zug3(anfahren)
                         If _Kamera = 3 And _aktuelleKamera <> _Wiehre Then
                             _Webcams.SetWebcam(0, _Wiehre)
                             SetText(Button13, "Wiehre")
@@ -2944,34 +3053,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
-            T_100 = T_100 + 200
-            T_130 = T_130 + 200
-            T_160 = T_160 + 200
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
             V_180 = V_180 + 350
         ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
+            T_100 = T_100 + 300
+            T_130 = T_130 + 300
+            T_160 = T_160 + 300
             V_180 = V_180 + 700
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 800
-            T_130 = T_130 + 800
-            T_160 = T_160 + 800
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 1100
-            T_130 = T_130 + 1100
-            T_160 = T_160 + 1100
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
             V_180 = V_180 + 1350
         ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1300
-            T_130 = T_130 + 1300
-            T_160 = T_160 + 1300
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
             V_180 = V_180 + 1700
         Else
-            T_100 = T_100 + 1300
-            T_130 = T_130 + 1300
-            T_160 = T_160 + 1300
+            T_100 = T_100 + 900
+            T_130 = T_130 + 900
+            T_160 = T_160 + 900
             V_180 = V_180 + 2000
         End If
 
@@ -4057,34 +4166,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -9520,8 +9629,6 @@ Public Class Automatikprogramme
         ElseIf _Prog29 = 2 Then
             If _Durchsagen = 1 Then
                 _eb.lokSteuern(29, Klassen.LokEigenschaften.Funktion2, 1) ' Durchsage ein
-            Else
-                _Prog29 = 6
             End If
         ElseIf _Prog29 = 3 Then
             _Betriebsparameter.RundenErhoehen(29)
@@ -9786,7 +9893,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für den TEE Gottardo 
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "RAe TEE II Gottardo                                                     IBS: 15.01.2022 V1: 2 - V3: 7")
+        SetText(TextBox1, "RAe TEE II Gottardo                                                     IBS: 29.12.2025 - V3: 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_TEE_11.jpg")
         GeschwindikeitenSetzen(30)
 
@@ -9823,34 +9930,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -9910,14 +10017,8 @@ Public Class Automatikprogramme
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
-            If _Durchsagen = 0 Then
-                _Prog30 = 5
-                If _AkustischeSignale = 0 Then
-                    _Prog30 = 6
-                End If
-            End If
         ElseIf _Prog30 = 1 Then
-            If _Durchsagen = 1 And _TypL30 = 1 Then
+            If _Durchsagen = 1 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Durchsage ein
             End If
         ElseIf _Prog30 = 2 Then
@@ -9994,9 +10095,6 @@ Public Class Automatikprogramme
         ElseIf _Prog30 = 137 Then
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 138 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
-            End If
         ElseIf _Prog30 = 139 Then
         ElseIf _Prog30 = 140 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
@@ -10023,9 +10121,6 @@ Public Class Automatikprogramme
         ElseIf _Prog30 = 167 Then
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 168 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
-            End If
         ElseIf _Prog30 = 169 Then
         ElseIf _Prog30 = 170 Then
             If _Fahrzeugbeleuchtung2 < 2 Then
@@ -10059,17 +10154,10 @@ Public Class Automatikprogramme
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe4)
             End If
         ElseIf _Prog30 = 206 Then
-        ElseIf _Prog30 = 207 Then
-            If _Motor > 1 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
-            End If
-        ElseIf _Prog30 = 208 Then
-            Prog_Lok30.Interval = 2000
-        ElseIf _Prog30 = 209 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Hupe ein
             End If
-        ElseIf _Prog30 = 210 Then
+        ElseIf _Prog30 = 207 Then
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Hupe aus
 
         ElseIf _Prog30 = 220 Then ' Kontakt 3.1 -> (hinter dem Martinstor bergauf)
@@ -10077,26 +10165,18 @@ Public Class Automatikprogramme
         ElseIf _Prog30 = 221 Then
         ElseIf _Prog30 = 222 Then
         ElseIf _Prog30 = 223 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor aus
-            End If
 
         ElseIf _Prog30 = 240 Then ' Kontakt 3.7 <- (hinter der Brücke bergauf)
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 241 Then
         ElseIf _Prog30 = 242 Then
-            Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 243 Then
-            If _Motor > 1 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
-            End If
-        ElseIf _Prog30 = 244 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
             End If
-        ElseIf _Prog30 = 245 Then
+        ElseIf _Prog30 = 244 Then
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 0) ' Pfiff aus
-        ElseIf _Prog30 = 246 Then
+        ElseIf _Prog30 = 245 Then
 
         ElseIf _Prog30 = 260 Then ' Kontakt 3.3 (links bzw vor der Brücke)
             Prog_Lok30.Interval = 2000
@@ -10105,7 +10185,7 @@ Public Class Automatikprogramme
             _eb.lokSteuern(30, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
 
         ElseIf _Prog30 = 600 Then ' Kontakt 3.5 <- (unter der Burg)
-            Prog_Lok30.Interval = 1000
+            Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 601 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
@@ -10117,7 +10197,6 @@ Public Class Automatikprogramme
         ElseIf _Prog30 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 621 Then
-            Prog_Lok30.Interval = 1000
         ElseIf _Prog30 = 622 Then
             If _AkustischeSignale > 1 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
@@ -10129,20 +10208,12 @@ Public Class Automatikprogramme
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 641 Then
         ElseIf _Prog30 = 642 Then
-            If _Motor < 3 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 0) ' Motor aus
-            End If
 
         ElseIf _Prog30 = 660 Then ' Kontakt 1.2 -> Talfahrt
             Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 661 Then
         ElseIf _Prog30 = 662 Then
         ElseIf _Prog30 = 663 Then
-            If _GlsL30 = 1 Or _GlsL30 = 2 Then
-                If _Motor > 0 Then
-                    _eb.lokSteuern(27, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
-                End If
-            End If
         ElseIf _Prog30 = 664 Then
             If _GlsL30 = 1 Or _GlsL30 = 2 Then
                 If _AkustischeSignale > 0 Then
@@ -10157,12 +10228,8 @@ Public Class Automatikprogramme
         ElseIf _Prog30 = 701 Then
         ElseIf _Prog30 = 702 Then
         ElseIf _Prog30 = 703 Then
-            If _Motor > 0 Then
-                _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion2, 1) ' Motor ein
-            End If
-
         ElseIf _Prog30 = 704 Then
-            Prog_Lok30.Interval = 1000
+            Prog_Lok30.Interval = 2000
         ElseIf _Prog30 = 705 Then
             If _AkustischeSignale > 0 Then
                 _eb.lokSteuern(30, Klassen.LokEigenschaften.Funktion3, 1) ' Pfiff ein
@@ -10242,34 +10309,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -10852,7 +10919,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Krokodil braun
         '*** Datum: 16.10.2023
 
-        SetText(TextBox1, "E-Lok CE 6/8 14301                                                      IBS: xx.xx.xxxx - V3: 8")
+        SetText(TextBox1, "E-Lok CE 6/8 14301                                                      IBS:  29.12.2025 - V3: 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Krokodil_12.jpg")
         GeschwindikeitenSetzen(33)
 
@@ -10889,34 +10956,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -11212,34 +11279,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -11497,7 +11564,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 44 039
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "E-Lok 44 039                                                            IBS: xx.xx.xxxx - V3:y ")
+        SetText(TextBox1, "E-Lok 44 039                                                            IBS: 16.03.2026 - V3 : 8")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_144_11.jpg")
         GeschwindikeitenSetzen(35)
 
@@ -11534,34 +11601,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 150
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -11857,34 +11924,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -12142,7 +12209,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für E-Lok 151 030-4
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "E-Lok 151 030-4                                                          IBS: 06.01.2022 - V3 : 7")
+        SetText(TextBox1, "E-Lok 151 030-4                                                          IBS: 29.12.2025 - V3 : 7")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_151_04.jpg")
         GeschwindikeitenSetzen(37)
 
@@ -12179,34 +12246,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -12263,10 +12330,10 @@ Public Class Automatikprogramme
 
         If _Prog37 = 0 Then
             Prog_Lok37.Interval = 2000
+        ElseIf _Prog37 = 1 Then
             If _Fahrzeugbeleuchtung2 > 0 Then
                 _eb.lokSteuern(37, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
             End If
-        ElseIf _Prog37 = 1 Then
         ElseIf _Prog37 = 2 Then
             _Betriebsparameter.RundenErhoehen(37)
         ElseIf _Prog37 = 3 Then
@@ -12524,7 +12591,7 @@ Public Class Automatikprogramme
         ElseIf Stufe2 = 6 Then
             T_100 = T_100 + 750
             T_130 = T_130 + 750
-            T_160 = T_160 + 7500
+            T_160 = T_160 + 750
             V_180 = V_180 + 2500
         Else
             T_100 = T_100 + 900
@@ -12870,34 +12937,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -13193,34 +13260,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -13686,34 +13753,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -14130,34 +14197,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -14577,34 +14644,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -14896,34 +14963,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -15540,34 +15607,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -15862,34 +15929,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -16186,34 +16253,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -16956,34 +17023,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -17276,34 +17343,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -17595,34 +17662,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -17914,34 +17981,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -18233,34 +18300,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -18824,7 +18891,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Dampflok Limmat
         '*** Datum: 23.02.2020
 
-        SetText(TextBox1, "Dampflokomotive Limmat                                                  IBS: nein")
+        SetText(TextBox1, "Dampflokomotive Limmat                                                  IBS: 29.12.2025 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_Limmat_01.jpg")
         GeschwindikeitenSetzen(56)
 
@@ -18861,34 +18928,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -19060,6 +19127,7 @@ Public Class Automatikprogramme
         ElseIf _Prog56 = 203 Then
         ElseIf _Prog56 = 204 Then
         ElseIf _Prog56 = 205 Then
+        ElseIf _Prog56 = 206 Then
             If Stufe4 < Stufe3 Then
                 _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, Stufe3)
             Else
@@ -19086,6 +19154,8 @@ Public Class Automatikprogramme
             Prog_Lok56.Interval = 2000
         ElseIf _Prog56 = 601 Then
         ElseIf _Prog56 = 602 Then
+            _eb.lokSteuern(56, Klassen.LokEigenschaften.Geschwindigkeit, Stufe1 + 1)
+        ElseIf _Prog56 = 603 Then
 
         ElseIf _Prog56 = 620 Then ' Kontakt 3.7 -> (hinter der Brücke bergab)
             Prog_Lok56.Interval = 2000
@@ -19177,34 +19247,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -19499,34 +19569,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -19847,34 +19917,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -20168,29 +20238,29 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 900
-            T_130 = T_130 + 900
-            T_160 = T_160 + 900
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
             V_180 = V_180 + 2000
         ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
             V_180 = V_180 + 2500
         Else
             T_100 = T_100 + 1200
@@ -20941,34 +21011,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -21260,34 +21330,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -21582,34 +21652,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -21869,7 +21939,7 @@ Public Class Automatikprogramme
         '*** Fahrprogramm für Baureihe 89 7314
         '*** Datum: 23.02.2020 +
 
-        SetText(TextBox1, "Dampflok 89 7314                                                        IBS: nein")
+        SetText(TextBox1, "Dampflok 89 7314                                                        IBS: 29.12.2025 - V3 : 10")
         LoadImage(PictureBox1, "H:\\EB_Media\\LokFotos\\Baureihe_89_01.jpg")
         GeschwindikeitenSetzen(65)
 
@@ -21906,34 +21976,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -21991,6 +22061,9 @@ Public Class Automatikprogramme
         If _Prog65 = 0 Then
             Prog_Lok65.Interval = 2000
         ElseIf _Prog65 = 1 Then
+            If _Fahrzeugbeleuchtung2 > 0 Then
+                _eb.lokSteuern(65, Klassen.LokEigenschaften.Hauptfunktion, 1) ' Licht ein
+            End If
         ElseIf _Prog65 = 2 Then
             _Betriebsparameter.RundenErhoehen(65)
         ElseIf _Prog65 = 3 Then
@@ -22235,34 +22308,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -22693,34 +22766,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -23040,34 +23113,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -23524,34 +23597,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -23857,34 +23930,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -24277,34 +24350,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -24590,34 +24663,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -24910,34 +24983,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -25393,34 +25466,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -25714,34 +25787,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -26033,29 +26106,29 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
-            T_100 = T_100 + 900
-            T_130 = T_130 + 900
-            T_160 = T_160 + 900
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
             V_180 = V_180 + 2000
         ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
             V_180 = V_180 + 2500
         Else
             T_100 = T_100 + 1200
@@ -26386,34 +26459,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -26734,34 +26807,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -27043,34 +27116,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -27400,34 +27473,34 @@ Public Class Automatikprogramme
             T_160 = T_160
             V_180 = V_180
         ElseIf Stufe2 = 2 Then
+            T_100 = T_100 + 150
+            T_130 = T_130 + 150
+            T_160 = T_160 + 150
+            V_180 = V_180 + 500
+        ElseIf Stufe2 = 3 Then
             T_100 = T_100 + 300
             T_130 = T_130 + 300
             T_160 = T_160 + 300
-            V_180 = V_180 + 500
-        ElseIf Stufe2 = 3 Then
-            T_100 = T_100 + 500
-            T_130 = T_130 + 500
-            T_160 = T_160 + 500
             V_180 = V_180 + 1000
         ElseIf Stufe2 = 4 Then
-            T_100 = T_100 + 700
-            T_130 = T_130 + 700
-            T_160 = T_160 + 700
+            T_100 = T_100 + 450
+            T_130 = T_130 + 450
+            T_160 = T_160 + 450
             V_180 = V_180 + 1500
         ElseIf Stufe2 = 5 Then
+            T_100 = T_100 + 600
+            T_130 = T_130 + 600
+            T_160 = T_160 + 600
+            V_180 = V_180 + 2000
+        ElseIf Stufe2 = 6 Then
+            T_100 = T_100 + 750
+            T_130 = T_130 + 750
+            T_160 = T_160 + 750
+            V_180 = V_180 + 2500
+        Else
             T_100 = T_100 + 900
             T_130 = T_130 + 900
             T_160 = T_160 + 900
-            V_180 = V_180 + 2000
-        ElseIf Stufe2 = 6 Then
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
-            V_180 = V_180 + 2500
-        Else
-            T_100 = T_100 + 1200
-            T_130 = T_130 + 1200
-            T_160 = T_160 + 1200
             V_180 = V_180 + 2500
         End If
 
@@ -31621,7 +31694,26 @@ Public Class Automatikprogramme
         End If
         ButtonsVisible(999)
     End Sub
+    Private Sub VorwahlLok4A()
+        _Loknummer_4A = _daten.read_from_table(AutomatikParameterTableName, 79)
+        NumericUpDown11.Value = _Loknummer_4A
+        Button46.BackColor = Drawing.Color.LightYellow
+        Button45.BackColor = Drawing.Color.LightGreen
+        _Vorwahl_Lok4 = 0
+        _daten.write_to_table(AutomatikParameterTableName, 81, _Vorwahl_Lok4)
 
+        ButtonsVisible(999)
+    End Sub
+    Private Sub VorwahlLok4B()
+        _Loknummer_4B = _daten.read_from_table(AutomatikParameterTableName, 80)
+        NumericUpDown11.Value = _Loknummer_4B
+        Button45.BackColor = Drawing.Color.LightYellow
+        Button46.BackColor = Drawing.Color.LightGreen
+        _Vorwahl_Lok4 = 1
+        _daten.write_to_table(AutomatikParameterTableName, 81, _Vorwahl_Lok4)
+
+        ButtonsVisible(999)
+    End Sub
     Private Sub WeichenInStartPositionLok1()
         If Betriebsart12 = 1 And Betriebsart34 = 0 Then
             _eb.weicheSchalten(13, Klassen.WeichenRichtung.links)
@@ -38537,14 +38629,62 @@ Public Class Automatikprogramme
         If Not _Betriebsparameter Is Nothing Then
             _Betriebsparameter.UpdateContent({NumericUpDown8.Value, NumericUpDown9.Value, NumericUpDown10.Value, NumericUpDown11.Value})
         End If
+        LoadImage(PictureBox2, GetEngineImagePath(NumericUpDown8.Value))
+        LoadImage(PictureBox3, GetEngineImagePath(NumericUpDown9.Value))
+        PictureBox1.Visible = 0
+        If _Betriebsart3_5Var = 0 Then
+            LoadImage(PictureBox4, GetEngineImagePath(NumericUpDown10.Value))
+            LoadImage(PictureBox5, GetEngineImagePath(NumericUpDown11.Value))
+            '_Loknummer_3A = NumericUpDown10.Value
+            '_daten.write_to_table(AutomatikParameterTableName, 70, _Loknummer_3A)
+            '_Loknummer_4A = NumericUpDown11.Value
+            '_daten.write_to_table(AutomatikParameterTableName, 80, _Loknummer_4A)
+        Else
+            If _Vorwahl_Lok3 = 0 Then
+                LoadImage(PictureBox4, GetEngineImagePath(NumericUpDown10.Value))
+                LoadImage(PictureBox5, GetEngineImagePath(_Loknummer_3B))
+                '_Loknummer_3A = NumericUpDown10.Value
+                '_daten.write_to_table(AutomatikParameterTableName, 69, _Loknummer_3A)
+            Else
+                LoadImage(PictureBox4, GetEngineImagePath(_Loknummer_3A))
+                LoadImage(PictureBox5, GetEngineImagePath(NumericUpDown10.Value))
+                '_Loknummer_3B = NumericUpDown10.Value
+                '_daten.write_to_table(AutomatikParameterTableName, 70, _Loknummer_3B)
+            End If
+            If _Vorwahl_Lok4 = 0 Then
+                LoadImage(PictureBox6, GetEngineImagePath(NumericUpDown11.Value))
+                LoadImage(PictureBox7, GetEngineImagePath(_Loknummer_4B))
+                '_Loknummer_4A = NumericUpDown11.Value
+                '_daten.write_to_table(AutomatikParameterTableName, 79, _Loknummer_4A)
+            Else
+                LoadImage(PictureBox6, GetEngineImagePath(_Loknummer_4A))
+                LoadImage(PictureBox7, GetEngineImagePath(NumericUpDown11.Value))
+                '_Loknummer_4B = NumericUpDown11.Value
+                '_daten.write_to_table(AutomatikParameterTableName, 80, _Loknummer_4B)
+            End If
+        End If
+
     End Sub
     Private Sub NumericUPDown8_Click(sender As System.Object, e As System.EventArgs) Handles NumericUpDown8.Click
 
-        TextBox2.Visible = 0
-        TextBox3.Visible = 0
-        TextBox4.Visible = 0
-        TextBox5.Visible = 0
-        PictureBox1.Visible = 1
+        'TextBox2.Visible = 1
+        'TextBox3.Visible = 1
+        'TextBox4.Visible = 1
+        'TextBox5.Visible = 1
+        'TextBox6.Visible = 1
+        'TextBox7.Visible = 1
+        'PictureBox1.Visible = 0
+        'PictureBox2.Visible = 1
+        'PictureBox3.Visible = 1
+        'PictureBox4.Visible = 1
+        'PictureBox5.Visible = 1
+        'If _Betriebsart3_5Var = 0 Then
+        '    PictureBox6.Visible = 0
+        '    PictureBox7.Visible = 0
+        'Else
+        '    PictureBox6.Visible = 1
+        '    PictureBox7.Visible = 1
+        'End If
 
         NumericUpDown8.BackColor = Drawing.Color.LightBlue
         NumericUpDown9.BackColor = Drawing.Color.White
@@ -38784,11 +38924,24 @@ Public Class Automatikprogramme
     End Sub
     Private Sub NumericUPDown9_Click(sender As System.Object, e As System.EventArgs) Handles NumericUpDown9.Click
 
-        TextBox2.Visible = 0
-        TextBox3.Visible = 0
-        TextBox4.Visible = 0
-        TextBox5.Visible = 0
-        PictureBox1.Visible = 1
+        'TextBox2.Visible = 1
+        'TextBox3.Visible = 1
+        'TextBox4.Visible = 1
+        'TextBox5.Visible = 1
+        'TextBox6.Visible = 1
+        'TextBox7.Visible = 1
+        'PictureBox1.Visible = 0
+        'PictureBox2.Visible = 1
+        'PictureBox3.Visible = 1
+        'PictureBox4.Visible = 1
+        'PictureBox5.Visible = 1
+        'If _Betriebsart3_5Var = 0 Then
+        '    PictureBox6.Visible = 0
+        '    PictureBox7.Visible = 0
+        'Else
+        '    PictureBox6.Visible = 1
+        '    PictureBox7.Visible = 1
+        'End If
 
         NumericUpDown8.BackColor = Drawing.Color.White
         NumericUpDown9.BackColor = Drawing.Color.LightBlue
@@ -39028,11 +39181,24 @@ Public Class Automatikprogramme
     End Sub
     Private Sub NumericUPDown10_Click(sender As System.Object, e As System.EventArgs) Handles NumericUpDown10.Click
 
-        TextBox2.Visible = 0
-        TextBox3.Visible = 0
-        TextBox4.Visible = 0
-        TextBox5.Visible = 0
-        PictureBox1.Visible = 1
+        'TextBox2.Visible = 1
+        'TextBox3.Visible = 1
+        'TextBox4.Visible = 1
+        'TextBox5.Visible = 1
+        'TextBox6.Visible = 1
+        'TextBox7.Visible = 1
+        'PictureBox1.Visible = 0
+        'PictureBox2.Visible = 1
+        'PictureBox3.Visible = 1
+        'PictureBox4.Visible = 1
+        'PictureBox5.Visible = 1
+        'If _Betriebsart3_5Var = 0 Then
+        '    PictureBox6.Visible = 0
+        '    PictureBox7.Visible = 0
+        'Else
+        '    PictureBox6.Visible = 1
+        '    PictureBox7.Visible = 1
+        'End If
 
         NumericUpDown8.BackColor = Drawing.Color.White
         NumericUpDown9.BackColor = Drawing.Color.White
@@ -39272,11 +39438,24 @@ Public Class Automatikprogramme
     End Sub
     Private Sub NumericUPDown11_Click(sender As System.Object, e As System.EventArgs) Handles NumericUpDown11.Click
 
-        TextBox2.Visible = 0
-        TextBox3.Visible = 0
-        TextBox4.Visible = 0
-        TextBox5.Visible = 0
-        PictureBox1.Visible = 1
+        'TextBox2.Visible = 1
+        'TextBox3.Visible = 1
+        'TextBox4.Visible = 1
+        'TextBox5.Visible = 1
+        'TextBox6.Visible = 1
+        'TextBox7.Visible = 1
+        'PictureBox1.Visible = 0
+        'PictureBox2.Visible = 1
+        'PictureBox3.Visible = 1
+        'PictureBox4.Visible = 1
+        'PictureBox5.Visible = 1
+        'If _Betriebsart3_5Var = 0 Then
+        '    PictureBox6.Visible = 0
+        '    PictureBox7.Visible = 0
+        'Else
+        '    PictureBox6.Visible = 1
+        '    PictureBox7.Visible = 1
+        'End If
 
         NumericUpDown8.BackColor = Drawing.Color.White
         NumericUpDown9.BackColor = Drawing.Color.White
@@ -42084,9 +42263,13 @@ Public Class Automatikprogramme
                 If _Betriebsart3_5Var = 1 Then
                     Button36.Visible = True
                     Button37.Visible = True
+                    Button45.Visible = True
+                    Button46.Visible = True
                 Else
                     Button36.Visible = False
                     Button37.Visible = False
+                    Button45.Visible = False
+                    Button46.Visible = False
                 End If
             End If
         End If
@@ -42493,26 +42676,64 @@ Public Class Automatikprogramme
     Private Sub Button10_Click(sender As System.Object, e As System.EventArgs) Handles Button10.Click
         If Betriebsart = 0 Then
             Betriebsart = 1
+            'TextBox2.Text = "Betriebart 1"
+            'TextBox3.Text = ""
+            'TextBox4.Text = ""
+            'TextBox5.Text = ""
         ElseIf Betriebsart = 1 Then
             Betriebsart = 2
+            'TextBox2.Text = "Betriebart 2"
+            'TextBox3.Text = "alle Züge fahren koordiniert"
+            'TextBox4.Text = ""
+            'TextBox5.Text = ""
         ElseIf Betriebsart = 2 Then
             Betriebsart = 0
+            'TextBox2.Text = "Betriebart 0"
+            'TextBox3.Text = "Automatik ausgeschaltet"
+            'TextBox4.Text = ""
+            'TextBox5.Text = ""
         Else
             Betriebsart = 0
         End If
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
+        PictureBox1.Visible = 0
+        TextBox2.Visible = 1
+        TextBox3.Visible = 1
+        TextBox4.Visible = 1
+        TextBox5.Visible = 1
         ButtonsVisible(999)
     End Sub
     Private Sub Button11_Click(sender As System.Object, e As System.EventArgs) Handles Button11.Click
         If Betriebsart12 = 0 Then
             Betriebsart12 = 1
+            TextBox2.Text = "Zug 1 : <--"
+            TextBox3.Text = ""
+            PictureBox2.Visible = 1
+            PictureBox3.Visible = 0
+            'TextBox4.Text = ""
+            'TextBox5.Text = ""
         ElseIf Betriebsart12 = 1 Then
             Betriebsart12 = 2
+            TextBox2.Text = ""
+            TextBox3.Text = "Zug 2 : <--"
+            PictureBox2.Visible = 0
+            PictureBox3.Visible = 1
+            'TextBox4.Text = ""
         ElseIf Betriebsart12 = 2 Then
             Betriebsart12 = 3
+            TextBox2.Text = "Zug 1 : <--"
+            TextBox3.Text = "Zug 2 : <--"
+            PictureBox2.Visible = 1
+            PictureBox3.Visible = 1
+            'TextBox4.Text = ""
         ElseIf Betriebsart12 = 3 Then
             Betriebsart12 = 0
+            TextBox2.Text = ""
+            TextBox3.Text = ""
+            PictureBox2.Visible = 0
+            PictureBox3.Visible = 0
+            'TextBox4.Text = ""
         Else
             Betriebsart12 = 0
         End If
@@ -42528,17 +42749,38 @@ Public Class Automatikprogramme
         Button19.Text = "V0"
         TextBox1.Text = " "
         Button43.BackColor = Drawing.Color.White
+        PictureBox1.Visible = 0
+        TextBox2.Visible = 1
+        TextBox3.Visible = 1
+        TextBox4.Visible = 1
+        TextBox5.Visible = 1
         ButtonsVisible(999)
     End Sub
     Private Sub Button12_Click(sender As System.Object, e As System.EventArgs) Handles Button12.Click
         If Betriebsart34 = 0 Then
             Betriebsart34 = 3
+            TextBox4.Text = "Zug 3 : <--"
+            TextBox5.Text = ""
+            PictureBox4.Visible = 1
+            PictureBox5.Visible = 0
         ElseIf Betriebsart34 = 3 Then
             Betriebsart34 = 4
+            TextBox4.Text = ""
+            TextBox5.Text = "Zug 4 : <--"
+            PictureBox4.Visible = 0
+            PictureBox5.Visible = 1
         ElseIf Betriebsart34 = 4 Then
             Betriebsart34 = 5
+            TextBox4.Text = "Zug 3 : <--"
+            TextBox5.Text = "Zug 4 : <--"
+            PictureBox4.Visible = 1
+            PictureBox5.Visible = 1
         ElseIf Betriebsart34 = 5 Then
             Betriebsart34 = 0
+            TextBox4.Text = ""
+            TextBox5.Text = ""
+            PictureBox4.Visible = 0
+            PictureBox5.Visible = 0
         Else
             Betriebsart34 = 0
         End If
@@ -42554,6 +42796,11 @@ Public Class Automatikprogramme
         Button19.Text = "V0"
         TextBox1.Text = " "
         Button43.BackColor = Drawing.Color.White
+        PictureBox1.Visible = 0
+        TextBox2.Visible = 1
+        TextBox3.Visible = 1
+        TextBox4.Visible = 1
+        TextBox5.Visible = 1
         ButtonsVisible(999)
     End Sub
     ' *** Fahrplan
@@ -42627,7 +42874,15 @@ Public Class Automatikprogramme
         TextBox3.Visible = 1
         TextBox4.Visible = 0
         TextBox5.Visible = 0
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
         PictureBox1.Visible = 0
+        PictureBox2.Visible = 1
+        PictureBox3.Visible = 0
+        PictureBox4.Visible = 0
+        PictureBox5.Visible = 0
+        PictureBox6.Visible = 0
+        PictureBox7.Visible = 0
 
         _Betriebsart2_0Var = 0
         _Betriebsart3_0Var = 0
@@ -42642,11 +42897,10 @@ Public Class Automatikprogramme
         _daten.write_to_table(AutomatikParameterTableName, 56, _Betriebsart0_5Var)
         _daten.write_to_table(AutomatikParameterTableName, 68, _Betriebsart3_5Var)
 
-        TextBox2.Text = "Zug1"
-
         If _Betriebsart1_0Var = 0 Then
             _Betriebsart1_0Var = 1
             Button40.Text = "V1"
+            TextBox2.Text = "Zug 1 : <--"
             TextBox3.Text = "fährt rückwärts über den inneren Kreis"
             _Route_Gleis1 = 2
             _daten.write_to_table(AutomatikParameterTableName, 3, _Route_Gleis1)
@@ -42657,6 +42911,7 @@ Public Class Automatikprogramme
         Else
             _Betriebsart1_0Var = 0
             Button40.Text = "V0"
+            TextBox2.Text = "Zug 1 : <--"
             TextBox3.Text = "fährt vorwärts über den inneren Kreis (Standard)"
             Diagonale_Gleis1 = 0
             Diagonale_Gleis2 = 0
@@ -42671,11 +42926,19 @@ Public Class Automatikprogramme
     End Sub
     Private Sub Button44_Click(sender As Object, e As EventArgs) Handles Button44.Click
         '*** Betriebsartvarianten für Gleis 2
-        TextBox2.Visible = 1
+        TextBox2.Visible = 0
         TextBox3.Visible = 1
         TextBox4.Visible = 0
         TextBox5.Visible = 0
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
         PictureBox1.Visible = 0
+        PictureBox2.Visible = 0
+        PictureBox3.Visible = 1
+        PictureBox4.Visible = 0
+        PictureBox5.Visible = 0
+        PictureBox6.Visible = 0
+        PictureBox7.Visible = 0
 
         _Betriebsart1_0Var = 0
         _Betriebsart3_0Var = 0
@@ -42690,19 +42953,17 @@ Public Class Automatikprogramme
         _daten.write_to_table(AutomatikParameterTableName, 56, _Betriebsart0_5Var)
         _daten.write_to_table(AutomatikParameterTableName, 68, _Betriebsart3_5Var)
 
-        TextBox2.Text = "Zug2"
-
         If _Betriebsart2_0Var = 0 Then
             _Betriebsart2_0Var = 1
             Button44.Text = "V1"
-            TextBox3.Text = "Zug2 fährt Route 'oben kurz' und rückwärts über Gleis 2"
+            TextBox3.Text = "Zug2 : --> "
             _Route_Gleis2 = 1
             _daten.write_to_table(AutomatikParameterTableName, 4, _Route_Gleis2)
             ARoute_Lok2 = _Route_Gleis2
         Else
             _Betriebsart2_0Var = 0
             Button44.Text = "V0"
-            TextBox3.Text = "Züg2 fährt vorwärts über Gleis 2 (Standard)"
+            TextBox3.Text = "Zug2 : <--"
         End If
         _daten.write_to_table(AutomatikParameterTableName, 61, _Betriebsart2_0Var)
         _Weichen_in_Startposition = False
@@ -42715,6 +42976,8 @@ Public Class Automatikprogramme
         TextBox3.Visible = 1
         TextBox4.Visible = 0
         TextBox5.Visible = 0
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
         PictureBox1.Visible = 0
 
         _Betriebsart1_0Var = 0
@@ -42834,6 +43097,8 @@ Public Class Automatikprogramme
         TextBox3.Visible = 1
         TextBox4.Visible = 0
         TextBox5.Visible = 0
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
         PictureBox1.Visible = 0
 
         _Betriebsart1_0Var = 0
@@ -42875,6 +43140,8 @@ Public Class Automatikprogramme
         TextBox3.Visible = 1
         TextBox4.Visible = 0
         TextBox5.Visible = 0
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
         PictureBox1.Visible = 0
 
         _Betriebsart1_0Var = 0
@@ -42930,6 +43197,8 @@ Public Class Automatikprogramme
         TextBox3.Visible = 1
         TextBox4.Visible = 1
         TextBox5.Visible = 1
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
         PictureBox1.Visible = 0
 
         _Betriebsart1_0Var = 0
@@ -43008,8 +43277,10 @@ Public Class Automatikprogramme
         '*** Betriebsartvarianten für Gleise 1,2,3,4
         TextBox2.Visible = 1
         TextBox3.Visible = 1
-        TextBox4.Visible = 0
-        TextBox5.Visible = 0
+        TextBox4.Visible = 1
+        TextBox5.Visible = 1
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
         PictureBox1.Visible = 0
 
         _Betriebsart1_0Var = 0
@@ -43026,7 +43297,7 @@ Public Class Automatikprogramme
         _daten.write_to_table(AutomatikParameterTableName, 56, _Betriebsart0_5Var)
         _daten.write_to_table(AutomatikParameterTableName, 68, _Betriebsart3_5Var)
 
-        TextBox2.Text = "Zug1, Zug2, Zug3, Zug4"
+        TextBox2.Text = "Anlage Altenstein"
 
         If _Betriebsart3_5Var = 0 Then
             _Betriebsart3_5Var = 1
@@ -43072,6 +43343,61 @@ Public Class Automatikprogramme
             TextBox3.Text = " Standard"
         End If
         _daten.write_to_table(AutomatikParameterTableName, 68, _Betriebsart3_5Var)
+
+        PictureBox2.Visible = 1
+        PictureBox3.Visible = 1
+        PictureBox4.Visible = 1
+        PictureBox5.Visible = 1
+        TextBox2.Visible = 1
+        TextBox3.Visible = 1
+        TextBox4.Visible = 1
+        TextBox5.Visible = 1
+        TextBox6.Visible = 1
+        TextBox7.Visible = 1
+
+
+        If _Betriebsart3_5Var = 0 Then
+            TextBox2.Text = "Zug1 im Bahnhof:  <---"
+            TextBox3.Text = "Zug2 im Bahnhof:  <---"
+            TextBox4.Text = "Zug3 im Bahnhof:  --->"
+            TextBox5.Text = "Zug4 im Bahnhof:  --->"
+            TextBox6.Text = "kein Zug im Schattenbahnhof"
+            TextBox7.Text = ""
+            LoadImage(PictureBox2, GetEngineImagePath(NumericUpDown8.Value))
+            LoadImage(PictureBox3, GetEngineImagePath(NumericUpDown9.Value))
+            LoadImage(PictureBox4, GetEngineImagePath(_Loknummer_3A))
+            LoadImage(PictureBox5, GetEngineImagePath(_Loknummer_4A))
+            NumericUpDown10.Value = _Loknummer_3A
+            NumericUpDown11.Value = _Loknummer_4A
+            PictureBox6.Visible = 0
+            PictureBox7.Visible = 0
+        Else
+            TextBox2.Text = "Zug1 im Bahnhof:  <---"
+            TextBox3.Text = "Zug2 im Bahnhof:  --->"
+            TextBox4.Text = "Zug3 im Schattenbahnhof:   <---"
+            TextBox5.Text = "Zug4 im Schattenbahnhof:   --->"
+            TextBox6.Text = "Zug5 im Bahnhof:  --->"
+            TextBox7.Text = "Zug6 im Bahnhof Titisee:   <---"
+            LoadImage(PictureBox2, GetEngineImagePath(NumericUpDown8.Value))
+            LoadImage(PictureBox3, GetEngineImagePath(NumericUpDown9.Value))
+            LoadImage(PictureBox4, GetEngineImagePath(_Loknummer_3A))
+            LoadImage(PictureBox5, GetEngineImagePath(_Loknummer_3B))
+            LoadImage(PictureBox6, GetEngineImagePath(_Loknummer_4A))
+            LoadImage(PictureBox7, GetEngineImagePath(_Loknummer_4B))
+            If _Vorwahl_Lok3 = 0 Then
+                NumericUpDown10.Value = _Loknummer_3A
+            Else
+                NumericUpDown10.Value = _Loknummer_3B
+            End If
+            If _Vorwahl_Lok4 = 0 Then
+                NumericUpDown11.Value = _Loknummer_4A
+            Else
+                NumericUpDown11.Value = _Loknummer_4B
+            End If
+            PictureBox6.Visible = 1
+            PictureBox7.Visible = 1
+
+        End If
         ButtonsVisible(999)
     End Sub
     Private Sub Button36_Click(sender As Object, e As EventArgs) Handles Button36.Click
@@ -43097,6 +43423,34 @@ Public Class Automatikprogramme
         End If
         _Weichen_in_Startposition = False
         _Signale_in_Startposition = False
+    End Sub
+    Private Sub Button45_Click(sender As Object, e As EventArgs) Handles Button45.Click
+        If _Vorwahl_Lok4 = 1 Then
+            _Vorwahl_Lok4 = 0
+            VorwahlLok4A()
+        Else
+            _Loknummer_4A = NumericUpDown11.Value
+            _daten.write_to_table(AutomatikParameterTableName, 79, _Loknummer_4A)
+            VorwahlLok4A()
+        End If
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        'Button45.BackColor = Drawing.Color.LightGreen
+        'Button46.BackColor = Drawing.Color.LightYellow
+    End Sub
+    Private Sub Button46_Click(sender As Object, e As EventArgs) Handles Button46.Click
+        If _Vorwahl_Lok4 = 0 Then
+            _Vorwahl_Lok4 = 1
+            VorwahlLok4B()
+        Else
+            _Loknummer_4B = NumericUpDown11.Value
+            _daten.write_to_table(AutomatikParameterTableName, 80, _Loknummer_4B)
+            VorwahlLok4B()
+        End If
+        _Weichen_in_Startposition = False
+        _Signale_in_Startposition = False
+        'Button46.BackColor = Drawing.Color.LightGreen
+        'Button45.BackColor = Drawing.Color.LightYellow
     End Sub
 
     ' *** Zugtyp
@@ -45790,10 +46144,18 @@ Public Class Automatikprogramme
         _Weichen_in_Startposition = False
 
         PictureBox1.Visible = 1
+        PictureBox2.Visible = 0
+        PictureBox3.Visible = 0
+        PictureBox4.Visible = 0
+        PictureBox5.Visible = 0
+        PictureBox6.Visible = 0
+        PictureBox7.Visible = 0
         TextBox2.Visible = 0
         TextBox3.Visible = 0
         TextBox4.Visible = 0
         TextBox5.Visible = 0
+        TextBox6.Visible = 0
+        TextBox7.Visible = 0
 
         If _Vorwahl_Lok3 = 0 Then
             _Loknummer_3A = NumericUpDown10.Value
@@ -45803,6 +46165,7 @@ Public Class Automatikprogramme
             _daten.write_to_table(AutomatikParameterTableName, 70, _Loknummer_3B)
 
         End If
+
 
         ' ***
         ' *** Betriebsart 0 - keine Automatik
@@ -46470,13 +46833,13 @@ Public Class Automatikprogramme
                     If Startzug = 1 Then
                         _eb.weicheSchalten(14, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(17, Klassen.WeichenRichtung.rechts)
-                        _eb.weicheSchalten(20, Klassen.WeichenRichtung.rechts)
+                        _eb.weicheSchalten(20, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(23, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(26, Klassen.WeichenRichtung.rechts)
                     ElseIf Startzug = 2 Then
                         _eb.weicheSchalten(14, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(17, Klassen.WeichenRichtung.rechts)
-                        _eb.weicheSchalten(20, Klassen.WeichenRichtung.rechts)
+                        _eb.weicheSchalten(20, Klassen.WeichenRichtung.links)
                         _eb.weicheSchalten(23, Klassen.WeichenRichtung.rechts)
                         _eb.weicheSchalten(26, Klassen.WeichenRichtung.rechts)
                     ElseIf Startzug = 3 Then
@@ -46554,6 +46917,18 @@ Public Class Automatikprogramme
             _Weichen_in_Startposition = True
         End If
         TextBox1.Text = "Die Weichen befinden sich in Startposition für die ausgewählte Automatik. Nächster Schritt: Signale in Startposition bringen."
+        If Startzug = 1 Then
+            Zug1(999)
+        End If
+        If Startzug = 2 Then
+            Zug2(999)
+        End If
+        If Startzug = 3 Then
+            Zug3(999)
+        End If
+        If Startzug = 4 Then
+            Zug4(999)
+        End If
     End Sub
     Private Sub Button42_Click(sender As System.Object, e As System.EventArgs) Handles Button42.Click
         _LokStufen.Senden(0)
@@ -47441,21 +47816,20 @@ Public Class Automatikprogramme
                     _eb.weicheSchalten(9, Klassen.WeichenRichtung.links)
                     _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
                 Else
-                    If Startzug = 3 Then
-                        If _Vorwahl_Lok3 = 0 Then
-                            _eb.weicheSchalten(9, Klassen.WeichenRichtung.links)
-                            _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
-                        Else
-                            _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
-                            _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
-                        End If
-                    Else
-                        _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
-                        _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
-                    End If
-
-
-
+                    _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
+                    _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                    'If Startzug = 3 Then
+                    '    If _Vorwahl_Lok3 = 0 Then
+                    '        _eb.weicheSchalten(9, Klassen.WeichenRichtung.links)
+                    '        _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                    '    Else
+                    '        _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
+                    '        _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
+                    '    End If
+                    'Else
+                    '    _eb.weicheSchalten(9, Klassen.WeichenRichtung.rechts)
+                    '    _eb.weicheSchalten(11, Klassen.WeichenRichtung.rechts)
+                    'End If
                 End If
             End If
         End If
@@ -47730,12 +48104,15 @@ Public Class Automatikprogramme
                             Zug2(anfahren)
                             AutomatikParameter = 200
                         ElseIf Startzug = 3 Then
-                            Zug3(anfahren)
                             If _Vorwahl_Lok3 = 0 Then
                                 AutomatikParameter = 320
+                                _eb.weicheSchalten(9, Klassen.WeichenRichtung.links)
                             Else
                                 AutomatikParameter = 302
+                                _eb.weicheSchalten(11, Klassen.WeichenRichtung.links)
                             End If
+                            _LokStufen.EinzelLokSenden(3, 0)
+                            Zug3(anfahren)
                         ElseIf Startzug = 4 Then
                             Zug4(anfahren)
                             AutomatikParameter = 400
@@ -48177,6 +48554,12 @@ Public Class Automatikprogramme
             End Try
         End If
     End Sub
+
+    Private Function GetEngineImagePath(number As Decimal) As String
+        Dim basePath As String = IO.Path.Combine(Windows.Forms.Application.StartupPath, "Symbole", "Lokbilder")
+        Dim files = IO.Directory.GetFiles(basePath, $"{number}.*")
+        Return files.FirstOrDefault()
+    End Function
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         _daten.write_to_table(AutomatikParameterTableName, 52, ComboBox1.SelectedIndex)
